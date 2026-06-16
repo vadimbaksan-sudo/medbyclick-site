@@ -1,0 +1,28 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//Users/vadimrudkovsky/.claude/skills/gstack/**)",
+      "Bash(~/.bun/bin/bun run *)",
+      "Bash(~/.bun/bin/bun ./setup)",
+      "Bash(PATH=/Users/vadimrudkovsky/.bun/bin:__TRACKED_VAR__ ./setup)",
+      "Bash(echo \"---EXIT:$?\")",
+      "Bash(command -v gbrain)",
+      "Bash(~/.claude/skills/gstack/bin/gstack-config get *)",
+      "WebSearch",
+      "Bash(open \"https://www.youtube.com/watch?v=Hm-ZIiwiN1o\")",
+      "Bash(open \"https://www.youtube.com/watch?v=ASABxNenD_U\")",
+      "Bash(open \"https://paulgraham.com/schlep.html\")",
+      "Bash(~/.claude/skills/gstack/bin/gstack-config set *)",
+      "Bash(~/.claude/skills/gstack/bin/gstack-learnings-search --limit 10 --cross-project)",
+      "Bash(~/.claude/skills/gstack/bin/gstack-review-log '{\"skill\":\"plan-eng-review\",\"timestamp\":\"__CMDSUB_OUTPUT__\",\"status\":\"clean\",\"unresolved\":0,\"critical_gaps\":0,\"issues_found\":8,\"mode\":\"FULL_REVIEW\",\"commit\":\"unknown\"}')",
+      "Bash(~/.claude/skills/gstack/bin/gstack-decision-log \"{\\\\\"decision\\\\\":\\\\\"Eng review \\(FULL_REVIEW\\): 8 findings, all resolved\\\\\",\\\\\"rationale\\\\\":\\\\\"Coordinator SPOF fixed with readiness gate + bus-factor protocol; SLA defined in routing protocol; quality formula consolidated; trust-transfer test added; geography expansion deferred to Year 2\\\\\",\\\\\"scope\\\\\":\\\\\"branch\\\\\",\\\\\"source\\\\\":\\\\\"skill\\\\\",\\\\\"confidence\\\\\":8}\")",
+      "Bash(~/.claude/skills/gstack/bin/gstack-review-log '{\"skill\":\"codex-plan-review\",\"timestamp\":\"__TRACKED_VAR__\",\"status\":\"issues_found\",\"source\":\"claude\"}')",
+      "Bash(~/.claude/skills/gstack/bin/gstack-review-read)",
+      "Bash(~/.claude/skills/gstack/bin/gstack-learnings-log '{\"skill\":\"plan-eng-review\",\"type\":\"operational\",\"key\":\"coordinator-spof-pattern\",\"insight\":\"When a plan moves founder SPOF to coordinator, it must also define coordinator bus-factor mitigations and a readiness gate before handoff. The SPOF is transferred, not eliminated.\",\"confidence\":9,\"source\":\"observed\",\"files\":[\"~/.gstack/projects/medbyclick/vadimrudkovsky-unknown-design-20260616-194257.md\"]}')",
+      "Bash(~/.claude/skills/gstack/bin/gstack-learnings-log '{\"skill\":\"plan-eng-review\",\"type\":\"operational\",\"key\":\"trust-transfer-test\",\"insight\":\"Plans that assume personal founder trust transfers to a company brand should include an explicit test in Phase 1 before marketing spend: one case where the new entity \\(not founder\\) is the primary contact. No test = unproven assumption.\",\"confidence\":9,\"source\":\"cross-model\",\"files\":[\"~/.gstack/projects/medbyclick/vadimrudkovsky-unknown-design-20260616-194257.md\"]}')",
+      "Bash(~/.claude/skills/gstack/bin/gstack-learnings-log '{\"skill\":\"plan-eng-review\",\"type\":\"operational\",\"key\":\"geography-expansion-year1\",\"insight\":\"Geography expansion in Year 1 of a services business is almost always premature: new jurisdiction = new operation. Cut from 12-month plan; put in Year 2 planning.\",\"confidence\":8,\"source\":\"cross-model\",\"files\":[\"~/.gstack/projects/medbyclick/vadimrudkovsky-unknown-design-20260616-194257.md\"]}')",
+      "Bash(npx create-next-app@latest *)",
+      "Bash(~/.bun/bin/bun --version)"
+    ]
+  }
+}
