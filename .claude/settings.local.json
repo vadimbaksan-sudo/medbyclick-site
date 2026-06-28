@@ -22,7 +22,17 @@
       "Bash(~/.claude/skills/gstack/bin/gstack-learnings-log '{\"skill\":\"plan-eng-review\",\"type\":\"operational\",\"key\":\"trust-transfer-test\",\"insight\":\"Plans that assume personal founder trust transfers to a company brand should include an explicit test in Phase 1 before marketing spend: one case where the new entity \\(not founder\\) is the primary contact. No test = unproven assumption.\",\"confidence\":9,\"source\":\"cross-model\",\"files\":[\"~/.gstack/projects/medbyclick/vadimrudkovsky-unknown-design-20260616-194257.md\"]}')",
       "Bash(~/.claude/skills/gstack/bin/gstack-learnings-log '{\"skill\":\"plan-eng-review\",\"type\":\"operational\",\"key\":\"geography-expansion-year1\",\"insight\":\"Geography expansion in Year 1 of a services business is almost always premature: new jurisdiction = new operation. Cut from 12-month plan; put in Year 2 planning.\",\"confidence\":8,\"source\":\"cross-model\",\"files\":[\"~/.gstack/projects/medbyclick/vadimrudkovsky-unknown-design-20260616-194257.md\"]}')",
       "Bash(npx create-next-app@latest *)",
-      "Bash(~/.bun/bin/bun --version)"
+      "Bash(~/.bun/bin/bun --version)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3000/)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3000/doctors)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3000/doctors/dr-elena-volkova)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3000/book)",
+      "Bash(curl -s http://localhost:3000/doctors)",
+      "Bash(curl -s http://localhost:3000/book)",
+      "Bash(curl -s -o /dev/null -w \"/ = %{http_code}\\\\n\" http://localhost:3000/)",
+      "Bash(curl -s -o /dev/null -w \"/doctors = %{http_code}\\\\n\" http://localhost:3000/doctors)",
+      "Bash(curl -s -o /dev/null -w \"/doctors/dr-elena-volkova = %{http_code}\\\\n\" http://localhost:3000/doctors/dr-elena-volkova)",
+      "Bash(curl -s -o /dev/null -w \"/book = %{http_code}\\\\n\" http://localhost:3000/book)"
     ]
   }
 }
