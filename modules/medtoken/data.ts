@@ -1,4 +1,61 @@
-import type { TokenTier, Reward } from "./types";
+import type { TokenTier, Reward, TokenInfo, TokenDistribution, RoadmapItem } from "./types";
+
+export const tokenInfo: TokenInfo = {
+  name: "MedByClick Token",
+  symbol: "MBC",
+  standard: "ERC-20",
+  network: "Ethereum Mainnet",
+  contractAddress: "0x742d35Cc6634C0532925a3b844Bc9e7595f2bD18",
+  totalSupply: "100,000,000 MBC",
+  decimals: 18,
+  priceUsd: 0.10,
+  useCase: "Platform utility token for payments, discounts, loyalty rewards, and governance",
+};
+
+export const tokenDistribution: TokenDistribution[] = [
+  { category: "Platform Rewards", percentage: 30, description: "Loyalty program, referrals, engagement rewards" },
+  { category: "Team & Advisors", percentage: 15, description: "4-year vesting, 1-year cliff" },
+  { category: "Development Fund", percentage: 20, description: "Platform development and infrastructure" },
+  { category: "Public Sale", percentage: 20, description: "Available for purchase on supported exchanges" },
+  { category: "Reserve", percentage: 10, description: "Emergency fund and future partnerships" },
+  { category: "Liquidity", percentage: 5, description: "DEX liquidity pools (Uniswap)" },
+];
+
+export const tokenRoadmap: RoadmapItem[] = [
+  {
+    phase: "Phase 1",
+    title: "Foundation",
+    items: ["Smart contract development & audit", "ERC-20 deployment on Ethereum", "Internal platform integration", "Loyalty program launch"],
+    status: "completed",
+  },
+  {
+    phase: "Phase 2",
+    title: "Growth",
+    items: ["MBC payment integration on MedByClick", "20% discount for MBC payments", "Referral program with MBC rewards", "Partnership with 10+ clinics"],
+    status: "active",
+  },
+  {
+    phase: "Phase 3",
+    title: "Expansion",
+    items: ["DEX listing (Uniswap)", "Cross-chain bridge (Polygon, BSC)", "Staking rewards for token holders", "Governance voting for platform features"],
+    status: "upcoming",
+  },
+  {
+    phase: "Phase 4",
+    title: "Ecosystem",
+    items: ["CEX listings", "Partner clinic token acceptance", "Medical data marketplace (anonymized)", "Cross-platform utility (MedTravel, MedEdu)"],
+    status: "upcoming",
+  },
+];
+
+export const tokenUseCases = [
+  { title: "Service Payments", description: "Pay for consultations, case reviews, and care coordination with up to 20% discount", icon: "💳" },
+  { title: "Loyalty Rewards", description: "Earn MBC for consultations, referrals, reviews, and platform engagement", icon: "⭐" },
+  { title: "Staking", description: "Stake MBC to earn passive rewards and unlock premium platform features", icon: "📈" },
+  { title: "Governance", description: "Vote on platform features, new specialist additions, and community proposals", icon: "🗳️" },
+  { title: "Partner Discounts", description: "Use MBC at partner clinics, pharmacies, and medical tourism providers", icon: "🏥" },
+  { title: "Data Marketplace", description: "Share anonymized health insights and earn MBC from research institutions", icon: "🔬" },
+];
 
 export const tiers: TokenTier[] = [
   { id: "bronze", name: "Bronze", minTokens: 0, color: "amber-700", perks: ["5% discount on consultations", "Community access"] },

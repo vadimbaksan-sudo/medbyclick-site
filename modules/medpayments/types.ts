@@ -9,3 +9,13 @@ export interface PricingPlan {
   highlighted: boolean;
   cta: string;
 }
+
+export interface PaymentMethod {
+  id: string;
+  name: string;
+  type: "card" | "crypto" | "token";
+  icon: string;
+  description: string;
+  networks?: string[];
+  discount?: number;
+}
