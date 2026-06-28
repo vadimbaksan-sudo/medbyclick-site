@@ -1,4 +1,4 @@
-import type { PricingPlan } from "./types";
+import type { PricingPlan, PaymentMethod } from "./types";
 
 export const plans: PricingPlan[] = [
   {
@@ -50,5 +50,60 @@ export const plans: PricingPlan[] = [
     ],
     highlighted: false,
     cta: "Subscribe",
+  },
+];
+
+export const paymentMethods: PaymentMethod[] = [
+  {
+    id: "stripe",
+    name: "Credit / Debit Card",
+    type: "card",
+    description: "Visa, Mastercard, American Express — processed securely by Stripe.",
+    icon: "💳",
+    details: [
+      "PCI DSS Level 1 certified",
+      "3D Secure authentication",
+      "Instant processing",
+    ],
+  },
+  {
+    id: "usdt-erc20",
+    name: "USDT (ERC-20)",
+    type: "crypto",
+    description: "Tether USD stablecoin on the Ethereum network.",
+    network: "Ethereum",
+    icon: "₮",
+    details: [
+      "ERC-20 standard on Ethereum",
+      "~1–3 min confirmation",
+      "Gas fees apply",
+    ],
+  },
+  {
+    id: "usdt-trc20",
+    name: "USDT (TRC-20)",
+    type: "crypto",
+    description: "Tether USD stablecoin on the TRON network. Minimal fees.",
+    network: "TRON",
+    icon: "₮",
+    details: [
+      "TRC-20 standard on TRON",
+      "~3 second block time",
+      "Near-zero fees",
+    ],
+  },
+  {
+    id: "mbc",
+    name: "MBC Token",
+    type: "token",
+    description: "MedByClick utility token on Ethereum. Pay with MBC and receive 20% off.",
+    network: "Ethereum",
+    discount: 20,
+    icon: "🪙",
+    details: [
+      "ERC-20 on Ethereum",
+      "20% discount applied at checkout",
+      "Tokens burned on redemption",
+    ],
   },
 ];
