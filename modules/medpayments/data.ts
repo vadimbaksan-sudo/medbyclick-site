@@ -1,33 +1,5 @@
 import type { PricingPlan, PaymentMethod } from "./types";
 
-export const paymentMethods: PaymentMethod[] = [
-  {
-    id: "card",
-    name: "Credit / Debit Card",
-    type: "card",
-    icon: "💳",
-    description: "Visa, Mastercard, American Express. Processed securely via Stripe.",
-    networks: ["Visa", "Mastercard", "Amex"],
-  },
-  {
-    id: "usdt",
-    name: "USDT (Tether)",
-    type: "crypto",
-    icon: "₮",
-    description: "Pay with USDT stablecoin. ERC-20 (Ethereum) or TRC-20 (Tron) networks supported.",
-    networks: ["ERC-20 (Ethereum)", "TRC-20 (Tron)"],
-  },
-  {
-    id: "medtoken",
-    name: "MBC Token",
-    type: "token",
-    icon: "🪙",
-    description: "Pay with MedByClick utility tokens (ERC-20). Get up to 20% discount on all services.",
-    networks: ["ERC-20 (Ethereum)"],
-    discount: 20,
-  },
-];
-
 export const plans: PricingPlan[] = [
   {
     id: "basic",
@@ -81,8 +53,57 @@ export const plans: PricingPlan[] = [
   },
 ];
 
-export const cryptoAddresses = {
-  usdt_erc20: "0x742d35Cc6634C0532925a3b844Bc9e7595f2bD18",
-  usdt_trc20: "TN3W4H6rK2ce4vX9YnFQHwKENnHjoxb3m9",
-  mbc_erc20: "0x742d35Cc6634C0532925a3b844Bc9e7595f2bD18",
-};
+export const paymentMethods: PaymentMethod[] = [
+  {
+    id: "stripe",
+    name: "Credit / Debit Card",
+    type: "card",
+    description: "Visa, Mastercard, American Express — processed securely by Stripe.",
+    icon: "💳",
+    details: [
+      "PCI DSS Level 1 certified",
+      "3D Secure authentication",
+      "Instant processing",
+    ],
+  },
+  {
+    id: "usdt-erc20",
+    name: "USDT (ERC-20)",
+    type: "crypto",
+    description: "Tether USD stablecoin on the Ethereum network.",
+    network: "Ethereum",
+    icon: "₮",
+    details: [
+      "ERC-20 standard on Ethereum",
+      "~1–3 min confirmation",
+      "Gas fees apply",
+    ],
+  },
+  {
+    id: "usdt-trc20",
+    name: "USDT (TRC-20)",
+    type: "crypto",
+    description: "Tether USD stablecoin on the TRON network. Minimal fees.",
+    network: "TRON",
+    icon: "₮",
+    details: [
+      "TRC-20 standard on TRON",
+      "~3 second block time",
+      "Near-zero fees",
+    ],
+  },
+  {
+    id: "mbc",
+    name: "MBC Token",
+    type: "token",
+    description: "MedByClick utility token on Ethereum. Pay with MBC and receive 20% off.",
+    network: "Ethereum",
+    discount: 20,
+    icon: "🪙",
+    details: [
+      "ERC-20 on Ethereum",
+      "20% discount applied at checkout",
+      "Tokens burned on redemption",
+    ],
+  },
+];

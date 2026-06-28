@@ -14,27 +14,36 @@ export interface Reward {
   category: string;
 }
 
+export interface TokenomicsItem {
+  label: string;
+  percentage: number;
+  description: string;
+  color: string;
+}
+
+export interface RoadmapPhase {
+  phase: number;
+  title: string;
+  period: string;
+  items: string[];
+  completed: boolean;
+}
+
+export interface UseCase {
+  id: string;
+  title: string;
+  description: string;
+  icon: string;
+}
+
 export interface TokenInfo {
   name: string;
   symbol: string;
-  standard: string;
   network: string;
-  contractAddress: string;
-  totalSupply: string;
-  decimals: number;
+  standard: string;
+  totalSupply: number;
   priceUsd: number;
-  useCase: string;
-}
-
-export interface TokenDistribution {
-  category: string;
-  percentage: number;
-  description: string;
-}
-
-export interface RoadmapItem {
-  phase: string;
-  title: string;
-  items: string[];
-  status: "completed" | "active" | "upcoming";
+  tokenomics: TokenomicsItem[];
+  roadmap: RoadmapPhase[];
+  useCases: UseCase[];
 }

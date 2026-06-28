@@ -14,8 +14,9 @@ export interface PaymentMethod {
   id: string;
   name: string;
   type: "card" | "crypto" | "token";
-  icon: string;
   description: string;
-  networks?: string[];
+  network?: string;
   discount?: number;
+  icon: string;
+  details: string[];
 }

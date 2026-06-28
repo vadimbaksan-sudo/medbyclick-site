@@ -1,61 +1,4 @@
-import type { TokenTier, Reward, TokenInfo, TokenDistribution, RoadmapItem } from "./types";
-
-export const tokenInfo: TokenInfo = {
-  name: "MedByClick Token",
-  symbol: "MBC",
-  standard: "ERC-20",
-  network: "Ethereum Mainnet",
-  contractAddress: "0x742d35Cc6634C0532925a3b844Bc9e7595f2bD18",
-  totalSupply: "100,000,000 MBC",
-  decimals: 18,
-  priceUsd: 0.10,
-  useCase: "Platform utility token for payments, discounts, loyalty rewards, and governance",
-};
-
-export const tokenDistribution: TokenDistribution[] = [
-  { category: "Platform Rewards", percentage: 30, description: "Loyalty program, referrals, engagement rewards" },
-  { category: "Team & Advisors", percentage: 15, description: "4-year vesting, 1-year cliff" },
-  { category: "Development Fund", percentage: 20, description: "Platform development and infrastructure" },
-  { category: "Public Sale", percentage: 20, description: "Available for purchase on supported exchanges" },
-  { category: "Reserve", percentage: 10, description: "Emergency fund and future partnerships" },
-  { category: "Liquidity", percentage: 5, description: "DEX liquidity pools (Uniswap)" },
-];
-
-export const tokenRoadmap: RoadmapItem[] = [
-  {
-    phase: "Phase 1",
-    title: "Foundation",
-    items: ["Smart contract development & audit", "ERC-20 deployment on Ethereum", "Internal platform integration", "Loyalty program launch"],
-    status: "completed",
-  },
-  {
-    phase: "Phase 2",
-    title: "Growth",
-    items: ["MBC payment integration on MedByClick", "20% discount for MBC payments", "Referral program with MBC rewards", "Partnership with 10+ clinics"],
-    status: "active",
-  },
-  {
-    phase: "Phase 3",
-    title: "Expansion",
-    items: ["DEX listing (Uniswap)", "Cross-chain bridge (Polygon, BSC)", "Staking rewards for token holders", "Governance voting for platform features"],
-    status: "upcoming",
-  },
-  {
-    phase: "Phase 4",
-    title: "Ecosystem",
-    items: ["CEX listings", "Partner clinic token acceptance", "Medical data marketplace (anonymized)", "Cross-platform utility (MedTravel, MedEdu)"],
-    status: "upcoming",
-  },
-];
-
-export const tokenUseCases = [
-  { title: "Service Payments", description: "Pay for consultations, case reviews, and care coordination with up to 20% discount", icon: "💳" },
-  { title: "Loyalty Rewards", description: "Earn MBC for consultations, referrals, reviews, and platform engagement", icon: "⭐" },
-  { title: "Staking", description: "Stake MBC to earn passive rewards and unlock premium platform features", icon: "📈" },
-  { title: "Governance", description: "Vote on platform features, new specialist additions, and community proposals", icon: "🗳️" },
-  { title: "Partner Discounts", description: "Use MBC at partner clinics, pharmacies, and medical tourism providers", icon: "🏥" },
-  { title: "Data Marketplace", description: "Share anonymized health insights and earn MBC from research institutions", icon: "🔬" },
-];
+import type { TokenTier, Reward, TokenInfo } from "./types";
 
 export const tiers: TokenTier[] = [
   { id: "bronze", name: "Bronze", minTokens: 0, color: "amber-700", perks: ["5% discount on consultations", "Community access"] },
@@ -78,3 +21,77 @@ export const earnActions = [
   { action: "Complete profile", tokens: 25 },
   { action: "Take a MedEdu course", tokens: 75 },
 ];
+
+export const tokenInfo: TokenInfo = {
+  name: "MedByClick Token",
+  symbol: "MBC",
+  network: "Ethereum",
+  standard: "ERC-20",
+  totalSupply: 100_000_000,
+  priceUsd: 0.10,
+  tokenomics: [
+    { label: "Platform Rewards", percentage: 35, description: "Distributed to users as loyalty rewards for platform activity", color: "bg-amber-400" },
+    { label: "Ecosystem Fund", percentage: 25, description: "Reserved for partnerships, integrations, and ecosystem growth", color: "bg-amber-600" },
+    { label: "Team & Advisors", percentage: 15, description: "Vested over 3 years with 12-month cliff", color: "bg-slate-500" },
+    { label: "Public Sale", percentage: 15, description: "Available through public token sale events", color: "bg-slate-400" },
+    { label: "Liquidity Reserve", percentage: 10, description: "DEX liquidity pools and market stability", color: "bg-slate-300" },
+  ],
+  roadmap: [
+    {
+      phase: 1,
+      title: "Foundation",
+      period: "Q1–Q2 2025",
+      completed: true,
+      items: [
+        "ERC-20 smart contract deployment on Ethereum mainnet",
+        "Token audit by CertiK",
+        "MedToken loyalty program launch",
+        "Wallet integration in MedByClick app",
+      ],
+    },
+    {
+      phase: 2,
+      title: "Expansion",
+      period: "Q3–Q4 2025",
+      completed: true,
+      items: [
+        "MBC payment acceptance across all modules",
+        "20% discount mechanism live",
+        "CEX listing on two exchanges",
+        "Staking v1 with platform-fee yield",
+      ],
+    },
+    {
+      phase: 3,
+      title: "Ecosystem",
+      period: "Q1–Q2 2026",
+      completed: false,
+      items: [
+        "DAO governance module for token holders",
+        "Cross-chain bridge to BNB Chain",
+        "MBC-denominated insurance pools",
+        "Partner clinic MBC acceptance network",
+      ],
+    },
+    {
+      phase: 4,
+      title: "Global Scale",
+      period: "Q3–Q4 2026",
+      completed: false,
+      items: [
+        "Layer-2 deployment for near-zero gas fees",
+        "NFT health credentials for MBC holders",
+        "Decentralized medical record storage incentives",
+        "50+ healthcare partner integrations",
+      ],
+    },
+  ],
+  useCases: [
+    { id: "payments", title: "Service Payments", description: "Pay for consultations, case reviews, and care coordination with a 20% discount vs. card payments.", icon: "💳" },
+    { id: "rewards", title: "Loyalty Rewards", description: "Earn MBC tokens for every platform interaction — consultations, reviews, referrals, and completed courses.", icon: "🎁" },
+    { id: "governance", title: "DAO Governance", description: "Vote on platform feature priorities, fee structures, and ecosystem fund allocations.", icon: "🗳️" },
+    { id: "staking", title: "Staking Yield", description: "Stake MBC to earn a share of platform service fees, distributed weekly.", icon: "📈" },
+    { id: "access", title: "Premium Access", description: "Unlock exclusive specialists, early access to new modules, and priority scheduling queues.", icon: "🔑" },
+    { id: "insurance", title: "Insurance Pools", description: "Contribute MBC to decentralized medical expense pools for community-backed coverage.", icon: "🛡️" },
+  ],
+};
