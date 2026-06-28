@@ -1,0 +1,43 @@
+import type { ClinicalTrial } from "./types";
+
+export const trials: ClinicalTrial[] = [
+  {
+    id: "ct-1",
+    title: "CAR-T Cell Therapy for Relapsed Large B-Cell Lymphoma",
+    phase: "III",
+    status: "recruiting",
+    condition: "Diffuse Large B-Cell Lymphoma",
+    intervention: "Axicabtagene Ciloleucel (CAR-T)",
+    sponsor: "Sheba Medical Center / NCI",
+    location: "Tel Aviv, Israel",
+    eligibility: ["18–75 years", "Relapsed/refractory DLBCL", "Prior 2+ lines of therapy", "ECOG PS 0–2"],
+    description: "Phase III randomized trial comparing CAR-T cell therapy versus standard salvage chemotherapy in relapsed DLBCL patients.",
+    estimatedCompletion: "December 2027",
+  },
+  {
+    id: "ct-2",
+    title: "Ocrelizumab Biosimilar in Progressive Multiple Sclerosis",
+    phase: "II",
+    status: "recruiting",
+    condition: "Primary Progressive Multiple Sclerosis",
+    intervention: "OCA-4502 (ocrelizumab biosimilar)",
+    sponsor: "Tel Aviv University MS Clinic",
+    location: "Tel Aviv, Israel",
+    eligibility: ["Age 25–65", "PPMS diagnosis ≥2 years", "EDSS 3.0–6.5", "No prior anti-CD20 therapy"],
+    description: "Evaluating the safety and efficacy of a novel ocrelizumab biosimilar in slowing disability progression in PPMS.",
+    estimatedCompletion: "June 2026",
+  },
+  {
+    id: "ct-3",
+    title: "Genetic Screening Program for Hereditary Cardiac Arrhythmias",
+    phase: "IV",
+    status: "active",
+    condition: "Hereditary Cardiac Arrhythmias (Brugada, LQTS, HCM)",
+    intervention: "Next-generation sequencing panel + clinical follow-up",
+    sponsor: "Hadassah Medical Center",
+    location: "Jerusalem, Israel",
+    eligibility: ["Any age", "First-degree relative with sudden cardiac death or diagnosed arrhythmia", "No pacemaker/ICD"],
+    description: "Post-market registry study tracking outcomes of a 200-gene cardiac arrhythmia screening panel in at-risk families.",
+    estimatedCompletion: "Ongoing — no end date",
+  },
+];

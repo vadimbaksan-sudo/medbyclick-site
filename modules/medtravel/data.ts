@@ -1,0 +1,40 @@
+import type { TravelDestination } from "./types";
+
+export const destinations: TravelDestination[] = [
+  {
+    id: "germany-munich",
+    country: "Germany",
+    city: "Munich",
+    hospital: "Ludwig Maximilian University Hospital",
+    specialties: ["Oncology", "Cardiology", "Neurosurgery"],
+    priceRange: "$$$",
+    travelTime: "4h from Tel Aviv",
+    rating: 98,
+    description: "One of Europe's leading academic medical centers with cutting-edge treatment protocols.",
+    highlights: ["Top 10 world cancer center", "CAR-T cell therapy", "Proton beam therapy"],
+  },
+  {
+    id: "israel-tel-aviv",
+    country: "Israel",
+    city: "Tel Aviv",
+    hospital: "Sheba Medical Center",
+    specialties: ["Rare diseases", "Oncology", "Cardiac surgery"],
+    priceRange: "$$",
+    travelTime: "Local",
+    rating: 97,
+    description: "Ranked #3 in the world by Newsweek. World leader in rare disease research and treatment.",
+    highlights: ["Global rare disease hub", "Most advanced CICU in region", "English/Russian/Hebrew staff"],
+  },
+  {
+    id: "thailand-bangkok",
+    country: "Thailand",
+    city: "Bangkok",
+    hospital: "Bumrungrad International Hospital",
+    specialties: ["Orthopedics", "Plastic surgery", "General surgery"],
+    priceRange: "$",
+    travelTime: "11h from Tel Aviv",
+    rating: 92,
+    description: "World-class care at 30–70% lower cost than Western hospitals. JCI accredited.",
+    highlights: ["60+ languages spoken", "Same-day appointments", "All-inclusive care packages"],
+  },
+];

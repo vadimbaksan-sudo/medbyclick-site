@@ -1,0 +1,48 @@
+import type { Medication } from "./types";
+
+export const medications: Medication[] = [
+  {
+    id: "med-1",
+    name: "Keytruda",
+    genericName: "Pembrolizumab",
+    category: "Immunotherapy",
+    indication: "Multiple cancer types (melanoma, NSCLC, TNBC)",
+    availability: "available",
+    countries: ["Israel", "Germany", "USA", "France"],
+    description: "PD-1 checkpoint inhibitor. Available through oncology department directly. MedByClick can coordinate compassionate access for unlisted indications.",
+    requiresPrescription: true,
+  },
+  {
+    id: "med-2",
+    name: "Spinraza",
+    genericName: "Nusinersen",
+    category: "Gene therapy / RNA-targeting",
+    indication: "Spinal Muscular Atrophy (SMA)",
+    availability: "limited",
+    countries: ["Israel (ages 2–18)", "Germany", "USA"],
+    description: "Approved for pediatric SMA in Israel. Adult access requires specialist approval. We can connect you with the SMA specialist network.",
+    requiresPrescription: true,
+  },
+  {
+    id: "med-3",
+    name: "Zolgensma",
+    genericName: "Onasemnogene abeparvovec",
+    category: "Gene therapy",
+    indication: "Spinal Muscular Atrophy type 1",
+    availability: "compassionate",
+    countries: ["USA", "Germany", "Japan"],
+    description: "One-time gene therapy for SMA-1. Not yet approved in Israel — MedByClick has coordinated compassionate use access in 4 cases.",
+    requiresPrescription: true,
+  },
+  {
+    id: "med-4",
+    name: "Dupixent",
+    genericName: "Dupilumab",
+    category: "Biologic / Monoclonal antibody",
+    indication: "Atopic dermatitis, asthma, nasal polyposis",
+    availability: "available",
+    countries: ["Israel", "EU", "USA", "Canada"],
+    description: "IL-4/IL-13 blocker approved for multiple conditions. Insurance authorization support available through MedByClick.",
+    requiresPrescription: true,
+  },
+];

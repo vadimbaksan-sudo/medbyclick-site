@@ -1,0 +1,40 @@
+import type { MedEvent } from "./types";
+
+export const events: MedEvent[] = [
+  {
+    id: "e1",
+    title: "International Rare Disease Summit 2026",
+    type: "summit",
+    date: "September 14–16, 2026",
+    location: "Tel Aviv, Israel",
+    description: "Three days of cutting-edge research presentations, patient advocacy panels, and networking with the world's leading rare disease specialists.",
+    speakers: ["Prof. Rina Goldberg", "Dr. Klaus Werner (Berlin Charité)", "Dr. Amir Cohen (NIH)"],
+    topics: ["Rare neurological diseases", "Gene therapy", "Patient-centered research", "Global registry access"],
+    registrationOpen: true,
+    price: "Free for patients · $290 professionals",
+  },
+  {
+    id: "e2",
+    title: "Oncology Second Opinion Masterclass",
+    type: "webinar",
+    date: "July 18, 2026",
+    location: "Online (Zoom)",
+    description: "A practical webinar on how to get, evaluate, and act on second opinions for cancer diagnoses. Hosted by Dr. Elena Volkova.",
+    speakers: ["Dr. Elena Volkova", "Dr. Noa Ben-David (patient advocate)"],
+    topics: ["Reading pathology reports", "Questions to ask your oncologist", "When second opinions change treatment"],
+    registrationOpen: true,
+    price: "Free",
+  },
+  {
+    id: "e3",
+    title: "Medical Tourism Expo — Eastern Europe & Israel",
+    type: "conference",
+    date: "October 5–6, 2026",
+    location: "Warsaw, Poland",
+    description: "The region's premier event for medical tourism professionals, hospital representatives, and international patient coordinators.",
+    speakers: ["MedByClick Team", "Sheba International", "LMU Munich Representatives"],
+    topics: ["Cost benchmarking", "Patient routing", "Legal & insurance", "Quality standards"],
+    registrationOpen: false,
+    price: "$450 · Early bird available August 1",
+  },
+];
