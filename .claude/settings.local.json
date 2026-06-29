@@ -32,7 +32,13 @@
       "Bash(curl -s -o /dev/null -w \"/ = %{http_code}\\\\n\" http://localhost:3000/)",
       "Bash(curl -s -o /dev/null -w \"/doctors = %{http_code}\\\\n\" http://localhost:3000/doctors)",
       "Bash(curl -s -o /dev/null -w \"/doctors/dr-elena-volkova = %{http_code}\\\\n\" http://localhost:3000/doctors/dr-elena-volkova)",
-      "Bash(curl -s -o /dev/null -w \"/book = %{http_code}\\\\n\" http://localhost:3000/book)"
+      "Bash(curl -s -o /dev/null -w \"/book = %{http_code}\\\\n\" http://localhost:3000/book)",
+      "Bash(bun run *)",
+      "Bash(git add *)",
+      "Bash(git commit *)",
+      "Bash(git push *)",
+      "Bash(gh repo *)",
+      "Bash(gh api *)"
     ]
   }
 }
