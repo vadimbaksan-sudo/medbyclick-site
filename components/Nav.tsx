@@ -12,11 +12,16 @@ export default function Nav() {
   const primary = navModules.find((m) => m.id === "medconnect");
   const platform = navModules.filter((m) => m.id !== "medconnect");
 
+  function closeAll() {
+    setOpen(false);
+    setPlatformOpen(false);
+  }
+
   return (
     <header className="sticky top-0 z-50 bg-white border-b border-slate-100">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          <Link href="/" className="flex items-center gap-2" onClick={() => setOpen(false)}>
+          <Link href="/" className="flex items-center gap-2 flex-shrink-0" onClick={closeAll}>
             <span className="text-slate-900 font-semibold text-lg tracking-tight">MedByClick</span>
             <span className="hidden sm:inline-block text-xs font-medium text-amber-700 bg-amber-50 border border-amber-200 px-2 py-0.5 rounded-full">
               Platform
@@ -25,7 +30,14 @@ export default function Nav() {
 
           {/* Desktop nav */}
           <nav className="hidden md:flex items-center gap-1">
-            {primary && (
+            <Link
+              href="/specialists/"
+              className="text-sm font-medium text-slate-600 hover:text-slate-900 px-3 py-2 rounded-lg hover:bg-slate-50 transition-colors"
+            >
+              Specialists
+            </Link>
+
+            {primary && primary.href !== "/medconnect" && (
               <Link
                 href={primary.href!}
                 className="text-sm font-medium text-slate-600 hover:text-slate-900 px-3 py-2 rounded-lg hover:bg-slate-50 transition-colors"
@@ -66,27 +78,39 @@ export default function Nav() {
                         </Link>
                       ))}
                     </div>
-                    <div className="border-t border-slate-100 px-4 py-3 bg-slate-50">
-                      <p className="text-xs text-slate-400">Toggle modules in <code className="font-mono bg-slate-200 px-1 rounded">modules/config.ts</code></p>
-                    </div>
                   </div>
                 )}
               </div>
             )}
 
-            <Link
-              href="/book"
-              className="ml-2 text-sm font-medium bg-slate-900 text-white px-4 py-2 rounded-lg hover:bg-slate-700 transition-colors"
-            >
-              Book a Consultation
-            </Link>
+            <div className="flex items-center gap-2 ml-3 pl-3 border-l border-slate-200">
+              <Link
+                href="/login/"
+                className="text-sm font-medium text-slate-600 hover:text-slate-900 px-3 py-2 rounded-lg hover:bg-slate-50 transition-colors"
+              >
+                Log in
+              </Link>
+              <Link
+                href="/register/"
+                className="text-sm font-medium bg-slate-100 hover:bg-slate-200 text-slate-900 px-3 py-2 rounded-lg transition-colors"
+              >
+                Register
+              </Link>
+              <Link
+                href="/book/"
+                className="text-sm font-medium bg-slate-900 text-white px-4 py-2 rounded-lg hover:bg-slate-700 transition-colors"
+              >
+                Book a Consultation
+              </Link>
+            </div>
           </nav>
 
           {/* Mobile hamburger */}
           <button
-            className="md:hidden p-2 text-slate-600"
+            className="md:hidden p-2 -mr-1 text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-lg transition-colors"
             onClick={() => setOpen(!open)}
-            aria-label="Toggle menu"
+            aria-label={open ? "Close menu" : "Open menu"}
+            aria-expanded={open}
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               {open ? (
@@ -101,24 +125,70 @@ export default function Nav() {
 
       {/* Mobile menu */}
       {open && (
-        <div className="md:hidden border-t border-slate-100 bg-white">
+        <div className="md:hidden border-t border-slate-100 bg-white shadow-lg">
           <div className="px-4 py-4 space-y-1">
-            {navModules.map((mod) => (
+            <Link
+              href="/specialists/"
+              onClick={closeAll}
+              className="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-50 transition-colors"
+            >
+              <span className="text-lg">🩺</span>
+              <span className="text-sm font-medium text-slate-700">Specialists</span>
+            </Link>
+            <Link
+              href="/ai-diagnostics/"
+              onClick={closeAll}
+              className="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-50 transition-colors"
+            >
+              <span className="text-lg">🧠</span>
+              <span className="text-sm font-medium text-slate-700">AI Diagnostics</span>
+            </Link>
+            <Link
+              href="/pricing/"
+              onClick={closeAll}
+              className="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-50 transition-colors"
+            >
+              <span className="text-lg">💳</span>
+              <span className="text-sm font-medium text-slate-700">Pricing</span>
+            </Link>
+            <Link
+              href="/medical-travel/"
+              onClick={closeAll}
+              className="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-50 transition-colors"
+            >
+              <span className="text-lg">✈️</span>
+              <span className="text-sm font-medium text-slate-700">Medical Travel</span>
+            </Link>
+            <Link
+              href="/education/"
+              onClick={closeAll}
+              className="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-50 transition-colors"
+            >
+              <span className="text-lg">📚</span>
+              <span className="text-sm font-medium text-slate-700">Education</span>
+            </Link>
+
+            <div className="pt-2 border-t border-slate-100 mt-2 space-y-2">
+              <div className="flex gap-2">
+                <Link
+                  href="/login/"
+                  onClick={closeAll}
+                  className="flex-1 text-center py-2.5 border border-slate-200 text-slate-700 text-sm font-medium rounded-xl hover:bg-slate-50 transition-colors"
+                >
+                  Log in
+                </Link>
+                <Link
+                  href="/register/"
+                  onClick={closeAll}
+                  className="flex-1 text-center py-2.5 bg-slate-100 text-slate-900 text-sm font-medium rounded-xl hover:bg-slate-200 transition-colors"
+                >
+                  Register
+                </Link>
+              </div>
               <Link
-                key={mod.id}
-                href={mod.href!}
-                onClick={() => setOpen(false)}
-                className="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-50 transition-colors"
-              >
-                <span className="text-lg">{mod.icon}</span>
-                <span className="text-sm font-medium text-slate-700">{mod.navLabel}</span>
-              </Link>
-            ))}
-            <div className="pt-2 border-t border-slate-100 mt-2">
-              <Link
-                href="/book"
-                onClick={() => setOpen(false)}
-                className="block text-center py-3 bg-slate-900 text-white text-sm font-semibold rounded-xl"
+                href="/book/"
+                onClick={closeAll}
+                className="block text-center py-3 bg-slate-900 text-white text-sm font-semibold rounded-xl hover:bg-slate-700 transition-colors"
               >
                 Book a Consultation
               </Link>
