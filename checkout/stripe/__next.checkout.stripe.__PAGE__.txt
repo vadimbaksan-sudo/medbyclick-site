@@ -1,0 +1,6 @@
+1:"$Sreact.fragment"
+2:"$Sreact.suspense"
+3:I[23956,["/medbyclick-site/_next/static/chunks/364ub9xt65jir.js","/medbyclick-site/_next/static/chunks/14mrh2-p_w84d.js","/medbyclick-site/_next/static/chunks/0_awf8dv6btt0.js"],"default"]
+4:I[97367,["/medbyclick-site/_next/static/chunks/364ub9xt65jir.js","/medbyclick-site/_next/static/chunks/14mrh2-p_w84d.js"],"OutletBoundary"]
+0:{"rsc":["$","$1","c",{"children":[["$","div",null,{"children":[["$","div",null,{"className":"bg-slate-900 text-white py-12","children":["$","div",null,{"className":"max-w-3xl mx-auto px-4 sm:px-6","children":[["$","p",null,{"className":"text-xs font-semibold uppercase tracking-widest text-amber-400 mb-3","children":"Checkout"}],["$","h1",null,{"className":"text-3xl font-bold","children":"Pay by card"}]]}]}],["$","div",null,{"className":"max-w-3xl mx-auto px-4 sm:px-6 py-12","children":["$","$2",null,{"fallback":["$","div",null,{"className":"animate-pulse h-80 bg-slate-100 rounded-2xl"}],"children":["$","$L3",null,{}]}]}]]}],[["$","script","script-0",{"src":"/medbyclick-site/_next/static/chunks/0_awf8dv6btt0.js","async":true}]],["$","$L4",null,{"children":["$","$2",null,{"name":"Next.MetadataOutlet","children":"$@5"}]}]]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"JlP2bH562wN9v_U6oYzva"}
+5:null
