@@ -7,6 +7,7 @@ dotenv.config({ path: __dirname + "/.env" });
 const SEPOLIA_RPC = process.env.SEPOLIA_RPC_URL || "";
 const PRIVATE_KEY = process.env.DEPLOYER_PRIVATE_KEY || "";
 const ETHERSCAN_KEY = process.env.ETHERSCAN_API_KEY || "";
+const BSCSCAN_KEY = process.env.BSCSCAN_API_KEY || "";
 
 const config: HardhatUserConfig = {
   solidity: {
@@ -24,9 +25,24 @@ const config: HardhatUserConfig = {
       url: process.env.MAINNET_RPC_URL || "",
       accounts: PRIVATE_KEY ? [PRIVATE_KEY] : [],
     },
+    bscTestnet: {
+      url: "https://bsc-testnet-rpc.publicnode.com",
+      accounts: PRIVATE_KEY ? [PRIVATE_KEY] : [],
+      chainId: 97,
+    },
+    bsc: {
+      url: "https://bsc-rpc.publicnode.com",
+      accounts: PRIVATE_KEY ? [PRIVATE_KEY] : [],
+      chainId: 56,
+    },
   },
   etherscan: {
-    apiKey: ETHERSCAN_KEY,
+    apiKey: {
+      sepolia: ETHERSCAN_KEY,
+      mainnet: ETHERSCAN_KEY,
+      bscTestnet: BSCSCAN_KEY,
+      bsc: BSCSCAN_KEY,
+    },
   },
   paths: {
     sources: "./src",
