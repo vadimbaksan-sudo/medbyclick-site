@@ -1,8 +1,15 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { paymentMethods } from "../data";
 import type { PaymentMethod } from "../types";
+
+interface SelectedPlan {
+  id: string;
+  name: string;
+  price: number;
+}
 
 function MethodCard({
   method,
@@ -83,12 +90,40 @@ function MethodCard({
   );
 }
 
-export default function PaymentSelector({ basePrice = 490 }: { basePrice?: number }) {
+export default function PaymentSelector({
+  basePrice = 490,
+  plan,
+}: {
+  basePrice?: number;
+  plan?: SelectedPlan;
+}) {
+  const router = useRouter();
   const [selected, setSelected] = useState<string>("stripe");
 
   const method = paymentMethods.find((m) => m.id === selected)!;
   const discount = method.discount ?? 0;
-  const finalPrice = discount > 0 ? basePrice * (1 - discount / 100) : basePrice;
+  const effectivePrice = plan?.price ?? basePrice;
+  const finalPrice = discount > 0 ? effectivePrice * (1 - discount / 100) : effectivePrice;
+
+  function handlePayNow() {
+    const params = new URLSearchParams({
+      planId: plan?.id ?? "custom",
+      plan: plan?.name ?? "Custom",
+      price: effectivePrice.toString(),
+    });
+
+    if (selected === "stripe") {
+      router.push(`/checkout/stripe/?${params}`);
+    } else if (selected === "usdt-erc20") {
+      params.set("network", "ethereum");
+      router.push(`/checkout/crypto/?${params}`);
+    } else if (selected === "usdt-trc20") {
+      params.set("network", "tron");
+      router.push(`/checkout/crypto/?${params}`);
+    } else if (selected === "mbc") {
+      router.push(`/checkout/mbc/?${params}`);
+    }
+  }
 
   return (
     <div className="max-w-2xl mx-auto">
@@ -104,7 +139,7 @@ export default function PaymentSelector({ basePrice = 490 }: { basePrice?: numbe
       </div>
 
       <div
-        className={`mt-6 rounded-2xl p-6 flex items-center justify-between ${
+        className={`mt-6 rounded-2xl p-6 flex items-center justify-between gap-4 ${
           discount > 0
             ? "bg-amber-400 text-slate-900"
             : "bg-slate-900 text-white"
@@ -112,21 +147,22 @@ export default function PaymentSelector({ basePrice = 490 }: { basePrice?: numbe
       >
         <div>
           <p className={`text-xs font-medium mb-1 ${discount > 0 ? "text-amber-800" : "text-slate-400"}`}>
-            Total due with {method.name}
+            {plan ? `${plan.name} — ` : ""}Total due with {method.name}
           </p>
           <div className="flex items-baseline gap-3">
             <span className="text-3xl font-black">${finalPrice.toFixed(2)}</span>
             {discount > 0 && (
-              <span className="text-sm line-through text-amber-700">${basePrice.toFixed(2)}</span>
+              <span className="text-sm line-through text-amber-700">${effectivePrice.toFixed(2)}</span>
             )}
           </div>
           {discount > 0 && (
             <p className="text-xs font-semibold text-amber-800 mt-0.5">
-              You save ${(basePrice - finalPrice).toFixed(2)} ({discount}% MBC discount)
+              You save ${(effectivePrice - finalPrice).toFixed(2)} ({discount}% MBC discount)
             </p>
           )}
         </div>
         <button
+          onClick={handlePayNow}
           className={`px-6 py-3 rounded-xl font-bold text-sm transition-colors flex-shrink-0 ${
             discount > 0
               ? "bg-slate-900 hover:bg-slate-800 text-white"

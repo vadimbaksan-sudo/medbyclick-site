@@ -85,6 +85,12 @@ export default function Nav() {
 
             <div className="flex items-center gap-2 ml-3 pl-3 border-l border-slate-200">
               <Link
+                href="/dashboard/"
+                className="text-sm font-medium text-slate-600 hover:text-slate-900 px-3 py-2 rounded-lg hover:bg-slate-50 transition-colors"
+              >
+                Dashboard
+              </Link>
+              <Link
                 href="/login/"
                 className="text-sm font-medium text-slate-600 hover:text-slate-900 px-3 py-2 rounded-lg hover:bg-slate-50 transition-colors"
               >
