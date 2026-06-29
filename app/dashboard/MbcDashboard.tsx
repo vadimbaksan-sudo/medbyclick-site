@@ -15,9 +15,11 @@ interface Transaction {
 }
 
 function getBalance(): number {
+  if (typeof window === "undefined") return DEFAULT_BALANCE;
   try {
     const v = localStorage.getItem("mbc_balance");
-    return v !== null ? parseFloat(v) : DEFAULT_BALANCE;
+    const n = v !== null ? parseFloat(v) : DEFAULT_BALANCE;
+    return isNaN(n) ? DEFAULT_BALANCE : n;
   } catch { return DEFAULT_BALANCE; }
 }
 

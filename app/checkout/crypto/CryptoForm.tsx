@@ -31,6 +31,9 @@ export default function CryptoForm() {
     navigator.clipboard.writeText(wallet).then(() => {
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
+    }).catch(() => {
+      // Clipboard API blocked (iOS Safari, HTTP, privacy mode) — show address for manual copy
+      setCopied(false);
     });
   }
 

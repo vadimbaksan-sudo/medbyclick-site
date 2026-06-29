@@ -53,15 +53,15 @@ export default function MbcForm() {
     const mbcRequired = Math.ceil(discountedUsd / MBC_PRICE_USD);
     const balance = getBalance();
     setData({ planName, originalPrice, discountedUsd, mbcRequired, balance });
-    setBuyAmount(Math.max(mbcRequired - balance, mbcRequired));
+    const shortfall = Math.max(mbcRequired - balance, 0);
+    setBuyAmount(shortfall > 0 ? shortfall : mbcRequired);
   }, []);
 
   if (!data) {
     return <div className="animate-pulse h-64 bg-slate-100 rounded-2xl" />;
   }
 
-  const { planName, originalPrice, discountedUsd, mbcRequired } = data;
-  let { balance } = data;
+  const { planName, originalPrice, discountedUsd, mbcRequired, balance } = data;
   const hasSufficientBalance = balance >= mbcRequired;
 
   function handlePayFromBalance() {
@@ -107,14 +107,13 @@ export default function MbcForm() {
   }
 
   if (state === "buy-success") {
-    balance = data.balance;
-    const canPayNow = balance >= mbcRequired;
+    const canPayNow = data.balance >= mbcRequired;
     return (
       <div className="space-y-6">
         <div className="bg-green-50 border border-green-200 rounded-2xl p-5 text-center">
           <p className="font-semibold text-green-800">Tokens added!</p>
           <p className="text-sm text-green-700 mt-1">
-            New balance: {balance.toLocaleString()} MBC (${(balance * MBC_PRICE_USD).toFixed(2)})
+            New balance: {data.balance.toLocaleString()} MBC (${(data.balance * MBC_PRICE_USD).toFixed(2)})
           </p>
         </div>
         {canPayNow ? (
@@ -126,7 +125,7 @@ export default function MbcForm() {
           </button>
         ) : (
           <p className="text-sm text-slate-500 text-center">
-            Still need {(mbcRequired - balance).toLocaleString()} more MBC.
+            Still need {(mbcRequired - data.balance).toLocaleString()} more MBC.
           </p>
         )}
       </div>
