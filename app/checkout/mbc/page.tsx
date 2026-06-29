@@ -1,4 +1,3 @@
-import { Suspense } from "react";
 import MbcForm from "./MbcForm";
 
 export const metadata = {
@@ -17,9 +16,7 @@ export default function MbcCheckoutPage() {
         </div>
       </div>
       <div className="max-w-3xl mx-auto px-4 sm:px-6 py-12">
-        <Suspense fallback={<div className="animate-pulse h-80 bg-slate-100 rounded-2xl" />}>
-          <MbcForm />
-        </Suspense>
+        <MbcForm />
       </div>
     </div>
   );
