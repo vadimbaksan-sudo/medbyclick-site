@@ -7,6 +7,20 @@ import { doctors } from "@/lib/doctors";
 
 type FormState = "idle" | "submitting" | "success";
 
+const SPECIALTIES = [
+  "Oncology",
+  "Cardiology",
+  "Neurology",
+  "Gastroenterology",
+  "Endocrinology",
+  "Orthopedic Surgery",
+  "Hematology",
+  "Rheumatology",
+  "Pulmonology",
+  "Psychiatry",
+  "Other / Not sure",
+];
+
 export default function BookForm() {
   const searchParams = useSearchParams();
   const preselectedDoctor = searchParams.get("doctor") ?? "";
@@ -17,7 +31,9 @@ export default function BookForm() {
     email: "",
     phone: "",
     doctor: preselectedDoctor,
+    specialty: "",
     situation: "",
+    urgency: "routine",
     language: "Russian",
   });
 
@@ -71,7 +87,7 @@ export default function BookForm() {
             Check your email at {form.email}
           </p>
           <Link
-            href="/doctors"
+            href="/specialists/"
             className="text-sm font-medium text-slate-600 hover:text-slate-900 underline"
           >
             ← Back to our specialists
@@ -163,6 +179,48 @@ export default function BookForm() {
           </div>
         </div>
 
+        <div className="grid sm:grid-cols-2 gap-6">
+          <div>
+            <label
+              htmlFor="specialty"
+              className="block text-sm font-medium text-slate-700 mb-1.5"
+            >
+              Medical specialty needed
+            </label>
+            <select
+              id="specialty"
+              name="specialty"
+              value={form.specialty}
+              onChange={handleChange}
+              className="w-full border border-slate-200 rounded-lg px-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-slate-300 focus:border-slate-400 transition bg-white"
+            >
+              <option value="">Select specialty…</option>
+              {SPECIALTIES.map((s) => (
+                <option key={s} value={s}>{s}</option>
+              ))}
+            </select>
+          </div>
+          <div>
+            <label
+              htmlFor="urgency"
+              className="block text-sm font-medium text-slate-700 mb-1.5"
+            >
+              Urgency
+            </label>
+            <select
+              id="urgency"
+              name="urgency"
+              value={form.urgency}
+              onChange={handleChange}
+              className="w-full border border-slate-200 rounded-lg px-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-slate-300 focus:border-slate-400 transition bg-white"
+            >
+              <option value="routine">Routine — within 1–2 weeks</option>
+              <option value="semi-urgent">Semi-urgent — within a few days</option>
+              <option value="urgent">Urgent — as soon as possible</option>
+            </select>
+          </div>
+        </div>
+
         <div>
           <label
             htmlFor="doctor"
@@ -192,7 +250,7 @@ export default function BookForm() {
             htmlFor="situation"
             className="block text-sm font-medium text-slate-700 mb-1.5"
           >
-            Describe your situation <span className="text-red-400">*</span>
+            Describe your case <span className="text-red-400">*</span>
           </label>
           <textarea
             id="situation"
@@ -263,7 +321,7 @@ export default function BookForm() {
           <p>
             Not sure which specialist you need?{" "}
             <Link
-              href="/doctors"
+              href="/specialists/"
               className="text-slate-700 underline hover:text-slate-900"
             >
               Browse the network

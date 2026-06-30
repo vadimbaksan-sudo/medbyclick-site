@@ -26,7 +26,7 @@ export default function HomePage() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <Link
-                href="/medconnect"
+                href="/specialists/"
                 className="inline-flex items-center justify-center px-6 py-3.5 bg-amber-500 hover:bg-amber-400 text-slate-900 font-semibold rounded-lg transition-colors text-sm"
               >
                 Browse Specialists
@@ -72,7 +72,7 @@ export default function HomePage() {
               Everything you need, in one place
             </h2>
             <p className="text-slate-500 mt-3 max-w-xl mx-auto text-sm leading-relaxed">
-              {modules.length} active modules — from AI diagnostics to global specialist access. Toggle them on or off in <code className="font-mono bg-slate-200 px-1.5 py-0.5 rounded text-xs">modules/config.ts</code>.
+              {modules.length} active modules — from AI diagnostics to global specialist access, medical travel, and education.
             </p>
           </div>
 
@@ -163,7 +163,7 @@ export default function HomePage() {
               <p className="text-xs font-semibold uppercase tracking-widest text-amber-600 mb-4">Our specialists</p>
               <h2 className="text-3xl md:text-4xl font-bold text-slate-900">Meet the network</h2>
             </div>
-            <Link href="/medconnect" className="hidden sm:inline-flex items-center gap-1 text-sm font-medium text-slate-600 hover:text-slate-900 transition-colors">
+            <Link href="/specialists/" className="hidden sm:inline-flex items-center gap-1 text-sm font-medium text-slate-600 hover:text-slate-900 transition-colors">
               See all specialists →
             </Link>
           </div>
@@ -194,7 +194,7 @@ export default function HomePage() {
           </div>
 
           <div className="mt-8 text-center sm:hidden">
-            <Link href="/medconnect" className="text-sm font-medium text-slate-600 hover:text-slate-900">
+            <Link href="/specialists/" className="text-sm font-medium text-slate-600 hover:text-slate-900">
               See all specialists →
             </Link>
           </div>
@@ -218,7 +218,7 @@ export default function HomePage() {
           </Link>
           <p className="text-slate-400 text-sm mt-4">
             Not sure yet?{" "}
-            <Link href="/medconnect" className="underline hover:text-slate-600">
+            <Link href="/specialists/" className="underline hover:text-slate-600">
               Browse our specialists first →
             </Link>
           </p>

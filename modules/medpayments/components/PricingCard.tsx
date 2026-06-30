@@ -1,6 +1,36 @@
 import type { PricingPlan } from "../types";
 
-export default function PricingCard({ plan }: { plan: PricingPlan }) {
+export default function PricingCard({
+  plan,
+  onSelect,
+}: {
+  plan: PricingPlan;
+  onSelect?: () => void;
+}) {
+  const cta = onSelect ? (
+    <button
+      onClick={onSelect}
+      className={`block w-full text-center py-3 rounded-xl font-semibold text-sm transition-colors ${
+        plan.highlighted
+          ? "bg-amber-400 hover:bg-amber-300 text-slate-900"
+          : "bg-slate-900 hover:bg-slate-700 text-white"
+      }`}
+    >
+      {plan.cta}
+    </button>
+  ) : (
+    <a
+      href="/book/"
+      className={`block w-full text-center py-3 rounded-xl font-semibold text-sm transition-colors ${
+        plan.highlighted
+          ? "bg-amber-400 hover:bg-amber-300 text-slate-900"
+          : "bg-slate-900 hover:bg-slate-700 text-white"
+      }`}
+    >
+      {plan.cta}
+    </a>
+  );
+
   return (
     <div
       className={`relative rounded-2xl p-8 flex flex-col ${
@@ -44,16 +74,7 @@ export default function PricingCard({ plan }: { plan: PricingPlan }) {
         ))}
       </ul>
 
-      <a
-        href="/book"
-        className={`block w-full text-center py-3 rounded-xl font-semibold text-sm transition-colors ${
-          plan.highlighted
-            ? "bg-amber-400 hover:bg-amber-300 text-slate-900"
-            : "bg-slate-900 hover:bg-slate-700 text-white"
-        }`}
-      >
-        {plan.cta}
-      </a>
+      {cta}
     </div>
   );
 }
