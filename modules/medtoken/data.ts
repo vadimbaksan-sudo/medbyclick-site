@@ -25,16 +25,18 @@ export const earnActions = [
 export const tokenInfo: TokenInfo = {
   name: "MedByClick Token",
   symbol: "MBC",
-  network: "Ethereum",
-  standard: "ERC-20",
+  network: "BSC",
+  standard: "BEP-20",
   totalSupply: 100_000_000,
   priceUsd: 0.10,
   tokenomics: [
-    { label: "Platform Rewards", percentage: 35, description: "Distributed to users as loyalty rewards for platform activity", color: "bg-amber-400" },
-    { label: "Ecosystem Fund", percentage: 25, description: "Reserved for partnerships, integrations, and ecosystem growth", color: "bg-amber-600" },
-    { label: "Team & Advisors", percentage: 15, description: "Vested over 3 years with 12-month cliff", color: "bg-slate-500" },
-    { label: "Public Sale", percentage: 15, description: "Available through public token sale events", color: "bg-slate-400" },
-    { label: "Liquidity Reserve", percentage: 10, description: "DEX liquidity pools and market stability", color: "bg-slate-300" },
+    { label: "Founder Locked Allocation", percentage: 25, description: "Co-founders personal tokens. 12-month cliff, then 48-month linear unlock (5 years total vesting)", color: "bg-amber-400" },
+    { label: "Ecosystem Rewards", percentage: 25, description: "Rewards for patients, doctors, clinics, partners, AI, reviews, referrals, and education", color: "bg-amber-600" },
+    { label: "Treasury", percentage: 15, description: "Company development fund: hiring, expansion, marketing, listings, legal, infrastructure", color: "bg-slate-500" },
+    { label: "Founder Innovation Fund", percentage: 10, description: "Strategic hiring, technology acquisitions, and key partnerships (company-controlled)", color: "bg-amber-500" },
+    { label: "Liquidity", percentage: 10, description: "Phased DEX liquidity deployment. Launch: 500K MBC + $5K. Remainder held in reserve", color: "bg-slate-400" },
+    { label: "Strategic Partners", percentage: 10, description: "Reserved for clinics, insurance, labs, telemedicine, AI providers, banks, and exchanges", color: "bg-slate-300" },
+    { label: "Community", percentage: 5, description: "Airdrops, ambassadors, contests, early adopters, and marketing campaigns", color: "bg-violet-400" },
   ],
   roadmap: [
     {
