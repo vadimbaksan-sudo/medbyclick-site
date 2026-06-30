@@ -3,7 +3,7 @@ import { rewards, earnActions, tiers, tokenInfo } from "@/modules/medtoken/data"
 
 export const metadata = {
   title: "MBC Token — MedByClick",
-  description: "MBC is the MedByClick ERC-20 utility token on Ethereum. Earn rewards, pay for services with a 20% discount, and participate in governance.",
+  description: "MBC is the MedByClick BEP-20 utility token on BSC. Earn rewards, pay for services with a 20% discount, and participate in governance.",
 };
 
 export default function MedTokenPage() {
