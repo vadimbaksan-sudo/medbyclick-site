@@ -47,3 +47,24 @@ export interface TokenInfo {
   roadmap: RoadmapPhase[];
   useCases: UseCase[];
 }
+
+export interface VestingRow {
+  category: string;
+  amount: number;
+  tgePercent: number;
+  cliff: string;
+  vest: string;
+}
+
+export interface FounderCompRow {
+  phase: string;
+  perFounder: string;
+  total: string;
+  note: string;
+}
+
+export interface BurnMechanic {
+  source: string;
+  burnPercent: number;
+  notes: string;
+}
