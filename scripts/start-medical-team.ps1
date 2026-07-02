@@ -1,29 +1,28 @@
-# Launches one Windows Terminal tab per Medical-lane AI role for MedByClick.
-# Counterpart to scripts/start-ai-team.sh (macOS), scoped to Marina's 3 roles:
-# Medical Advisory, Medical Content, Medical Community.
-#
-# Usage (PowerShell):
-#   cd $HOME\medbyclick
+# Launches 3 Medical-lane AI role terminals for Marina.
+# Usage (PowerShell from the project root):
+#   Set-ExecutionPolicy Bypass -Scope Process
 #   .\scripts\start-medical-team.ps1
-#
-# Requires: Windows Terminal (wt.exe) on PATH, Claude Code CLI installed and
-# logged in, git clone of this repo already done.
 
-$ProjectDir = "$HOME\medbyclick"
+$ProjectDir = Split-Path $PSScriptRoot -Parent
 
 function Open-Role {
-    param(
-        [string]$SessionName,
-        [string]$RoleFile
+    param([string]$Title, [string]$Script)
+    $scriptPath = "$ProjectDir\scripts\roles\$Script"
+    Start-Process wt -ArgumentList @(
+        "-w", "0",
+        "new-tab",
+        "--title", $Title,
+        "-d", $ProjectDir,
+        "powershell",
+        "-NoExit",
+        "-ExecutionPolicy", "Bypass",
+        "-File", $scriptPath
     )
-
-    $prompt = "You are operating as the $SessionName for MedByClick. Before doing anything else, read docs/agents/$RoleFile in full and strictly follow its Mission, Responsibilities, Decision Authority, Must-Not-Do, Deliverables, KPI, Handoff Rules, and Escalation Rules. Also read docs/TEAM_STRUCTURE.md and docs/governance/DECISION_MATRIX.md to understand how you fit into the two-founder structure (Marina is CEO, medical lane; Vadim is CPWO, product and Web3 lane). Confirm you have read your role file, summarize your mandate in 3 bullets, then wait for a specific task from Marina before taking any action."
-
-    wt -w 0 new-tab --title "$SessionName" -d "$ProjectDir" powershell -NoExit -Command "claude --name `"$SessionName`" `"$prompt`""
+    Start-Sleep -Milliseconds 500
 }
 
-Open-Role -SessionName "MedByClick Medical Advisory"  -RoleFile "MEDICAL_ADVISORY.md"
-Open-Role -SessionName "MedByClick Medical Content"   -RoleFile "MEDICAL_CONTENT.md"
-Open-Role -SessionName "MedByClick Medical Community" -RoleFile "MEDICAL_COMMUNITY.md"
+Open-Role -Title "Medical Advisory"  -Script "medical-advisory.ps1"
+Open-Role -Title "Medical Content"   -Script "medical-content.ps1"
+Open-Role -Title "Medical Community" -Script "medical-community.ps1"
 
-Write-Host "Launched 3 Medical-lane AI-team terminals. Each is reading its role file in docs/agents/ now."
+Write-Host "Launched 3 Medical-lane terminals." -ForegroundColor Cyan
