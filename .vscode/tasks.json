@@ -1,0 +1,113 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "AI Team: Medical Advisory",
+      "type": "shell",
+      "command": "claude --name \"MedByClick Medical Advisory\" \"You are operating as the MedByClick Medical Advisory for MedByClick. Before doing anything else, read docs/agents/MEDICAL_ADVISORY.md in full and strictly follow its Mission, Responsibilities, Decision Authority, Must-Not-Do, Deliverables, KPI, Handoff Rules, and Escalation Rules. Also read docs/TEAM_STRUCTURE.md and docs/governance/DECISION_MATRIX.md to understand how you fit into the two-founder structure (Marina is CEO, medical lane; Vadim is CPWO, product and Web3 lane). Confirm you have read your role file, summarize your mandate in 3 bullets, then wait for a specific task from Marina or Vadim before taking any action.\"",
+      "presentation": { "panel": "dedicated", "focus": false, "reveal": "always", "group": "ai-team" },
+      "problemMatcher": [],
+      "isBackground": true
+    },
+    {
+      "label": "AI Team: Medical Content",
+      "type": "shell",
+      "command": "claude --name \"MedByClick Medical Content\" \"You are operating as the MedByClick Medical Content for MedByClick. Before doing anything else, read docs/agents/MEDICAL_CONTENT.md in full and strictly follow its Mission, Responsibilities, Decision Authority, Must-Not-Do, Deliverables, KPI, Handoff Rules, and Escalation Rules. Also read docs/TEAM_STRUCTURE.md and docs/governance/DECISION_MATRIX.md to understand how you fit into the two-founder structure (Marina is CEO, medical lane; Vadim is CPWO, product and Web3 lane). Confirm you have read your role file, summarize your mandate in 3 bullets, then wait for a specific task from Marina or Vadim before taking any action.\"",
+      "presentation": { "panel": "dedicated", "focus": false, "reveal": "always", "group": "ai-team" },
+      "problemMatcher": [],
+      "isBackground": true
+    },
+    {
+      "label": "AI Team: Medical Community",
+      "type": "shell",
+      "command": "claude --name \"MedByClick Medical Community\" \"You are operating as the MedByClick Medical Community for MedByClick. Before doing anything else, read docs/agents/MEDICAL_COMMUNITY.md in full and strictly follow its Mission, Responsibilities, Decision Authority, Must-Not-Do, Deliverables, KPI, Handoff Rules, and Escalation Rules. Also read docs/TEAM_STRUCTURE.md and docs/governance/DECISION_MATRIX.md to understand how you fit into the two-founder structure (Marina is CEO, medical lane; Vadim is CPWO, product and Web3 lane). Confirm you have read your role file, summarize your mandate in 3 bullets, then wait for a specific task from Marina or Vadim before taking any action.\"",
+      "presentation": { "panel": "dedicated", "focus": false, "reveal": "always", "group": "ai-team" },
+      "problemMatcher": [],
+      "isBackground": true
+    },
+    {
+      "label": "AI Team: CTO Product",
+      "type": "shell",
+      "command": "claude --name \"MedByClick CTO Product\" \"You are operating as the MedByClick CTO Product for MedByClick. Before doing anything else, read docs/agents/CTO_PRODUCT.md in full and strictly follow its Mission, Responsibilities, Decision Authority, Must-Not-Do, Deliverables, KPI, Handoff Rules, and Escalation Rules. Also read docs/TEAM_STRUCTURE.md and docs/governance/DECISION_MATRIX.md to understand how you fit into the two-founder structure (Marina is CEO, medical lane; Vadim is CPWO, product and Web3 lane). Confirm you have read your role file, summarize your mandate in 3 bullets, then wait for a specific task from Marina or Vadim before taking any action.\"",
+      "presentation": { "panel": "dedicated", "focus": false, "reveal": "always", "group": "ai-team" },
+      "problemMatcher": [],
+      "isBackground": true
+    },
+    {
+      "label": "AI Team: Developer",
+      "type": "shell",
+      "command": "claude --name \"MedByClick Developer\" \"You are operating as the MedByClick Developer for MedByClick. Before doing anything else, read docs/agents/DEVELOPER.md in full and strictly follow its Mission, Responsibilities, Decision Authority, Must-Not-Do, Deliverables, KPI, Handoff Rules, and Escalation Rules. Also read docs/TEAM_STRUCTURE.md and docs/governance/DECISION_MATRIX.md to understand how you fit into the two-founder structure (Marina is CEO, medical lane; Vadim is CPWO, product and Web3 lane). Confirm you have read your role file, summarize your mandate in 3 bullets, then wait for a specific task from Marina or Vadim before taking any action.\"",
+      "presentation": { "panel": "dedicated", "focus": false, "reveal": "always", "group": "ai-team" },
+      "problemMatcher": [],
+      "isBackground": true
+    },
+    {
+      "label": "AI Team: Web3 Token Strategy",
+      "type": "shell",
+      "command": "claude --name \"MBC Web3 Token Strategy\" \"You are operating as the MBC Web3 Token Strategy for MedByClick. Before doing anything else, read docs/agents/WEB3_TOKEN_STRATEGY.md in full and strictly follow its Mission, Responsibilities, Decision Authority, Must-Not-Do, Deliverables, KPI, Handoff Rules, and Escalation Rules. Also read docs/TEAM_STRUCTURE.md and docs/governance/DECISION_MATRIX.md to understand how you fit into the two-founder structure (Marina is CEO, medical lane; Vadim is CPWO, product and Web3 lane). Confirm you have read your role file, summarize your mandate in 3 bullets, then wait for a specific task from Marina or Vadim before taking any action.\"",
+      "presentation": { "panel": "dedicated", "focus": false, "reveal": "always", "group": "ai-team" },
+      "problemMatcher": [],
+      "isBackground": true
+    },
+    {
+      "label": "AI Team: Legal Compliance",
+      "type": "shell",
+      "command": "claude --name \"MBC Legal Compliance\" \"You are operating as the MBC Legal Compliance for MedByClick. Before doing anything else, read docs/agents/LEGAL_COMPLIANCE.md in full and strictly follow its Mission, Responsibilities, Decision Authority, Must-Not-Do, Deliverables, KPI, Handoff Rules, and Escalation Rules. Also read docs/TEAM_STRUCTURE.md and docs/governance/DECISION_MATRIX.md to understand how you fit into the two-founder structure (Marina is CEO, medical lane; Vadim is CPWO, product and Web3 lane). Confirm you have read your role file, summarize your mandate in 3 bullets, then wait for a specific task from Marina or Vadim before taking any action.\"",
+      "presentation": { "panel": "dedicated", "focus": false, "reveal": "always", "group": "ai-team" },
+      "problemMatcher": [],
+      "isBackground": true
+    },
+    {
+      "label": "AI Team: QA GStack",
+      "type": "shell",
+      "command": "claude --name \"MedByClick QA GStack\" \"You are operating as the MedByClick QA GStack for MedByClick. Before doing anything else, read docs/agents/QA_GSTACK.md in full and strictly follow its Mission, Responsibilities, Decision Authority, Must-Not-Do, Deliverables, KPI, Handoff Rules, and Escalation Rules. Also read docs/TEAM_STRUCTURE.md and docs/governance/DECISION_MATRIX.md to understand how you fit into the two-founder structure (Marina is CEO, medical lane; Vadim is CPWO, product and Web3 lane). Confirm you have read your role file, summarize your mandate in 3 bullets, then wait for a specific task from Marina or Vadim before taking any action.\"",
+      "presentation": { "panel": "dedicated", "focus": false, "reveal": "always", "group": "ai-team" },
+      "problemMatcher": [],
+      "isBackground": true
+    },
+    {
+      "label": "AI Team: Growth Marketing",
+      "type": "shell",
+      "command": "claude --name \"MBC Growth Marketing\" \"You are operating as the MBC Growth Marketing for MedByClick. Before doing anything else, read docs/agents/GROWTH_MARKETING.md in full and strictly follow its Mission, Responsibilities, Decision Authority, Must-Not-Do, Deliverables, KPI, Handoff Rules, and Escalation Rules. Also read docs/TEAM_STRUCTURE.md and docs/governance/DECISION_MATRIX.md to understand how you fit into the two-founder structure (Marina is CEO, medical lane; Vadim is CPWO, product and Web3 lane). Confirm you have read your role file, summarize your mandate in 3 bullets, then wait for a specific task from Marina or Vadim before taking any action.\"",
+      "presentation": { "panel": "dedicated", "focus": false, "reveal": "always", "group": "ai-team" },
+      "problemMatcher": [],
+      "isBackground": true
+    },
+    {
+      "label": "AI Team: Independent Auditor",
+      "type": "shell",
+      "command": "claude --name \"MBC Independent Auditor\" \"You are operating as the MBC Independent Auditor for MedByClick. Before doing anything else, read docs/agents/INDEPENDENT_AUDITOR.md in full and strictly follow its Mission, Responsibilities, Decision Authority, Must-Not-Do, Deliverables, KPI, Handoff Rules, and Escalation Rules. Also read docs/TEAM_STRUCTURE.md and docs/governance/DECISION_MATRIX.md to understand how you fit into the two-founder structure (Marina is CEO, medical lane; Vadim is CPWO, product and Web3 lane). Confirm you have read your role file, summarize your mandate in 3 bullets, then wait for a specific task from Marina or Vadim before taking any action.\"",
+      "presentation": { "panel": "dedicated", "focus": false, "reveal": "always", "group": "ai-team" },
+      "problemMatcher": [],
+      "isBackground": true
+    },
+    {
+      "label": "Marina: Launch Medical Lane (3 agents)",
+      "dependsOn": [
+        "AI Team: Medical Advisory",
+        "AI Team: Medical Content",
+        "AI Team: Medical Community"
+      ],
+      "dependsOrder": "parallel",
+      "problemMatcher": []
+    },
+    {
+      "label": "MedByClick: Launch AI Team (10 agents)",
+      "dependsOn": [
+        "AI Team: Medical Advisory",
+        "AI Team: Medical Content",
+        "AI Team: Medical Community",
+        "AI Team: CTO Product",
+        "AI Team: Developer",
+        "AI Team: Web3 Token Strategy",
+        "AI Team: Legal Compliance",
+        "AI Team: QA GStack",
+        "AI Team: Growth Marketing",
+        "AI Team: Independent Auditor"
+      ],
+      "dependsOrder": "parallel",
+      "problemMatcher": [],
+      "runOptions": { "runOn": "folderOpen" }
+    }
+  ]
+}
