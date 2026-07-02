@@ -106,8 +106,7 @@
         "AI Team: Independent Auditor"
       ],
       "dependsOrder": "parallel",
-      "problemMatcher": [],
-      "runOptions": { "runOn": "folderOpen" }
+      "problemMatcher": []
     }
   ]
 }
