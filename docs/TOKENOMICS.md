@@ -1,10 +1,19 @@
 # MBC Token — Tokenomics Paper
-### Version 1.0 | June 2026
+### Version 1.1 | June 2026 *(v1.1 currency review — July 2026, see revision note)*
 ### MedByClick — Medical Coordination Platform
 
 ---
 
 > **Disclaimer:** This document is for informational purposes only. MBC is a utility token. Nothing herein constitutes financial advice, an offer to purchase securities, or a guarantee of returns. Acquiring MBC carries risk of total or partial loss.
+
+> **Revision note (v1.1, 2026-07-02):** Web3 & Token Strategy currency review. Fixed
+> a Private Sale vesting arithmetic error (§3.7/§4) that over-distributed the
+> allocation by 700,000 MBC versus the stated 7,000,000 cap. Flagged — but did not
+> hand-patch — a stale illustrative figure in the §5 Unlock Calendar, a circulating-supply
+> definition inconsistency (LP inclusion), and a schedule mismatch in §3.2 Platform
+> Rewards. Full findings: `docs/reports/web3/2026-07-02-tokenomics-audit-review.md`.
+> Items with MiCA/regulatory exposure are cross-referenced there for Legal &
+> Compliance, not duplicated here.
 
 ---
 
@@ -99,6 +108,14 @@ Rewards drive user acquisition and retention. This pool funds:
 Remaining ~2,382,000 MBC transferred to Treasury at Month 36 for ongoing ecosystem use.
 
 **Why decreasing emission?** Early platform stages need aggressive rewards to acquire users. Later stages have network effects and organic retention — rewards become less critical and continued high emission would create unnecessary sell pressure.
+
+> **Flagged 2026-07-02:** this cap schedule (556,000/month starting Month 1, no
+> cliff) does not match the vesting schedule used in §4/§5 for the same pool
+> (5% TGE, 3-month cliff, 527,778/month starting Month 3). Both cannot be
+> literally true at once. Needs reconciliation — either this is a ceiling that
+> the vesting schedule never actually reaches (state that explicitly), or this
+> section is stale relative to §4/§5. Left both numbers in place pending that
+> decision rather than guessing which one is authoritative.
 
 ---
 
@@ -215,7 +232,10 @@ Private sale funds early development before TGE. 7% = 7,000,000 MBC × $0.02 = $
 Private investors take maximum risk (pre-product, pre-audit, pre-listing). 60% discount to public is industry standard for seed rounds. Any tighter discount reduces private round attractiveness; any wider discount over-rewards early investors at public investor expense.
 
 **Vesting:** 10% TGE (700,000 MBC), 3-month cliff, 18-month linear release
-- Monthly release after cliff: 388,889 MBC/month
+- Monthly release after cliff: 350,000 MBC/month (6,300,000 remaining ÷ 18 —
+  corrected 2026-07-02; the allocation had previously been divided by the total
+  7,000,000 instead of the post-TGE remainder, which over-distributed by 700,000
+  MBC versus the stated cap)
 
 ---
 
@@ -263,7 +283,7 @@ Typical advisor allocation: 100,000–500,000 MBC per advisor (2–8 advisors).
 | Strategic Partners | 8,000,000 | 0% | 0 | 6 mo | 24 mo | 333,333 |
 | Public Sale | 8,000,000 | 25% | 2,000,000 | 0 mo | 9 mo | 666,667 |
 | Liquidity Pool | 7,000,000 | 100% | 7,000,000 | — | Locked 24 mo | N/A |
-| Private Sale | 7,000,000 | 10% | 700,000 | 3 mo | 18 mo | 388,889 |
+| Private Sale | 7,000,000 | 10% | 700,000 | 3 mo | 18 mo | 350,000 |
 | Reserve | 6,000,000 | 0% | 0 | 12 mo | 24 mo | 250,000 |
 | Advisors | 4,000,000 | 0% | 0 | 6 mo | 24 mo | 166,667 |
 | **TOTAL** | **100,000,000** | | **10,700,000** | | | |
@@ -294,6 +314,15 @@ Typical advisor allocation: 100,000–500,000 MBC per advisor (2–8 advisors).
 | 49+ | — | — | — | — | — | — | — | — | 0 | **100,000,000** |
 
 *Note: Liquidity LP tokens are locked for 24 months and not counted as circulating — they're locked in the pool, not individual wallets.*
+
+> **Flagged 2026-07-02, not yet corrected in this table:** the Private Sale
+> column above still uses the pre-correction 388,889/month figure (rather than
+> the 350,000/month corrected in §3.7/§4) and stops at Month 18 instead of
+> running the full 18 payments through Month 20. This table is illustrative
+> (uses "~" throughout and omits an individual Month 11 row), so it has been
+> flagged rather than hand-patched cell-by-cell — regenerate it from the
+> corrected per-category schedule before this document is used for external
+> diligence. See `docs/reports/web3/2026-07-02-tokenomics-audit-review.md`.
 
 ---
 

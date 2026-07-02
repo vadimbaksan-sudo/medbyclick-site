@@ -1,10 +1,75 @@
 # MBC Token — Smart Contract Bytecode Audit Report
 ### Date: June 2026 | Analyst: Internal Pre-Audit
 ### Audit Type: Bytecode-level analysis (NOT a substitute for source code audit)
+### Addendum: Source-Level Audit Engagement Plan added 2026-07-02 by Web3 & Token Strategy
 
 ---
 
 > **Scope:** Runtime bytecode analysis only. Source code was not available. This report identifies structural and functional findings from decompilation of the provided EVM bytecode. A full source-level audit by a named firm (Hacken, CertiK, Trail of Bits) is required before any exchange listing.
+
+---
+
+## Part 0: Source-Level Audit Engagement Plan (added 2026-07-02)
+
+This section separates the same two categories `docs/LEGAL_BRIEF.md` Part 0 uses:
+open technical *questions* a real audit firm needs to answer (fine — that's the
+point of hiring one) versus missing *prerequisites* that block sending this
+contract to a firm and signing an engagement letter at all. As of this addendum,
+no firm has been contacted.
+
+### 0.1 Blocking gaps
+
+| # | Gap | Why it blocks engagement | Owner / decision type |
+|---|-----|---------------------------|------------------------|
+| 1 | No reviewable Solidity source exists — only decompiled bytecode | Audit firms audit source code, not bytecode; the actual `.sol` files must be recovered/reconstructed and match the deployed bytecode before any firm can quote or start work | **Developer** — technical requirement handed off from this role |
+| 2 | Known Critical/High findings (C-01, H-01, H-02) not yet remediated in source | Submitting known-bad code to a paid audit burns budget re-discovering issues we've already found ourselves; fix first, let the firm validate the fix and hunt for what bytecode analysis can't see | **CPWO-only** per Decision Matrix ("smart contract design choices pre-audit") — hands the fix spec to Developer |
+| 3 | No legal entity exists yet to sign an audit engagement contract | Same blocker as `docs/LEGAL_BRIEF.md` gap #3 — no entity means the engagement letter is signed by founders personally or not at all | **Joint** — mirrors the outside-counsel precedent already logged in `docs/reports/legal/2026-07-02-counsel-engagement-readiness.md` |
+| 4 | No funding source decided for the audit fee | `docs/TOKENOMICS.md` §9.2 earmarks $37,500 (Y1) for "Smart Contract Audits" from Treasury — but Treasury doesn't exist pre-TGE; funding is necessarily founder capital or private-sale proceeds pre-incorporation | **Joint** — budget/liability decision, Decision Matrix catch-all |
+| 5 | No firm selected or contacted | Candidates identified below (0.2), none approached | **Joint** to approve spend + signatory; this role recommends |
+
+### 0.2 What is NOT blocking
+
+Getting **non-binding quotes** from Hacken, CertiK, and/or Trail of Bits can start
+now, in parallel with gaps #1–#4 — firms routinely quote off a scope description
+and bytecode/spec before source is finalized or a contract is signed. What's
+blocked is *signing* an engagement and *starting billed work*, not asking.
+
+### 0.3 Candidate Firm Comparison
+
+| Firm | Tier / Cost | BSC/BEP-20 fit | Typical turnaround | Recommendation |
+|------|-------------|-----------------|---------------------|-----------------|
+| **Hacken** | Mid-tier | Strong — widely recognized by MEXC/Gate.io-class exchanges, matches `docs/TOKENOMICS.md` §11.2's own named acceptable auditors | Fastest of the three | **Recommended for the Tier-3 listing audit** — cost-appropriate for a standard OpenZeppelin ERC-20 + anti-bot contract, not an exotic design |
+| **CertiK** | Premium | Broad brand recognition (Skynet), commonly expected by Tier-2 exchanges (KuCoin/Bybit/OKX) | Slower, higher cost | Reserve as the **"secondary audit"** `docs/TOKENOMICS.md` §11.3 already requires before Tier-2 CEX phase |
+| **Trail of Bits** | Elite / highest cost | Excellent, but generally reserved for novel or high-complexity logic | Slowest, most rigorous | Overkill for the current contract (standard OZ 5.x base). **Reserve for the Ethereum bridge audit** (LayerZero integration, §11.4) — that is genuinely novel cross-chain logic where ToB's depth is worth the premium |
+
+### 0.4 Outreach tracker
+
+Not yet populated — no firm has been contacted. Source of truth once outreach starts; update in place:
+
+| Firm | Contacted | Scope sent | Quote received | Engagement signed | Status |
+|------|-----------|-----------|-----------------|--------------------|--------|
+| Hacken | — | — | — | — | Not started |
+| CertiK | — | — | — | — | Not started |
+| Trail of Bits | — | — | — | — | Not started |
+
+### 0.5 Recommended sequencing
+
+1. Recover/finalize the actual Solidity source matching the deployed bytecode (Developer).
+2. Remediate C-01, H-01, H-02 in source per the Pre-Listing Action Plan below (Developer, spec owned by this role).
+3. Deploy to BSC testnet; verify source on BscScan + Sourcify (resolves I-02, L-01).
+4. Request non-binding quotes from Hacken (primary) — can start immediately, does not wait on gaps #3/#4.
+5. **Joint decision**: firm selection, engagement signatory, and funding source (gaps #3–#5) — same joint sync that resolves the outside-counsel engagement gap; recommend bundling both decisions into one founders' sync since both are blocked on the same missing-entity/funding prerequisite.
+6. Sign engagement once entity + funding are settled; run the audit.
+7. Remediate any new findings, re-verify, publish the full report publicly (Pre-Listing Action Plan item ⑤) before any exchange application.
+
+### 0.6 Decision routing
+
+Per `docs/governance/DECISION_MATRIX.md`: pre-audit contract remediation choices
+are CPWO-only and handled through this role's handoff to Developer. Committing
+company funds to a named audit firm is a vendor engagement with financial
+liability and no entity yet to bear it — routed **Joint**, not decided here
+unilaterally, consistent with `docs/agents/WEB3_TOKEN_STRATEGY.md` Escalation
+Rules and the precedent already set for outside legal counsel.
 
 ---
 

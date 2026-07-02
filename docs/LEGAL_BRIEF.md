@@ -1,7 +1,9 @@
 # MedByClick (MBC Token) — Legal Foundation Brief
 **Prepared for: Crypto Law Firm Engagement**
-**Version: 1.0 — July 2026**
+**Version: 1.1 — July 2026** *(v1.1 adds Part 0: Engagement Readiness — see revision note below)*
 **Confidential — Attorney-Client Privilege Intended**
+
+> **Revision note (v1.1):** The technical/commercial content of this brief (Parts 1–10) is substantively complete and has not been changed. What was missing was not more legal analysis — it was the operational scaffolding to actually send this brief to a firm and sign an engagement letter. Part 0 below is new and identifies those gaps. Maintained by Legal & Compliance; entity, firm-selection, and funding decisions remain Joint per `docs/governance/DECISION_MATRIX.md`.
 
 ---
 
@@ -14,6 +16,62 @@ We are seeking:
 2. Guidance on **optimal legal entity structure** for token issuance
 3. A **SAFT or Token Warrant template** for the private sale round
 4. A **MiCA White Paper compliance review** before filing with the national competent authority
+
+---
+
+## Part 0: Engagement Readiness — What's Missing to Actually Engage Counsel
+
+This section separates two different kinds of "incomplete": open legal *questions*
+(fine — that's what counsel is for, see Parts 2–8) versus missing *prerequisites*
+that block sending this brief and signing an engagement letter at all. As of this
+revision, no firm has been contacted and no NDA has gone out. The gap is entirely
+in the second category.
+
+### 0.1 Blocking gaps
+
+| # | Gap | Why it blocks engagement | Owner / decision type |
+|---|-----|---------------------------|------------------------|
+| 1 | No firm selected from the candidate list (Part "Recommended Law Firms") | Can't send a brief or sign a retainer without a counterparty | **Joint** — retainer = financial liability for the company (Decision Matrix catch-all) |
+| 2 | No NDA template exists | Part "Appendix B" documents (whitepaper, tokenomics, audit, founder ID) are gated on NDA execution, but no NDA has been drafted | Legal & Compliance to draft; Joint to approve terms if it includes founder personal-liability clauses |
+| 3 | No engagement signatory designated | No legal entity exists yet (Part 1), so the engagement letter must be signed by the founders personally or as an unincorporated joint venture — counsel will ask "who signs and who pays" before opening a file | **Joint** |
+| 4 | No retainer funding source decided | No entity, no treasury, no token sale proceeds yet — retainer can only be funded from founders' personal funds pre-incorporation | **Joint** — budget allocation is explicitly Joint per Decision Matrix |
+| 5 | Founder identity fields still placeholders (Part 1: "[jurisdiction — to be specified]") | Firms run a conflict check before agreeing to represent; most will ask for this before or immediately after first contact, NDA or not | Founders to supply directly — not something Legal & Compliance can source or invent |
+| 6 | No outreach has actually happened | Items 1–5 are prerequisites *to* outreach; even once resolved, someone has to send the email and start the conflict-check/quote process | Whichever founder owns first contact — action item, not a finding |
+
+### 0.2 What is NOT blocking
+
+For clarity, since this brief already reads as "ready to send" in Parts 1–10:
+jurisdiction being undecided (Part 6), the token classification being unresolved
+(Part 5), and the budget for legal fees being unknown (Part 10) are **not**
+blockers — those are precisely the open questions this brief asks counsel to help
+resolve. Do not wait on those before initiating contact.
+
+### 0.3 Outreach tracker
+
+Not yet populated — no firm has been contacted. To be filled in as outreach
+proceeds (this table is the source of truth for engagement status; update in
+place rather than duplicating in `docs/reports/legal/`):
+
+| Firm | Contacted | NDA sent/executed | Conflict check | Fee quote | Status |
+|------|-----------|--------------------|-----------------|-----------|--------|
+| Fieldfisher | — | — | — | — | Not started |
+| DLx Law | — | — | — | — | Not started |
+| MME Legal | — | — | — | — | Not started |
+| Hogan Lovells | — | — | — | — | Not started |
+| Sygna Partners | — | — | — | — | Not started |
+
+### 0.4 Recommended sequencing
+
+1. **Joint decision** (gaps #1, #3, #4 above): pick 1–3 firms from the candidate
+   list to approach in parallel, designate who signs/pays, agree how a
+   pre-incorporation retainer is funded and split.
+2. Legal & Compliance drafts a mutual NDA (gap #2) once firm(s) are picked — many
+   firms provide their own NDA/engagement-letter paper, so this may be moot
+   depending on firm norms; confirm on first contact.
+3. Founder-identifying information (gap #5) is supplied directly by founders to
+   counsel post-NDA, not routed through this document.
+4. First contact goes out (gap #6); this document (Parts 1–10) is what gets
+   attached once an NDA is in place.
 
 ---
 
