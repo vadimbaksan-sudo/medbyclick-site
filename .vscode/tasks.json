@@ -89,7 +89,8 @@
         "AI Team: Medical Community"
       ],
       "dependsOrder": "parallel",
-      "problemMatcher": []
+      "problemMatcher": [],
+      "runOptions": { "runOn": "folderOpen" }
     },
     {
       "label": "MedByClick: Launch AI Team (10 agents)",
