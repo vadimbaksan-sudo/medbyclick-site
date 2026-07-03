@@ -1,9 +1,19 @@
 # MedByClick (MBC Token) — Legal Foundation Brief
 **Prepared for: Crypto Law Firm Engagement**
-**Version: 1.1 — July 2026** *(v1.1 adds Part 0: Engagement Readiness — see revision note below)*
+**Version: 1.2 — July 2026** *(v1.2 adds the Israel platform-entity fact and a draft outreach message — see revision note below)*
 **Confidential — Attorney-Client Privilege Intended**
 
 > **Revision note (v1.1):** The technical/commercial content of this brief (Parts 1–10) is substantively complete and has not been changed. What was missing was not more legal analysis — it was the operational scaffolding to actually send this brief to a firm and sign an engagement letter. Part 0 below is new and identifies those gaps. Maintained by Legal & Compliance; entity, firm-selection, and funding decisions remain Joint per `docs/governance/DECISION_MATRIX.md`.
+
+> **Revision note (v1.2, 2026-07-03):** Two additions, both from Vadim's
+> 2026-07-03 update. (1) Part 1 and new Part 6 §6.0 record a previously
+> undocumented fact — an Israel platform/operating entity, target
+> incorporation December 2025 — and reconcile it against the existing
+> offshore token-entity candidate list as a **two-entity structure**, flagged
+> for Joint decision, not decided here. (2) Part 0 §0.5 adds a draft,
+> copy-paste-ready outreach message to the five candidate firms plus rough
+> non-binding market-rate ranges, to unblock Part 0 gap #6 as far as possible
+> without a founder decision on who to approach and who signs.
 
 ---
 
@@ -48,17 +58,19 @@ resolve. Do not wait on those before initiating contact.
 
 ### 0.3 Outreach tracker
 
-Not yet populated — no firm has been contacted. To be filled in as outreach
-proceeds (this table is the source of truth for engagement status; update in
-place rather than duplicating in `docs/reports/legal/`):
+Not yet contacted — no email has actually gone out. A draft outreach message
+is now ready (see §0.5) and can be sent as soon as gap #1 (firm selection)
+and gap #3 (signatory) are picked. This table is the source of truth for
+engagement status; update in place rather than duplicating in
+`docs/reports/legal/`:
 
 | Firm | Contacted | NDA sent/executed | Conflict check | Fee quote | Status |
 |------|-----------|--------------------|-----------------|-----------|--------|
-| Fieldfisher | — | — | — | — | Not started |
-| DLx Law | — | — | — | — | Not started |
-| MME Legal | — | — | — | — | Not started |
-| Hogan Lovells | — | — | — | — | Not started |
-| Sygna Partners | — | — | — | — | Not started |
+| Fieldfisher | — | — | — | — | Draft outreach ready (§0.5) — not yet sent |
+| DLx Law | — | — | — | — | Draft outreach ready (§0.5) — not yet sent |
+| MME Legal | — | — | — | — | Draft outreach ready (§0.5) — not yet sent |
+| Hogan Lovells | — | — | — | — | Draft outreach ready (§0.5) — not yet sent |
+| Sygna Partners | — | — | — | — | Draft outreach ready (§0.5) — not yet sent |
 
 ### 0.4 Recommended sequencing
 
@@ -72,6 +84,72 @@ place rather than duplicating in `docs/reports/legal/`):
    counsel post-NDA, not routed through this document.
 4. First contact goes out (gap #6); this document (Parts 1–10) is what gets
    attached once an NDA is in place.
+
+### 0.5 Draft Outreach Message (prepared 2026-07-03, not yet sent)
+
+Closes as much of gap #2 (NDA-adjacent first contact) and gap #6 (no
+outreach yet) as this role can without a founder decision. This is a short,
+public-facing introduction — **not** the confidential brief itself (Parts
+1–10 stay gated behind NDA per §0.4). Copy-paste, fill in `[FIRM NAME]` and
+`[FOUNDER NAME / TITLE]`, and send once gaps #1 and #3 are resolved (which
+firm(s), who signs). Not sent by this role — no outreach capability exists
+here, and signing/paying is Joint, not decided yet.
+
+> Subject: MedByClick / MBC Token — Crypto Legal Counsel Inquiry (MiCA,
+> Entity Structure, Token Sale)
+>
+> Hi [FIRM NAME] team,
+>
+> We're the founding team of MedByClick, an early-stage healthcare
+> coordination platform launching a BEP-20 utility token (MBC, BNB Chain,
+> 100,000,000 fixed supply, no mint function) to fund platform growth and
+> reward doctors/patients/clinics. We're approaching first token sale and
+> exchange listing and are looking for outside counsel on:
+>
+> 1. Token classification under MiCA (EU 2023/1114) and applicable national
+>    law — our working self-assessment is that MBC is a non-ART/non-EMT
+>    "other crypto-asset" under MiCA Title II, but we want that confirmed.
+> 2. Entity structure: we expect a **two-entity structure** — an Israeli
+>    operating company for the platform business (targeting incorporation
+>    December 2025) plus a separate offshore entity for token issuance and
+>    treasury (candidates: BVI, Cayman, UAE ADGM/DIFC, Singapore) — and want
+>    your recommendation on which offshore jurisdiction and how the two
+>    entities should relate (services agreement, transfer pricing, PE risk
+>    given founders are Israel-based).
+> 3. A SAFT or Token Purchase Agreement template for a small private round
+>    (~$140,000 target, ≤20 investors).
+> 4. A MiCA white paper compliance review before any EU-facing public token
+>    sale.
+>
+> No legal entity exists yet — engagement would be signed by the founders
+> personally or as an unincorporated joint venture pending incorporation.
+> Could you let us know: (a) availability for an initial consultation, (b)
+> your general fee structure/estimate for the scope above, and (c) whether
+> you'd run a conflict check before or after NDA. Happy to sign an NDA and
+> share our full technical brief (whitepaper, tokenomics, contract audit)
+> once that's in place.
+>
+> Best,
+> [FOUNDER NAME / TITLE], MedByClick
+
+**Rough market-rate expectations (NOT a quote — no firm has been contacted;
+Part 10 is the actual open ask to counsel).** General, non-binding ranges for
+this class of engagement (boutique/mid-tier crypto-focused firms; large
+full-service firms like Hogan Lovells typically bill toward the top of or
+above these ranges):
+
+| Deliverable (per Part 9/10) | Rough range | Notes |
+|---|---|---|
+| Initial consultation | Often free–$2,000 | Many boutique crypto firms do a free intro call |
+| Preliminary written opinion (min. 3 pages) | $5,000–$15,000 | |
+| Full signed Legal Opinion Letter (min. 10 pages, MiCA + Howey) | $15,000–$40,000+ | Large firms likely above this range |
+| MiCA white paper compliance review | $10,000–$25,000 | |
+| SAFT/Token Purchase Agreement template | $5,000–$15,000 | Sometimes bundled with the opinion |
+| Offshore entity incorporation (BVI/Cayman, all-in year 1) | $3,000–$15,000 | ADGM/DIFC VASP or Singapore DPT licensing runs materially higher, $50,000+ |
+| Israel operating company incorporation | Separate from the above — local Israeli corporate counsel, not the crypto firms on this list; typically far cheaper ($1,500–$5,000 all-in) but not sourced from this candidate list |
+| Ongoing retainer (post-TGE, monthly) | $3,000–$10,000/month | Scope-dependent |
+
+Treat every figure above as a planning placeholder, not a budget commitment.
 
 ---
 
@@ -93,7 +171,16 @@ place rather than duplicating in `docs/reports/legal/`):
 - No token has been issued or sold to date
 
 **Intended jurisdiction for entity registration:**
-- Candidates under consideration: British Virgin Islands (BVI), Cayman Islands, UAE (ADGM or DIFC), Singapore
+- **Platform/operating entity: Israel.** New as of 2026-07-03 (per Vadim) —
+  the MedByClick operating company (platform, patient/doctor contracts, fiat
+  revenue) is planned to be registered in Israel, target incorporation
+  **December 2025**. This is a separate entity from the token-issuing
+  entity below, not a replacement for it — see Part 6 §6.0 for the
+  reconciled two-entity structure and why Israel is not itself a candidate
+  for the token-issuing entity.
+- **Token-issuing entity: still offshore, undecided.** Candidates under
+  consideration: British Virgin Islands (BVI), Cayman Islands, UAE (ADGM or
+  DIFC), Singapore
 - We seek counsel's recommendation based on MiCA passporting, investor base, and banking access
 
 ---
@@ -262,6 +349,62 @@ We believe MBC is classifiable as a **utility token** under MiCA Article 3(1)(9)
 ---
 
 ## Part 6: Legal Entity Structure
+
+### 6.0 Two-Entity Structure — Reconciling the Israel Platform Entity (added 2026-07-03)
+
+**New fact (Vadim, 2026-07-03):** MedByClick's platform is planned to
+register as a company in **Israel**, target incorporation **December 2025**.
+This was not previously in this brief. Reconciled against the rest of Part 1
+and Part 6, here is the picture as it stands — **not a decision, a
+clarification for Vadim and Marina to decide against**, since jurisdiction is
+Joint per `docs/governance/DECISION_MATRIX.md`.
+
+**Reading: this is a second, separate entity — not a settlement of the
+token-issuing-entity question.** Part 1's original candidate list (BVI,
+Cayman, UAE ADGM/DIFC, Singapore) was scoped explicitly to the **token**
+entity, chosen for MiCA passporting, crypto-friendly banking, and — notably —
+to avoid **founder personal tax liability "in Israel or [second
+jurisdiction]."** That last point only makes sense if Israel was always
+understood as the founders' personal tax jurisdiction to route the token
+entity around, not a candidate for it. The new fact confirms Israel as real
+(likely where at least one founder is tax-resident) but for the **platform**,
+not the token.
+
+**Proposed two-entity structure (for founder decision, not yet adopted):**
+
+| | Entity 1 — Platform/Operating Company | Entity 2 — Token-Issuing Entity |
+|---|---|---|
+| Jurisdiction | Israel (target incorporation Dec 2025) | Offshore — BVI / Cayman / UAE ADGM-DIFC / Singapore (undecided, Part 6 below) |
+| Handles | Healthcare coordination platform, doctor/patient/clinic contracts, healthcare-regulatory compliance (telemedicine licensing, Israeli Patient Rights Law, GDPR-equivalent data handling), fiat revenue from services (`docs/WHITEPAPER.md` §9.1) | MBC issuance and Treasury (Gnosis Safe custody), private/public token sale proceeds, audit engagement (Hacken/CertiK), exchange listing agreements, MiCA notification |
+| Employs founders? | Likely yes — matches `docs/TOKENOMICS.md` §9.3: "Founders maintain formal employment or consulting contracts with the operating company" | No — pays Stream 1 token allocation only (§3.3), not a salary |
+| Pays founder Treasury salary (Stream 2, `docs/TOKENOMICS.md` §9.3)? | Open question — needs counsel: if Treasury salary is paid from the offshore entity's Treasury to Israel-resident/employed founders, that cross-border flow needs a services agreement and transfer-pricing treatment, and risks creating a taxable permanent establishment for the offshore entity in Israel | |
+
+**Could Israel serve as the SOLE entity, including token issuance?**
+Plausible mechanically, but it cuts directly against the three reasons this
+brief already gives for going offshore, so I'm flagging the tension rather
+than picking a side:
+
+- **MiCA passporting:** no improvement — Israel is not an EU member state,
+  same as every existing offshore candidate. (Side note for counsel,
+  unaffected by this question either way: MiCA's passporting mechanism
+  itself generally presumes an EU-established issuer/offeror; none of BVI,
+  Cayman, UAE, Singapore, *or* Israel resolve that on their own — a
+  pre-existing gap in this brief's own premise, not something Israel changes.)
+- **Crypto-friendly banking:** no clear improvement — Israeli banks have
+  historically been restrictive toward crypto-native businesses, and this
+  brief already documents banking difficulty as a real cost for the offshore
+  candidates too (Part 6 "Banking: difficult to open accounts" for BVI/Cayman).
+- **Founder personal tax exposure:** actively worse, not neutral — Part 1's
+  original rationale was to *avoid* creating tax liability "in Israel... for
+  founders." Locating the token entity itself in Israel doesn't route around
+  that concern, it stacks the token entity directly on top of it.
+
+**My read (not a decision):** keep the two-entity structure — Israel for the
+platform, a separate offshore entity for the token — consistent with the
+original Part 6 rationale, and treat "Israel as sole entity" as the option
+this brief's own facts argue against. Counsel should confirm the
+inter-entity mechanics (services agreement, transfer pricing, PE risk) before
+either entity is finalized. Jurisdiction choice itself remains Joint.
 
 ### Requirements
 
