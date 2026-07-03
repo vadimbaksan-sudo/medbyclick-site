@@ -388,3 +388,215 @@ low-risk first moves; (b) whether TODOS T1's coordinator hire cleared its
 Month 2 deadline; (c) whether any token-specific spend was committed before
 the five milestones in §4 were met, which would be the single clearest
 signal that this report's recommendation was not followed.
+
+---
+
+## Addendum — 2026-07-03 (same day): Correction Request and a New Regulatory Flag
+
+**Trigger:** A message relayed via the Coordinator, same day, asserting two
+facts attributed to Vadim: (1) the Israel operating entity is registered and
+paid for, not merely a December 2025 target; (2) a real, if informal, doctor
+network and real patient case flow already exist and predate the software —
+consistent with `TODOS.md` T1's own framing that the founder currently
+performs case routing personally. The message asked this report's bottom
+line to be revisited, since it was read as conditioned on "zero traction."
+
+This addendum is appended rather than silently rewriting the sections above,
+per this role's own practice — the record of what changed and why should
+stay visible.
+
+### A.1 Evidentiary note — asserted, not yet documented
+
+Both claims arrive through a relayed message in conversation, not through any
+update to a repo document this role can independently verify. As of this
+addendum: `docs/LEGAL_BRIEF.md` Part 1 still reads "No legal entity exists
+yet for the token project" and lists the Israel platform-entity as a
+December 2025 **target**, not a completed fact — its own most recent
+revision note (2026-07-03) records the entity as a new *fact to reconcile*,
+not as incorporated. No file under `docs/reports/medical/` or
+`docs/reports/legal/` documents a current doctor count, case volume, or
+entity-registration confirmation.
+
+Per this role's core operating principle — ground findings in what's in the
+repo, cite sections, don't invent numbers — **both claims are treated here as
+asserted-pending-documentation, not as confirmed facts.** This is not
+disbelief of Vadim specifically; it is the same bar this report already
+applies to every other figure in it, including ones that cut in either
+founder's favor. The concrete recommendation: whoever holds these facts
+should have the owning role file them where the rest of the team can see and
+verify them — Legal & Compliance updates `docs/LEGAL_BRIEF.md` Part 0/Part 1
+to mark the entity gap closed with evidence (registration number, date), and
+Medical Community files a short report documenting the existing informal
+doctor network and case volume (how many doctors, how many cases, over what
+period). Until that exists, the next audit cycle has no way to verify this
+addendum's premise independently of the same relayed-message channel that
+produced it — which is itself worth naming as a process gap, not just a
+formality.
+
+### A.2 Does this change the legal/audit spend timing recommendation?
+
+Partially — narrower than the correction implies, once the claims are
+separated from what they actually bear on.
+
+**On the entity:** if genuinely done and paid for, this resolves the one
+piece of spend the original report already called "justified now, cheap"
+(§4). It doesn't change that conclusion — it means that specific action item
+has already executed, which is good news, and should be marked closed in
+`docs/LEGAL_BRIEF.md` Part 0's blocking-gaps table once documented.
+
+**On the informal doctor network and case flow:** this is real signal, but
+it moves less of the original analysis than it might appear to:
+
+- It is partially corroborated by material already in this report's source
+  base — the growth team's own T4 report
+  (`docs/reports/growth/2026-07-02-t4-paid-acquisition-channel-hypothesis.md`)
+  already cites "hundreds of word-of-mouth referrals" over "40 years" and
+  describes today's acquisition as "100% organic" through the founder's
+  personal network. §1.3 of this report's original text already drew this
+  exact distinction: "whatever the founder's informal word-of-mouth network
+  already produces... is NOT the same as a scaled coordinator-run intake
+  pipeline." This addendum confirms that network is real and has produced
+  real cases. It does not establish that it produces anything close to the
+  100 case reviews/month, 40 care coordinations/month, or the 130-doctor Y1
+  figure in `docs/WHITEPAPER.md` §9.1 / `docs/TOKENOMICS.md` §7.2 — none of
+  that volume has gone through a scalable, priced, repeatable, coordinator-run
+  process. It has gone through one person's manual judgment, at whatever
+  pace one person can sustain.
+- **It does not touch §2 of this report at all.** The raise-adequacy math
+  ($540,000 raise vs. ~$293,000–$655,000+ realistic token-specific cost
+  stack) is entirely about token-side costs — legal, audit, listing,
+  liquidity pairing. How many informal cases the founder has personally
+  routed has no bearing on whether the token raise covers its own legal and
+  audit bills.
+- It modestly raises confidence in product-market fit for the underlying
+  medical-coordination service — a genuine, positive update worth crediting.
+  It does not validate a paid acquisition channel (T4's CAC assumptions
+  remain empirical-data-free), does not change the coordinator-hire
+  timeline, and does not change the token cost-stack arithmetic.
+
+**Revised position:** the full $100,000–$150,000+ token-specific
+legal/audit/listing/liquidity catalog remains premature. That conclusion was
+never actually conditioned on "zero traction" in the fiat business in the
+sense of zero deal flow ever having happened — it was conditioned on (a) the
+token raise not covering its own cost stack (§2, unaffected by this
+correction) and (b) the token's demand mechanisms requiring platform-scale,
+software-mediated doctor/patient volume that one founder's manual case
+routing, however real, does not yet constitute (§3, only modestly affected).
+What should shift is the framing in §1: read "wait for traction" as *wait for
+traction to become software-mediated and repeatable*, not *wait for traction
+to exist at all* — informal traction existing was always the expected
+starting condition for a 40-year referral-based practice, and doesn't change
+the funding math in §2 or §4.
+
+### A.3 Medical-regulatory exposure — flagging as urgent, recommending same-day escalation to Marina
+
+This is the part of the correction this role reads as more consequential
+than the funding question, and it sits outside this role's lane to resolve
+(Medical Advisory's clinical-authority territory and Legal & Compliance's
+regulatory territory per `docs/TEAM_STRUCTURE.md`) — but surfacing it without
+waiting for the next weekly cycle is squarely inside this role's mandate.
+
+If real patients and real doctors are being actively matched and treated
+today — off-platform, informally, per the correction — that is **live
+medical-regulatory exposure happening now, not a future risk gated on
+launch:**
+
+- `docs/reports/product/2026-07-02-t2-platform-evaluation-rubric.md` already
+  flags Israeli Patient Rights Law compliance as unaddressed by any
+  candidate platform vendor — but that finding was framed as an input to the
+  Day-30 platform decision, i.e., forward-looking. If real cases are
+  happening today, the exposure question isn't waiting for Day 30 — it may
+  already be live.
+- No telemedicine-licensing question has been raised anywhere in `docs/` for
+  the *current* informal referral/routing activity — every existing mention
+  addresses the future platform only.
+- `docs/reports/medical/2026-07-02-doctor-vetting-standard.md` describes a
+  vetting standard that, per TODOS T3, hasn't yet had its triage criteria
+  finalized and hasn't been run against any doctor on record. If the doctors
+  already handling real cases in the informal network haven't been run
+  through any documented verification step, that is a gap between "doctors
+  we say are verified" and "doctors who have actually been verified,"
+  existing today, not at launch.
+- Data handling: the sourcing behind the growth team's T4 report describes
+  today's patient contact happening over WhatsApp groups and informal
+  word-of-mouth. If real medical case details move through those channels,
+  that is a live data-handling/confidentiality question — not a hypothetical
+  one gated on the platform going live.
+
+**This role is flagging this as warranting urgent, same-day visibility for
+Marina — not deferral to the next weekly audit cycle.** Per this role's
+Handoff Rules, findings go to both founders simultaneously, never routed
+through one to reach the other; per Escalation Rules, an ongoing,
+undocumented informal medical practice is exactly the category of risk that
+shouldn't sit until it's next convenient to look at. Recommend Marina (with
+Legal & Compliance) get eyes on, today: (a) whether the current informal
+case-routing activity requires any Israeli telemedicine licensing right now,
+independent of the platform's build status; (b) whether Patient Rights Law
+obligations are already being triggered by the existing, real case flow;
+(c) what data-handling/confidentiality controls exist today for the
+WhatsApp-based referral channel carrying real medical information. Resolving
+this is Medical Advisory / Legal & Compliance's call, not this role's — the
+job here is only to make sure it's seen today rather than found later.
+
+---
+
+## Addendum 2 — 2026-07-03 (same day): Correction to A.3
+
+**Trigger:** A second message relayed via the Coordinator, quoting Vadim
+directly: "все делается официально мы как агенты все через документы банки
+клиники" — everything is done officially; MedByClick acts as an
+**agent/referral intermediary** connecting patients to already-licensed
+clinics, with formal documentation, bank transactions, and clinic
+agreements, not the ad hoc, WhatsApp-only coordination A.3 was read as
+describing.
+
+### A.4 Effect on the A.3 risk read
+
+An agent/facilitator model that refers patients to independently-licensed
+clinics is, as a general regulatory matter, a materially different — and
+typically lighter-touch — posture than a platform itself performing clinical
+coordination or triage. If accurate, this narrows the specific risk A.3
+raised: "may be practicing unlicensed telemedicine right now" was written
+against a WhatsApp-only, undocumented-informal-practice framing, and that
+framing is what's being corrected.
+
+**Same evidentiary caveat as Addendum 1 applies, unchanged:** this correction
+arrives the same way the first one did — a relayed message, not a repo
+document. As of this addendum, no file under `docs/reports/medical/` or
+`docs/legal/` (still empty, per the standing gap tracked since the
+2026-07-02 baseline audit) documents the clinic agreements, the bank
+transaction records, or a formal description of MedByClick's role as
+referral agent rather than care coordinator. Asserted, not yet verified —
+same bar as before, applied consistently rather than relaxed because the
+second message is more reassuring than the first.
+
+### A.5 Revised urgency: stand down from same-day, do not close the flag
+
+This role is **not** fully standing down A.3 on the strength of a relayed
+description alone — two things still need independent confirmation before
+this is a closed matter rather than a corrected one:
+
+1. That MedByClick's actual, documented role is "referral agent to
+   already-licensed clinics" — and that it holds up in practice, not just in
+   description. An agent model can drift into de facto clinical coordination
+   (triage advice, treatment-adjacent guidance, case management beyond pure
+   referral) without anyone deciding that on purpose — that drift is exactly
+   the kind of thing a facilitator label doesn't automatically prevent, and
+   it's a fact pattern worth Legal & Compliance actually checking against
+   what MedByClick's founder/coordinator interactions with patients actually
+   look like, not just what the entity paperwork says.
+2. That the clinic agreements and bank records described actually exist as
+   described — same document-it-so-the-next-audit-can-verify-it
+   recommendation as Addendum 1.
+
+**Revised urgency: downgraded from same-day/urgent to normal-cycle
+follow-up.** The specific fact that made A.3 urgent — an undocumented,
+informal, WhatsApp-only practice with no apparent licensing structure at
+all — is the fact this correction addresses. A documented agent/referral
+model with bank and clinic paperwork, even if not yet independently
+verified by this role, is a different risk class than the one A.3 described,
+and doesn't warrant pulling Marina off other work today. Recommend Legal &
+Compliance confirm the two points above on its normal reporting cadence
+(`docs/reports/legal/`), not as an emergency item. A.3 stays open on the
+standing gaps list as a confirmation-pending item, not a same-day emergency,
+and not yet closed.
