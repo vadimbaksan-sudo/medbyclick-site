@@ -1,5 +1,5 @@
 # MBC Token — Tokenomics Paper
-### Version 1.1 | June 2026 *(v1.1 currency review — July 2026, see revision note)*
+### Version 1.2 | June 2026 *(v1.1/v1.2 currency review — July 2026, see revision notes)*
 ### MedByClick — Medical Coordination Platform
 
 ---
@@ -14,6 +14,16 @@
 > Rewards. Full findings: `docs/reports/web3/2026-07-02-tokenomics-audit-review.md`.
 > Items with MiCA/regulatory exposure are cross-referenced there for Legal &
 > Compliance, not duplicated here.
+>
+> **Revision note (v1.2, 2026-07-03):** Web3 & Token Strategy — pure arithmetic/
+> internal-consistency follow-up, no change to category percentages or caps.
+> (1) §5 Unlock Calendar's Private Sale column regenerated with the corrected
+> 350,000 MBC/month figure from §3.7/§4, extended through Month 20 (18 monthly
+> payments) instead of stopping short at Month 18 — Monthly Total and Cumulative
+> recomputed for every affected row. (2) The §5 footnote's LP-exclusion claim
+> corrected — it was internally contradicting §1/§6's own headline TGE circulating
+> supply figure. See §5 for the reconciliation. The §3.2 Platform Rewards schedule
+> mismatch remains open (needs a decision, not a spot-fix — unchanged from v1.1).
 
 ---
 
@@ -30,7 +40,7 @@
 | TGE Price | $0.05 | Honest valuation for early stage |
 | Private Sale Price | $0.02 | 60% discount to public; justified by early risk |
 | Fully Diluted Valuation | $5,000,000 | Target at TGE |
-| TGE Circulating Supply | 10,700,000 MBC (10.7%) | Conservative launch — prevents immediate sell pressure |
+| TGE Circulating Supply | 10,700,000 MBC (10.7%) — **includes** the 7,000,000 MBC Liquidity Pool allocation (deployed to the pool at TGE; publicly tradeable, so counted as circulating even though contractually locked from team withdrawal — see §5 reconciliation) | Conservative launch — prevents immediate sell pressure |
 | TGE Market Cap | ~$535,000 | Achievable, credible for Tier-3 CEX listing |
 | Mint Function | **NONE** | Permanently disabled in contract |
 | Admin Pause | Temporary (renounced after Phase 1) | For emergency only; renounced at Month 6 |
@@ -299,30 +309,50 @@ Typical advisor allocation: 100,000–500,000 MBC per advisor (2–8 advisors).
 | 0 (TGE) | 0 | 1,000,000 | 0 | 0 | 700,000 | 2,000,000 | 0 | 0 | **3,700,000** | 3,700,000 |
 | 1 | 0 | 0 | 0 | 0 | 0 | 666,667 | 0 | 0 | 666,667 | 4,366,667 |
 | 2 | 0 | 0 | 0 | 0 | 0 | 666,667 | 0 | 0 | 666,667 | 5,033,333 |
-| 3 | 0 | 527,778 | 0 | 0 | 388,889 | 666,667 | 0 | 0 | **1,583,333** | 6,616,667 |
-| 4 | 0 | 527,778 | 0 | 0 | 388,889 | 666,667 | 0 | 0 | 1,583,333 | 8,200,000 |
-| 5 | 0 | 527,778 | 0 | 0 | 388,889 | 666,667 | 0 | 0 | 1,583,333 | 9,783,333 |
-| 6 | 520,833 | 527,778 | 0 | 333,333 | 388,889 | 666,667 | 166,667 | 0 | **2,604,167** | 12,387,500 |
-| 7–9 | 520,833 | ~500,000 | 0 | 333,333 | 388,889 | 666,667 | 166,667 | 0 | ~2,576,389/mo | ~20,100,000 |
-| 10 | 520,833 | ~500,000 | 0 | 333,333 | 388,889 | **done** | 166,667 | 0 | ~1,909,722 | ~22,000,000 |
-| 12 | 520,833 | ~450,000 | 416,667 | 333,333 | 388,889 | — | 166,667 | 250,000 | **2,526,389** | ~26,500,000 |
-| 13–18 | 520,833 | ~450,000 | 416,667 | 333,333 | 388,889 | — | 166,667 | 250,000 | ~2,526,389/mo | ~41,700,000 |
-| 19–24 | 520,833 | ~405,000 | 416,667 | 333,333 | — | — | 166,667 | 250,000 | ~2,092,500/mo | ~54,200,000 |
-| 25–30 | 520,833 | ~364,000 | 416,667 | — | — | — | — | 250,000 | ~1,551,500/mo | ~63,500,000 |
-| 31–36 | 520,833 | ~328,000 | 416,667 | — | — | — | — | 250,000 | ~1,515,500/mo | ~72,500,000 |
-| 37–48 | 520,833 | — | — | — | — | — | — | — | 520,833/mo | ~78,750,000 |
+| 3 | 0 | 527,778 | 0 | 0 | 350,000 | 666,667 | 0 | 0 | **1,544,445** | 6,577,778 |
+| 4 | 0 | 527,778 | 0 | 0 | 350,000 | 666,667 | 0 | 0 | 1,544,445 | 8,122,223 |
+| 5 | 0 | 527,778 | 0 | 0 | 350,000 | 666,667 | 0 | 0 | 1,544,445 | 9,666,668 |
+| 6 | 520,833 | 527,778 | 0 | 333,333 | 350,000 | 666,667 | 166,667 | 0 | **2,565,278** | 12,231,946 |
+| 7–9 | 520,833 | ~500,000 | 0 | 333,333 | 350,000 | 666,667 | 166,667 | 0 | ~2,537,500/mo | ~19,800,000 |
+| 10 | 520,833 | ~500,000 | 0 | 333,333 | 350,000 | **done** | 166,667 | 0 | ~1,870,833 | ~21,700,000 |
+| 12 | 520,833 | ~450,000 | 416,667 | 333,333 | 350,000 | — | 166,667 | 250,000 | **2,487,500** | ~26,100,000 |
+| 13–18 | 520,833 | ~450,000 | 416,667 | 333,333 | 350,000 | — | 166,667 | 250,000 | ~2,487,500/mo | ~41,000,000 |
+| 19–20 | 520,833 | ~405,000 | 416,667 | 333,333 | 350,000 | — | 166,667 | 250,000 | ~2,442,500/mo | ~45,900,000 |
+| 21–24 | 520,833 | ~405,000 | 416,667 | 333,333 | — | — | 166,667 | 250,000 | ~2,092,500/mo | ~54,300,000 |
+| 25–30 | 520,833 | ~364,000 | 416,667 | — | — | — | — | 250,000 | ~1,551,500/mo | ~63,600,000 |
+| 31–36 | 520,833 | ~328,000 | 416,667 | — | — | — | — | 250,000 | ~1,515,500/mo | ~72,700,000 |
+| 37–48 | 520,833 | — | — | — | — | — | — | — | 520,833/mo | ~78,900,000 |
 | 49+ | — | — | — | — | — | — | — | — | 0 | **100,000,000** |
 
-*Note: Liquidity LP tokens are locked for 24 months and not counted as circulating — they're locked in the pool, not individual wallets.*
+*Private Sale column: 700,000 MBC at TGE (10%) + 350,000 MBC/month for 18
+months (Months 3–20) = exactly 7,000,000 MBC — matches the §3.7/§4 cap. Month
+11 remains grouped/omitted from its own row per this table's existing
+illustrative convention (rows are collapsed where composition doesn't change);
+its contribution is included in the Cumulative column at Month 12 onward. Total
+Monthly/Cumulative figures beyond Month 6 use "~" because Platform Rewards'
+own emission figures are themselves illustrative (see the open §3.2 schedule
+question above) — only the Private Sale figures in this table are treated as
+exact.*
 
-> **Flagged 2026-07-02, not yet corrected in this table:** the Private Sale
-> column above still uses the pre-correction 388,889/month figure (rather than
-> the 350,000/month corrected in §3.7/§4) and stops at Month 18 instead of
-> running the full 18 payments through Month 20. This table is illustrative
-> (uses "~" throughout and omits an individual Month 11 row), so it has been
-> flagged rather than hand-patched cell-by-cell — regenerate it from the
-> corrected per-category schedule before this document is used for external
-> diligence. See `docs/reports/web3/2026-07-02-tokenomics-audit-review.md`.
+> **Circulating supply reconciliation (corrected 2026-07-03):** This table's
+> Month 0 (TGE) total of 3,700,000 MBC covers only the categories tracked
+> month-by-month above (Rewards, Private, Public) — it does **not** include
+> the 7,000,000 MBC Liquidity Pool allocation, because Liquidity Pool isn't a
+> per-month vesting category and has no column in this table (it is 100% TGE,
+> deployed directly to the DEX pool per §3.6/§4). The previous version of this
+> footnote stated LP is "not counted as circulating," which directly
+> contradicted §1 and §6's headline TGE Circulating Supply figure of
+> 10,700,000 MBC (10.7%). That contradiction is resolved as follows: **§1/§6's
+> convention is authoritative — LP tokens deployed to a public DEX pool at TGE
+> are counted as circulating**, consistent with standard practice (e.g.
+> CoinGecko counts AMM-pooled tokens as circulating since they're publicly
+> tradeable, even if the LP position itself is locked against team withdrawal).
+> Reconciliation: 3,700,000 (this table's Month 0 total) + 7,000,000
+> (Liquidity Pool, TGE) = **10,700,000 MBC — the single, consistent TGE
+> circulating supply figure used throughout this document.** There is no
+> remaining second convention or competing 3,700,000/3.7% figure; that number
+> only ever existed as this table's un-reconciled subtotal, not as an
+> alternative circulating-supply claim.
 
 ---
 
