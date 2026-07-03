@@ -1,0 +1,390 @@
+# Business & Token Viability Audit
+
+**Date:** 2026-07-03
+**Filed by:** Independent Auditor (`docs/agents/INDEPENDENT_AUDITOR.md`)
+**Type:** Financial/business viability audit — requested directly by Vadim (CPWO)
+after reacting to legal cost estimates reaching ~$100–150k for the full legal
+catalog before any token sale or real revenue exists. Not a routine weekly
+audit; this is a gut-check review.
+**Routed to:** Both founders simultaneously (Marina, Vadim), per this role's
+Handoff Rules
+**Scope:** Reads only — this role has no decision authority
+(`docs/agents/INDEPENDENT_AUDITOR.md` §Decision Authority). Every number below
+is either quoted directly from repo documents or marked as external
+market-knowledge context that is *not* sourced from this repo. Nothing here
+should be read as a recommendation this role has authority to make binding.
+**Supersedes nothing; complements** `docs/reports/audit/2026-07-02-initial-gaps-report.md`
+(that report was governance-focused; this one is financial/business
+viability-focused and does not repeat its findings).
+
+---
+
+## Bottom line, up front
+
+As currently designed and currently executed, **neither the fiat business nor
+the token has demonstrated viability yet — they are both pre-revenue plans,
+not businesses.** The Y1 revenue projection in the whitepaper is aspirational
+math, not a forecast grounded in anything operational today. The token raise
+target does not cover the realistic cost of getting the token to a legally
+clean, audited, listed state — it is short by a wide margin once the full
+cost stack is added up. The token itself is not structurally necessary for
+the business to function; the project's own tokenomics document says this
+explicitly (§3 below). Spending the full $100–150k legal/audit/TGE catalog
+right now, before a coordinator is hired, before any doctor is vetted, and
+before any acquisition channel is tested, is premature relative to actual
+traction. A narrow, cheap slice of legal work (the Israel operating entity)
+is justified now regardless of the token. The rest should wait. Full
+reasoning below.
+
+---
+
+## 1. Current Actual State vs. Projected State
+
+### 1.1 What exists today
+
+`docs/ROADMAP.md` "Current State" section, dated 2026-07-02, is unambiguous:
+
+> "Every one of the 13 modules plus `core` is a **frontend-only mock
+> scaffold**... There is no database, no ORM, and no auth library in
+> `package.json`... No `app/api` routes exist."
+
+The one partial exception is Stripe UI wired to nothing on the backend (no
+`PaymentIntent` creation, no webhook). MBC and crypto checkout paths are fully
+simulated with `localStorage`. There is no real payment processing, no real
+user accounts, and — by direct implication — **$0 in actual recorded
+revenue.**
+
+Cross-checking the team's own execution tracking confirms the same picture
+operationally, not just technically:
+
+- **Coordinator (TODOS T1):** JD is written (`docs/reports/medical/2026-07-02-t1-coordinator-job-description.md`,
+  status "Ready for Marina review") but the hire itself has not happened —
+  Month 2 is still a target, not an accomplished fact. No sourcing/interview
+  activity is recorded anywhere in `docs/reports/`.
+- **Doctor vetting (TODOS T3):** the vetting standard document exists
+  (`docs/reports/medical/2026-07-02-doctor-vetting-standard.md`) but T3's
+  triage-criteria addition to it is explicitly gated on the standard being
+  "Phase 1 deliverable," and no doctors have been run through it. Zero
+  verified doctors are onboarded today.
+- **Paid acquisition (TODOS T4):** `docs/reports/growth/2026-07-02-t4-paid-acquisition-channel-hypothesis.md`
+  is explicit that it is "a hypothesis document, not a go decision," that
+  "no empirical CAC exists yet," and that two of its four go/no-go criteria
+  (minimum volume, profile match) are **literally marked Blocked**, pending
+  data the not-yet-hired coordinator would produce. Zero paid marketing has
+  ever run.
+
+### 1.2 What the whitepaper claims is happening right now
+
+`docs/WHITEPAPER.md` §18 labels **Phase 0: Foundation as "Current — Q3 2026"**
+— i.e., the whitepaper's own roadmap asserts this phase is happening today —
+and lists as its deliverables:
+
+> "Platform MVP operational with first 10–20 paying patients... Clinical
+> coordinator hired and operational... Legal structure established (company
+> incorporated, jurisdiction selected)... Security audit vendor selected and
+> engagement started"
+
+None of these four things are true as of this audit. Zero paying patients
+through the platform (the platform has no working checkout), no coordinator
+hired, no entity incorporated (`docs/LEGAL_BRIEF.md` Part 0 confirms: "no
+firm has been contacted and no NDA has gone out" as of this brief's latest
+revision), no audit vendor engaged (`docs/CONTRACT_AUDIT.md` §0.4 outreach
+tracker: "Not started" for Hacken, CertiK, and Trail of Bits alike). This is
+worth naming plainly: if this whitepaper section were shown to an outside
+investor or exchange compliance team today, it would read as materially
+inaccurate about present-tense facts, not aspirational about the future. That
+is a whitepaper-content risk for Web3 & Token Strategy to fix (not this
+role's file to edit), but it is directly relevant to a viability audit because
+it means the document the company would use to raise money currently
+overstates where the company is.
+
+### 1.3 The Y1 revenue projection, tested against what actually has to be true for it
+
+`docs/WHITEPAPER.md` §9.1 projects ~$72,400/month (~$870,000/year), built from:
+
+| Line | Assumption | What has to be true for it |
+|---|---|---|
+| Case Review: 100/mo × $150 | 100 patients/month completing paid case reviews | A functioning intake pipeline processing volume from month 1 |
+| Care Coordination: 40/mo × $490 | 40 patients/month in the higher-touch product | Coordinator operational (T1) — not hired yet |
+| Ongoing Access: 50 subscribers × $290/mo | 50 people willing to pre-commit to a monthly subscription | Retention infrastructure that doesn't exist (no auth/DB per §1.1) |
+| Medical Travel: 10 packages/mo × $1,200 avg commission | 10 cross-border logistics deals/month | `medtravel` module is mock-only per ROADMAP.md Phase 3 sequencing, not built |
+| MedEdu: 200 subscribers × $49/mo | 200 paying content subscribers | No content platform live yet |
+| Partner Listings: 20 partners | 20 clinics paying $500–2,000/year | No partner-recruitment activity recorded anywhere in `docs/reports/` |
+
+Every single line assumes infrastructure and operational capacity
+(coordinator, verified doctor supply, a working payment backend, a tested
+acquisition channel) that the team's own tracking documents mark as not yet
+built or not yet started. `docs/TOKENOMICS.md` §7.2/§7.3 compounds this: it
+separately assumes **130 doctors and 33 clinics onboarded and staked in Y1**
+— those numbers require the same not-yet-hired coordinator and not-yet-written
+vetting execution to have already run at scale.
+
+**Verdict:** This is not a forecast in the sense of "revenue we expect to
+collect this year." It is a target model — useful for showing what the
+business becomes *if* the coordinator hire, doctor vetting, and paid channel
+all land on schedule — being presented in whitepaper format as if it were a
+credible near-term projection. Neither founder should treat $870k/year as
+something to plan cash flow, hiring, or token-sale-use-of-proceeds against.
+The honest current-state number is $0/year, with a roadmap toward the
+projection that has not yet cleared its own first gate (T1's Month-2
+coordinator deadline).
+
+---
+
+## 2. Token Raise vs. Token Economy Costs
+
+### 2.1 The raise target
+
+`docs/LEGAL_BRIEF.md` Part 4: Private Sale target **~$140,000** + Public
+Sale/IDO target **~$400,000** = **~$540,000 total raise target.**
+
+### 2.2 The realistic cost stack around TGE
+
+**Legal.** `docs/LEGAL_BRIEF.md` §0.5 (added 2026-07-03, explicitly
+non-binding planning ranges, not a quote) gives:
+
+| Item | Range |
+|---|---|
+| Initial consultation | $0–$2,000 |
+| Preliminary written opinion | $5,000–$15,000 |
+| Full Legal Opinion Letter | $15,000–$40,000+ |
+| MiCA white paper compliance review | $10,000–$25,000 |
+| SAFT/Token Purchase Agreement template | $5,000–$15,000 |
+| Offshore token-entity incorporation (BVI/Cayman) | $3,000–$15,000 |
+| Offshore token-entity incorporation (ADGM/DIFC/Singapore, licensed) | $50,000+ |
+| Ongoing retainer, post-TGE | $3,000–$10,000/month |
+
+Summing the token-specific core items (excluding the separate Israel
+operating-entity line and the ongoing monthly retainer): **low end ≈
+$38,000**; **high end ≈ $112,000** if the offshore entity is BVI/Cayman, or
+**≈ $147,000+** if it lands in a licensed jurisdiction (ADGM/DIFC/Singapore)
+with a larger firm (Hogan Lovells is named on the candidate list and flagged
+in the brief itself as likely to bill "toward the top of or above" these
+ranges). **This is exactly where Vadim's $100–150k figure comes from** — it
+is not an exaggeration, it is the brief's own high end for a licensed
+jurisdiction plus a full-service firm.
+
+**Smart contract audits.** `docs/CONTRACT_AUDIT.md` §0.3 names three tiers —
+Hacken (mid-tier, recommended for Tier-3 listing), CertiK (premium, required
+before Tier-2 CEX per `docs/TOKENOMICS.md` §11.3), Trail of Bits (elite,
+reserved for the LayerZero Ethereum bridge audit per §11.4 and the
+2026-07-02 dual-chain report). **No dollar quotes exist anywhere in this
+repo** for any of the three — outreach tracker shows all three "Not started."
+`docs/TOKENOMICS.md` §9.2 budgets **$37,500 total for "Smart Contract
+Audits" in Y1** — sized, at best, for one mid-tier engagement, not the
+three-firm, three-stage strategy the project's own documents commit to.
+*(External context, not sourced from this repo: publicly known market rates
+for this class of firm typically run low-to-mid five figures for a
+standard-scope Hacken audit, mid-five to low-six figures for CertiK, and
+Trail of Bits engagements on novel cross-chain/bridge logic — which is
+exactly what the LayerZero OFT integration is — are commonly the most
+expensive of the three, frequently exceeding $37,500 on their own.)* This is
+a real, structural budget gap independent of exactly which numbers a quote
+comes back with: **the plan commits to three audits: the budget funds
+roughly one.**
+
+**Exchange listing.** Both `docs/WHITEPAPER.md` §14.2 and
+`docs/TOKENOMICS.md` §11.2 state a **Tier-3 CEX listing fee of $20,000–$80,000**
+(whitepaper) / **$40,000–$80,000** (tokenomics), sourced from Treasury, due
+by Month 4–8.
+
+**Liquidity.** `docs/WHITEPAPER.md` §13.1: at TGE, **$175,000 in actual USDT**
+must be paired with MBC for the initial PancakeSwap position (this is cash,
+not token supply). §13.3 then requires further Treasury liquidity
+injections: +$50,000 (Month 3), +$100,000 (Month 6), +$200,000 (Month 12) —
+another **$350,000** within roughly Year 1.
+
+### 2.3 Does the raise cover it?
+
+Adding only the items that are hard requirements at or immediately around
+TGE — liquidity pairing ($175,000, mandatory), legal ($38,000–$150,000+),
+audit (unbudgeted for the real three-firm strategy, plausibly $60,000–
+$250,000+ using external market context), and the Tier-3 listing fee
+($20,000–$80,000, due Month 4–8) — the **low-end total is roughly $293,000**
+and the **realistic-to-high end is roughly $655,000+**, before counting a
+single dollar of the additional $350,000 in liquidity growth commitments from
+§13.3, or the post-TGE monthly legal retainer.
+
+Against the **$540,000 raise target**: on the low end, this consumes **~54%**
+of the entire raise before platform development, marketing, or founder
+compensation see a dollar. On the realistic-to-high end, **the raise does not
+cover the stack at all** — it is short by roughly **$115,000 or more**,
+before touching the Year 1 liquidity-growth schedule.
+
+### 2.4 An internal inconsistency worth flagging directly
+
+`docs/TOKENOMICS.md` §9.2's own Treasury Spending Categories table sums Y1
+spend to **$250,000**, explicitly stated as drawn from "private/public sale
+proceeds of $540,000 total raised." That table has **no line item at all**
+for the $175,000 USDT liquidity pairing that §13.1 requires at TGE — it
+isn't the 3%/$7,500 "Liquidity Support" line (too small by more than 20x to
+be it), and it isn't listed separately either. Add the mandatory $175,000
+liquidity pairing to the table's own $250,000 Y1 budget and **Y1 commitments
+already total $425,000 — 79% of the entire $540,000 raise** — before
+correcting the Legal ($37,500 budgeted) and Audit ($37,500 budgeted) lines up
+to anything resembling the real fee ranges in §2.2 above. This sits in the
+same category as the TGE-market-cap and Treasury-allocation-breakdown
+mismatches already flagged in the 2026-07-02 baseline audit (§5 of that
+report) — except those were presentation/consistency issues; **this one is a
+solvency question.**
+
+### 2.5 What this implies
+
+The raise target, as currently sized, does not fund the plan the project's
+own documents describe. The options are the same three Vadim's question
+already implies:
+
+1. **Raise more** — but this cuts against the deliberately conservative $5M
+   FDV positioning `docs/TOKENOMICS.md` §13 uses to differentiate MBC from
+   "inflated launches," and a bigger raise on an unlaunched, unaudited,
+   pre-revenue platform invites more regulatory and reputational scrutiny,
+   not less.
+2. **Stage/defer spend** — skip or delay CertiK and Trail of Bits until
+   Year 2 (accept a slower path to Tier-2 listing and no Ethereum bridge in
+   the near term), defer the Tier-3 listing fee until organic DEX volume
+   actually justifies it rather than targeting Month 4–8 by calendar.
+3. **Subsidize from the fiat business** — directly contradicted by
+   `docs/WHITEPAPER.md` §9.3's own stated separation principle ("the company
+   does NOT pay operating expenses from the Treasury... Company stability
+   should not depend on token price" — and the reverse commingling is the
+   same red flag), and moot regardless, because the fiat business has $0
+   revenue today (§1 above).
+
+Option 2 is the only one that doesn't contradict something the project has
+already committed to in writing.
+
+---
+
+## 3. Token Value Proposition — "чем ценен этот токен тогда"
+
+`docs/WHITEPAPER.md` §10 lists six demand mechanisms; `docs/TOKENOMICS.md`
+§7 quantifies them. Assessed individually against what actually exists today:
+
+- **Payment discount (15% for paying in MBC):** Real mechanic on paper, but
+  requires patients — per the growth team's own target profile in
+  `docs/reports/growth/2026-07-02-t4-paid-acquisition-channel-hypothesis.md`,
+  a Russian-speaking diaspora population in Israel, not a crypto-native one —
+  to acquire and hold a volatile asset to save 15% on a $150–$490 medical
+  service. Plausible, unproven, and irrelevant until real payment volume
+  exists (it doesn't yet).
+- **Mandatory doctor staking (1,000–5,000 MBC):** The strongest mechanism on
+  paper — genuinely forced demand, not optional. But it scales exactly with
+  doctor recruitment, which is currently the single least-progressed
+  workstream in the entire company (T1 coordinator not hired, T3 vetting not
+  executed, zero doctors onboarded).
+- **Clinic staking:** Same structure and same dependency — zero clinics
+  recruited yet.
+- **Burn mechanics tied to payment revenue:** Real supply-reduction design,
+  but proportional to real payment volume, which is currently $0 (§1.1).
+- **Priority Pass burns, referral rewards, travel escrow:** All downstream of
+  the same missing prerequisite — real patients transacting on a real
+  platform.
+
+**The project's own tokenomics document already answers Vadim's question in
+writing.** `docs/TOKENOMICS.md` §12.3, titled "Why the Business Doesn't Need
+the Token to Succeed," states:
+
+> "If MBC price crashes: company operations continue, platform services
+> continue, business model intact... The token enhances the business. The
+> business does not depend on the token."
+
+That is the honest answer, and it is not a criticism this role is inventing —
+it is a direct quote from Web3 & Token Strategy's own document. **Yes,
+MedByClick's core business — booking, payments, doctor network — can run
+entirely on fiat with no token at all.** The token, as designed, is not a
+naked cash-grab (no yield promised, no dividend claims, deflationary by
+design, explicitly revenue-independent per §9.3) — it is a reasonably
+well-intentioned utility-token design. But it is a bolt-on layer sitting on
+top of a business that has not yet proven it needs, or can support, a token
+economy. Every demand mechanism in §10 requires fiat-side volume (patients,
+doctors, clinics) to exist first; none of that volume exists yet. **The
+token's value today is pre-revenue story value, not utility value** — it is
+priced and structured as if the utility mechanisms were already running,
+when in fact the business generating the transactions those mechanisms
+depend on hasn't launched.
+
+---
+
+## 4. Bottom-Line Viability Assessment
+
+**Is spending real money on legal/audit/entity setup right now premature or
+justified?** Both, depending on which slice:
+
+**Justified now, and cheap:** the **Israel operating entity** (per Vadim's
+2026-07-03 update, `docs/LEGAL_BRIEF.md` Part 1/§6.0, target incorporation
+December 2025, estimated $1,500–$5,000 via local counsel, not the crypto
+firms on the candidate list). This entity is needed for the fiat business
+regardless of what happens with the token — patient/doctor contracts and any
+real revenue require *some* legal entity to exist, and this is the cheapest,
+least-token-dependent piece of the entire legal catalog. Also justified now
+and free: an initial consultation call with 1–2 shortlisted crypto firms
+(`docs/LEGAL_BRIEF.md` §0.5 notes many boutique firms do this free) and
+non-binding audit quotes from Hacken (`docs/CONTRACT_AUDIT.md` §0.2:
+explicitly "can start now" and doesn't require a signed engagement) — both
+produce real numbers to plan against instead of the current range-based
+guesswork, at zero or near-zero cost.
+
+**Premature right now:** the full $100–150k legal catalog (full Legal
+Opinion Letter, MiCA white paper review, SAFT template, licensed offshore
+entity incorporation), any CertiK or Trail of Bits engagement, any Tier-3
+listing spend, and the $175,000 liquidity pairing. All of these exist to
+prepare a token economy whose entire demand model (§3 above) depends on
+doctor and patient volume that does not exist yet, funded from a raise
+(§2 above) that doesn't actually cover the stack even under generous
+assumptions. Spending real money to polish the token's legal/audit posture
+before the fiat business has a single hired coordinator, a single vetted
+doctor, or a single tested acquisition channel is optimizing a constraint
+that isn't the bottleneck. The bottleneck is operational, not legal.
+
+**What needs to be true before token-specific spend scales up:**
+
+1. Coordinator hired and operating (TODOS T1 — currently JD-only, Month 2
+   target not yet met).
+2. A first real cohort of vetted, onboarded doctors under the vetting
+   standard (TODOS T3 — currently blocked on the coordinator).
+3. T4's two blocked go/no-go criteria (minimum volume, profile match) filled
+   in with real coordinator intake data, not placeholders.
+4. At least one paid acquisition channel actually tested against the
+   documented $50 CAC ceiling, with real numbers — not the current zero
+   empirical data point.
+5. Ideally, some first real fiat revenue on the books — even a small
+   fraction of the $72,400/month projection — so that spending real money on
+   a token layered on top of the business is grounded in an actual operating
+   business, not a roadmap document.
+
+**Recommendation, stated plainly, not hedged:** Fund the Israel entity now —
+it's cheap and it's needed either way. Get free consultations and free audit
+quotes now — they cost nothing and replace guesswork with real numbers. Do
+not commit to the full token-specific legal/audit/listing/liquidity catalog
+($100k–$150k+ legal, $60k–$250k+ realistic audit spend, $175k+ mandatory
+liquidity, $20k–$80k listing fee) until the five operational milestones above
+are visibly on track. The Q4 2026 TGE date in `docs/WHITEPAPER.md` §18
+should be treated by both founders as a target to reassess against actual
+operational progress, not a fixed date to fund toward regardless of whether
+the coordinator, doctors, and acquisition channel are real yet. Spending the
+full catalog today, against zero revenue, zero onboarded doctors, no hired
+coordinator, and no validated channel, is the pattern this audit is flagging
+as the actual risk — not the token design itself, which is comparatively
+sound on paper.
+
+---
+
+## What This Report Is Not
+
+This role has no authority to approve, reject, or decide a budget, a raise
+size, a jurisdiction, or a spend sequence — those are Joint decisions per
+`docs/governance/DECISION_MATRIX.md`, or CPWO-only where they're pure
+tokenomics/fundraising-instrument calls. Nothing in this report should be
+read as a decision; it is risk made visible for both founders to act on or
+not. If either founder wants to act on §4's recommendation, or disagrees
+with it, that outcome belongs in `docs/decision-log/` per this role's
+Handoff Rules, not left implicit in this file.
+
+## Next Review
+
+Recommend the next audit check: (a) whether the Israel entity and free
+consultations/quotes in §4 actually happened, since they're the cheap,
+low-risk first moves; (b) whether TODOS T1's coordinator hire cleared its
+Month 2 deadline; (c) whether any token-specific spend was committed before
+the five milestones in §4 were met, which would be the single clearest
+signal that this report's recommendation was not followed.
