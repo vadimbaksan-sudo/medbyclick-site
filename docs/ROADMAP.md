@@ -7,24 +7,42 @@ document is the engineering sequencing view — the whitepaper's §18 stays the
 token/TGE-facing view for external readers and should be treated as downstream
 of this one, not the other way around. Kept independently current here.
 
-## Current State (as of 2026-07-02)
+## Current State (as of 2026-07-04)
 
-Every one of the 13 modules plus `core` is a **frontend-only mock scaffold**:
-`types.ts` + `data.ts` (hardcoded arrays) + `index.ts` + one or two presentational
-components. There is no database, no ORM, and no auth library in `package.json` —
-the entire site is static/client-rendered against mock data. No `app/api` routes
-exist.
+**Supersedes the 2026-07-02 baseline below — Phase 0 and half of Phase 1 have
+landed in code since.** Full module-by-module detail, plus an actual
+click-through verification, is in
+`docs/reports/product/2026-07-04-platform-status-report.md`. Short version:
+`core` (Supabase Auth + Drizzle/Postgres schema), the booking flow, the Stripe
+fiat payment path, and `medai`'s real Claude-backed intake are now **real
+code**, not mock. But none of it has been exercised against a live backend
+yet, because **no Supabase project, Stripe account, or Anthropic API key has
+been provisioned in any environment this was built in.** Every one of these
+flows fails closed with a clear "not configured, contact support" message
+rather than crashing or silently faking success — but that also means nobody
+can click through a real signup → booking → payment loop anywhere until those
+three vendor accounts exist and their keys are supplied via `.env.local` (see
+`.env.example`). Provisioning those is now the single highest-priority item
+blocking "the platform works fully end-to-end."
 
-The one partial exception: `app/checkout/stripe` uses real `@stripe/react-stripe-js`
-Elements against a Stripe **test** publishable key, but there's no server-side
-`PaymentIntent` creation or webhook — it's real UI wired to nothing on the back
-end yet. `app/checkout/mbc` and `app/checkout/crypto` are fully simulated
+The remaining 8 modules (`medcommunity`, `mededu`, `medevents`, `medglobaldb`,
+`medpharmaccess`, `medsupport`, `medtoken`, `medtravel`, `medtrials`) are still
+**frontend-only mock scaffolds**, unchanged from the original baseline:
+`types.ts` + `data.ts` (hardcoded arrays) + `index.ts` + one or two
+presentational components. `medglobaldb` (and `medconnect`'s own browse pages)
+have an extra wrinkle: a real DB query layer (`lib/db/queries/doctors.ts`)
+already exists and is used by the booking flow, but the `/medconnect`,
+`/medglobaldb`, `/doctors`, and `/specialists` browse pages still read the old
+static mock arrays instead of calling it — see Phase 1 table below.
+
+`app/checkout/mbc` and `app/checkout/crypto` remain fully simulated
 (`localStorage` balance, manual "confirm" button, no wallet connection or
-on-chain check).
+on-chain check) — correctly deferred to Phase 4 alongside `medtoken`, not a gap.
 
-This is the honest baseline every phase below builds from. "Real functionality"
-in this document means: backed by a real data store and a real workflow, not
-just a nicer mock.
+"Real functionality" in this document still means: backed by a real data store
+and a real workflow, not just a nicer mock — and, as of this update, also
+means *actually reachable end-to-end*, not merely code-complete against an
+unprovisioned vendor account.
 
 ## Sequencing Principles
 
@@ -75,23 +93,23 @@ That spec recommends **Supabase (Auth + Postgres together) queried via Drizzle
 ORM** as the default vendor pick for both rows below, pending Vadim's sign-off —
 see that document's §1.3–1.4 and §2.1–2.2 for the full options/tradeoffs table.
 
-| Module | Real-functionality definition | Depends on | Consult |
-|---|---|---|---|
-| `core` | Real auth (session/identity), a real database, user records replacing `mockUsers`. Auth vendor/library choice and DB+ORM choice are real vendor/cost decisions — see kickoff spec §1, §2 for options and recommendation. | Platform decision (T2) informs whether coordinator-side identity lives here or in the T2 platform | — |
-| `core` — medical history / lab results *(new line item, not previously tracked here — see kickoff spec §5)* | Schema + UI shell for patient visit history and lab results, built and demoed against synthetic data only. Lives as an extension of `core`'s user record (one patient identity, one medical record), not a new module and not folded into `medconnect`. | `core` auth + DB (this phase) | **Legal & Compliance — required before any real (non-synthetic) health data is stored** (retention policy, data residency, jurisdiction handling — same category of gate already set for `medai`'s LLM data flow, per `docs/reports/legal/2026-07-04-medai-llm-data-handling-review.md`); may escalate Joint if it turns on the same Israel-entity/Russian-citizen question already open for `medai` |
-| `medpayments` (fiat path only) | Server-side Stripe `PaymentIntent` + webhook confirmation + persisted receipts; live key swapped in only after QA sign-off. Current `app/checkout/stripe` uses a hardcoded Stripe *public demo* test key with no server-side route at all — see kickoff spec §4 for the concrete gap list. | `core` (need a real user/order record to attach a payment to) | Independent Auditor (release playbook flags payments/checkout as consult-required) |
+| Module | Real-functionality definition | Status (2026-07-04) | Depends on | Consult |
+|---|---|---|---|---|
+| `core` | Real auth (session/identity), a real database, user records replacing `mockUsers`. | **Code done.** Supabase Auth + Drizzle/Postgres schema, register/login/logout Server Actions, session DAL (`getCurrentUser`/`requireUser`/`requireRole`), optimistic Proxy redirects. **Not yet reachable** — no live Supabase project/`DATABASE_URL` provisioned in any environment; every flow fails closed to a "not configured" message. | Platform decision (T2) informs whether coordinator-side identity lives here or in the T2 platform | — |
+| `core` — medical history / lab results | Schema + UI shell for patient visit history and lab results, built and demoed against synthetic data only. | **UI shell done, synthetic-only by design.** `app/dashboard/MedicalHistoryShell.tsx` renders a hardcoded synthetic seed set with a visible "pending Legal & Compliance review" badge; no DB read, no input form. Correctly gated — do not wire to real data yet. | `core` auth + DB (this phase) | **Legal & Compliance — required before any real (non-synthetic) health data is stored**; may escalate Joint on the Israel-entity/Russian-citizen question already open for `medai` |
+| `medpayments` (fiat path only) | Server-side Stripe `PaymentIntent` + webhook confirmation + persisted receipts. | **Code done.** `app/api/payments/stripe/create-intent` + `.../webhook` routes exist, receipts persist to `payments` table, dashboard `PaymentHistory` reads them. **Not yet reachable** — no real Stripe account/keys; `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY` falls back to Stripe's own public demo key, which cannot confirm against our PaymentIntents (fails with a clear Stripe error, not a silent "success"). | `core` (need a real user/order record to attach a payment to) | Independent Auditor (release playbook flags payments/checkout as consult-required) |
 
 MBC and crypto checkout paths in `medpayments` stay mocked through this phase —
 they're correctly sequenced in Phase 4 alongside `medtoken`.
 
 ## Phase 1 — Core Product Loop
 
-| Module | Real-functionality definition | Depends on | Consult |
-|---|---|---|---|
-| `medconnect` | Real doctor profiles, real booking/matching workflow, replacing `mockDoctors`-style data. The minimal `app/doctor-dashboard` (read-only assigned-bookings list) has landed; doctor profile self-service, doctor registration, and booking-status actions are specced in `docs/reports/product/2026-07-04-doctor-dashboard-spec.md` and are the next Developer handoff for this row. | `core`; doctor vetting standard (Medical Community, per T3) before doctors go live | Medical Community (vetting standard, doctor admission) |
-| `medglobaldb` | Real specialist/clinic directory backing `medconnect`'s and `medtravel`'s cards | `core` | — |
-| `medai` | Real symptom-intake flow feeding coordinator triage, per whitepaper §3.4 ("increase intake quality, not replace clinical judgment") | `core`, `medconnect` (intake needs somewhere to route to) | **Medical Advisory — required before build starts**, per this role's Must-Not-Do |
-| `medsupport` | **Contingent on T2.** If Healthie/Jane App is selected, this module likely becomes an integration/embed layer against the chosen platform rather than a custom-built scheduling/coordination system. Do not spec a full custom build until the Day-30 decision lands. | T2 platform decision | QA/GStack before any release candidate |
+| Module | Real-functionality definition | Status (2026-07-04) | Depends on | Consult |
+|---|---|---|---|---|
+| `medconnect` | Real doctor profiles, real booking/matching workflow, replacing `mockDoctors`-style data. | **Booking flow: code done**, auth-gated Server Action → real `bookings` table → doctor dashboard and patient dashboard both read real rows. **Browse pages: still mock** — `/medconnect`, `/doctors`, `/specialists` all still import `modules/medconnect/data.ts`'s static array instead of the already-built `lib/db/queries/doctors.ts` query layer. Doctor self-registration and profile self-service are specced (`docs/reports/product/2026-07-04-doctor-dashboard-spec.md`) but not built — doctor accounts today are manually provisioned only, and doctors can view but not act on (confirm/complete/decline) assigned bookings. | `core`; doctor vetting standard (Medical Community, per T3) before doctors go live | Medical Community (vetting standard, doctor admission) |
+| `medglobaldb` | Real specialist/clinic directory backing `medconnect`'s and `medtravel`'s cards. | **Still mock.** `/medglobaldb` reads `modules/medglobaldb/data.ts`'s static array. `listGlobalDbDoctors()` in the shared query layer exists and is ready but unused by this page. | `core` | — |
+| `medai` | Real symptom-intake flow feeding coordinator triage, per whitepaper §3.4. | **Code done.** `/medai`'s `SymptomChecker` posts to `app/api/medai/intake`, which calls real Claude (Haiku 4.5) for structured intake JSON, with red-flag detection (`redFlags.ts`) and i18n. Legal + Medical Advisory reviews landed; route is scoped to synthetic/test input only pending those sign-offs on real patient data. **Not yet reachable** — no `ANTHROPIC_API_KEY` configured; fails closed with a 503 "AI intake service is not configured" message. | `core`, `medconnect` (intake needs somewhere to route to) | **Medical Advisory — required before build starts**, per this role's Must-Not-Do |
+| `medsupport` | **Contingent on T2.** If Healthie/Jane App is selected, this module likely becomes an integration/embed layer against the chosen platform rather than a custom-built scheduling/coordination system. Do not spec a full custom build until the Day-30 decision lands. | **Still mock** (`ChatWidget` + static data) — unchanged, correctly waiting on T2. | T2 platform decision | QA/GStack before any release candidate |
 
 **Resolved at Phase 1 kickoff** (was an open spec question in the prior version
 of this document): `medconnect`'s `Doctor` type and `medglobaldb`'s `GlobalDoctor`
