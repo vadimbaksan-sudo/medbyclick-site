@@ -1,0 +1,271 @@
+import type { NewDbDoctorProfile } from "@/lib/db/schema";
+
+/**
+ * Canonical seed dataset resolving modules/medconnect's `Doctor` and
+ * modules/medglobaldb's `GlobalDoctor` into one `doctor_profiles` shape, per
+ * spec §2.3/§3.1. This is the single source of truth both modules' UI now
+ * derives from (see modules/medconnect/data.ts, modules/medglobaldb/data.ts)
+ * and what lib/db/seed/run.ts inserts into a real Supabase Postgres instance
+ * once DATABASE_URL is configured.
+ *
+ * IMPORTANT — these are the same believable-but-placeholder doctors that
+ * existed as hardcoded mock arrays before this schema existed: 10 in
+ * modules/medconnect/data.ts + 5 in modules/medglobaldb/data.ts (15 total).
+ * The kickoff spec's §0 ground-truth section describes medconnect as having
+ * "11 hardcoded doctors" — direct inspection of the actual pre-existing
+ * file (git history) shows 10; this seed preserves the real file's content
+ * exactly rather than inventing an 11th doctor to match the spec's count.
+ * They are NOT real vetted doctors. Every row is seeded with
+ * vettingStatus: "pending" — none may be flipped to "approved" without
+ * Medical Community's vetting workflow (not built yet, per
+ * docs/ROADMAP.md Phase 1). `verified` (medglobaldb's original field) is a
+ * distinct, narrower concept — "this academic/institutional profile data
+ * was checked" — and does NOT imply MedByClick vetting; it is kept only so
+ * medglobaldb's existing UI copy ("verified specialists") still describes
+ * what it always described.
+ */
+
+// slug doubles as the seed's stable identity so re-running the seed script
+// upserts rather than duplicates rows.
+export interface SeedDoctor extends Omit<NewDbDoctorProfile, "id" | "userId" | "createdAt" | "updatedAt"> {
+  slug: string;
+}
+
+export const seedDoctors: SeedDoctor[] = [
+  // --- medconnect: vetted local (Israel) network, endorsement-driven ------
+  {
+    slug: "dr-elena-volkova",
+    name: "Dr. Elena Volkova",
+    title: "MD, PhD",
+    specialty: "Oncology",
+    subspecialties: ["Breast cancer", "Rare tumors", "Second opinions"],
+    languages: ["Russian", "Hebrew", "English"],
+    credentials:
+      "Head of Oncology, Sheba Medical Center. 22 years of practice. Fellow of the European Society for Medical Oncology.",
+    endorsement:
+      "Elena is one of three oncologists I call when I see a case that doesn't fit a textbook. She has the rarest combination of academic rigor and clinical instinct. I've sent her some of the most complex breast cancer cases I've encountered — cases where patients had been told there were no more options. She finds options.",
+    bio: "Dr. Volkova leads the oncology department at one of Israel's top medical centers. Trained in Moscow and Tel Aviv, she specializes in rare and treatment-resistant tumors. Fluent in Russian, Hebrew, and English.",
+    casesHandledOverride: 84,
+    responseTime: "Within 24 hours",
+    vettingStatus: "pending",
+    verified: false,
+  },
+  {
+    slug: "dr-mikhail-stern",
+    name: "Dr. Mikhail Stern",
+    title: "MD",
+    specialty: "Cardiology",
+    subspecialties: ["Complex arrhythmia", "Heart failure", "Pre-surgery evaluation"],
+    languages: ["Russian", "Hebrew", "English"],
+    credentials: "Senior Cardiologist, Hadassah Medical Center. 18 years of practice. Trained at the Cleveland Clinic.",
+    endorsement:
+      "Mikhail is who I call before a patient goes into cardiac surgery and I want a second set of eyes on the case. His judgment on when to operate — and when not to — has saved more than a few lives. I trust him completely.",
+    bio: "Dr. Stern trained at the Cleveland Clinic and has spent 18 years at Hadassah specializing in complex heart cases. He handles pre-surgical evaluations and patients who have been turned away by other cardiologists.",
+    casesHandledOverride: 61,
+    responseTime: "Within 48 hours",
+    vettingStatus: "pending",
+    verified: false,
+  },
+  {
+    slug: "dr-rina-goldberg",
+    name: "Dr. Rina Goldberg",
+    title: "MD, Professor",
+    specialty: "Neurology",
+    subspecialties: ["Multiple sclerosis", "Rare neurological conditions", "Treatment-resistant cases"],
+    languages: ["Russian", "Hebrew"],
+    credentials: "Professor of Neurology, Tel Aviv University. Chair of the MS Clinic. 30 years of practice.",
+    endorsement:
+      "Rina is the person I consult when a neurological case makes no sense. She has an encyclopedic knowledge of rare conditions and the patience to sit with diagnostic uncertainty that most clinicians don't. If anyone can find a pattern, it's her.",
+    bio: "Prof. Goldberg chairs the MS clinic at Tel Aviv University's medical school. She is the go-to specialist for treatment-resistant multiple sclerosis and rare neurological conditions that have stumped other neurologists.",
+    casesHandledOverride: 112,
+    responseTime: "Within 48 hours",
+    vettingStatus: "pending",
+    verified: false,
+  },
+  {
+    slug: "dr-ariel-ben-david",
+    name: "Dr. Ariel Ben-David",
+    title: "MD, PhD",
+    specialty: "Gastroenterology",
+    subspecialties: ["Inflammatory bowel disease", "Colorectal cancer", "Liver disease"],
+    languages: ["Hebrew", "English", "Russian"],
+    credentials:
+      "Head of Gastroenterology, Rabin Medical Center. 20 years of practice. Fellow of the European Crohn's and Colitis Organisation.",
+    endorsement:
+      "Ariel is exceptional at inflammatory bowel disease — he's managed cases that had failed every biologic on the market and still found a path forward. When a patient's GI situation has become genuinely complicated, he's the call I make.",
+    bio: "Dr. Ben-David leads the gastroenterology department at Rabin Medical Center and has spent two decades focused on IBD, colorectal cancer screening, and complex liver disease. He speaks fluent Russian and sees many patients from the Russian-speaking diaspora.",
+    casesHandledOverride: 68,
+    responseTime: "Within 24 hours",
+    vettingStatus: "pending",
+    verified: false,
+  },
+  {
+    slug: "dr-natalya-chernova",
+    name: "Dr. Natalya Chernova",
+    title: "MD",
+    specialty: "Endocrinology",
+    subspecialties: ["Type 1 & Type 2 diabetes", "Thyroid disorders", "Adrenal conditions"],
+    languages: ["Russian", "English"],
+    credentials: "Senior Endocrinologist, Sourasky Medical Center (Ichilov). 16 years of practice. Certified diabetes educator.",
+    endorsement:
+      "Natalya sees the metabolic picture when others see only the numbers. I've sent her patients with wildly unstable diabetes who had been through six other specialists — she stabilizes them and finds the underlying driver every time.",
+    bio: "Dr. Chernova specializes in complex diabetes management, thyroid cancer follow-up, and rare adrenal conditions. She is one of very few endocrinologists in Israel who conducts full consultations in Russian, making her invaluable to the diaspora community.",
+    casesHandledOverride: 95,
+    responseTime: "Within 48 hours",
+    vettingStatus: "pending",
+    verified: false,
+  },
+  {
+    slug: "dr-yossi-levi",
+    name: "Dr. Yossi Levi",
+    title: "MD",
+    specialty: "Orthopedic Surgery",
+    subspecialties: ["Spine surgery", "Joint replacement", "Sports medicine"],
+    languages: ["Hebrew", "English"],
+    credentials:
+      "Senior Orthopedic Surgeon, Assuta Medical Center. 15 years of practice. Fellowship at Hospital for Special Surgery, New York.",
+    endorsement:
+      "Yossi trained at HSS — one of the best orthopedic programs in the world — and brought that rigour back to Israel. He's the person I call when a patient is being pushed toward spine surgery and I want an honest second opinion on whether they actually need it.",
+    bio: "Dr. Levi completed a fellowship at New York's Hospital for Special Surgery before returning to Israel, where he now performs complex spine and joint procedures at Assuta. He is known for his candid approach to surgical decision-making.",
+    casesHandledOverride: 54,
+    responseTime: "Within 48 hours",
+    vettingStatus: "pending",
+    verified: false,
+  },
+  {
+    slug: "dr-sofia-abramov",
+    name: "Dr. Sofia Abramov",
+    title: "MD, PhD",
+    specialty: "Hematology",
+    subspecialties: ["Blood cancers", "Clotting disorders", "Bone marrow conditions"],
+    languages: ["Russian", "Hebrew", "English"],
+    credentials: "Head of Hematology, Rambam Health Care Campus. 25 years of practice. Expert in myeloproliferative neoplasms.",
+    endorsement:
+      "Sofia is one of the foremost hematologists in the country. She's methodical in a way that most clinicians simply aren't — she will not give up on a diagnosis until she has ruled out everything. I've seen her catch rare blood cancers that three other hematologists missed.",
+    bio: "Prof. Abramov leads the hematology department at Rambam, Israel's largest hospital in the north, and has spent her career focused on rare blood malignancies and clotting disorders. She publishes internationally and sees cases referred from across Europe.",
+    casesHandledOverride: 141,
+    responseTime: "Within 48 hours",
+    vettingStatus: "pending",
+    verified: false,
+  },
+  {
+    slug: "dr-david-ofer",
+    name: "Dr. David Ofer",
+    title: "MD",
+    specialty: "Rheumatology",
+    subspecialties: ["Autoimmune diseases", "Rheumatoid arthritis", "Lupus"],
+    languages: ["Hebrew", "English", "French"],
+    credentials: "Senior Rheumatologist, Hadassah Medical Center. 18 years of practice. Fellowship in Paris.",
+    endorsement:
+      "David has a gift for autoimmune disease that is genuinely rare. Autoimmunity is a field of overlapping presentations and diagnostic ambiguity — and he has the patience and pattern recognition to work through it. I send him every patient whose joints and labs don't tell the same story.",
+    bio: "Dr. Ofer trained in France and spent two decades at Hadassah focused on complex autoimmune conditions, including seronegative rheumatoid arthritis and overlap syndromes. He is fluent in French, which makes him valuable for patients arriving from francophone countries.",
+    casesHandledOverride: 87,
+    responseTime: "Within 24 hours",
+    vettingStatus: "pending",
+    verified: false,
+  },
+  {
+    slug: "dr-irina-blum",
+    name: "Dr. Irina Blum",
+    title: "MD",
+    specialty: "Pulmonology",
+    subspecialties: ["Rare lung diseases", "Sleep apnea", "Long COVID complications"],
+    languages: ["Russian", "Hebrew", "English"],
+    credentials: "Senior Pulmonologist, Wolfson Medical Center. 14 years of practice. Expert in interstitial lung disease.",
+    endorsement:
+      "Irina is one of the most thorough diagnosticians I know in pulmonology. She's a go-to for interstitial lung disease — a category that's frequently misdiagnosed and undertreated. She's also one of the few in Israel with deep experience in Long COVID pulmonary sequelae.",
+    bio: "Dr. Blum specializes in rare and difficult-to-diagnose lung conditions, including idiopathic pulmonary fibrosis, sarcoidosis, and post-COVID lung damage. She runs a specialized Long COVID pulmonary clinic and is fluent in Russian.",
+    casesHandledOverride: 62,
+    responseTime: "Within 24 hours",
+    vettingStatus: "pending",
+    verified: false,
+  },
+  {
+    slug: "dr-amir-cohen",
+    name: "Dr. Amir Cohen",
+    title: "MD, Professor",
+    specialty: "Psychiatry",
+    subspecialties: ["Treatment-resistant depression", "Psychosomatic medicine", "Trauma"],
+    languages: ["Hebrew", "English"],
+    credentials: "Professor of Psychiatry, Beer-Sheva Faculty of Medicine. 28 years of practice. Director of the Psychosomatic Medicine Unit.",
+    endorsement:
+      "Amir is the psychiatrist I call when a patient has a physical condition with a major psychological component — or when they've been through four antidepressants and nothing has worked. He understands the bidirectional relationship between chronic illness and mental health in a way that very few psychiatrists do.",
+    bio: "Prof. Cohen directs the Psychosomatic Medicine Unit at Soroka University Medical Center and has spent nearly three decades treating treatment-resistant depression, chronic pain syndromes, and trauma in patients with complex medical histories.",
+    casesHandledOverride: 203,
+    responseTime: "Within 48 hours",
+    vettingStatus: "pending",
+    verified: false,
+  },
+
+  // --- medglobaldb: broader international directory, academic-stats-driven -
+  {
+    slug: "gd-1",
+    name: "Prof. Klaus Werner",
+    title: "MD, PhD",
+    specialty: "Neuro-oncology",
+    institution: "Charité Universitätsmedizin Berlin",
+    country: "Germany",
+    city: "Berlin",
+    languages: ["German", "English"],
+    hIndex: 42,
+    publications: 187,
+    verified: true,
+    vettingStatus: "pending",
+  },
+  {
+    slug: "gd-2",
+    name: "Dr. Priya Nair",
+    title: "MBBS, DM",
+    specialty: "Hematology",
+    institution: "Tata Memorial Hospital",
+    country: "India",
+    city: "Mumbai",
+    languages: ["English", "Hindi", "Marathi"],
+    hIndex: 28,
+    publications: 94,
+    verified: true,
+    vettingStatus: "pending",
+  },
+  {
+    slug: "gd-3",
+    name: "Dr. Jean-Pierre Moreau",
+    title: "MD",
+    specialty: "Cardiothoracic Surgery",
+    institution: "Hôpital Lariboisière",
+    country: "France",
+    city: "Paris",
+    languages: ["French", "English"],
+    hIndex: 35,
+    publications: 142,
+    verified: true,
+    vettingStatus: "pending",
+  },
+  {
+    slug: "gd-4",
+    name: "Dr. Amir Cohen",
+    title: "MD, MPH",
+    specialty: "Rare Diseases",
+    institution: "National Institutes of Health",
+    country: "USA",
+    city: "Bethesda, MD",
+    languages: ["English", "Hebrew"],
+    hIndex: 51,
+    publications: 231,
+    verified: true,
+    vettingStatus: "pending",
+  },
+  {
+    slug: "gd-5",
+    name: "Prof. Yuki Tanaka",
+    title: "MD, PhD",
+    specialty: "Immunology",
+    institution: "Keio University School of Medicine",
+    country: "Japan",
+    city: "Tokyo",
+    languages: ["Japanese", "English"],
+    hIndex: 38,
+    publications: 156,
+    verified: true,
+    vettingStatus: "pending",
+  },
+];
