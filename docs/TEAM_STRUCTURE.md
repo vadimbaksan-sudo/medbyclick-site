@@ -2,6 +2,9 @@
 
 Status: **Final** (adopted 2026-07-01)
 Supersedes: earlier single-CEO draft of this document.
+Amended 2026-07-04: added **Designer** as a tenth role (Shared Services) — the
+platform had no role responsible for visual/UX quality until this gap surfaced
+during Phase 0 build-out.
 
 This file is the map. For the operating rules behind it, see `docs/governance/`.
 For day-to-day execution rules per role, see `docs/agents/`.
@@ -31,7 +34,7 @@ for the full operating agreement.
                                                                         fundraising fn.)
 
         ══════════════════════ SHARED SERVICES (report to both) ══════════════════════
-              Legal & Compliance │ QA / GStack │ Growth / Marketing │ Independent Auditor
+      Legal & Compliance │ QA / GStack │ Growth / Marketing │ Designer │ Independent Auditor
 ```
 
 ## Marina's Lane (CEO)
@@ -57,6 +60,7 @@ for the full operating agreement.
 | Legal & Compliance | `docs/agents/LEGAL_COMPLIANCE.md` | Routes medical-regulatory findings to Marina, crypto-regulatory findings to Vadim |
 | QA / GStack | `docs/agents/QA_GSTACK.md` | Tests the live product; never edits code or content |
 | Growth / Marketing | `docs/agents/GROWTH_MARKETING.md` | Acquisition strategy under Vadim; any clinical-claim content gated by Marina |
+| Designer | `docs/agents/DESIGNER.md` | Visual/UX quality and design-system ownership under Vadim; never rewrites medical copy |
 | Independent Auditor | `docs/agents/INDEPENDENT_AUDITOR.md` | Reports to neither lane — critiques both, captured by no one |
 
 ## How Decisions Get Made
@@ -98,7 +102,7 @@ being orphaned:
 ## Reports
 
 Each role's deliverables land in a dedicated folder under `docs/reports/`:
-`daily/`, `medical/`, `product/`, `web3/`, `fundraising/`, `legal/`, `qa/`, `growth/`, `audit/`.
+`daily/`, `medical/`, `product/`, `web3/`, `fundraising/`, `legal/`, `qa/`, `growth/`, `design/`, `audit/`.
 See each role file's Deliverables section for what goes where and how often.
 
 ## Scaling to Real Employees
