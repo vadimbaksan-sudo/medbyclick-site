@@ -143,6 +143,7 @@ an active/completed booking with that patient, contingent on the parallel
 | Module | Real-functionality definition | Depends on | Consult |
 |---|---|---|---|
 | `mededu` | Real course/article content replacing `mockCourses`, backed by Medical Content's verified copy | `core`; Medical Content pipeline | Medical Content (copy), Medical Advisory (clinical accuracy of course content) |
+| `mededu` — clinician reference section | Optional, second-priority addition within this phase: a free/low-friction clinician-facing reference area (clinical protocols, drug reference, lab reference ranges), added *after* the patient-facing content pipeline above is running, as an incremental content type on the same pipeline rather than a standalone build. Traffic/retention play for doctor-side adoption (§3.1's supply-side network), not part of the whitepaper §9 revenue model. Competitively motivated — see `docs/reports/product/2026-07-04-medelement-competitive-assessment.md` (MedElement's clinician content section). | Patient-facing `mededu` content pipeline landing first; competes for the same Medical Content/Medical Advisory review bandwidth as concurrent clinical work (`medai`, medical-history retention, doctor-dashboard vetting) — not free capacity | **Medical Content (authorship), Medical Advisory (clinical accuracy) — required, same gate as patient-facing `mededu`** |
 | `medcommunity` | Real posts/threads with moderation, tied to real user accounts | `core`; a moderation policy from Medical Community | Medical Community (conduct rules, per Team Structure) |
 
 Neither module is revenue-critical at current scale (whitepaper §9's Y1
@@ -178,5 +179,12 @@ produces a wallet UI with no contract to call.
 - Dates. Phase order is fixed; timing depends on the T2 decision (Day 30),
   the coordinator hire (T1, Month 2 gate), and the smart contract audit
   timeline, none of which are CTO/Product-owned inputs.
+- A B2B clinic practice-management (MIS) product, of the kind MedElement
+  sells to clinics — considered and explicitly **rejected**, not merely
+  omitted: wrong customer (clinics, not patients), wrong market position
+  (competing head-on with an entrenched CIS-wide incumbent instead of
+  exploiting a gap), wrong moment (no spare capacity in a two-founder team
+  mid-Phase-0/1). See `docs/decision-log/0002-medelement-b2b-mis-reject.md`
+  and `docs/reports/product/2026-07-04-medelement-competitive-assessment.md`.
 - Token/TGE roadmap milestones (listings, liquidity, governance phases) — those
   remain in `docs/WHITEPAPER.md` §18 and are Web3 & Token Strategy's domain.
