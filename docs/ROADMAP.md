@@ -69,10 +69,17 @@ Rules; this document sets order, not implementation detail.
 
 ## Phase 0 — Foundation Infrastructure
 
+Kickoff spec for this phase: `docs/reports/product/2026-07-04-core-patient-doctor-cabinets-spec.md`
+(also covers the Phase 1 `medconnect`/`medglobaldb` doctor-profile overlap below).
+That spec recommends **Supabase (Auth + Postgres together) queried via Drizzle
+ORM** as the default vendor pick for both rows below, pending Vadim's sign-off —
+see that document's §1.3–1.4 and §2.1–2.2 for the full options/tradeoffs table.
+
 | Module | Real-functionality definition | Depends on | Consult |
 |---|---|---|---|
-| `core` | Real auth (session/identity), a real database, user records replacing `mockUsers` | Platform decision (T2) informs whether coordinator-side identity lives here or in the T2 platform | — |
-| `medpayments` (fiat path only) | Server-side Stripe `PaymentIntent` + webhook confirmation + persisted receipts; live key swapped in only after QA sign-off | `core` (need a real user/order record to attach a payment to) | Independent Auditor (release playbook flags payments/checkout as consult-required) |
+| `core` | Real auth (session/identity), a real database, user records replacing `mockUsers`. Auth vendor/library choice and DB+ORM choice are real vendor/cost decisions — see kickoff spec §1, §2 for options and recommendation. | Platform decision (T2) informs whether coordinator-side identity lives here or in the T2 platform | — |
+| `core` — medical history / lab results *(new line item, not previously tracked here — see kickoff spec §5)* | Schema + UI shell for patient visit history and lab results, built and demoed against synthetic data only. Lives as an extension of `core`'s user record (one patient identity, one medical record), not a new module and not folded into `medconnect`. | `core` auth + DB (this phase) | **Legal & Compliance — required before any real (non-synthetic) health data is stored** (retention policy, data residency, jurisdiction handling — same category of gate already set for `medai`'s LLM data flow, per `docs/reports/legal/2026-07-04-medai-llm-data-handling-review.md`); may escalate Joint if it turns on the same Israel-entity/Russian-citizen question already open for `medai` |
+| `medpayments` (fiat path only) | Server-side Stripe `PaymentIntent` + webhook confirmation + persisted receipts; live key swapped in only after QA sign-off. Current `app/checkout/stripe` uses a hardcoded Stripe *public demo* test key with no server-side route at all — see kickoff spec §4 for the concrete gap list. | `core` (need a real user/order record to attach a payment to) | Independent Auditor (release playbook flags payments/checkout as consult-required) |
 
 MBC and crypto checkout paths in `medpayments` stay mocked through this phase —
 they're correctly sequenced in Phase 4 alongside `medtoken`.
@@ -86,10 +93,16 @@ they're correctly sequenced in Phase 4 alongside `medtoken`.
 | `medai` | Real symptom-intake flow feeding coordinator triage, per whitepaper §3.4 ("increase intake quality, not replace clinical judgment") | `core`, `medconnect` (intake needs somewhere to route to) | **Medical Advisory — required before build starts**, per this role's Must-Not-Do |
 | `medsupport` | **Contingent on T2.** If Healthie/Jane App is selected, this module likely becomes an integration/embed layer against the chosen platform rather than a custom-built scheduling/coordination system. Do not spec a full custom build until the Day-30 decision lands. | T2 platform decision | QA/GStack before any release candidate |
 
-Open spec question to resolve with Developer at Phase 1 kickoff, not decided
-here: `medconnect` (specialist matching/booking) and `medglobaldb` (specialist/
-clinic database) currently look like they may overlap in data model. Flagging
-for the Phase 1 spec, not resolving unilaterally in this roadmap.
+**Resolved at Phase 1 kickoff** (was an open spec question in the prior version
+of this document): `medconnect`'s `Doctor` type and `medglobaldb`'s `GlobalDoctor`
+type are two shapes describing the same real-world entity. Per
+`docs/reports/product/2026-07-04-core-patient-doctor-cabinets-spec.md` §2.3/§3.1,
+this becomes **one `doctor_profiles` table** in `core`'s schema, with `medconnect`
+(vetted local network, endorsement-driven) and `medglobaldb` (broader
+international directory, academic-stats-driven) as two filtered views/queries
+over it — not two parallel tables. Doctor vetting status (`vetting_status`) lives
+on that shared table and gates whether a profile is bookable, tying directly to
+the Medical Community consult above.
 
 ## Phase 2 — Trust & Content
 
