@@ -142,7 +142,7 @@ export default function Nav() {
               <span className="text-sm font-medium text-slate-700">Specialists</span>
             </Link>
             <Link
-              href="/ai-diagnostics/"
+              href="/medai/"
               onClick={closeAll}
               className="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-50 transition-colors"
             >
@@ -158,7 +158,7 @@ export default function Nav() {
               <span className="text-sm font-medium text-slate-700">Pricing</span>
             </Link>
             <Link
-              href="/medical-travel/"
+              href="/medtravel/"
               onClick={closeAll}
               className="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-50 transition-colors"
             >
@@ -166,7 +166,7 @@ export default function Nav() {
               <span className="text-sm font-medium text-slate-700">Medical Travel</span>
             </Link>
             <Link
-              href="/education/"
+              href="/mededu/"
               onClick={closeAll}
               className="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-50 transition-colors"
             >

@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { doctors } from "@/lib/doctors";
+import { doctors } from "@/modules/medconnect/data";
 
 export function generateStaticParams() {
   return doctors.map((d) => ({ id: d.id }));

@@ -81,7 +81,12 @@ export default function MbcDashboard() {
       {/* Balance card */}
       <div className="lg:col-span-1 space-y-5">
         <div className="bg-slate-900 text-white rounded-2xl p-6">
-          <p className="text-xs text-slate-400 mb-1">MBC Token Balance</p>
+          <div className="flex items-center justify-between gap-2 mb-1">
+            <p className="text-xs text-slate-400">MBC Token Balance</p>
+            <span className="text-[10px] font-bold uppercase tracking-wide text-amber-300 bg-amber-400/10 border border-amber-400/30 px-1.5 py-0.5 rounded flex-shrink-0">
+              Sample data — no account required yet
+            </span>
+          </div>
           <p className="text-4xl font-black text-amber-400">{balance.toLocaleString()}</p>
           <p className="text-sm text-slate-300 mt-1">≈ ${usdValue.toFixed(2)} USD</p>
           <p className="text-xs text-slate-500 mt-0.5">at $0.10 / MBC</p>
