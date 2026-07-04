@@ -187,3 +187,64 @@ the correction is recorded here for whichever role owns the next whitepaper revi
 Updated in place (`docs/ROADMAP.md` Phase 3 `medtravel` row) to reference this spec and name the
 cross-border doctor-licensing consult as a distinct, additional item alongside the existing Legal &
 Compliance consult for patient-side travel logistics.
+
+---
+
+## Addendum — 2026-07-04 (same day): Correction — Moscow and Moldova Are Real Doctor-Travels Destinations
+
+**Trigger:** Vadim, relayed via the Coordinator, corrected §1 and §3 above before Developer builds
+from either. Appended rather than silently rewritten, per the same practice other roles' reports have
+used this session (e.g. the correction addendum in
+`docs/reports/audit/2026-07-03-business-token-viability-audit.md`) — what changed and why should stay
+visible, not disappear into the original text.
+
+### A.1 The correction
+
+§1's recommendation to drop Germany and Thailand stands — those were invented, with no real
+partnership behind the named hospitals. But §1's framing of "Israel is the only real destination" was
+**incomplete, not wrong**: it was correct for the patient-travels direction and silent on the
+doctor-travels direction, because at the time of writing this document had not yet confirmed any real
+doctor-travels destination existed. It now has: **MedByClick has real hospital partnerships in Moscow
+(Russia) and Moldova**, where the visiting Israeli doctor operates under the host hospital's own
+licensing framework. The exact legal mechanism isn't documented anywhere yet (see A.3), but the
+practical arrangement itself is confirmed real, not hypothetical.
+
+Corrected picture:
+
+- **Patient-travels-to-Israel**: single real destination (Israel) — §1 unchanged.
+- **Doctor-travels-to-CIS**: real destinations are **Moscow and Moldova** (specific partner hospitals),
+  not a generic country list and not the invented Germany/Thailand pattern.
+
+### A.2 What this changes for §2's schema/UI recommendation
+
+§2's schema shape holds: `bookings.travelDirection`/`travelCountry` and
+`doctorProfiles.availableForMissionTravel` are still the right fields, and `travelCountry` now has two
+concrete real values to populate (`Russia`, `Moldova`) instead of being speculative. §2's point that
+the doctor-travels direction needs "which of our doctors offer mission travel, to which
+countries/partner hospitals" — not a `TravelDestination`-style card — also stands, and is now sharper:
+that surface should model **specific partner hospitals in Moscow and Moldova**, the same way §1's
+Israel list names Sourasky/Hadassah/Rabin/Rambam by name, not a repeat of the Germany/Thailand pattern
+of an invented hospital name and a made-up rating.
+
+**Input needed before real launch copy, flagged the same way any other real-data dependency would
+be:** this document does not have the actual partner hospital names, cities, specialties, or contact/
+relationship details for the Moscow and Moldova partnerships. Developer should build the schema and UI
+to *support* real partner-hospital entries for the doctor-travels direction now, but the fields
+themselves should stay empty/unpublished until Vadim/Marina supply the real partner data — do not
+invent placeholder hospital names for Moscow/Moldova the way Germany/Thailand's cards currently do.
+That would repeat exactly the mistake §1 is correcting, just relocated to a different pair of
+countries.
+
+### A.3 Softened Legal & Compliance flag
+
+§3's framing — "does an Israeli-licensed physician have any legal standing to perform procedures on
+CIS soil at all" — is answered in practice: yes, via the host hospital's own licensing framework in
+each existing partnership. **This is no longer an open legal-risk question blocking the feature; it is
+a documentation task.** Revised flag for Legal & Compliance: document how the existing Moscow and
+Moldova hospital-partnership licensing arrangements actually work (what the host hospital's licensing
+covers, whether it's a formal credentialing/locum arrangement or something else, whether malpractice
+liability sits with the host hospital or the visiting doctor, any per-partnership variation between
+Moscow and Moldova) — lower urgency than the original flag, informational rather than a blocker on
+building the schema support in §2. The operational-complexity flag (visas, equipment, scheduling) and
+the Medical Community input request (which doctors already do this, on what terms) from §3 both stand
+unchanged — this correction narrows the legal question specifically, not the rest of §3.
