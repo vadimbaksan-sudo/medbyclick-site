@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { doctors } from "@/lib/doctors";
+import { doctors } from "@/modules/medconnect/data";
 
 export const metadata = {
   title: "Our Specialists — MedByClick",

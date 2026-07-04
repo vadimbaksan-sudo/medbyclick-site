@@ -43,7 +43,10 @@ export default function CryptoForm() {
         <div className="w-16 h-16 rounded-full bg-amber-100 flex items-center justify-center mx-auto mb-6 text-2xl">⏳</div>
         <h2 className="text-2xl font-bold text-slate-900 mb-2">Awaiting confirmation</h2>
         <p className="text-slate-500 mb-1">{planName} — {price.toFixed(2)} USDT via {net.name}</p>
-        <p className="text-slate-400 text-sm mb-8">We'll activate your plan as soon as the transaction confirms ({net.time}).</p>
+        <p className="text-slate-400 text-sm mb-1">We'll activate your plan as soon as the transaction confirms ({net.time}).</p>
+        <p className="text-red-600 text-xs font-semibold mb-8">
+          Demo mode — no real transaction was sent or is being monitored.
+        </p>
         <Link href="/dashboard/" className="inline-flex items-center px-5 py-2.5 bg-slate-900 text-white rounded-xl text-sm font-semibold hover:bg-slate-700 transition-colors">
           Go to dashboard
         </Link>
@@ -82,7 +85,12 @@ export default function CryptoForm() {
 
         {/* Wallet address */}
         <div>
-          <p className="text-sm font-medium text-slate-700 mb-2">Send to this address ({net.name})</p>
+          <div className="flex items-center gap-2 mb-2">
+            <p className="text-sm font-medium text-slate-700">Send to this address ({net.name})</p>
+            <span className="text-[10px] font-bold uppercase tracking-wide text-red-700 bg-red-50 border border-red-200 px-1.5 py-0.5 rounded">
+              Demo address — do not send funds
+            </span>
+          </div>
           <div className="flex items-center gap-2">
             <code className="flex-1 bg-slate-100 border border-slate-200 rounded-xl px-4 py-3 text-xs font-mono text-slate-800 break-all">
               {wallet}

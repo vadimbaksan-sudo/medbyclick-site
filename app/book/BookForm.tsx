@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
-import { doctors } from "@/lib/doctors";
+import { doctors } from "@/modules/medconnect/data";
 
 type FormState = "idle" | "submitting" | "success";
 
