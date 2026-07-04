@@ -146,7 +146,7 @@ export const patientProfilesRelations = relations(patientProfiles, ({ one }) => 
 // doctor_profiles — the single source of truth resolving medconnect.Doctor
 // and medglobaldb.GlobalDoctor into one table (spec §2.3/§3.1).
 //
-// `userId` is nullable: seed/placeholder doctors (the existing 11 medconnect
+// `userId` is nullable: seed/placeholder doctors (the existing 10 medconnect
 // + 5 medglobaldb entries) don't have a real login account yet. It's
 // populated once a doctor is actually onboarded (Medical Community vetting
 // workflow + real registration — out of scope for this pass, see

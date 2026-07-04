@@ -8,16 +8,21 @@ import type { NewDbDoctorProfile } from "@/lib/db/schema";
  * and what lib/db/seed/run.ts inserts into a real Supabase Postgres instance
  * once DATABASE_URL is configured.
  *
- * IMPORTANT — these are the same 11 (medconnect) + 5 (medglobaldb)
- * believable-but-placeholder doctors that existed as hardcoded mock arrays
- * before this schema existed. They are NOT real vetted doctors. Every row
- * is seeded with vettingStatus: "pending" — none may be flipped to
- * "approved" without Medical Community's vetting workflow (not built yet,
- * per docs/ROADMAP.md Phase 1). `verified` (medglobaldb's original field)
- * is a distinct, narrower concept — "this academic/institutional profile
- * data was checked" — and does NOT imply MedByClick vetting; it is kept
- * only so medglobaldb's existing UI copy ("verified specialists") still
- * describes what it always described.
+ * IMPORTANT — these are the same believable-but-placeholder doctors that
+ * existed as hardcoded mock arrays before this schema existed: 10 in
+ * modules/medconnect/data.ts + 5 in modules/medglobaldb/data.ts (15 total).
+ * The kickoff spec's §0 ground-truth section describes medconnect as having
+ * "11 hardcoded doctors" — direct inspection of the actual pre-existing
+ * file (git history) shows 10; this seed preserves the real file's content
+ * exactly rather than inventing an 11th doctor to match the spec's count.
+ * They are NOT real vetted doctors. Every row is seeded with
+ * vettingStatus: "pending" — none may be flipped to "approved" without
+ * Medical Community's vetting workflow (not built yet, per
+ * docs/ROADMAP.md Phase 1). `verified` (medglobaldb's original field) is a
+ * distinct, narrower concept — "this academic/institutional profile data
+ * was checked" — and does NOT imply MedByClick vetting; it is kept only so
+ * medglobaldb's existing UI copy ("verified specialists") still describes
+ * what it always described.
  */
 
 // slug doubles as the seed's stable identity so re-running the seed script

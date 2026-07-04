@@ -1,6 +1,6 @@
 /**
  * Real seed script — run with `bun run db:seed` against a configured
- * DATABASE_URL (a real Supabase Postgres instance). Upserts the 11
+ * DATABASE_URL (a real Supabase Postgres instance). Upserts the 10
  * medconnect + 5 medglobaldb placeholder doctors (lib/db/seed/doctors.seed.ts)
  * into `doctor_profiles`, keyed on `slug` so re-running is idempotent.
  *

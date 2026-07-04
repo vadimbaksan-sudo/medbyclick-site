@@ -13,7 +13,7 @@ import { seedDoctors } from "@/lib/db/seed/doctors.seed";
  * static derivation keeps the existing browse pages working without a live
  * DB connection, filtered the same way medconnect's cards always were —
  * doctors with a founder endorsement, the local-network hallmark. Content
- * is unchanged from the original 11-doctor mock array.
+ * is unchanged from the original 10-doctor mock array.
  */
 export const doctors: Doctor[] = seedDoctors
   .filter((d) => Boolean(d.endorsement))
