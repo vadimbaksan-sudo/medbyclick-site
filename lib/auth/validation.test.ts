@@ -47,7 +47,8 @@ describe("RegisterFormSchema", () => {
   });
 
   it("defaults preferredLanguage to ru when omitted", () => {
-    const { preferredLanguage: _omit, ...withoutLanguage } = valid;
+    const withoutLanguage: Partial<typeof valid> = { ...valid };
+    delete withoutLanguage.preferredLanguage;
     const result = RegisterFormSchema.safeParse(withoutLanguage);
     expect(result.success).toBe(true);
     if (result.success) {
