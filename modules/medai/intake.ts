@@ -1,7 +1,16 @@
 import { detectRedFlags } from "./redFlags";
 import type { IntakeApiResponse, SymptomInput } from "./types";
 
-export const MEDAI_MODEL = "claude-opus-4-8";
+// COST/QUALITY TRADE-OFF (deliberate, easy to revert): this endpoint only
+// structures patient-reported symptoms into a fixed JSON schema (no
+// diagnosis) — well within a smaller model's capability — so it runs on
+// Haiku 4.5 (~$1/$5 per MTok) instead of Opus 4.8 (~$5/$25 per MTok) to keep
+// per-request cost down. Neither `output_config.effort` nor `thinking` is set
+// anywhere in this file, so Haiku 4.5's lack of `effort` support doesn't
+// apply here; structured outputs (`output_config.format`) are supported on
+// Haiku 4.5. If real-world output quality turns out insufficient, bump this
+// back to "claude-opus-4-8" — that's the only line that needs to change.
+export const MEDAI_MODEL = "claude-haiku-4-5";
 
 /**
  * System prompt binding the model to intake-structuring only. Per
