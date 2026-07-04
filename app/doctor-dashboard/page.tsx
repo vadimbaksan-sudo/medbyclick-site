@@ -3,6 +3,10 @@ import { isDatabaseConfigured } from "@/lib/db/client";
 import { listBookingsForDoctorProfile } from "@/lib/db/queries/bookings";
 import type { DbBooking } from "@/lib/db/schema";
 
+// See app/dashboard/page.tsx's identical note — this page reads the auth
+// session and must not be statically snapshotted.
+export const dynamic = "force-dynamic";
+
 export const metadata = {
   title: "Doctor Dashboard — MedByClick",
   description: "Bookings assigned to you.",

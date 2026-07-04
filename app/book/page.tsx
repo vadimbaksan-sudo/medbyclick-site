@@ -3,6 +3,10 @@ import Link from "next/link";
 import BookForm from "./BookForm";
 import { getCurrentUser } from "@/lib/auth/dal";
 
+// See app/dashboard/page.tsx's identical note — this page reads the auth
+// session and must not be statically snapshotted.
+export const dynamic = "force-dynamic";
+
 export const metadata = {
   title: "Book a Consultation — MedByClick",
   description: "Request a consultation with one of our vetted specialists.",
