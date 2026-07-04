@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { Doctor } from "../types";
+import { avatarGradientClass } from "@/lib/ui/avatarColor";
 
 export default function DoctorCard({ doctor }: { doctor: Doctor }) {
   return (
@@ -8,7 +9,9 @@ export default function DoctorCard({ doctor }: { doctor: Doctor }) {
       className="group block border border-slate-100 rounded-2xl p-6 hover:border-amber-300 hover:shadow-md transition-all bg-white"
     >
       <div className="flex items-center gap-4 mb-4">
-        <div className="w-14 h-14 rounded-full bg-gradient-to-br from-slate-700 to-slate-900 flex items-center justify-center text-amber-400 font-bold text-xl flex-shrink-0">
+        <div
+          className={`w-14 h-14 rounded-full bg-gradient-to-br ${avatarGradientClass(doctor.id)} flex items-center justify-center text-white font-bold text-xl flex-shrink-0`}
+        >
           {doctor.name.split(" ").slice(-1)[0][0]}
         </div>
         <div>

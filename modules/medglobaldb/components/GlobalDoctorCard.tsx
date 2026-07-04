@@ -1,10 +1,13 @@
 import type { GlobalDoctor } from "../types";
+import { avatarGradientClass } from "@/lib/ui/avatarColor";
 
 export default function GlobalDoctorCard({ doctor }: { doctor: GlobalDoctor }) {
   return (
     <div className="border border-slate-200 rounded-xl p-5 bg-white hover:border-amber-300 hover:shadow-sm transition-all">
       <div className="flex items-start gap-4">
-        <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-slate-700 to-slate-900 flex items-center justify-center text-amber-400 font-bold text-lg flex-shrink-0">
+        <div
+          className={`w-12 h-12 rounded-xl bg-gradient-to-br ${avatarGradientClass(doctor.id)} flex items-center justify-center text-white font-bold text-lg flex-shrink-0`}
+        >
           {doctor.name.split(" ").slice(-1)[0][0]}
         </div>
         <div className="flex-1 min-w-0">

@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { doctors } from "@/modules/medconnect/data";
+import { avatarGradientClass } from "@/lib/ui/avatarColor";
 
 export function generateStaticParams() {
   return doctors.map((d) => ({ id: d.id }));
@@ -50,7 +51,9 @@ export default async function DoctorProfilePage({
           <div className="lg:col-span-2">
             {/* Header */}
             <div className="flex items-start gap-6 mb-8">
-              <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-slate-200 to-slate-300 flex items-center justify-center text-slate-600 font-bold text-3xl flex-shrink-0">
+              <div
+                className={`w-20 h-20 rounded-2xl bg-gradient-to-br ${avatarGradientClass(doctor.id)} flex items-center justify-center text-white font-bold text-3xl flex-shrink-0`}
+              >
                 {doctor.name.split(" ").slice(-1)[0][0]}
               </div>
               <div>
@@ -176,7 +179,9 @@ export default async function DoctorProfilePage({
                   href={`/doctors/${other.id}`}
                   className="flex items-center gap-4 p-4 border border-slate-100 rounded-xl hover:border-slate-300 transition-all group"
                 >
-                  <div className="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center text-slate-500 font-semibold text-base flex-shrink-0">
+                  <div
+                    className={`w-10 h-10 rounded-full bg-gradient-to-br ${avatarGradientClass(other.id)} flex items-center justify-center text-white font-semibold text-base flex-shrink-0`}
+                  >
                     {other.name.split(" ").slice(-1)[0][0]}
                   </div>
                   <div>

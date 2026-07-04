@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { doctors } from "@/modules/medconnect/data";
 import { getNavModules } from "@/modules/registry";
+import { avatarGradientClass } from "@/lib/ui/avatarColor";
 
 export default function HomePage() {
   const featured = doctors.slice(0, 3);
@@ -175,7 +176,9 @@ export default function HomePage() {
                 href={`/doctors/${doctor.id}`}
                 className="group block border border-slate-100 rounded-2xl p-6 hover:border-slate-300 hover:shadow-md transition-all"
               >
-                <div className="w-12 h-12 rounded-full bg-slate-100 flex items-center justify-center text-slate-500 font-semibold text-lg mb-4">
+                <div
+                  className={`w-12 h-12 rounded-full bg-gradient-to-br ${avatarGradientClass(doctor.id)} flex items-center justify-center text-white font-semibold text-lg mb-4`}
+                >
                   {doctor.name.split(" ").slice(-1)[0][0]}
                 </div>
                 <p className="font-semibold text-slate-900 group-hover:text-amber-700 transition-colors">{doctor.name}</p>
