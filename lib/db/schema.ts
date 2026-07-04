@@ -60,6 +60,17 @@ export const bookingUrgencyEnum = pgEnum("booking_urgency", [
   "urgent",
 ]);
 
+// Per docs/reports/product/2026-07-04-medtravel-bidirectional-flow-spec.md
+// §2: which party crosses the border for a medtravel booking. Null/default
+// means "not a cross-border-travel booking at all" — every existing row and
+// every non-medtravel booking flow (local Israel booking, regular medconnect
+// match) is unaffected; only bookings originating from the medtravel flow
+// populate this.
+export const travelDirectionEnum = pgEnum("travel_direction", [
+  "patient_travels",
+  "doctor_travels",
+]);
+
 export const paymentMethodEnum = pgEnum("payment_method", [
   "card",
   "crypto",
@@ -188,6 +199,22 @@ export const doctorProfiles = pgTable("doctor_profiles", {
   verified: boolean("verified").notNull().default(false),
   vettingStatus: vettingStatusEnum("vetting_status").notNull().default("pending"),
 
+  // Per docs/reports/product/2026-07-04-medtravel-bidirectional-flow-spec.md
+  // §2: a distinct concept from being Israel-based — "is this doctor
+  // willing/vetted to travel to a CIS country for on-site mission work,"
+  // not "where is this doctor's home institution." Defaults false for every
+  // doctor, including all existing seed rows; opting in is a new commitment,
+  // never inferred.
+  //
+  // NOT DOCTOR-SELF-EDITABLE. Same server-side-enforced pattern as
+  // `verified`/`vettingStatus` above: per
+  // docs/reports/product/2026-07-04-doctor-dashboard-spec.md §1.2/§1.3, any
+  // future doctor self-edit Server Action's Zod whitelist must not include
+  // this field at all (not merely strip it after parsing) — only an
+  // admin/Medical-Community-role action may flip it, given the cross-border
+  // licensing exposure named in the medtravel spec §3/addendum A.3.
+  availableForMissionTravel: boolean("available_for_mission_travel").notNull().default(false),
+
   createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
   updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
 }, (table) => ([
@@ -223,6 +250,19 @@ export const bookings = pgTable("bookings", {
   language: varchar("language", { length: 40 }),
   // Which plan/flow created it, e.g. "book-form", "medai-intake".
   source: varchar("source", { length: 80 }).notNull().default("book-form"),
+
+  // Per docs/reports/product/2026-07-04-medtravel-bidirectional-flow-spec.md
+  // §2: nullable, only populated by bookings originating from the medtravel
+  // flow. Null means "not a cross-border-travel booking" and every existing
+  // row/non-medtravel flow is unaffected.
+  travelDirection: travelDirectionEnum("travel_direction"),
+  // Only meaningful when travelDirection = 'doctor_travels' — the CIS
+  // country the doctor is flying to (e.g. "Russia", "Moldova" per the
+  // spec's addendum). Not populated for 'patient_travels': the destination
+  // is always Israel at this stage, and the patient's origin country is
+  // already captured on `patientProfiles.citizenshipOrCountry` — not
+  // duplicated here.
+  travelCountry: varchar("travel_country", { length: 100 }),
 
   createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
   updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
