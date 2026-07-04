@@ -1,69 +1,29 @@
 import type { GlobalDoctor } from "./types";
+import { seedDoctors } from "@/lib/db/seed/doctors.seed";
 
-export const globalDoctors: GlobalDoctor[] = [
-  {
-    id: "gd-1",
-    name: "Prof. Klaus Werner",
-    title: "MD, PhD",
-    specialty: "Neuro-oncology",
-    institution: "Charité Universitätsmedizin Berlin",
-    country: "Germany",
-    city: "Berlin",
-    languages: ["German", "English"],
-    hIndex: 42,
-    publications: 187,
-    verified: true,
-  },
-  {
-    id: "gd-2",
-    name: "Dr. Priya Nair",
-    title: "MBBS, DM",
-    specialty: "Hematology",
-    institution: "Tata Memorial Hospital",
-    country: "India",
-    city: "Mumbai",
-    languages: ["English", "Hindi", "Marathi"],
-    hIndex: 28,
-    publications: 94,
-    verified: true,
-  },
-  {
-    id: "gd-3",
-    name: "Dr. Jean-Pierre Moreau",
-    title: "MD",
-    specialty: "Cardiothoracic Surgery",
-    institution: "Hôpital Lariboisière",
-    country: "France",
-    city: "Paris",
-    languages: ["French", "English"],
-    hIndex: 35,
-    publications: 142,
-    verified: true,
-  },
-  {
-    id: "gd-4",
-    name: "Dr. Amir Cohen",
-    title: "MD, MPH",
-    specialty: "Rare Diseases",
-    institution: "National Institutes of Health",
-    country: "USA",
-    city: "Bethesda, MD",
-    languages: ["English", "Hebrew"],
-    hIndex: 51,
-    publications: 231,
-    verified: true,
-  },
-  {
-    id: "gd-5",
-    name: "Prof. Yuki Tanaka",
-    title: "MD, PhD",
-    specialty: "Immunology",
-    institution: "Keio University School of Medicine",
-    country: "Japan",
-    city: "Tokyo",
-    languages: ["Japanese", "English"],
-    hIndex: 38,
-    publications: 156,
-    verified: true,
-  },
-];
+/**
+ * medglobaldb's view over the unified `doctor_profiles` table (spec
+ * §2.3/§3.1): the broader international directory, academic-stats-driven.
+ *
+ * Adapter over lib/db/seed/doctors.seed.ts — see modules/medconnect/data.ts's
+ * identical comment. Once a live Supabase database is seeded, swap this for
+ * `listGlobalDbDoctors()` from lib/db/queries/doctors.ts. Filtered here by
+ * the presence of academic-stats fields (institution/hIndex), which is what
+ * always distinguished medglobaldb's international directory entries.
+ * Content is unchanged from the original 5-doctor mock array.
+ */
+export const globalDoctors: GlobalDoctor[] = seedDoctors
+  .filter((d) => Boolean(d.institution))
+  .map((d): GlobalDoctor => ({
+    id: d.slug,
+    name: d.name,
+    title: d.title ?? "",
+    specialty: d.specialty,
+    institution: d.institution ?? "",
+    country: d.country ?? "",
+    city: d.city ?? "",
+    languages: (d.languages as string[] | undefined) ?? [],
+    hIndex: d.hIndex ?? 0,
+    publications: d.publications ?? 0,
+    verified: d.verified ?? false,
+  }));
