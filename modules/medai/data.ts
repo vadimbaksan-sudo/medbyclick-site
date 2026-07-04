@@ -1,19 +1,20 @@
-import type { DiagnosticResult } from "./types";
-
-export const mockDiagnosticResult: DiagnosticResult = {
-  possibleConditions: [
-    { name: "Tension headache", likelihood: "high", description: "Most common cause of recurring head pain, often stress-related." },
-    { name: "Migraine", likelihood: "medium", description: "Neurological condition with episodic moderate-to-severe headaches." },
-    { name: "Hypertension", likelihood: "low", description: "Elevated blood pressure can cause headaches, especially morning pain." },
-  ],
-  recommendedSpecialty: "Neurology",
-  urgency: "routine",
-  disclaimer: "This analysis is for informational purposes only. It is not a medical diagnosis. Consult a qualified physician before making any health decisions.",
-};
-
+/**
+ * NOTE: the previous version of this file included a "Trained on 50M+
+ * clinical records" claim and a hardcoded "possible conditions" mock result
+ * with confidence badges. Both were removed per
+ * docs/reports/medical/2026-07-04-medai-llm-integration-clinical-safety-review.md
+ * §0 — the training-data claim is a fabricated, unverifiable capability claim,
+ * and a named-condition list with a likelihood label is a differential
+ * diagnosis presented to a layperson, which this feature must never do.
+ *
+ * Replacement marketing copy describing the *real* capability (once the real
+ * LLM integration is live) should be routed through Medical Content, not
+ * authored here — this list intentionally sticks to plain, verifiable
+ * statements about what the feature does structurally.
+ */
 export const aiFeatures = [
-  { icon: "🔬", title: "Pattern Recognition", description: "Trained on 50M+ clinical records to identify symptom clusters" },
-  { icon: "⚡", title: "Instant Analysis", description: "Results in under 30 seconds, available 24/7" },
-  { icon: "🎯", title: "Specialist Routing", description: "Recommends the exact specialty you need — no guessing" },
-  { icon: "🔒", title: "Private & Encrypted", description: "Your symptoms are never stored or shared" },
+  { icon: "📝", title: "Structured Intake", description: "Turns your description into a clear, organized summary for your care team." },
+  { icon: "⚡", title: "Fast, Always Available", description: "Complete your intake in minutes, any time of day." },
+  { icon: "🎯", title: "Specialist Routing", description: "Suggests a specialty for your coordinator to confirm — never a diagnosis." },
+  { icon: "🧑‍⚕️", title: "Reviewed by a Human", description: "A coordinator reviews every submission before any next step is taken." },
 ];

@@ -3,8 +3,8 @@ import SymptomChecker from "@/modules/medai/components/SymptomChecker";
 import { aiFeatures } from "@/modules/medai/data";
 
 export const metadata = {
-  title: "MedAI — AI Diagnostics · MedByClick",
-  description: "AI-powered symptom analysis and specialist routing.",
+  title: "MedAI — AI Intake Assistant · MedByClick",
+  description: "AI-assisted symptom intake and specialist routing, reviewed by a human coordinator before any medical decision is made.",
 };
 
 export default function MedAIPage() {
@@ -16,9 +16,9 @@ export default function MedAIPage() {
             <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />
             MedAI Module
           </div>
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">AI Diagnostics</h1>
+          <h1 className="text-4xl md:text-5xl font-bold mb-4">AI Intake Assistant</h1>
           <p className="text-slate-300 text-lg max-w-2xl leading-relaxed">
-            Describe your symptoms and get an instant analysis — including likely conditions, recommended specialty, and urgency level.
+            Describe your symptoms and get a structured intake summary — including suggested specialty and queue priority — reviewed by a coordinator before anything happens next. This is not a diagnosis.
           </p>
         </div>
       </div>
@@ -49,7 +49,7 @@ export default function MedAIPage() {
             <div className="mt-6 bg-amber-50 border border-amber-200 rounded-xl p-5">
               <p className="text-xs font-semibold uppercase tracking-widest text-amber-700 mb-2">Important Notice</p>
               <p className="text-sm text-amber-800 leading-relaxed">
-                MedAI is a decision-support tool, not a diagnostic service. All results should be reviewed by a qualified physician. MedByClick connects you to real specialists for confirmed diagnoses.
+                MedAI structures your intake for a human coordinator — it does not diagnose, does not suggest treatment, and never books or dismisses a case on its own. A qualified doctor reviews your information before any medical decision is made.
               </p>
             </div>
           </div>
