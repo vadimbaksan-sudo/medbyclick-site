@@ -88,7 +88,7 @@ they're correctly sequenced in Phase 4 alongside `medtoken`.
 
 | Module | Real-functionality definition | Depends on | Consult |
 |---|---|---|---|
-| `medconnect` | Real doctor profiles, real booking/matching workflow, replacing `mockDoctors`-style data | `core`; doctor vetting standard (Medical Community, per T3) before doctors go live | Medical Community (vetting standard, doctor admission) |
+| `medconnect` | Real doctor profiles, real booking/matching workflow, replacing `mockDoctors`-style data. The minimal `app/doctor-dashboard` (read-only assigned-bookings list) has landed; doctor profile self-service, doctor registration, and booking-status actions are specced in `docs/reports/product/2026-07-04-doctor-dashboard-spec.md` and are the next Developer handoff for this row. | `core`; doctor vetting standard (Medical Community, per T3) before doctors go live | Medical Community (vetting standard, doctor admission) |
 | `medglobaldb` | Real specialist/clinic directory backing `medconnect`'s and `medtravel`'s cards | `core` | — |
 | `medai` | Real symptom-intake flow feeding coordinator triage, per whitepaper §3.4 ("increase intake quality, not replace clinical judgment") | `core`, `medconnect` (intake needs somewhere to route to) | **Medical Advisory — required before build starts**, per this role's Must-Not-Do |
 | `medsupport` | **Contingent on T2.** If Healthie/Jane App is selected, this module likely becomes an integration/embed layer against the chosen platform rather than a custom-built scheduling/coordination system. Do not spec a full custom build until the Day-30 decision lands. | T2 platform decision | QA/GStack before any release candidate |
@@ -103,6 +103,22 @@ international directory, academic-stats-driven) as two filtered views/queries
 over it — not two parallel tables. Doctor vetting status (`vetting_status`) lives
 on that shared table and gates whether a profile is bookable, tying directly to
 the Medical Community consult above.
+
+**Doctor dashboard follow-up spec landed** (per the prior version of this
+document's note under `core` — medical history / lab results row — flagging
+`app/doctor-dashboard` as a placeholder needing its own spec once Phase 0
+auth/DB landed): `docs/reports/product/2026-07-04-doctor-dashboard-spec.md`
+covers doctor profile self-service (which `doctor_profiles` fields a doctor
+may edit vs. admin/Medical-Community-only, e.g. `vetting_status`/`verified`
+are never doctor-editable), the doctor registration flow (recommendation:
+self-registration defaulting to `vetting_status: pending`, mirroring
+`registerPatient()`'s existing pattern, followed by Medical Community
+review — not admin-provisioned-only), booking-status actions a doctor can
+take on an already-coordinator-routed booking (confirm/complete/notes/
+decline-to-pool; no scheduling system), and a proposed (not yet cleared)
+DB-level access rule for doctor access to `medical_history_entries` gated on
+an active/completed booking with that patient, contingent on the parallel
+`docs/reports/legal/2026-07-04-medical-history-data-handling-review.md`.
 
 ## Phase 2 — Trust & Content
 
