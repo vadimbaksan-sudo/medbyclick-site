@@ -1,12 +1,36 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { getNavModules } from "@/modules/registry";
+import { createSupabaseBrowserClient } from "@/lib/supabase/client";
+import { logoutUser } from "@/lib/auth/actions";
 
 export default function Nav() {
   const [open, setOpen] = useState(false);
   const [platformOpen, setPlatformOpen] = useState(false);
+  // Session awareness so "Log out" is reachable from the header on any
+  // page, not just /dashboard. Uses the browser Supabase client (reads the
+  // same cookie-based session lib/supabase/server.ts / proxy.ts maintain)
+  // rather than a server-fetched prop, so the rest of the site can stay
+  // statically rendered — see lib/supabase/client.ts.
+  const [loggedIn, setLoggedIn] = useState(false);
+
+  useEffect(() => {
+    let supabase;
+    try {
+      supabase = createSupabaseBrowserClient();
+    } catch {
+      // Supabase not configured in this environment — stay logged-out UI.
+      return;
+    }
+
+    supabase.auth.getUser().then(({ data }) => setLoggedIn(Boolean(data.user)));
+    const { data: sub } = supabase.auth.onAuthStateChange((_event, session) => {
+      setLoggedIn(Boolean(session?.user));
+    });
+    return () => sub.subscription.unsubscribe();
+  }, []);
 
   const navModules = getNavModules();
   const primary = navModules.find((m) => m.id === "medconnect");
@@ -90,18 +114,31 @@ export default function Nav() {
               >
                 Dashboard
               </Link>
-              <Link
-                href="/login/"
-                className="text-sm font-medium text-slate-600 hover:text-slate-900 px-3 py-2 rounded-lg hover:bg-slate-50 transition-colors"
-              >
-                Log in
-              </Link>
-              <Link
-                href="/register/"
-                className="text-sm font-medium bg-slate-100 hover:bg-slate-200 text-slate-900 px-3 py-2 rounded-lg transition-colors"
-              >
-                Register
-              </Link>
+              {loggedIn ? (
+                <form action={logoutUser}>
+                  <button
+                    type="submit"
+                    className="text-sm font-medium text-slate-600 hover:text-slate-900 px-3 py-2 rounded-lg hover:bg-slate-50 transition-colors"
+                  >
+                    Log out
+                  </button>
+                </form>
+              ) : (
+                <>
+                  <Link
+                    href="/login/"
+                    className="text-sm font-medium text-slate-600 hover:text-slate-900 px-3 py-2 rounded-lg hover:bg-slate-50 transition-colors"
+                  >
+                    Log in
+                  </Link>
+                  <Link
+                    href="/register/"
+                    className="text-sm font-medium bg-slate-100 hover:bg-slate-200 text-slate-900 px-3 py-2 rounded-lg transition-colors"
+                  >
+                    Register
+                  </Link>
+                </>
+              )}
               <Link
                 href="/book/"
                 className="text-sm font-medium bg-slate-900 text-white px-4 py-2 rounded-lg hover:bg-slate-700 transition-colors"
@@ -175,22 +212,42 @@ export default function Nav() {
             </Link>
 
             <div className="pt-2 border-t border-slate-100 mt-2 space-y-2">
-              <div className="flex gap-2">
-                <Link
-                  href="/login/"
-                  onClick={closeAll}
-                  className="flex-1 text-center py-2.5 border border-slate-200 text-slate-700 text-sm font-medium rounded-xl hover:bg-slate-50 transition-colors"
-                >
-                  Log in
-                </Link>
-                <Link
-                  href="/register/"
-                  onClick={closeAll}
-                  className="flex-1 text-center py-2.5 bg-slate-100 text-slate-900 text-sm font-medium rounded-xl hover:bg-slate-200 transition-colors"
-                >
-                  Register
-                </Link>
-              </div>
+              {loggedIn ? (
+                <div className="flex gap-2">
+                  <Link
+                    href="/dashboard/"
+                    onClick={closeAll}
+                    className="flex-1 text-center py-2.5 border border-slate-200 text-slate-700 text-sm font-medium rounded-xl hover:bg-slate-50 transition-colors"
+                  >
+                    Dashboard
+                  </Link>
+                  <form action={logoutUser} className="flex-1" onSubmit={closeAll}>
+                    <button
+                      type="submit"
+                      className="w-full text-center py-2.5 bg-slate-100 text-slate-900 text-sm font-medium rounded-xl hover:bg-slate-200 transition-colors"
+                    >
+                      Log out
+                    </button>
+                  </form>
+                </div>
+              ) : (
+                <div className="flex gap-2">
+                  <Link
+                    href="/login/"
+                    onClick={closeAll}
+                    className="flex-1 text-center py-2.5 border border-slate-200 text-slate-700 text-sm font-medium rounded-xl hover:bg-slate-50 transition-colors"
+                  >
+                    Log in
+                  </Link>
+                  <Link
+                    href="/register/"
+                    onClick={closeAll}
+                    className="flex-1 text-center py-2.5 bg-slate-100 text-slate-900 text-sm font-medium rounded-xl hover:bg-slate-200 transition-colors"
+                  >
+                    Register
+                  </Link>
+                </div>
+              )}
               <Link
                 href="/book/"
                 onClick={closeAll}
