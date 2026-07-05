@@ -7,7 +7,19 @@ document is the engineering sequencing view — the whitepaper's §18 stays the
 token/TGE-facing view for external readers and should be treated as downstream
 of this one, not the other way around. Kept independently current here.
 
-## Current State (as of 2026-07-04)
+## Current State (as of 2026-07-05)
+
+**2026-07-05 update:** a full architecture review (`docs/reports/product/2026-07-05-architecture-review.md`)
+verified two things by direct code inspection that change the picture below: (1) the doctor
+dashboard/self-registration work described under Phase 1 is **still 0% implemented** — the spec
+merged, but no code followed it (see the `medconnect` row and the note under Phase 1); (2) `medtravel`'s
+schema gained real `travelDirection`/`travelCountry`/`availableForMissionTravel` fields today, moving
+it from "still mock" to "partially real" (schema real, browse/booking UI still mock — see Phase 3).
+That review also flagged a real `DESIGN.md` compliance gap: `lib/ui/avatarColor.ts`'s 8-color gradient
+palette (including teal) renders on medical-trust pages, violating `DESIGN.md`'s "one accent per
+context" rule and its explicit "no teal on medical-trust pages" rule — flagged here as open design debt
+for Developer, not yet fixed.
+
 
 **Supersedes the 2026-07-02 baseline below — Phase 0 and half of Phase 1 have
 landed in code since.** Full module-by-module detail, plus an actual
@@ -106,7 +118,7 @@ they're correctly sequenced in Phase 4 alongside `medtoken`.
 
 | Module | Real-functionality definition | Status (2026-07-04) | Depends on | Consult |
 |---|---|---|---|---|
-| `medconnect` | Real doctor profiles, real booking/matching workflow, replacing `mockDoctors`-style data. | **Booking flow: code done**, auth-gated Server Action → real `bookings` table → doctor dashboard and patient dashboard both read real rows. **Browse pages: still mock** — `/medconnect`, `/doctors`, `/specialists` all still import `modules/medconnect/data.ts`'s static array instead of the already-built `lib/db/queries/doctors.ts` query layer. Doctor self-registration and profile self-service are specced (`docs/reports/product/2026-07-04-doctor-dashboard-spec.md`) but not built — doctor accounts today are manually provisioned only, and doctors can view but not act on (confirm/complete/decline) assigned bookings. | `core`; doctor vetting standard (Medical Community, per T3) before doctors go live | Medical Community (vetting standard, doctor admission) |
+| `medconnect` | Real doctor profiles, real booking/matching workflow, replacing `mockDoctors`-style data. | **Booking flow: code done**, auth-gated Server Action → real `bookings` table → doctor dashboard and patient dashboard both read real rows. **Browse pages: still mock** — `/medconnect`, `/doctors`, `/specialists` all still import `modules/medconnect/data.ts`'s static array instead of the already-built `lib/db/queries/doctors.ts` query layer. Doctor self-registration and profile self-service are specced (`docs/reports/product/2026-07-04-doctor-dashboard-spec.md`) but **verified 2026-07-05: zero implementation landed** — no `/register/doctor` route, no `lib/doctor-profile/actions.ts`, no booking-status mutation function exist anywhere; `app/doctor-dashboard/page.tsx` is unchanged from the original read-only Phase 0 build. Doctor accounts today are manually provisioned only, and doctors can view but not act on (confirm/complete/decline) assigned bookings — this needs a fresh Developer handoff, not a last-mile finish. | `core`; doctor vetting standard (Medical Community, per T3) before doctors go live | Medical Community (vetting standard, doctor admission) |
 | `medglobaldb` | Real specialist/clinic directory backing `medconnect`'s and `medtravel`'s cards. | **Still mock.** `/medglobaldb` reads `modules/medglobaldb/data.ts`'s static array. `listGlobalDbDoctors()` in the shared query layer exists and is ready but unused by this page. | `core` | — |
 | `medai` | Real symptom-intake flow feeding coordinator triage, per whitepaper §3.4. | **Code done.** `/medai`'s `SymptomChecker` posts to `app/api/medai/intake`, which calls real Claude (Haiku 4.5) for structured intake JSON, with red-flag detection (`redFlags.ts`) and i18n. Legal + Medical Advisory reviews landed; route is scoped to synthetic/test input only pending those sign-offs on real patient data. **Not yet reachable** — no `ANTHROPIC_API_KEY` configured; fails closed with a 503 "AI intake service is not configured" message. | `core`, `medconnect` (intake needs somewhere to route to) | **Medical Advisory — required before build starts**, per this role's Must-Not-Do |
 | `medsupport` | **Contingent on T2.** If Healthie/Jane App is selected, this module likely becomes an integration/embed layer against the chosen platform rather than a custom-built scheduling/coordination system. Do not spec a full custom build until the Day-30 decision lands. | **Still mock** (`ChatWidget` + static data) — unchanged, correctly waiting on T2. | T2 platform decision | QA/GStack before any release candidate |
@@ -138,6 +150,12 @@ DB-level access rule for doctor access to `medical_history_entries` gated on
 an active/completed booking with that patient, contingent on the parallel
 `docs/reports/legal/2026-07-04-medical-history-data-handling-review.md`.
 
+**Correction (2026-07-05):** the spec above is ready for Developer but nothing in it has been built
+yet — verified by direct inspection of `app/doctor-dashboard/page.tsx`, `lib/auth/actions.ts`,
+`lib/db/queries/bookings.ts`, and the absence of any `/register/doctor` route or
+`lib/doctor-profile/actions.ts` file. Do not treat this as done or in-progress; it needs a new
+kickoff to Developer. See `docs/reports/product/2026-07-05-architecture-review.md` §2.
+
 ## Phase 2 — Trust & Content
 
 | Module | Real-functionality definition | Depends on | Consult |
@@ -154,7 +172,7 @@ pipeline exist, ahead of anything token-gated.
 
 | Module | Real-functionality definition | Depends on | Consult |
 |---|---|---|---|
-| `medtravel` (logistics only) | Real clinic/hospital selection workflow and document coordination (whitepaper §3.3), **excluding** the MBC escrow mechanism. Per `docs/reports/product/2026-07-04-medtravel-bidirectional-flow-spec.md` (+ addendum), this is narrower than originally scoped: the real business is CIS-to-Israel patient travel specifically (destination list corrected to Israel-only, dropping the Germany/Thailand entries that don't reflect an actual relationship), plus a **bidirectional** second mode — Israeli doctors traveling to real partner hospitals in **Moscow and Moldova** for on-site missions — that the current data model (`bookings`, `doctor_profiles`) has no concept of at all. That spec gives Developer the concrete field-level fix (`bookings.travelDirection`/`travelCountry`, `doctorProfiles.availableForMissionTravel`), plus a flag that the actual Moscow/Moldova partner hospital names/details still need to come from Vadim/Marina before real launch copy — build the schema/UI now, don't invent placeholder hospital names. | `medglobaldb`, `medconnect` | Legal & Compliance (cross-border medical travel has jurisdiction-specific requirements; the doctor-travels legal question is **answered in practice** — the visiting doctor operates under the host hospital's own licensing framework in each partnership — so the remaining ask is lower-urgency: document how that licensing arrangement actually works, not an open legal-risk review); Medical Community (whether any endorsed doctors already do informal mission work, and on what terms) |
+| `medtravel` (logistics only) | Real clinic/hospital selection workflow and document coordination (whitepaper §3.3), **excluding** the MBC escrow mechanism. Per `docs/reports/product/2026-07-04-medtravel-bidirectional-flow-spec.md` (+ addendum), this is narrower than originally scoped: the real business is CIS-to-Israel patient travel specifically (destination list corrected to Israel-only, dropping the Germany/Thailand entries that don't reflect an actual relationship), plus a **bidirectional** second mode — Israeli doctors traveling to real partner hospitals in **Moscow and Moldova** for on-site missions — that the current data model (`bookings`, `doctor_profiles`) has no concept of at all. That spec gives Developer the concrete field-level fix (`bookings.travelDirection`/`travelCountry`, `doctorProfiles.availableForMissionTravel`), plus a flag that the actual Moscow/Moldova partner hospital names/details still need to come from Vadim/Marina before real launch copy — build the schema/UI now, don't invent placeholder hospital names. **Status (2026-07-05): partially real** — the schema fields (`bookings.travelDirection`/`travelCountry`, `doctorProfiles.availableForMissionTravel`) and corrected destination copy have landed in code; the browse/booking UI itself still reads `modules/medtravel/data.ts`'s mock array and no query layer or booking path exercises the new columns yet. | `medglobaldb`, `medconnect` | Legal & Compliance (cross-border medical travel has jurisdiction-specific requirements; the doctor-travels legal question is **answered in practice** — the visiting doctor operates under the host hospital's own licensing framework in each partnership — so the remaining ask is lower-urgency: document how that licensing arrangement actually works, not an open legal-risk review); Medical Community (whether any endorsed doctors already do informal mission work, and on what terms) |
 | `medevents` | Real event/webinar listings and registration | `core` | — |
 
 ## Phase 4 — Token-Gated
