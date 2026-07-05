@@ -43,9 +43,9 @@ export default async function DashboardPage() {
 
   return (
     <div>
-      <div className="bg-slate-900 text-white py-12">
+      <div className="bg-green-50 text-stone-900 py-12">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <p className="text-xs font-semibold uppercase tracking-widest text-amber-400 mb-3">Account</p>
+          <p className="text-xs font-semibold uppercase tracking-widest text-amber-700 mb-3">Account</p>
           <h1 className="text-3xl font-bold">Welcome, {user.name}</h1>
         </div>
       </div>
@@ -56,9 +56,9 @@ export default async function DashboardPage() {
 
         <div>
           <div className="flex items-center gap-2 mb-4">
-            <h2 className="text-lg font-bold text-slate-900">Token (preview)</h2>
+            <h2 className="text-lg font-bold text-stone-900">Token (preview)</h2>
           </div>
-          <Suspense fallback={<div className="animate-pulse h-96 bg-slate-100 rounded-2xl" />}>
+          <Suspense fallback={<div className="animate-pulse h-96 bg-stone-100 rounded-2xl" />}>
             <MbcDashboard />
           </Suspense>
         </div>

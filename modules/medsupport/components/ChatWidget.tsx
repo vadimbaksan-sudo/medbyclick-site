@@ -34,11 +34,11 @@ export default function ChatWidget() {
   }
 
   return (
-    <div className="border border-slate-200 rounded-2xl overflow-hidden bg-white shadow-sm max-w-lg">
-      <div className="bg-slate-900 px-5 py-4 flex items-center gap-3">
+    <div className="border border-stone-200 rounded-2xl overflow-hidden bg-white shadow-sm max-w-lg">
+      <div className="bg-stone-900 px-5 py-4 flex items-center gap-3">
         <div className="w-2.5 h-2.5 rounded-full bg-green-400 animate-pulse" />
         <p className="text-white font-medium text-sm">MedByClick Support</p>
-        <span className="ml-auto text-xs text-slate-400">24/7 · Avg reply: 2 min</span>
+        <span className="ml-auto text-xs text-stone-400">24/7 · Avg reply: 2 min</span>
       </div>
 
       <div className="h-72 overflow-y-auto px-4 py-4 space-y-3">
@@ -47,8 +47,8 @@ export default function ChatWidget() {
             <div
               className={`max-w-[80%] px-4 py-2.5 rounded-2xl text-sm leading-relaxed ${
                 msg.role === "user"
-                  ? "bg-slate-900 text-white rounded-br-sm"
-                  : "bg-slate-100 text-slate-700 rounded-bl-sm"
+                  ? "bg-stone-900 text-white rounded-br-sm"
+                  : "bg-stone-100 text-stone-700 rounded-bl-sm"
               }`}
             >
               {msg.content}
@@ -57,16 +57,16 @@ export default function ChatWidget() {
         ))}
       </div>
 
-      <form onSubmit={handleSend} className="border-t border-slate-100 px-4 py-3 flex gap-2">
+      <form onSubmit={handleSend} className="border-t border-stone-100 px-4 py-3 flex gap-2">
         <input
           value={input}
           onChange={(e) => setInput(e.target.value)}
           placeholder="Type your message…"
-          className="flex-1 text-sm border border-slate-200 rounded-xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-amber-400 focus:border-transparent"
+          className="flex-1 text-sm border border-stone-200 rounded-xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-amber-400 focus:border-transparent"
         />
         <button
           type="submit"
-          className="px-4 py-2 bg-amber-500 hover:bg-amber-400 text-slate-900 font-semibold rounded-xl text-sm transition-colors"
+          className="px-4 py-2 bg-amber-500 hover:bg-amber-400 text-stone-900 font-semibold rounded-xl text-sm transition-colors"
         >
           Send
         </button>

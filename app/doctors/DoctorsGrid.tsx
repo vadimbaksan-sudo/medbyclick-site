@@ -16,14 +16,14 @@ export default function DoctorsGrid({ doctors }: { doctors: Doctor[] }) {
   return (
     <>
       {/* Filters */}
-      <div className="border-b border-slate-100 bg-slate-50 sticky top-16 z-10">
+      <div className="border-b border-stone-100 bg-stone-50 sticky top-16 z-10">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex gap-3 overflow-x-auto">
           <button
             onClick={() => setActive(null)}
             className={`flex-shrink-0 text-sm px-4 py-1.5 rounded-full border transition-colors ${
               active === null
-                ? "bg-slate-900 text-white border-slate-900"
-                : "border-slate-200 text-slate-600 hover:border-slate-400"
+                ? "bg-stone-900 text-white border-stone-900"
+                : "border-stone-200 text-stone-600 hover:border-stone-400"
             }`}
           >
             All specialties
@@ -34,8 +34,8 @@ export default function DoctorsGrid({ doctors }: { doctors: Doctor[] }) {
               onClick={() => setActive(specialty)}
               className={`flex-shrink-0 text-sm px-4 py-1.5 rounded-full border transition-colors ${
                 active === specialty
-                  ? "bg-slate-900 text-white border-slate-900"
-                  : "border-slate-200 text-slate-600 hover:border-slate-400"
+                  ? "bg-stone-900 text-white border-stone-900"
+                  : "border-stone-200 text-stone-600 hover:border-stone-400"
               }`}
             >
               {specialty}
@@ -47,7 +47,7 @@ export default function DoctorsGrid({ doctors }: { doctors: Doctor[] }) {
       {/* Doctor list */}
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {visible.length === 0 ? (
-          <p className="text-center text-slate-500 py-12">
+          <p className="text-center text-stone-500 py-12">
             No specialists in {active} yet — try another specialty or{" "}
             <Link href="/book" className="text-amber-700 underline">
               tell us your case
@@ -60,7 +60,7 @@ export default function DoctorsGrid({ doctors }: { doctors: Doctor[] }) {
               <Link
                 key={doctor.id}
                 href={`/doctors/${doctor.id}`}
-                className="group block border border-slate-100 rounded-2xl p-6 hover:border-slate-300 hover:shadow-md transition-all"
+                className="group block border border-stone-100 rounded-2xl p-6 hover:border-stone-300 hover:shadow-md transition-all"
               >
                 {/* Avatar */}
                 <div className="flex items-center gap-4 mb-4">
@@ -70,10 +70,10 @@ export default function DoctorsGrid({ doctors }: { doctors: Doctor[] }) {
                     {doctor.name.split(" ").slice(-1)[0][0]}
                   </div>
                   <div>
-                    <p className="font-semibold text-slate-900 group-hover:text-amber-700 transition-colors leading-tight">
+                    <p className="font-semibold text-stone-900 group-hover:text-amber-700 transition-colors leading-tight">
                       {doctor.name}
                     </p>
-                    <p className="text-sm text-slate-400 mt-0.5">
+                    <p className="text-sm text-stone-400 mt-0.5">
                       {doctor.title}
                     </p>
                   </div>
@@ -91,7 +91,7 @@ export default function DoctorsGrid({ doctors }: { doctors: Doctor[] }) {
                   {doctor.subspecialties.map((sub) => (
                     <span
                       key={sub}
-                      className="text-xs px-2 py-0.5 bg-slate-100 text-slate-600 rounded-full"
+                      className="text-xs px-2 py-0.5 bg-stone-100 text-stone-600 rounded-full"
                     >
                       {sub}
                     </span>
@@ -99,12 +99,12 @@ export default function DoctorsGrid({ doctors }: { doctors: Doctor[] }) {
                 </div>
 
                 {/* Endorsement preview */}
-                <blockquote className="text-sm text-slate-500 leading-relaxed line-clamp-3 italic border-l-2 border-amber-300 pl-3 mb-4">
+                <blockquote className="text-sm text-stone-500 leading-relaxed line-clamp-3 italic border-l-2 border-amber-300 pl-3 mb-4">
                   {doctor.endorsement}
                 </blockquote>
 
                 {/* Footer */}
-                <div className="flex items-center justify-between text-xs text-slate-400 pt-4 border-t border-slate-100">
+                <div className="flex items-center justify-between text-xs text-stone-400 pt-4 border-t border-stone-100">
                   <span className="flex items-center gap-1">
                     <span className="w-1.5 h-1.5 rounded-full bg-green-400 inline-block"></span>
                     {doctor.responseTime}

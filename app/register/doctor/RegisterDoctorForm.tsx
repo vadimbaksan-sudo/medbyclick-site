@@ -15,7 +15,7 @@ export default function RegisterDoctorForm() {
       <form action={action} className="space-y-4">
         <div className="grid grid-cols-2 gap-4">
           <div>
-            <label htmlFor="firstName" className="block text-sm font-medium text-slate-700 mb-1.5">
+            <label htmlFor="firstName" className="block text-sm font-medium text-stone-700 mb-1.5">
               First name
             </label>
             <input
@@ -23,14 +23,14 @@ export default function RegisterDoctorForm() {
               name="firstName"
               type="text"
               placeholder="Elena"
-              className="w-full border border-slate-200 rounded-lg px-4 py-2.5 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-slate-300 transition"
+              className="w-full border border-stone-200 rounded-lg px-4 py-2.5 text-sm text-stone-900 placeholder-stone-400 focus:outline-none focus:ring-2 focus:ring-stone-300 transition"
             />
             {state?.errors?.firstName && (
               <p className="text-xs text-red-500 mt-1">{state.errors.firstName[0]}</p>
             )}
           </div>
           <div>
-            <label htmlFor="lastName" className="block text-sm font-medium text-slate-700 mb-1.5">
+            <label htmlFor="lastName" className="block text-sm font-medium text-stone-700 mb-1.5">
               Last name
             </label>
             <input
@@ -38,7 +38,7 @@ export default function RegisterDoctorForm() {
               name="lastName"
               type="text"
               placeholder="Volkova"
-              className="w-full border border-slate-200 rounded-lg px-4 py-2.5 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-slate-300 transition"
+              className="w-full border border-stone-200 rounded-lg px-4 py-2.5 text-sm text-stone-900 placeholder-stone-400 focus:outline-none focus:ring-2 focus:ring-stone-300 transition"
             />
             {state?.errors?.lastName && (
               <p className="text-xs text-red-500 mt-1">{state.errors.lastName[0]}</p>
@@ -47,7 +47,7 @@ export default function RegisterDoctorForm() {
         </div>
 
         <div>
-          <label htmlFor="email" className="block text-sm font-medium text-slate-700 mb-1.5">
+          <label htmlFor="email" className="block text-sm font-medium text-stone-700 mb-1.5">
             Email
           </label>
           <input
@@ -55,13 +55,13 @@ export default function RegisterDoctorForm() {
             name="email"
             type="email"
             placeholder="you@example.com"
-            className="w-full border border-slate-200 rounded-lg px-4 py-2.5 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-slate-300 transition"
+            className="w-full border border-stone-200 rounded-lg px-4 py-2.5 text-sm text-stone-900 placeholder-stone-400 focus:outline-none focus:ring-2 focus:ring-stone-300 transition"
           />
           {state?.errors?.email && <p className="text-xs text-red-500 mt-1">{state.errors.email[0]}</p>}
         </div>
 
         <div>
-          <label htmlFor="password" className="block text-sm font-medium text-slate-700 mb-1.5">
+          <label htmlFor="password" className="block text-sm font-medium text-stone-700 mb-1.5">
             Password
           </label>
           <input
@@ -69,7 +69,7 @@ export default function RegisterDoctorForm() {
             name="password"
             type="password"
             placeholder="At least 8 characters"
-            className="w-full border border-slate-200 rounded-lg px-4 py-2.5 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-slate-300 transition"
+            className="w-full border border-stone-200 rounded-lg px-4 py-2.5 text-sm text-stone-900 placeholder-stone-400 focus:outline-none focus:ring-2 focus:ring-stone-300 transition"
           />
           {state?.errors?.password && (
             <p className="text-xs text-red-500 mt-1">{state.errors.password[0]}</p>
@@ -78,7 +78,7 @@ export default function RegisterDoctorForm() {
 
         <div className="grid grid-cols-2 gap-4">
           <div>
-            <label htmlFor="specialty" className="block text-sm font-medium text-slate-700 mb-1.5">
+            <label htmlFor="specialty" className="block text-sm font-medium text-stone-700 mb-1.5">
               Specialty
             </label>
             <input
@@ -86,14 +86,14 @@ export default function RegisterDoctorForm() {
               name="specialty"
               type="text"
               placeholder="e.g. Oncology"
-              className="w-full border border-slate-200 rounded-lg px-4 py-2.5 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-slate-300 transition"
+              className="w-full border border-stone-200 rounded-lg px-4 py-2.5 text-sm text-stone-900 placeholder-stone-400 focus:outline-none focus:ring-2 focus:ring-stone-300 transition"
             />
             {state?.errors?.specialty && (
               <p className="text-xs text-red-500 mt-1">{state.errors.specialty[0]}</p>
             )}
           </div>
           <div>
-            <label htmlFor="title" className="block text-sm font-medium text-slate-700 mb-1.5">
+            <label htmlFor="title" className="block text-sm font-medium text-stone-700 mb-1.5">
               Title
             </label>
             <input
@@ -101,13 +101,13 @@ export default function RegisterDoctorForm() {
               name="title"
               type="text"
               placeholder="e.g. MD, Prof."
-              className="w-full border border-slate-200 rounded-lg px-4 py-2.5 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-slate-300 transition"
+              className="w-full border border-stone-200 rounded-lg px-4 py-2.5 text-sm text-stone-900 placeholder-stone-400 focus:outline-none focus:ring-2 focus:ring-stone-300 transition"
             />
           </div>
         </div>
 
         <div>
-          <label htmlFor="credentials" className="block text-sm font-medium text-slate-700 mb-1.5">
+          <label htmlFor="credentials" className="block text-sm font-medium text-stone-700 mb-1.5">
             Credentials
           </label>
           <input
@@ -115,12 +115,12 @@ export default function RegisterDoctorForm() {
             name="credentials"
             type="text"
             placeholder="Degrees, training, board certifications"
-            className="w-full border border-slate-200 rounded-lg px-4 py-2.5 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-slate-300 transition"
+            className="w-full border border-stone-200 rounded-lg px-4 py-2.5 text-sm text-stone-900 placeholder-stone-400 focus:outline-none focus:ring-2 focus:ring-stone-300 transition"
           />
         </div>
 
         <div>
-          <label htmlFor="languages" className="block text-sm font-medium text-slate-700 mb-1.5">
+          <label htmlFor="languages" className="block text-sm font-medium text-stone-700 mb-1.5">
             Languages spoken
           </label>
           <input
@@ -128,13 +128,13 @@ export default function RegisterDoctorForm() {
             name="languages"
             type="text"
             placeholder="e.g. Russian, English, Hebrew"
-            className="w-full border border-slate-200 rounded-lg px-4 py-2.5 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-slate-300 transition"
+            className="w-full border border-stone-200 rounded-lg px-4 py-2.5 text-sm text-stone-900 placeholder-stone-400 focus:outline-none focus:ring-2 focus:ring-stone-300 transition"
           />
-          <p className="text-xs text-slate-400 mt-1">Comma-separated.</p>
+          <p className="text-xs text-stone-400 mt-1">Comma-separated.</p>
         </div>
 
         <div>
-          <label htmlFor="bio" className="block text-sm font-medium text-slate-700 mb-1.5">
+          <label htmlFor="bio" className="block text-sm font-medium text-stone-700 mb-1.5">
             Short bio
           </label>
           <textarea
@@ -142,19 +142,19 @@ export default function RegisterDoctorForm() {
             name="bio"
             rows={3}
             placeholder="A brief self-description patients will see."
-            className="w-full border border-slate-200 rounded-lg px-4 py-2.5 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-slate-300 transition"
+            className="w-full border border-stone-200 rounded-lg px-4 py-2.5 text-sm text-stone-900 placeholder-stone-400 focus:outline-none focus:ring-2 focus:ring-stone-300 transition"
           />
         </div>
 
         <div>
-          <label htmlFor="preferredLanguage" className="block text-sm font-medium text-slate-700 mb-1.5">
+          <label htmlFor="preferredLanguage" className="block text-sm font-medium text-stone-700 mb-1.5">
             Dashboard language
           </label>
           <select
             id="preferredLanguage"
             name="preferredLanguage"
             defaultValue="ru"
-            className="w-full border border-slate-200 rounded-lg px-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-slate-300 transition bg-white"
+            className="w-full border border-stone-200 rounded-lg px-4 py-2.5 text-sm text-stone-900 focus:outline-none focus:ring-2 focus:ring-stone-300 transition bg-white"
           >
             <option value="ru">Russian</option>
             <option value="en">English</option>
@@ -179,25 +179,25 @@ export default function RegisterDoctorForm() {
         <button
           type="submit"
           disabled={pending}
-          className="w-full py-3 bg-slate-900 hover:bg-slate-700 disabled:opacity-60 text-white font-semibold rounded-lg text-sm transition-colors"
+          className="w-full py-3 bg-stone-900 hover:bg-stone-700 disabled:opacity-60 text-white font-semibold rounded-lg text-sm transition-colors"
         >
           {pending ? "Creating account…" : "Create doctor account"}
         </button>
       </form>
 
-      <p className="text-center text-xs text-slate-400 mt-4 leading-relaxed">
+      <p className="text-center text-xs text-stone-400 mt-4 leading-relaxed">
         By registering you agree to our terms of service and privacy policy.
       </p>
 
-      <p className="text-center text-sm text-slate-500 mt-4">
+      <p className="text-center text-sm text-stone-500 mt-4">
         Already have an account?{" "}
-        <Link href="/login/" className="text-slate-900 font-medium underline hover:no-underline">
+        <Link href="/login/" className="text-stone-900 font-medium underline hover:no-underline">
           Log in
         </Link>
       </p>
-      <p className="text-center text-sm text-slate-500 mt-2">
+      <p className="text-center text-sm text-stone-500 mt-2">
         Registering as a patient instead?{" "}
-        <Link href="/register/" className="text-slate-900 font-medium underline hover:no-underline">
+        <Link href="/register/" className="text-stone-900 font-medium underline hover:no-underline">
           Patient sign up
         </Link>
       </p>

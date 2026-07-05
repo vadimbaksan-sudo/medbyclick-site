@@ -47,9 +47,9 @@ export default async function DoctorDashboardPage() {
 
   return (
     <div>
-      <div className="bg-slate-900 text-white py-12">
+      <div className="bg-green-50 text-stone-900 py-12">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <p className="text-xs font-semibold uppercase tracking-widest text-amber-400 mb-3">
+          <p className="text-xs font-semibold uppercase tracking-widest text-amber-700 mb-3">
             Doctor cabinet
           </p>
           <h1 className="text-3xl font-bold">Welcome, {user.name}</h1>
@@ -58,8 +58,8 @@ export default async function DoctorDashboardPage() {
 
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-8">
         {!doctorProfile ? (
-          <div className="border border-slate-200 rounded-2xl p-10 text-center">
-            <p className="text-slate-500 text-sm max-w-md mx-auto leading-relaxed">
+          <div className="border border-stone-200 rounded-2xl p-10 text-center">
+            <p className="text-stone-500 text-sm max-w-md mx-auto leading-relaxed">
               Your account isn&apos;t linked to a doctor profile yet. If you registered as a
               doctor, this can take a moment to appear — otherwise{" "}
               <a href="/register/doctor/" className="underline">register as a doctor</a> or
@@ -71,7 +71,7 @@ export default async function DoctorDashboardPage() {
             <p className="text-xs font-semibold uppercase tracking-widest text-amber-700 mb-2">
               Pending review
             </p>
-            <p className="text-slate-600 text-sm max-w-md mx-auto leading-relaxed">
+            <p className="text-stone-600 text-sm max-w-md mx-auto leading-relaxed">
               Your application is being reviewed by Medical Community. You&apos;ll be able to see
               and manage assigned bookings once your profile is approved. You can still update
               your profile details below in the meantime.
@@ -85,29 +85,29 @@ export default async function DoctorDashboardPage() {
             <ProfileEditForm doctorProfile={doctorProfile} />
 
             <div>
-              <h2 className="text-lg font-semibold text-slate-900 mb-4">Your bookings</h2>
+              <h2 className="text-lg font-semibold text-stone-900 mb-4">Your bookings</h2>
               {bookings.length === 0 ? (
-                <div className="border border-slate-200 rounded-2xl p-10 text-center">
-                  <p className="text-slate-500 text-sm">No bookings assigned to you yet.</p>
+                <div className="border border-stone-200 rounded-2xl p-10 text-center">
+                  <p className="text-stone-500 text-sm">No bookings assigned to you yet.</p>
                 </div>
               ) : (
-                <div className="border border-slate-200 rounded-2xl overflow-hidden">
-                  <div className="divide-y divide-slate-100">
+                <div className="border border-stone-200 rounded-2xl overflow-hidden">
+                  <div className="divide-y divide-stone-100">
                     {bookings.map((b) => (
                       <div key={b.id} className="px-5 py-4">
                         <div className="flex items-center justify-between gap-4">
                           <div>
-                            <p className="text-sm font-medium text-slate-900">
+                            <p className="text-sm font-medium text-stone-900">
                               {b.specialty ?? "General consultation"}
                             </p>
-                            <p className="text-xs text-slate-400 mt-0.5">
+                            <p className="text-xs text-stone-400 mt-0.5">
                               Requested {new Date(b.requestedAt).toLocaleDateString()}
                             </p>
-                            <p className="text-xs text-slate-500 mt-1 max-w-md line-clamp-2">
+                            <p className="text-xs text-stone-500 mt-1 max-w-md line-clamp-2">
                               {b.situationNotes}
                             </p>
                           </div>
-                          <span className="text-xs font-semibold uppercase tracking-wide px-2.5 py-1 rounded-full bg-slate-100 text-slate-600 flex-shrink-0">
+                          <span className="text-xs font-semibold uppercase tracking-wide px-2.5 py-1 rounded-full bg-stone-100 text-stone-600 flex-shrink-0">
                             {b.status}
                           </span>
                         </div>

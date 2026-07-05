@@ -9,14 +9,14 @@ export default function MedSupportPage() {
 
   return (
     <div>
-      <div className="bg-slate-900 text-white py-16">
+      <div className="bg-green-50 text-stone-900 py-16">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="inline-flex items-center gap-2 text-xs font-medium text-amber-400 bg-amber-400/10 border border-amber-400/20 px-3 py-1.5 rounded-full mb-6">
+          <div className="inline-flex items-center gap-2 text-xs font-medium text-amber-700 bg-amber-100 border border-amber-200 px-3 py-1.5 rounded-full mb-6">
             <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
             MedSupport · Online Now
           </div>
           <h1 className="text-4xl md:text-5xl font-bold mb-4">24/7 Patient Support</h1>
-          <p className="text-slate-300 text-lg max-w-2xl leading-relaxed">
+          <p className="text-stone-600 text-lg max-w-2xl leading-relaxed">
             Our coordinators are available around the clock. Average response time: 2 minutes during business hours, 2 hours overnight.
           </p>
         </div>
@@ -25,7 +25,7 @@ export default function MedSupportPage() {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid lg:grid-cols-2 gap-12">
           <div>
-            <h2 className="text-xl font-bold text-slate-900 mb-6">Chat with a Coordinator</h2>
+            <h2 className="text-xl font-bold text-stone-900 mb-6">Chat with a Coordinator</h2>
             <ChatWidget />
 
             <div className="mt-6 grid grid-cols-2 gap-4">
@@ -36,30 +36,30 @@ export default function MedSupportPage() {
                 <a
                   key={contact.label}
                   href={contact.href}
-                  className="block p-4 border border-slate-200 rounded-xl hover:border-amber-300 transition-colors"
+                  className="block p-4 border border-stone-200 rounded-xl hover:border-amber-300 transition-colors"
                 >
-                  <p className="text-xs text-slate-400 mb-1">{contact.label}</p>
-                  <p className="text-sm font-medium text-slate-900">{contact.value}</p>
+                  <p className="text-xs text-stone-400 mb-1">{contact.label}</p>
+                  <p className="text-sm font-medium text-stone-900">{contact.value}</p>
                 </a>
               ))}
             </div>
           </div>
 
           <div>
-            <h2 className="text-xl font-bold text-slate-900 mb-6">Frequently Asked Questions</h2>
+            <h2 className="text-xl font-bold text-stone-900 mb-6">Frequently Asked Questions</h2>
             <div className="space-y-3">
               {faqs.map((faq, i) => (
-                <div key={i} className="border border-slate-200 rounded-xl overflow-hidden">
+                <div key={i} className="border border-stone-200 rounded-xl overflow-hidden">
                   <button
                     onClick={() => setOpen(open === i ? null : i)}
                     className="w-full flex items-center justify-between px-5 py-4 text-left"
                   >
-                    <span className="font-medium text-slate-900 text-sm pr-4">{faq.question}</span>
-                    <span className="text-slate-400 flex-shrink-0">{open === i ? "−" : "+"}</span>
+                    <span className="font-medium text-stone-900 text-sm pr-4">{faq.question}</span>
+                    <span className="text-stone-400 flex-shrink-0">{open === i ? "−" : "+"}</span>
                   </button>
                   {open === i && (
                     <div className="px-5 pb-4">
-                      <p className="text-sm text-slate-600 leading-relaxed">{faq.answer}</p>
+                      <p className="text-sm text-stone-600 leading-relaxed">{faq.answer}</p>
                     </div>
                   )}
                 </div>

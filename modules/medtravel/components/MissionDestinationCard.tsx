@@ -17,8 +17,8 @@ export default function MissionDestinationCard({ destination }: { destination: M
           </span>
         )}
       </div>
-      <h3 className="font-bold text-slate-900 text-lg leading-tight mb-2">{destination.partnerHospital}</h3>
-      <p className="text-sm text-slate-600 leading-relaxed">{destination.description}</p>
+      <h3 className="font-bold text-stone-900 text-lg leading-tight mb-2">{destination.partnerHospital}</h3>
+      <p className="text-sm text-stone-600 leading-relaxed">{destination.description}</p>
     </div>
   );
 }

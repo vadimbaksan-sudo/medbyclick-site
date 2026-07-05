@@ -71,7 +71,7 @@ export default function MbcDashboard() {
   }
 
   if (balance === null) {
-    return <div className="animate-pulse h-96 bg-slate-100 rounded-2xl" />;
+    return <div className="animate-pulse h-96 bg-stone-100 rounded-2xl" />;
   }
 
   const usdValue = balance * MBC_PRICE_USD;
@@ -80,35 +80,35 @@ export default function MbcDashboard() {
     <div className="grid lg:grid-cols-3 gap-8">
       {/* Balance card */}
       <div className="lg:col-span-1 space-y-5">
-        <div className="bg-slate-900 text-white rounded-2xl p-6">
+        <div className="bg-green-50 text-stone-900 rounded-2xl p-6">
           <div className="flex items-center justify-between gap-2 mb-1">
-            <p className="text-xs text-slate-400">MBC Token Balance</p>
-            <span className="text-[10px] font-bold uppercase tracking-wide text-amber-300 bg-amber-400/10 border border-amber-400/30 px-1.5 py-0.5 rounded flex-shrink-0">
+            <p className="text-xs text-stone-600">MBC Token Balance</p>
+            <span className="text-[10px] font-bold uppercase tracking-wide text-amber-700 bg-amber-100 border border-amber-200 px-1.5 py-0.5 rounded shrink-0">
               Sample data — no account required yet
             </span>
           </div>
-          <p className="text-4xl font-black text-amber-400">{balance.toLocaleString()}</p>
-          <p className="text-sm text-slate-300 mt-1">≈ ${usdValue.toFixed(2)} USD</p>
-          <p className="text-xs text-slate-500 mt-0.5">at $0.10 / MBC</p>
+          <p className="text-4xl font-black text-amber-700">{balance.toLocaleString()}</p>
+          <p className="text-sm text-stone-600 mt-1">≈ ${usdValue.toFixed(2)} USD</p>
+          <p className="text-xs text-stone-500 mt-0.5">at $0.10 / MBC</p>
 
-          <div className="mt-6 pt-5 border-t border-white/10 space-y-2">
+          <div className="mt-6 pt-5 border-t border-stone-200 space-y-2">
             <div className="flex justify-between text-xs">
-              <span className="text-slate-400">Token symbol</span>
-              <span className="font-semibold text-white">MBC</span>
+              <span className="text-stone-600">Token symbol</span>
+              <span className="font-semibold text-stone-900">MBC</span>
             </div>
             <div className="flex justify-between text-xs">
-              <span className="text-slate-400">Network</span>
-              <span className="font-semibold text-white">Ethereum (ERC-20)</span>
+              <span className="text-stone-600">Network</span>
+              <span className="font-semibold text-stone-900">Ethereum (ERC-20)</span>
             </div>
             <div className="flex justify-between text-xs">
-              <span className="text-slate-400">Current price</span>
-              <span className="font-semibold text-amber-400">$0.10</span>
+              <span className="text-stone-600">Current price</span>
+              <span className="font-semibold text-amber-700">$0.10</span>
             </div>
           </div>
 
           <button
             onClick={() => { setShowBuy(!showBuy); setBuySuccess(false); }}
-            className="mt-5 w-full py-2.5 bg-amber-400 hover:bg-amber-300 text-slate-900 font-bold rounded-xl text-sm transition-colors"
+            className="mt-5 w-full py-2.5 bg-amber-400 hover:bg-amber-300 text-stone-900 font-bold rounded-xl text-sm transition-colors"
           >
             {showBuy ? "Cancel" : "Add tokens"}
           </button>
@@ -116,14 +116,14 @@ export default function MbcDashboard() {
 
         {/* Buy tokens form */}
         {showBuy && (
-          <div className="border border-slate-200 rounded-2xl p-5">
+          <div className="border border-stone-200 rounded-2xl p-5">
             {buySuccess ? (
               <p className="text-sm font-semibold text-green-700 text-center py-2">✓ Tokens added!</p>
             ) : (
               <form onSubmit={handleBuy} className="space-y-4">
-                <p className="text-sm font-semibold text-slate-900">Buy MBC tokens</p>
+                <p className="text-sm font-semibold text-stone-900">Buy MBC tokens</p>
                 <div>
-                  <label className="text-xs text-slate-500 mb-2 block">Choose amount</label>
+                  <label className="text-xs text-stone-500 mb-2 block">Choose amount</label>
                   <div className="grid grid-cols-3 gap-2 mb-3">
                     {["500", "1000", "5000"].map((qty) => (
                       <button
@@ -132,8 +132,8 @@ export default function MbcDashboard() {
                         onClick={() => setBuyQty(qty)}
                         className={`py-2 rounded-lg text-xs font-medium border transition-colors ${
                           buyQty === qty
-                            ? "border-slate-900 bg-slate-900 text-white"
-                            : "border-slate-200 text-slate-600 hover:border-slate-400"
+                            ? "border-stone-900 bg-stone-900 text-white"
+                            : "border-stone-200 text-stone-600 hover:border-stone-400"
                         }`}
                       >
                         {parseInt(qty).toLocaleString()}
@@ -145,16 +145,16 @@ export default function MbcDashboard() {
                     value={buyQty}
                     onChange={(e) => setBuyQty(e.target.value)}
                     min="100"
-                    className="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-slate-300 transition"
+                    className="w-full border border-stone-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-stone-300 transition"
                   />
-                  <p className="text-xs text-slate-400 mt-1.5">
+                  <p className="text-xs text-stone-400 mt-1.5">
                     Cost: ${(parseInt(buyQty || "0") * MBC_PRICE_USD).toFixed(2)} USD
                   </p>
                 </div>
                 <button
                   type="submit"
                   disabled={buying}
-                  className="w-full py-2.5 bg-slate-900 hover:bg-slate-700 disabled:opacity-60 text-white font-bold rounded-xl text-sm transition-colors"
+                  className="w-full py-2.5 bg-stone-900 hover:bg-stone-700 disabled:opacity-60 text-white font-bold rounded-xl text-sm transition-colors"
                 >
                   {buying ? "Processing…" : `Buy ${parseInt(buyQty || "0").toLocaleString()} MBC`}
                 </button>
@@ -164,27 +164,27 @@ export default function MbcDashboard() {
         )}
 
         {/* Quick actions */}
-        <div className="border border-slate-200 rounded-2xl p-5 space-y-3">
-          <p className="text-xs font-semibold text-slate-500 uppercase tracking-widest">Quick actions</p>
-          <Link href="/medpayments/" className="flex items-center gap-3 p-2.5 rounded-xl hover:bg-slate-50 transition-colors group">
+        <div className="border border-stone-200 rounded-2xl p-5 space-y-3">
+          <p className="text-xs font-semibold text-stone-500 uppercase tracking-widest">Quick actions</p>
+          <Link href="/medpayments/" className="flex items-center gap-3 p-2.5 rounded-xl hover:bg-stone-50 transition-colors group">
             <span className="text-lg">💳</span>
             <div>
-              <p className="text-sm font-medium text-slate-900 group-hover:text-amber-700 transition-colors">Pay for a plan</p>
-              <p className="text-xs text-slate-400">20% off with MBC tokens</p>
+              <p className="text-sm font-medium text-stone-900 group-hover:text-amber-700 transition-colors">Pay for a plan</p>
+              <p className="text-xs text-stone-400">20% off with MBC tokens</p>
             </div>
           </Link>
-          <Link href="/book/" className="flex items-center gap-3 p-2.5 rounded-xl hover:bg-slate-50 transition-colors group">
+          <Link href="/book/" className="flex items-center gap-3 p-2.5 rounded-xl hover:bg-stone-50 transition-colors group">
             <span className="text-lg">🩺</span>
             <div>
-              <p className="text-sm font-medium text-slate-900 group-hover:text-amber-700 transition-colors">Book a consultation</p>
-              <p className="text-xs text-slate-400">Earn 100 MBC per consultation</p>
+              <p className="text-sm font-medium text-stone-900 group-hover:text-amber-700 transition-colors">Book a consultation</p>
+              <p className="text-xs text-stone-400">Earn 100 MBC per consultation</p>
             </div>
           </Link>
-          <Link href="/medtoken/" className="flex items-center gap-3 p-2.5 rounded-xl hover:bg-slate-50 transition-colors group">
+          <Link href="/medtoken/" className="flex items-center gap-3 p-2.5 rounded-xl hover:bg-stone-50 transition-colors group">
             <span className="text-lg">🪙</span>
             <div>
-              <p className="text-sm font-medium text-slate-900 group-hover:text-amber-700 transition-colors">Token details & roadmap</p>
-              <p className="text-xs text-slate-400">MBC token info</p>
+              <p className="text-sm font-medium text-stone-900 group-hover:text-amber-700 transition-colors">Token details & roadmap</p>
+              <p className="text-xs text-stone-400">MBC token info</p>
             </div>
           </Link>
         </div>
@@ -192,41 +192,41 @@ export default function MbcDashboard() {
 
       {/* Transaction history */}
       <div className="lg:col-span-2">
-        <h2 className="text-lg font-bold text-slate-900 mb-5">Transaction history</h2>
+        <h2 className="text-lg font-bold text-stone-900 mb-5">Transaction history</h2>
         {transactions.length === 0 ? (
-          <div className="border border-slate-200 rounded-2xl p-10 text-center">
-            <p className="text-slate-400 text-sm">No transactions yet.</p>
-            <p className="text-slate-400 text-xs mt-1">
+          <div className="border border-stone-200 rounded-2xl p-10 text-center">
+            <p className="text-stone-400 text-sm">No transactions yet.</p>
+            <p className="text-stone-400 text-xs mt-1">
               Transactions will appear here when you pay for services or earn tokens.
             </p>
             <Link
               href="/medpayments/"
-              className="inline-block mt-5 px-5 py-2.5 bg-slate-900 text-white text-sm font-semibold rounded-xl hover:bg-slate-700 transition-colors"
+              className="inline-block mt-5 px-5 py-2.5 bg-stone-900 text-white text-sm font-semibold rounded-xl hover:bg-stone-700 transition-colors"
             >
               Browse plans
             </Link>
           </div>
         ) : (
-          <div className="border border-slate-200 rounded-2xl overflow-hidden">
-            <div className="divide-y divide-slate-100">
+          <div className="border border-stone-200 rounded-2xl overflow-hidden">
+            <div className="divide-y divide-stone-100">
               {transactions.map((tx) => (
-                <div key={tx.id} className="flex items-center gap-4 px-5 py-4 hover:bg-slate-50 transition-colors">
+                <div key={tx.id} className="flex items-center gap-4 px-5 py-4 hover:bg-stone-50 transition-colors">
                   <div className={`w-9 h-9 rounded-full flex items-center justify-center flex-shrink-0 text-sm ${
                     tx.type === "credit" ? "bg-green-100" : "bg-amber-100"
                   }`}>
                     {tx.type === "credit" ? "+" : "−"}
                   </div>
                   <div className="flex-1 min-w-0">
-                    <p className="text-sm font-medium text-slate-900 truncate">{tx.description}</p>
-                    <p className="text-xs text-slate-400 mt-0.5">
+                    <p className="text-sm font-medium text-stone-900 truncate">{tx.description}</p>
+                    <p className="text-xs text-stone-400 mt-0.5">
                       {new Date(tx.date).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric", hour: "2-digit", minute: "2-digit" })}
                     </p>
                   </div>
                   <div className="text-right flex-shrink-0">
-                    <p className={`text-sm font-bold ${tx.type === "credit" ? "text-green-600" : "text-slate-900"}`}>
+                    <p className={`text-sm font-bold ${tx.type === "credit" ? "text-green-600" : "text-stone-900"}`}>
                       {tx.type === "credit" ? "+" : "−"}{tx.amount.toLocaleString()} MBC
                     </p>
-                    <p className="text-xs text-slate-400 mt-0.5">
+                    <p className="text-xs text-stone-400 mt-0.5">
                       ${(tx.amount * MBC_PRICE_USD).toFixed(2)}
                     </p>
                   </div>

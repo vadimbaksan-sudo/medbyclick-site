@@ -12,7 +12,7 @@ export const tiers: TokenTier[] = [
     id: "silver",
     name: "Silver",
     minTokens: 500,
-    color: "slate-400",
+    color: "stone-400",
     perks: ["10% discount on services", "Priority scheduling", "Free case summary"],
   },
   {
@@ -95,7 +95,7 @@ export const tokenInfo: TokenInfo = {
       label: "Founders & Team",
       percentage: 15,
       description: "Two co-founders, equal split. 12-month cliff, 36-month vest. Operational salaries paid separately from Treasury.",
-      color: "bg-slate-600",
+      color: "bg-stone-600",
     },
     {
       label: "Strategic Partners",
@@ -107,7 +107,7 @@ export const tokenInfo: TokenInfo = {
       label: "Public Sale / IDO",
       percentage: 8,
       description: "Public token sale at $0.05. 25% at TGE, 9-month linear vest.",
-      color: "bg-slate-400",
+      color: "bg-stone-400",
     },
     {
       label: "Liquidity Pool",
@@ -119,7 +119,7 @@ export const tokenInfo: TokenInfo = {
       label: "Private Sale",
       percentage: 7,
       description: "Seed investors at $0.02. 10% at TGE, 3-month cliff, 18-month vest.",
-      color: "bg-slate-500",
+      color: "bg-stone-500",
     },
     {
       label: "Reserve",
