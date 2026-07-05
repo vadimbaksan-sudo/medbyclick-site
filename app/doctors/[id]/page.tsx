@@ -35,13 +35,13 @@ export default async function DoctorProfilePage({
   return (
     <div className="bg-white">
       {/* Breadcrumb */}
-      <div className="bg-slate-50 border-b border-slate-100">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center gap-2 text-sm text-slate-400">
-          <Link href="/doctors" className="hover:text-slate-700 transition-colors">
+      <div className="bg-stone-50 border-b border-stone-100">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center gap-2 text-sm text-stone-400">
+          <Link href="/doctors" className="hover:text-stone-700 transition-colors">
             Specialists
           </Link>
           <span>/</span>
-          <span className="text-slate-700">{doctor.name}</span>
+          <span className="text-stone-700">{doctor.name}</span>
         </div>
       </div>
 
@@ -60,10 +60,10 @@ export default async function DoctorProfilePage({
                 <span className="inline-block text-xs font-medium text-amber-700 bg-amber-50 border border-amber-200 px-2 py-0.5 rounded-full mb-2">
                   {doctor.specialty}
                 </span>
-                <h1 className="text-2xl md:text-3xl font-bold text-slate-900">
+                <h1 className="text-2xl md:text-3xl font-bold text-stone-900">
                   {doctor.name}
                 </h1>
-                <p className="text-slate-500 mt-1">{doctor.credentials}</p>
+                <p className="text-stone-500 mt-1">{doctor.credentials}</p>
               </div>
             </div>
 
@@ -72,13 +72,13 @@ export default async function DoctorProfilePage({
               {doctor.languages.map((lang) => (
                 <span
                   key={lang}
-                  className="flex items-center gap-1.5 text-sm text-slate-700 bg-slate-100 px-3 py-1.5 rounded-full"
+                  className="flex items-center gap-1.5 text-sm text-stone-700 bg-stone-100 px-3 py-1.5 rounded-full"
                 >
                   <span className="text-base">🌐</span>
                   {lang}
                 </span>
               ))}
-              <span className="flex items-center gap-1.5 text-sm text-slate-700 bg-green-50 border border-green-200 px-3 py-1.5 rounded-full">
+              <span className="flex items-center gap-1.5 text-sm text-stone-700 bg-green-50 border border-green-200 px-3 py-1.5 rounded-full">
                 <span className="w-1.5 h-1.5 rounded-full bg-green-400 inline-block"></span>
                 {doctor.responseTime}
               </span>
@@ -89,30 +89,30 @@ export default async function DoctorProfilePage({
               <p className="text-xs font-semibold uppercase tracking-widest text-amber-700 mb-4">
                 Founder&apos;s personal endorsement
               </p>
-              <blockquote className="text-slate-700 leading-relaxed italic text-base">
+              <blockquote className="text-stone-700 leading-relaxed italic text-base">
                 &ldquo;{doctor.endorsement}&rdquo;
               </blockquote>
-              <p className="text-slate-500 text-sm mt-4 not-italic">
+              <p className="text-stone-500 text-sm mt-4 not-italic">
                 — Professor of Oncology, MedByClick Founder
               </p>
             </div>
 
             {/* Bio */}
             <div className="mb-8">
-              <h2 className="text-lg font-semibold text-slate-900 mb-3">
+              <h2 className="text-lg font-semibold text-stone-900 mb-3">
                 About {doctor.name.split(" ")[0]}
               </h2>
-              <p className="text-slate-600 leading-relaxed">{doctor.bio}</p>
+              <p className="text-stone-600 leading-relaxed">{doctor.bio}</p>
             </div>
 
             {/* Specializes in */}
             <div>
-              <h2 className="text-lg font-semibold text-slate-900 mb-3">
+              <h2 className="text-lg font-semibold text-stone-900 mb-3">
                 Specializes in
               </h2>
               <ul className="space-y-2">
                 {doctor.subspecialties.map((sub) => (
-                  <li key={sub} className="flex items-center gap-2 text-slate-600 text-sm">
+                  <li key={sub} className="flex items-center gap-2 text-stone-600 text-sm">
                     <span className="w-4 h-4 rounded-full bg-amber-100 text-amber-700 text-xs flex items-center justify-center font-bold">
                       ✓
                     </span>
@@ -127,23 +127,23 @@ export default async function DoctorProfilePage({
           <div className="lg:col-span-1">
             <div className="sticky top-24">
               {/* Booking card */}
-              <div className="border border-slate-200 rounded-2xl p-6 mb-6">
-                <p className="font-semibold text-slate-900 mb-1">
+              <div className="border border-stone-200 rounded-2xl p-6 mb-6">
+                <p className="font-semibold text-stone-900 mb-1">
                   Book with {doctor.name.split(" ")[0]}
                 </p>
-                <p className="text-sm text-slate-500 mb-5 leading-relaxed">
+                <p className="text-sm text-stone-500 mb-5 leading-relaxed">
                   Tell us about your case and we&apos;ll confirm your appointment within{" "}
                   {doctor.responseTime.toLowerCase()}.
                 </p>
                 <Link
                   href={`/book?doctor=${doctor.id}`}
-                  className="block w-full text-center px-5 py-3 bg-slate-900 hover:bg-slate-700 text-white font-medium rounded-lg text-sm transition-colors mb-3"
+                  className="block w-full text-center px-5 py-3 bg-stone-900 hover:bg-stone-700 text-white font-medium rounded-lg text-sm transition-colors mb-3"
                 >
                   Request Consultation
                 </Link>
                 <Link
                   href="/book"
-                  className="block w-full text-center px-5 py-2.5 border border-slate-200 hover:border-slate-400 text-slate-600 rounded-lg text-sm transition-colors"
+                  className="block w-full text-center px-5 py-2.5 border border-stone-200 hover:border-stone-400 text-stone-600 rounded-lg text-sm transition-colors"
                 >
                   Not sure? Let us match you
                 </Link>
@@ -151,15 +151,15 @@ export default async function DoctorProfilePage({
 
               {/* Stats */}
               <div className="grid grid-cols-2 gap-3">
-                <div className="border border-slate-100 rounded-xl p-4 text-center">
-                  <p className="text-2xl font-bold text-slate-900">
+                <div className="border border-stone-100 rounded-xl p-4 text-center">
+                  <p className="text-2xl font-bold text-stone-900">
                     {doctor.casesHandled}
                   </p>
-                  <p className="text-xs text-slate-400 mt-1">Cases via MedByClick</p>
+                  <p className="text-xs text-stone-400 mt-1">Cases via MedByClick</p>
                 </div>
-                <div className="border border-slate-100 rounded-xl p-4 text-center">
+                <div className="border border-stone-100 rounded-xl p-4 text-center">
                   <p className="text-2xl font-bold text-amber-600">✓</p>
-                  <p className="text-xs text-slate-400 mt-1">Founder-verified</p>
+                  <p className="text-xs text-stone-400 mt-1">Founder-verified</p>
                 </div>
               </div>
             </div>
@@ -168,8 +168,8 @@ export default async function DoctorProfilePage({
 
         {/* Other specialists */}
         {others.length > 0 && (
-          <div className="mt-16 pt-12 border-t border-slate-100">
-            <h2 className="text-xl font-bold text-slate-900 mb-6">
+          <div className="mt-16 pt-12 border-t border-stone-100">
+            <h2 className="text-xl font-bold text-stone-900 mb-6">
               Other specialists in the network
             </h2>
             <div className="grid sm:grid-cols-2 gap-4">
@@ -177,7 +177,7 @@ export default async function DoctorProfilePage({
                 <Link
                   key={other.id}
                   href={`/doctors/${other.id}`}
-                  className="flex items-center gap-4 p-4 border border-slate-100 rounded-xl hover:border-slate-300 transition-all group"
+                  className="flex items-center gap-4 p-4 border border-stone-100 rounded-xl hover:border-stone-300 transition-all group"
                 >
                   <div
                     className={`w-10 h-10 rounded-full bg-gradient-to-br ${avatarGradientClass(other.id)} flex items-center justify-center text-white font-semibold text-base flex-shrink-0`}
@@ -185,10 +185,10 @@ export default async function DoctorProfilePage({
                     {other.name.split(" ").slice(-1)[0][0]}
                   </div>
                   <div>
-                    <p className="font-medium text-slate-900 group-hover:text-amber-700 transition-colors text-sm">
+                    <p className="font-medium text-stone-900 group-hover:text-amber-700 transition-colors text-sm">
                       {other.name}
                     </p>
-                    <p className="text-xs text-slate-400">
+                    <p className="text-xs text-stone-400">
                       {other.specialty} · {other.title}
                     </p>
                   </div>

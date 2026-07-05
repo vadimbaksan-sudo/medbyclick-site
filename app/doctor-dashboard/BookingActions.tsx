@@ -36,7 +36,7 @@ export default function BookingActions({ booking }: BookingActionsProps) {
             <button
               type="submit"
               disabled={pending}
-              className="text-xs font-semibold px-3 py-1.5 rounded-full bg-slate-900 text-white hover:bg-slate-700 disabled:opacity-60 transition-colors"
+              className="text-xs font-semibold px-3 py-1.5 rounded-full bg-stone-900 text-white hover:bg-stone-700 disabled:opacity-60 transition-colors"
             >
               Confirm
             </button>
@@ -62,7 +62,7 @@ export default function BookingActions({ booking }: BookingActionsProps) {
             <button
               type="submit"
               disabled={pending}
-              className="text-xs font-semibold px-3 py-1.5 rounded-full border border-slate-300 text-slate-600 hover:bg-slate-50 disabled:opacity-60 transition-colors"
+              className="text-xs font-semibold px-3 py-1.5 rounded-full border border-stone-300 text-stone-600 hover:bg-stone-50 disabled:opacity-60 transition-colors"
             >
               Decline (return to pool)
             </button>
@@ -71,7 +71,7 @@ export default function BookingActions({ booking }: BookingActionsProps) {
         <button
           type="button"
           onClick={() => setNotesOpen((v) => !v)}
-          className="text-xs font-semibold px-3 py-1.5 rounded-full border border-slate-300 text-slate-600 hover:bg-slate-50 transition-colors"
+          className="text-xs font-semibold px-3 py-1.5 rounded-full border border-stone-300 text-stone-600 hover:bg-stone-50 transition-colors"
         >
           {notesOpen ? "Hide notes" : "Add notes"}
         </button>
@@ -86,12 +86,12 @@ export default function BookingActions({ booking }: BookingActionsProps) {
             rows={3}
             defaultValue={booking.doctorNotes ?? ""}
             placeholder="Clinical notes, visible only to you and coordinators."
-            className="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-slate-300 transition"
+            className="w-full border border-stone-200 rounded-lg px-3 py-2 text-sm text-stone-900 placeholder-stone-400 focus:outline-none focus:ring-2 focus:ring-stone-300 transition"
           />
           <button
             type="submit"
             disabled={pending}
-            className="text-xs font-semibold px-3 py-1.5 rounded-full bg-slate-900 text-white hover:bg-slate-700 disabled:opacity-60 transition-colors"
+            className="text-xs font-semibold px-3 py-1.5 rounded-full bg-stone-900 text-white hover:bg-stone-700 disabled:opacity-60 transition-colors"
           >
             Save notes
           </button>

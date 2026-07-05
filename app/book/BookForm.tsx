@@ -123,17 +123,17 @@ export default function BookForm({ patientEmail }: { patientEmail: string }) {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
             </svg>
           </div>
-          <h2 className="text-2xl font-bold text-slate-900 mb-3">Request received</h2>
-          <p className="text-slate-500 mb-3 leading-relaxed text-sm">
+          <h2 className="text-2xl font-bold text-stone-900 mb-3">Request received</h2>
+          <p className="text-stone-500 mb-3 leading-relaxed text-sm">
             Our coordinator will review your case and confirm the appointment — usually within 24 hours.
           </p>
           {matchedDoctor && (
-            <p className="text-slate-500 text-sm mb-2">
-              Routing to: <strong className="text-slate-700">{matchedDoctor.name}</strong>
+            <p className="text-stone-500 text-sm mb-2">
+              Routing to: <strong className="text-stone-700">{matchedDoctor.name}</strong>
             </p>
           )}
-          <p className="text-slate-400 text-xs mb-8">Confirmation sent to {patientEmail}</p>
-          <Link href="/dashboard/" className="text-sm font-medium text-slate-700 hover:text-slate-900 underline">
+          <p className="text-stone-400 text-xs mb-8">Confirmation sent to {patientEmail}</p>
+          <Link href="/dashboard/" className="text-sm font-medium text-stone-700 hover:text-stone-900 underline">
             Go to your dashboard →
           </Link>
         </div>
@@ -145,11 +145,11 @@ export default function BookForm({ patientEmail }: { patientEmail: string }) {
     <div className="max-w-2xl mx-auto">
       {/* Progress */}
       <div className="mb-10">
-        <div className="flex items-center justify-between text-xs text-slate-400 mb-2">
+        <div className="flex items-center justify-between text-xs text-stone-400 mb-2">
           <span>Step {step} of 4</span>
           <span>{["Type", "Specialty", "Your case", "Review & submit"][step - 1]}</span>
         </div>
-        <div className="h-0.5 bg-slate-100 rounded-full overflow-hidden">
+        <div className="h-0.5 bg-stone-100 rounded-full overflow-hidden">
           <div
             className="h-full bg-amber-500 rounded-full transition-all duration-500"
             style={{ width: `${progressPct}%` }}
@@ -160,8 +160,8 @@ export default function BookForm({ patientEmail }: { patientEmail: string }) {
       {/* Step 1 — Case type */}
       {step === 1 && (
         <div>
-          <h2 className="text-2xl font-bold text-slate-900 mb-2">What kind of help do you need?</h2>
-          <p className="text-slate-500 text-sm mb-8 leading-relaxed">
+          <h2 className="text-2xl font-bold text-stone-900 mb-2">What kind of help do you need?</h2>
+          <p className="text-stone-500 text-sm mb-8 leading-relaxed">
             This helps us route your case to the right specialist and ask you the right questions.
           </p>
           <div className="space-y-3">
@@ -170,12 +170,12 @@ export default function BookForm({ patientEmail }: { patientEmail: string }) {
                 key={ct.id}
                 type="button"
                 onClick={() => { setCaseType(ct.id); setStep(2); }}
-                className="w-full text-left p-5 border border-slate-200 rounded-lg hover:border-amber-400 hover:bg-amber-50/60 transition-all group"
+                className="w-full text-left p-5 border border-stone-200 rounded-lg hover:border-amber-400 hover:bg-amber-50/60 transition-all group"
               >
-                <p className="font-semibold text-slate-900 group-hover:text-amber-800 transition-colors mb-1 text-sm">
+                <p className="font-semibold text-stone-900 group-hover:text-amber-800 transition-colors mb-1 text-sm">
                   {ct.label}
                 </p>
-                <p className="text-sm text-slate-500 leading-relaxed">{ct.description}</p>
+                <p className="text-sm text-stone-500 leading-relaxed">{ct.description}</p>
               </button>
             ))}
           </div>
@@ -185,8 +185,8 @@ export default function BookForm({ patientEmail }: { patientEmail: string }) {
       {/* Step 2 — Specialty */}
       {step === 2 && (
         <div>
-          <h2 className="text-2xl font-bold text-slate-900 mb-2">Which specialty do you need?</h2>
-          <p className="text-slate-500 text-sm mb-8 leading-relaxed">
+          <h2 className="text-2xl font-bold text-stone-900 mb-2">Which specialty do you need?</h2>
+          <p className="text-stone-500 text-sm mb-8 leading-relaxed">
             We will use this to identify the best-matched specialist across our network. If unsure, select
             &ldquo;Other / Not sure&rdquo; — we will figure it out from your description.
           </p>
@@ -199,7 +199,7 @@ export default function BookForm({ patientEmail }: { patientEmail: string }) {
                 className={`p-3.5 border rounded-lg text-left transition-all text-sm font-medium leading-tight ${
                   specialty === s
                     ? "border-amber-500 bg-amber-50 text-amber-800"
-                    : "border-slate-200 text-slate-700 hover:border-amber-300 hover:bg-amber-50/50"
+                    : "border-stone-200 text-stone-700 hover:border-amber-300 hover:bg-amber-50/50"
                 }`}
               >
                 {s}
@@ -209,7 +209,7 @@ export default function BookForm({ patientEmail }: { patientEmail: string }) {
           <button
             type="button"
             onClick={() => setStep(1)}
-            className="text-sm text-slate-400 hover:text-slate-700 transition-colors"
+            className="text-sm text-stone-400 hover:text-stone-700 transition-colors"
           >
             ← Back
           </button>
@@ -219,14 +219,14 @@ export default function BookForm({ patientEmail }: { patientEmail: string }) {
       {/* Step 3 — Situation */}
       {step === 3 && (
         <div>
-          <h2 className="text-2xl font-bold text-slate-900 mb-2">Tell us about your case</h2>
-          <p className="text-slate-500 text-sm mb-8 leading-relaxed">
+          <h2 className="text-2xl font-bold text-stone-900 mb-2">Tell us about your case</h2>
+          <p className="text-stone-500 text-sm mb-8 leading-relaxed">
             No medical records required at this stage. Describe what is happening — the more detail you share,
             the more precisely we can route your case.
           </p>
           <div className="space-y-6">
             <div>
-              <label className="block text-sm font-semibold text-slate-700 mb-2">
+              <label className="block text-sm font-semibold text-stone-700 mb-2">
                 Your situation <span className="text-red-400">*</span>
               </label>
               <textarea
@@ -240,13 +240,13 @@ export default function BookForm({ patientEmail }: { patientEmail: string }) {
                     ? "What is your diagnosis? What treatment options were proposed? What are you trying to decide between?"
                     : "What is happening? What symptoms or test results prompted this? What have you already tried or been told?"
                 }
-                className="w-full border border-slate-200 rounded-lg px-4 py-3 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-amber-200 focus:border-amber-400 transition resize-none"
+                className="w-full border border-stone-200 rounded-lg px-4 py-3 text-sm text-stone-900 placeholder-stone-400 focus:outline-none focus:ring-2 focus:ring-amber-200 focus:border-amber-400 transition resize-none"
               />
             </div>
 
             <div className="grid sm:grid-cols-2 gap-6">
               <div>
-                <label className="block text-sm font-semibold text-slate-700 mb-3">Urgency</label>
+                <label className="block text-sm font-semibold text-stone-700 mb-3">Urgency</label>
                 <div className="space-y-2">
                   {([
                     ["routine", "Routine — within 1–2 weeks"],
@@ -255,7 +255,7 @@ export default function BookForm({ patientEmail }: { patientEmail: string }) {
                   ] as const).map(([val, label]) => (
                     <label
                       key={val}
-                      className="flex items-center gap-3 p-3 border border-slate-200 rounded-lg cursor-pointer hover:border-slate-300 transition-colors"
+                      className="flex items-center gap-3 p-3 border border-stone-200 rounded-lg cursor-pointer hover:border-stone-300 transition-colors"
                     >
                       <input
                         type="radio"
@@ -265,19 +265,19 @@ export default function BookForm({ patientEmail }: { patientEmail: string }) {
                         onChange={() => setUrgency(val)}
                         className="accent-amber-500"
                       />
-                      <span className="text-sm text-slate-700">{label}</span>
+                      <span className="text-sm text-stone-700">{label}</span>
                     </label>
                   ))}
                 </div>
               </div>
 
               <div>
-                <label className="block text-sm font-semibold text-slate-700 mb-3">Consultation language</label>
+                <label className="block text-sm font-semibold text-stone-700 mb-3">Consultation language</label>
                 <div className="space-y-2">
                   {["Russian", "Hebrew", "English"].map((lang) => (
                     <label
                       key={lang}
-                      className="flex items-center gap-3 p-3 border border-slate-200 rounded-lg cursor-pointer hover:border-slate-300 transition-colors"
+                      className="flex items-center gap-3 p-3 border border-stone-200 rounded-lg cursor-pointer hover:border-stone-300 transition-colors"
                     >
                       <input
                         type="radio"
@@ -287,7 +287,7 @@ export default function BookForm({ patientEmail }: { patientEmail: string }) {
                         onChange={() => setLanguage(lang)}
                         className="accent-amber-500"
                       />
-                      <span className="text-sm text-slate-700">{lang}</span>
+                      <span className="text-sm text-stone-700">{lang}</span>
                     </label>
                   ))}
                 </div>
@@ -299,7 +299,7 @@ export default function BookForm({ patientEmail }: { patientEmail: string }) {
                 <button
                   type="button"
                   onClick={() => setStep(2)}
-                  className="text-sm text-slate-400 hover:text-slate-700 transition-colors"
+                  className="text-sm text-stone-400 hover:text-stone-700 transition-colors"
                 >
                   ← Back
                 </button>
@@ -310,7 +310,7 @@ export default function BookForm({ patientEmail }: { patientEmail: string }) {
                 type="button"
                 disabled={!situation.trim()}
                 onClick={() => setStep(4)}
-                className="px-6 py-2.5 bg-slate-900 hover:bg-slate-700 disabled:opacity-40 text-white font-semibold rounded-lg text-sm transition-colors"
+                className="px-6 py-2.5 bg-stone-900 hover:bg-stone-700 disabled:opacity-40 text-white font-semibold rounded-lg text-sm transition-colors"
               >
                 See your match →
               </button>
@@ -322,8 +322,8 @@ export default function BookForm({ patientEmail }: { patientEmail: string }) {
       {/* Step 4 — Match preview + actual form */}
       {step === 4 && (
         <div>
-          <h2 className="text-2xl font-bold text-slate-900 mb-2">Your preliminary match</h2>
-          <p className="text-slate-500 text-sm mb-6 leading-relaxed">
+          <h2 className="text-2xl font-bold text-stone-900 mb-2">Your preliminary match</h2>
+          <p className="text-stone-500 text-sm mb-6 leading-relaxed">
             Based on your case, we are routing you to this specialist. Our coordinator will review and confirm
             within 24 hours.
           </p>
@@ -337,8 +337,8 @@ export default function BookForm({ patientEmail }: { patientEmail: string }) {
                   {matchedDoctor.name.split(" ").slice(-1)[0][0]}
                 </div>
                 <div className="flex-1 min-w-0">
-                  <p className="font-bold text-slate-900 text-lg leading-tight">{matchedDoctor.name}</p>
-                  <p className="text-sm text-slate-500 mt-0.5">{matchedDoctor.title} · {matchedDoctor.specialty}</p>
+                  <p className="font-bold text-stone-900 text-lg leading-tight">{matchedDoctor.name}</p>
+                  <p className="text-sm text-stone-500 mt-0.5">{matchedDoctor.title} · {matchedDoctor.specialty}</p>
                   <p className="text-xs text-amber-700 font-medium mt-1">{matchedHospital}</p>
                 </div>
               </div>
@@ -346,18 +346,18 @@ export default function BookForm({ patientEmail }: { patientEmail: string }) {
               <p className="text-xs font-semibold uppercase tracking-widest text-amber-700 mb-2">
                 Why we&apos;re routing you here
               </p>
-              <p className="text-sm text-slate-700 leading-relaxed">{matchedRationale}</p>
+              <p className="text-sm text-stone-700 leading-relaxed">{matchedRationale}</p>
 
-              <div className="mt-4 pt-4 border-t border-amber-200 flex flex-wrap items-center gap-4 text-xs text-slate-500">
+              <div className="mt-4 pt-4 border-t border-amber-200 flex flex-wrap items-center gap-4 text-xs text-stone-500">
                 <span>Responds {matchedDoctor.responseTime.toLowerCase()}</span>
                 <span>{matchedDoctor.casesHandled} cases via MedByClick</span>
                 <span className="text-amber-700 font-medium">Founder-verified</span>
               </div>
             </div>
           ) : (
-            <div className="border border-slate-200 rounded-lg p-6 mb-6 bg-slate-50">
-              <p className="text-sm font-semibold text-slate-900 mb-2">Coordinator-matched</p>
-              <p className="text-sm text-slate-500 leading-relaxed">
+            <div className="border border-stone-200 rounded-lg p-6 mb-6 bg-stone-50">
+              <p className="text-sm font-semibold text-stone-900 mb-2">Coordinator-matched</p>
+              <p className="text-sm text-stone-500 leading-relaxed">
                 Our coordinator will review your case and route it to the best available specialist — usually
                 within 24 hours.
               </p>
@@ -365,30 +365,30 @@ export default function BookForm({ patientEmail }: { patientEmail: string }) {
           )}
 
           {/* Summary */}
-          <div className="bg-slate-50 rounded-lg p-4 mb-5 text-sm text-slate-600 space-y-1.5">
+          <div className="bg-stone-50 rounded-lg p-4 mb-5 text-sm text-stone-600 space-y-1.5">
             <div className="flex gap-2">
-              <span className="text-slate-400 w-24 shrink-0">Request type</span>
-              <span className="text-slate-800 font-medium">
+              <span className="text-stone-400 w-24 shrink-0">Request type</span>
+              <span className="text-stone-800 font-medium">
                 {CASE_TYPES.find((c) => c.id === caseType)?.label ?? "Specialist consultation"}
               </span>
             </div>
             {specialty && (
               <div className="flex gap-2">
-                <span className="text-slate-400 w-24 shrink-0">Specialty</span>
-                <span className="text-slate-800">{specialty}</span>
+                <span className="text-stone-400 w-24 shrink-0">Specialty</span>
+                <span className="text-stone-800">{specialty}</span>
               </div>
             )}
             <div className="flex gap-2">
-              <span className="text-slate-400 w-24 shrink-0">Urgency</span>
-              <span className="text-slate-800">{urgency}</span>
+              <span className="text-stone-400 w-24 shrink-0">Urgency</span>
+              <span className="text-stone-800">{urgency}</span>
             </div>
             <div className="flex gap-2">
-              <span className="text-slate-400 w-24 shrink-0">Language</span>
-              <span className="text-slate-800">{language}</span>
+              <span className="text-stone-400 w-24 shrink-0">Language</span>
+              <span className="text-stone-800">{language}</span>
             </div>
             <div className="flex gap-2">
-              <span className="text-slate-400 w-24 shrink-0">Account</span>
-              <span className="text-slate-800">{patientEmail}</span>
+              <span className="text-stone-400 w-24 shrink-0">Account</span>
+              <span className="text-stone-800">{patientEmail}</span>
             </div>
           </div>
 
@@ -413,12 +413,12 @@ export default function BookForm({ patientEmail }: { patientEmail: string }) {
             <button
               type="submit"
               disabled={pending}
-              className="w-full py-3.5 bg-slate-900 hover:bg-slate-700 disabled:opacity-60 text-white font-semibold rounded-lg text-sm transition-colors"
+              className="w-full py-3.5 bg-stone-900 hover:bg-stone-700 disabled:opacity-60 text-white font-semibold rounded-lg text-sm transition-colors"
             >
               {pending ? "Submitting…" : "Confirm and submit"}
             </button>
 
-            <p className="text-xs text-slate-400 text-center leading-relaxed">
+            <p className="text-xs text-stone-400 text-center leading-relaxed">
               Your information is confidential. We do not share patient details with third parties.
             </p>
           </form>
@@ -427,7 +427,7 @@ export default function BookForm({ patientEmail }: { patientEmail: string }) {
             <button
               type="button"
               onClick={() => setStep(3)}
-              className="text-sm text-slate-400 hover:text-slate-700 transition-colors"
+              className="text-sm text-stone-400 hover:text-stone-700 transition-colors"
             >
               ← Edit my case description
             </button>

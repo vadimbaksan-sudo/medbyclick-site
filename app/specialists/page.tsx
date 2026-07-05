@@ -13,15 +13,15 @@ export default function SpecialistsPage() {
   return (
     <div>
       {/* Header */}
-      <div className="bg-slate-900 text-white py-16">
+      <div className="bg-green-50 text-stone-900 py-16">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-8">
             <div>
-              <p className="text-xs font-semibold uppercase tracking-widest text-amber-400 mb-4">
+              <p className="text-xs font-semibold uppercase tracking-widest text-amber-700 mb-4">
                 Our network
               </p>
               <h1 className="text-4xl md:text-5xl font-bold mb-4">Meet the specialists</h1>
-              <p className="text-slate-300 text-base max-w-2xl leading-relaxed">
+              <p className="text-stone-600 text-base max-w-2xl leading-relaxed">
                 Every doctor in this network is personally known to the founder — vetted over decades of
                 clinical practice, not credentialed by an algorithm. Sheba. Hadassah. Ichilov. Rambam.
                 We work with all of them.
@@ -59,7 +59,7 @@ export default function SpecialistsPage() {
               )}
               <Link
                 href="/book/"
-                className="inline-flex items-center justify-center px-4 py-2.5 bg-amber-500 hover:bg-amber-400 text-slate-900 font-semibold rounded-lg text-sm transition-colors"
+                className="inline-flex items-center justify-center px-4 py-2.5 bg-amber-500 hover:bg-amber-400 text-stone-900 font-semibold rounded-lg text-sm transition-colors"
               >
                 Book a consultation
               </Link>
@@ -67,26 +67,28 @@ export default function SpecialistsPage() {
           </div>
 
           {/* Stats */}
-          <div className="grid grid-cols-3 gap-6 mt-12 pt-12 border-t border-slate-800">
+          <div className="grid grid-cols-3 gap-6 mt-12 pt-12 border-t border-stone-200">
             <div>
-              <p className="text-2xl font-bold text-amber-400">{doctors.length}</p>
-              <p className="text-xs text-slate-400 mt-1">Specialists in the network</p>
+              <p className="text-2xl font-bold text-amber-700">{doctors.length}</p>
+              <p className="text-xs text-stone-500 mt-1">Specialists in the network</p>
             </div>
             <div>
-              <p className="text-2xl font-bold text-amber-400">5+</p>
-              <p className="text-xs text-slate-400 mt-1">Israeli hospitals covered</p>
+              <p className="text-2xl font-bold text-amber-700">5+</p>
+              <p className="text-xs text-stone-500 mt-1">Israeli hospitals covered</p>
             </div>
             <div>
-              <p className="text-2xl font-bold text-amber-400">40 yrs</p>
-              <p className="text-xs text-slate-400 mt-1">Founder's clinical network</p>
+              <p className="text-2xl font-bold text-amber-700">40 yrs</p>
+              <p className="text-xs text-stone-500 mt-1">Founder's clinical network</p>
             </div>
           </div>
         </div>
       </div>
 
       {/* Grid */}
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <SpecialistsGrid doctors={doctors} />
+      <div className="bg-stone-50 py-12">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <SpecialistsGrid doctors={doctors} />
+        </div>
       </div>
     </div>
   );

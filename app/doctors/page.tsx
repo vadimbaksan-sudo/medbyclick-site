@@ -11,7 +11,7 @@ export default function DoctorsPage() {
   return (
     <div className="bg-white">
       {/* Header */}
-      <div className="bg-slate-900 text-white py-16">
+      <div className="bg-stone-900 text-white py-16">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <p className="text-xs font-semibold uppercase tracking-widest text-amber-400 mb-4">
             Our specialists
@@ -19,7 +19,7 @@ export default function DoctorsPage() {
           <h1 className="text-3xl md:text-4xl font-bold mb-4">
             The network
           </h1>
-          <p className="text-slate-300 max-w-xl leading-relaxed">
+          <p className="text-stone-300 max-w-xl leading-relaxed">
             Every doctor here has been personally vetted by the founder — known through
             years of clinical collaboration, not credential review.
           </p>
@@ -29,15 +29,15 @@ export default function DoctorsPage() {
       <DoctorsGrid doctors={doctors} />
 
       {/* CTA */}
-      <div className="bg-slate-50 border-t border-slate-100 py-16">
+      <div className="bg-stone-50 border-t border-stone-100 py-16">
         <div className="max-w-xl mx-auto text-center px-4">
-          <p className="text-slate-600 mb-6">
+          <p className="text-stone-600 mb-6">
             Not sure which specialist is right for your case? Tell us what you&apos;re
             dealing with — we&apos;ll route you.
           </p>
           <Link
             href="/book"
-            className="inline-flex items-center justify-center px-6 py-3 bg-slate-900 hover:bg-slate-700 text-white font-medium rounded-lg text-sm transition-colors"
+            className="inline-flex items-center justify-center px-6 py-3 bg-stone-900 hover:bg-stone-700 text-white font-medium rounded-lg text-sm transition-colors"
           >
             Book a Consultation
           </Link>

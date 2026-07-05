@@ -22,9 +22,13 @@ right foundation to build the wider ecosystem on.
   booking, payments) + a distinct-but-coherent token/education sub-brand.
 
 ## Aesthetic Direction
-- **Direction:** Confident, warm-professional trust network — dark navy
-  authority + a single warm accent, editorial headline voice. Already
-  validated in production; this system formalizes and extends it.
+- **Direction:** Confident, warm-professional trust network — light,
+  hopeful warmth (soft green + warm light gray) instead of dark-navy
+  authority, plus a single warm accent (amber), editorial headline voice.
+  Revised 2026-07-05 per direct user feedback: dark navy/slate read as
+  cold and "metallic" once seen across full pages and avatar grids; green
+  ("color of hope," associated with health) plus a warm neutral reads more
+  human for a medical-trust product. See Decisions Log.
 - **Decoration level:** minimal — typography and real content carry the
   page; no icon-in-colored-circle grids, no decorative gradients/blobs.
 - **Mood:** serious but human. A confident specific claim ("When every
@@ -50,30 +54,49 @@ right foundation to build the wider ecosystem on.
 
 ## Color
 - **Approach:** restrained — one accent color per context, color is rare and
-  meaningful, never a repeating decoration.
-- **Primary (medical/trust pages):** `amber-400`/`amber-500` (Tailwind
-  default, `#FBBF24`/`#F59E0B`) on `slate-900` (`#0F172A`) — already in
-  production, unchanged.
+  meaningful, never a repeating decoration. Revised 2026-07-05: the shared
+  *base* (formerly dark navy) is now a light green + warm gray pairing; the
+  accent layer (amber for medical, teal for token/education) is unchanged.
+- **Base — hero / "authority" sections (all pages):** `green-50` (`#F0FDF4`)
+  wash, replacing `bg-slate-900`. Text on this section switches from white
+  to `stone-900` (`#1C1917`); secondary/caption text uses `stone-600`/
+  `stone-500` instead of `slate-300`/`slate-400`; dividers use `stone-200`
+  instead of `slate-800`.
+- **Base — content sections (all pages):** `stone-50` (`#FAFAF9`), replacing
+  plain white/`slate-50` page backgrounds — a warm light gray, not the cool
+  blue-cast `slate` scale. Cards within these sections stay `bg-white` with
+  `border-stone-200` so they lift off the wash, same visual hierarchy as
+  before (white cards on a tinted page), just warmer.
+- **Neutrals:** Tailwind `stone` scale (50 through 900), replacing `slate`
+  everywhere — text, borders, UI chrome, non-accent buttons. `slate` had a
+  cool blue undertone that read as "metal" once seen across full pages and
+  avatar grids (user feedback, 2026-07-05); `stone` keeps the same restrained
+  neutral-plus-amber approach but warmer. Non-accent solid buttons (e.g. a
+  secondary "confirm"/"submit" action) use `stone-900`/`stone-700` where they
+  previously used `slate-900`/`slate-700`.
+- **Primary accent (medical/trust pages):** `amber-400`/`amber-500`
+  (`#FBBF24`/`#F59E0B`) — unchanged. On the new light green/stone base,
+  eyebrow labels and small accent text that used to be `amber-400` (for
+  contrast against dark navy) become `amber-700`/`amber-600` for contrast
+  against the light base; button fills (`bg-amber-500`) are unchanged.
 - **Secondary (token/education/foundation pages only):** `teal-600`/`teal-500`
-  (Tailwind default, `#0D9488`/`#14B8A6`). New addition. Confined strictly to
+  (`#0D9488`/`#14B8A6`) — unchanged, still confined strictly to
   ecosystem/token/education surfaces so a visitor's brain never conflates
-  "trust" pages with "token" pages — the same firewall principle validated
-  earlier in consultation, now applied with the site's existing palette
-  instead of a new one. Do not use teal on medical-trust pages; do not use
-  amber as the primary accent on token/tokenomics pages.
-- **Neutrals:** Tailwind `slate` scale (50 through 900) — already in use
-  throughout the codebase.
+  "trust" pages with "token" pages. Do not use teal on medical-trust pages;
+  do not use amber as the primary accent on token/tokenomics pages. These
+  pages get the same base swap (green/stone instead of navy/white) as
+  medical pages — only the accent differs, per the Ecosystem Extension Rule
+  below.
 - **Semantic:** success `green-400`/`green-500` (already used for doctor
-  response-time indicators), warning `amber-600` (distinct usage from the
-  brand accent — contextual, not decorative), error `red-500`, info
-  `sky-500`. Semantic color is separate from the brand accent and does not
-  count as a design risk — it's functional, not decorative.
-- **Dark mode:** the site is dark-navy-first already (`slate-900` hero/nav
-  sections) with white/light content sections — this is the existing,
-  validated pattern. No separate light/dark toggle needed; the system
-  already alternates dark and light sections intentionally by content type
-  (dark for hero/trust-statement sections, light for content-dense sections
-  like doctor listings).
+  response-time indicators), warning `amber-600`, error `red-500`, info
+  `sky-500`. These are mid-tone/saturated shades, clearly distinct from the
+  pale `green-50` base wash — a status indicator is never confused with the
+  page background. Semantic color is separate from the brand accent and does
+  not count as a design risk — it's functional, not decorative.
+- **Light-first:** the site is light-first — no more dark-navy hero
+  sections. Visual rhythm between sections now comes from alternating
+  `green-50` (hero/statement sections) and `stone-50` (content-dense
+  sections), rather than from a dark/light contrast.
 
 ## Spacing
 - **Base unit:** 4px (Tailwind default) — already in use.
@@ -105,14 +128,15 @@ right foundation to build the wider ecosystem on.
 ## Ecosystem Extension Rule (new, resolves the token/medical tension)
 
 The token, education, and foundation surfaces are **part of the same visual
-system**, not a separate brand — same Geist typeface, same navy/white base,
-same spacing/radius/motion rules. The **only** thing that changes on those
-pages is the accent color (teal instead of amber) and the addition of IBM
-Plex Mono for any numeric/ledger-style data. This keeps one coherent site
-while making sure a visitor never mistakes the token pages for a crypto-hype
-site or the medical pages for a token pitch. Do not introduce a third accent,
-a different typeface, or different spacing/radius rules for these sections —
-extend the existing system, don't fork it.
+system**, not a separate brand — same Geist typeface, same green/stone base
+(revised 2026-07-05, was navy/white), same spacing/radius/motion rules. The
+**only** thing that changes on those pages is the accent color (teal instead
+of amber) and the addition of IBM Plex Mono for any numeric/ledger-style
+data. This keeps one coherent site while making sure a visitor never
+mistakes the token pages for a crypto-hype site or the medical pages for a
+token pitch. Do not introduce a third accent, a different typeface, or
+different spacing/radius rules for these sections — extend the existing
+system, don't fork it.
 
 ## Decisions Log
 | Date | Decision | Rationale |
@@ -122,4 +146,5 @@ extend the existing system, don't fork it.
 | 2026-07-05 | Adopted: extend existing navy/amber/Geist system rather than replace it | Already validated by the 2026-07-04 `/design-review` audit as coherent and non-generic; two replacement attempts both missed — the honest read is the existing system was already right |
 | 2026-07-05 | Added IBM Plex Mono for data/token figures | Reads as audited/precise rather than marketing; free, open license |
 | 2026-07-05 | Added teal as the token/education/foundation-only secondary accent | Keeps ecosystem pages visually distinct from medical-trust pages without introducing a second full palette or typeface |
-| 2026-07-05 | Doctor avatar fills use `stone` (warm light gray) instead of sitewide `slate`, plus one muted `green-700` "trust/hope" option | User feedback: the `slate`-based avatar gradient read as cold/"metal" once repeated across a full grid; `stone` keeps the same restrained neutral-plus-amber approach but warmer. Green is a deliberately dark/desaturated shade, distinct from the `green-400`/`500` semantic success color, so it never gets misread as a status indicator. Scoped to avatar fills only — `slate` stays the neutral scale everywhere else (text, borders, UI chrome) |
+| 2026-07-05 | Doctor avatar fills use `stone` (warm light gray) instead of sitewide `slate`, plus one muted `green-700` "trust/hope" option | User feedback: the `slate`-based avatar gradient read as cold/"metal" once repeated across a full grid; `stone` keeps the same restrained neutral-plus-amber approach but warmer. Green is a deliberately dark/desaturated shade, distinct from the `green-400`/`500` semantic success color, so it never gets misread as a status indicator. Scoped to avatar fills only at the time — extended sitewide same day, see next row |
+| 2026-07-05 | Replaced the dark-navy (`slate-900`) base sitewide with a light `green-50` (hero sections) + `stone-50` (content sections) pairing; replaced `slate` neutrals with `stone` everywhere, not just avatars | Direct user feedback after seeing the avatar fix and the live site: the same "metal" critique applied to the whole site, not just avatars — user explicitly asked for green ("color of hope") + warm light gray as the two primary colors, confirmed via a live before/after preview on /specialists before wider rollout. Amber/teal accent layer and the medical/token firewall are unchanged — only the shared base and neutral scale moved |

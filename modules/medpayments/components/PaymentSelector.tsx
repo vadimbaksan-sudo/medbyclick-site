@@ -29,8 +29,8 @@ function MethodCard({
         selected
           ? isMbc
             ? "border-amber-400 bg-amber-400/5"
-            : "border-slate-900 bg-slate-900/5"
-          : "border-slate-200 bg-white hover:border-slate-300"
+            : "border-stone-900 bg-stone-900/5"
+          : "border-stone-200 bg-white hover:border-stone-300"
       }`}
     >
       <div className="flex items-start justify-between gap-3">
@@ -40,17 +40,17 @@ function MethodCard({
               selected
                 ? isMbc
                   ? "bg-amber-400/20"
-                  : "bg-slate-900/10"
-                : "bg-slate-100"
+                  : "bg-stone-900/10"
+                : "bg-stone-100"
             }`}
           >
             {method.icon}
           </span>
           <div>
             <div className="flex items-center gap-2 flex-wrap">
-              <span className="font-semibold text-slate-900 text-sm">{method.name}</span>
+              <span className="font-semibold text-stone-900 text-sm">{method.name}</span>
               {method.network && (
-                <span className="text-[10px] font-medium text-slate-400 bg-slate-100 px-2 py-0.5 rounded-full">
+                <span className="text-[10px] font-medium text-stone-400 bg-stone-100 px-2 py-0.5 rounded-full">
                   {method.network}
                 </span>
               )}
@@ -60,7 +60,7 @@ function MethodCard({
                 </span>
               )}
             </div>
-            <p className="text-xs text-slate-500 mt-0.5 leading-relaxed">{method.description}</p>
+            <p className="text-xs text-stone-500 mt-0.5 leading-relaxed">{method.description}</p>
           </div>
         </div>
         <span
@@ -68,8 +68,8 @@ function MethodCard({
             selected
               ? isMbc
                 ? "border-amber-400 bg-amber-400"
-                : "border-slate-900 bg-slate-900"
-              : "border-slate-300"
+                : "border-stone-900 bg-stone-900"
+              : "border-stone-300"
           }`}
         >
           {selected && <span className="w-2 h-2 rounded-full bg-white" />}
@@ -79,8 +79,8 @@ function MethodCard({
       {selected && (
         <ul className="mt-4 space-y-1.5 pl-13">
           {method.details.map((d) => (
-            <li key={d} className="flex items-center gap-2 text-xs text-slate-600">
-              <span className={isMbc ? "text-amber-500" : "text-slate-400"}>✓</span>
+            <li key={d} className="flex items-center gap-2 text-xs text-stone-600">
+              <span className={isMbc ? "text-amber-500" : "text-stone-400"}>✓</span>
               {d}
             </li>
           ))}
@@ -141,12 +141,12 @@ export default function PaymentSelector({
       <div
         className={`mt-6 rounded-2xl p-6 flex items-center justify-between gap-4 ${
           discount > 0
-            ? "bg-amber-400 text-slate-900"
-            : "bg-slate-900 text-white"
+            ? "bg-amber-400 text-stone-900"
+            : "bg-stone-900 text-white"
         }`}
       >
         <div>
-          <p className={`text-xs font-medium mb-1 ${discount > 0 ? "text-amber-800" : "text-slate-400"}`}>
+          <p className={`text-xs font-medium mb-1 ${discount > 0 ? "text-amber-800" : "text-stone-400"}`}>
             {plan ? `${plan.name} — ` : ""}Total due with {method.name}
           </p>
           <div className="flex items-baseline gap-3">
@@ -165,8 +165,8 @@ export default function PaymentSelector({
           onClick={handlePayNow}
           className={`px-6 py-3 rounded-xl font-bold text-sm transition-colors flex-shrink-0 ${
             discount > 0
-              ? "bg-slate-900 hover:bg-slate-800 text-white"
-              : "bg-amber-400 hover:bg-amber-300 text-slate-900"
+              ? "bg-stone-900 hover:bg-stone-800 text-white"
+              : "bg-amber-400 hover:bg-amber-300 text-stone-900"
           }`}
         >
           Pay Now

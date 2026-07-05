@@ -116,11 +116,11 @@ export default function AiDiagnosticsForm() {
           <p className="text-sm leading-relaxed">{result.summary}</p>
         </div>
 
-        <div className="border border-slate-200 rounded-2xl p-6 bg-white">
-          <p className="text-sm font-semibold text-slate-700 mb-3">Possible areas to investigate</p>
+        <div className="border border-stone-200 rounded-2xl p-6 bg-white">
+          <p className="text-sm font-semibold text-stone-700 mb-3">Possible areas to investigate</p>
           <ul className="space-y-2">
             {result.possibleAreas.map((area) => (
-              <li key={area} className="flex items-center gap-2 text-sm text-slate-600">
+              <li key={area} className="flex items-center gap-2 text-sm text-stone-600">
                 <span className="w-1.5 h-1.5 rounded-full bg-amber-400 flex-shrink-0" />
                 {area}
               </li>
@@ -128,27 +128,27 @@ export default function AiDiagnosticsForm() {
           </ul>
         </div>
 
-        <div className="border border-slate-200 rounded-2xl p-6 bg-white">
-          <p className="text-xs text-slate-400 mb-1">Recommended specialist</p>
-          <p className="font-semibold text-slate-900">{result.recommended}</p>
+        <div className="border border-stone-200 rounded-2xl p-6 bg-white">
+          <p className="text-xs text-stone-400 mb-1">Recommended specialist</p>
+          <p className="font-semibold text-stone-900">{result.recommended}</p>
         </div>
 
         <div className="flex gap-3">
           <Link
             href="/book/"
-            className="flex-1 text-center py-3 bg-slate-900 hover:bg-slate-700 text-white font-semibold rounded-xl text-sm transition-colors"
+            className="flex-1 text-center py-3 bg-stone-900 hover:bg-stone-700 text-white font-semibold rounded-xl text-sm transition-colors"
           >
             Book a consultation
           </Link>
           <button
             onClick={handleReset}
-            className="flex-1 py-3 border border-slate-200 hover:bg-slate-50 text-slate-700 font-medium rounded-xl text-sm transition-colors"
+            className="flex-1 py-3 border border-stone-200 hover:bg-stone-50 text-stone-700 font-medium rounded-xl text-sm transition-colors"
           >
             Analyze again
           </button>
         </div>
 
-        <p className="text-xs text-slate-400 text-center leading-relaxed">
+        <p className="text-xs text-stone-400 text-center leading-relaxed">
           This is an AI-generated orientation only, not a medical diagnosis. Consult a qualified specialist before making any health decisions.
         </p>
       </div>
@@ -158,7 +158,7 @@ export default function AiDiagnosticsForm() {
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
       <div>
-        <label htmlFor="symptoms" className="block text-sm font-medium text-slate-700 mb-1.5">
+        <label htmlFor="symptoms" className="block text-sm font-medium text-stone-700 mb-1.5">
           Describe your symptoms <span className="text-red-400">*</span>
         </label>
         <textarea
@@ -169,13 +169,13 @@ export default function AiDiagnosticsForm() {
           value={form.symptoms}
           onChange={handleChange}
           placeholder="Describe what you're experiencing — when it started, what it feels like, what makes it better or worse, any prior diagnoses or treatments you've tried…"
-          className="w-full border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-slate-300 focus:border-slate-400 transition resize-none"
+          className="w-full border border-stone-200 rounded-xl px-4 py-3 text-sm text-stone-900 placeholder-stone-400 focus:outline-none focus:ring-2 focus:ring-stone-300 focus:border-stone-400 transition resize-none"
         />
       </div>
 
       <div className="grid sm:grid-cols-2 gap-6">
         <div>
-          <label htmlFor="system" className="block text-sm font-medium text-slate-700 mb-1.5">
+          <label htmlFor="system" className="block text-sm font-medium text-stone-700 mb-1.5">
             Body system affected
           </label>
           <select
@@ -183,14 +183,14 @@ export default function AiDiagnosticsForm() {
             name="system"
             value={form.system}
             onChange={handleChange}
-            className="w-full border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-slate-300 focus:border-slate-400 transition bg-white"
+            className="w-full border border-stone-200 rounded-xl px-4 py-3 text-sm text-stone-900 focus:outline-none focus:ring-2 focus:ring-stone-300 focus:border-stone-400 transition bg-white"
           >
             <option value="">Select or leave blank…</option>
             {BODY_SYSTEMS.map((s) => <option key={s}>{s}</option>)}
           </select>
         </div>
         <div>
-          <label htmlFor="duration" className="block text-sm font-medium text-slate-700 mb-1.5">
+          <label htmlFor="duration" className="block text-sm font-medium text-stone-700 mb-1.5">
             How long have you had these symptoms?
           </label>
           <select
@@ -198,7 +198,7 @@ export default function AiDiagnosticsForm() {
             name="duration"
             value={form.duration}
             onChange={handleChange}
-            className="w-full border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-slate-300 focus:border-slate-400 transition bg-white"
+            className="w-full border border-stone-200 rounded-xl px-4 py-3 text-sm text-stone-900 focus:outline-none focus:ring-2 focus:ring-stone-300 focus:border-stone-400 transition bg-white"
           >
             <option value="">Select duration…</option>
             {DURATIONS.map((d) => <option key={d}>{d}</option>)}
@@ -207,8 +207,8 @@ export default function AiDiagnosticsForm() {
       </div>
 
       <div>
-        <label htmlFor="severity" className="block text-sm font-medium text-slate-700 mb-2">
-          Severity (1 = mild, 10 = severe): <span className="font-bold text-slate-900">{form.severity}</span>
+        <label htmlFor="severity" className="block text-sm font-medium text-stone-700 mb-2">
+          Severity (1 = mild, 10 = severe): <span className="font-bold text-stone-900">{form.severity}</span>
         </label>
         <input
           id="severity"
@@ -220,7 +220,7 @@ export default function AiDiagnosticsForm() {
           onChange={handleChange}
           className="w-full accent-amber-500"
         />
-        <div className="flex justify-between text-xs text-slate-400 mt-1">
+        <div className="flex justify-between text-xs text-stone-400 mt-1">
           <span>1 — Mild</span>
           <span>10 — Severe</span>
         </div>
@@ -229,7 +229,7 @@ export default function AiDiagnosticsForm() {
       <button
         type="submit"
         disabled={formState === "analyzing"}
-        className="w-full py-3.5 bg-amber-500 hover:bg-amber-400 disabled:opacity-60 text-slate-900 font-semibold rounded-xl text-sm transition-colors"
+        className="w-full py-3.5 bg-amber-500 hover:bg-amber-400 disabled:opacity-60 text-stone-900 font-semibold rounded-xl text-sm transition-colors"
       >
         {formState === "analyzing" ? (
           <span className="flex items-center justify-center gap-2">

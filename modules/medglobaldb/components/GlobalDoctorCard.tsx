@@ -3,7 +3,7 @@ import { avatarGradientClass } from "@/lib/ui/avatarColor";
 
 export default function GlobalDoctorCard({ doctor }: { doctor: GlobalDoctor }) {
   return (
-    <div className="border border-slate-200 rounded-xl p-5 bg-white hover:border-amber-300 hover:shadow-sm transition-all">
+    <div className="border border-stone-200 rounded-xl p-5 bg-white hover:border-amber-300 hover:shadow-sm transition-all">
       <div className="flex items-start gap-4">
         <div
           className={`w-12 h-12 rounded-xl bg-gradient-to-br ${avatarGradientClass(doctor.id)} flex items-center justify-center text-white font-bold text-lg flex-shrink-0`}
@@ -12,30 +12,30 @@ export default function GlobalDoctorCard({ doctor }: { doctor: GlobalDoctor }) {
         </div>
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2 flex-wrap">
-            <p className="font-semibold text-slate-900 truncate">{doctor.name}</p>
+            <p className="font-semibold text-stone-900 truncate">{doctor.name}</p>
             {doctor.verified && (
               <span className="text-xs font-medium bg-amber-100 text-amber-700 px-1.5 py-0.5 rounded-full flex-shrink-0">
                 ✓ Verified
               </span>
             )}
           </div>
-          <p className="text-xs text-slate-400 mt-0.5">{doctor.title} · {doctor.specialty}</p>
+          <p className="text-xs text-stone-400 mt-0.5">{doctor.title} · {doctor.specialty}</p>
         </div>
       </div>
 
-      <div className="mt-4 space-y-1 text-sm text-slate-600">
+      <div className="mt-4 space-y-1 text-sm text-stone-600">
         <p className="text-xs">{doctor.institution}</p>
-        <p className="text-xs text-slate-400">{doctor.city}, {doctor.country}</p>
+        <p className="text-xs text-stone-400">{doctor.city}, {doctor.country}</p>
       </div>
 
-      <div className="mt-3 flex items-center gap-4 text-xs text-slate-400">
-        <span>h-index: <strong className="text-slate-700">{doctor.hIndex}</strong></span>
+      <div className="mt-3 flex items-center gap-4 text-xs text-stone-400">
+        <span>h-index: <strong className="text-stone-700">{doctor.hIndex}</strong></span>
         <span>{doctor.publications} publications</span>
       </div>
 
       <div className="mt-3 flex flex-wrap gap-1">
         {doctor.languages.map((l) => (
-          <span key={l} className="text-xs bg-slate-100 text-slate-600 px-2 py-0.5 rounded-full">{l}</span>
+          <span key={l} className="text-xs bg-stone-100 text-stone-600 px-2 py-0.5 rounded-full">{l}</span>
         ))}
       </div>
 

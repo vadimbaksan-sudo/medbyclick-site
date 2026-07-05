@@ -8,14 +8,14 @@ export const metadata = {
 
 export default function RegisterPage() {
   return (
-    <div className="min-h-[80vh] flex items-center justify-center bg-slate-50">
+    <div className="min-h-[80vh] flex items-center justify-center bg-stone-50">
       <div className="w-full max-w-md px-4">
-        <div className="bg-white border border-slate-200 rounded-2xl p-8 shadow-sm">
+        <div className="bg-white border border-stone-200 rounded-2xl p-8 shadow-sm">
           <div className="text-center mb-8">
-            <Link href="/" className="text-slate-900 font-semibold text-xl tracking-tight">
+            <Link href="/" className="text-stone-900 font-semibold text-xl tracking-tight">
               MedByClick
             </Link>
-            <p className="text-slate-500 text-sm mt-2">Create your account</p>
+            <p className="text-stone-500 text-sm mt-2">Create your account</p>
           </div>
 
           <RegisterForm />

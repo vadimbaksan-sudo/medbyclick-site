@@ -40,13 +40,13 @@ export default function SpecialistsGrid({ doctors }: { doctors: Doctor[] }) {
   return (
     <div>
       {/* No-conflict-of-interest banner */}
-      <div className="bg-slate-900 text-white rounded-lg p-5 mb-8 flex gap-4 items-start">
-        <div className="w-1 bg-amber-400 rounded-full self-stretch shrink-0" />
+      <div className="bg-white border border-stone-200 rounded-lg p-5 mb-8 flex gap-4 items-start">
+        <div className="w-1 bg-amber-500 rounded-full self-stretch shrink-0" />
         <div>
-          <p className="text-sm font-semibold text-white mb-1">
+          <p className="text-sm font-semibold text-stone-900 mb-1">
             Hospital-agnostic — zero conflict of interest
           </p>
-          <p className="text-sm text-slate-400 leading-relaxed">
+          <p className="text-sm text-stone-500 leading-relaxed">
             Every competitor on this market routes you to their own hospital. We have no financial
             relationship with any of the hospitals below — Sheba, Hadassah, Ichilov, Assuta, Rambam.
             We route to whoever is right for your specific case.
@@ -57,7 +57,7 @@ export default function SpecialistsGrid({ doctors }: { doctors: Doctor[] }) {
       {/* Filters */}
       <div className="flex flex-wrap gap-6 mb-8">
         <div>
-          <p className="text-xs font-semibold text-slate-500 uppercase tracking-widest mb-2">Specialty</p>
+          <p className="text-xs font-semibold text-stone-500 uppercase tracking-widest mb-2">Specialty</p>
           <div className="flex flex-wrap gap-1.5">
             {specialties.map((s) => (
               <button
@@ -66,8 +66,8 @@ export default function SpecialistsGrid({ doctors }: { doctors: Doctor[] }) {
                 onClick={() => setSpecialtyFilter(s)}
                 className={`px-3 py-1.5 rounded-full text-xs font-medium transition-colors ${
                   specialtyFilter === s
-                    ? "bg-slate-900 text-white"
-                    : "bg-slate-100 text-slate-600 hover:bg-slate-200"
+                    ? "bg-stone-900 text-white"
+                    : "bg-stone-100 text-stone-600 hover:bg-stone-200"
                 }`}
               >
                 {s}
@@ -77,7 +77,7 @@ export default function SpecialistsGrid({ doctors }: { doctors: Doctor[] }) {
         </div>
 
         <div>
-          <p className="text-xs font-semibold text-slate-500 uppercase tracking-widest mb-2">Hospital</p>
+          <p className="text-xs font-semibold text-stone-500 uppercase tracking-widest mb-2">Hospital</p>
           <div className="flex flex-wrap gap-1.5">
             {hospitals.map((h) => (
               <button
@@ -87,7 +87,7 @@ export default function SpecialistsGrid({ doctors }: { doctors: Doctor[] }) {
                 className={`px-3 py-1.5 rounded-full text-xs font-medium transition-colors ${
                   hospitalFilter === h
                     ? "bg-amber-500 text-white"
-                    : "bg-slate-100 text-slate-600 hover:bg-slate-200"
+                    : "bg-stone-100 text-stone-600 hover:bg-stone-200"
                 }`}
               >
                 {h}
@@ -98,19 +98,19 @@ export default function SpecialistsGrid({ doctors }: { doctors: Doctor[] }) {
       </div>
 
       {/* Count */}
-      <p className="text-xs text-slate-400 mb-5">
+      <p className="text-xs text-stone-400 mb-5">
         {filtered.length} specialist{filtered.length !== 1 ? "s" : ""}
         {specialtyFilter !== "All" || hospitalFilter !== "All" ? " matching filters" : " in the network"}
       </p>
 
       {/* Grid */}
       {filtered.length === 0 ? (
-        <div className="text-center py-16 text-slate-400 text-sm">
+        <div className="text-center py-16 text-stone-400 text-sm">
           No specialists match these filters.{" "}
           <button
             type="button"
             onClick={() => { setSpecialtyFilter("All"); setHospitalFilter("All"); }}
-            className="underline hover:text-slate-700"
+            className="underline hover:text-stone-700"
           >
             Clear filters
           </button>
@@ -123,7 +123,7 @@ export default function SpecialistsGrid({ doctors }: { doctors: Doctor[] }) {
               <Link
                 key={doctor.id}
                 href={`/doctors/${doctor.id}/`}
-                className="group block border border-slate-100 rounded-lg p-6 hover:border-amber-300 hover:shadow-md transition-all bg-white"
+                className="group block border border-stone-100 rounded-lg p-6 hover:border-amber-300 hover:shadow-md transition-all bg-white"
               >
                 <div className="flex items-start gap-4 mb-4">
                   <div
@@ -132,10 +132,10 @@ export default function SpecialistsGrid({ doctors }: { doctors: Doctor[] }) {
                     {doctor.name.split(" ").slice(-1)[0][0]}
                   </div>
                   <div className="min-w-0">
-                    <p className="font-semibold text-slate-900 group-hover:text-amber-700 transition-colors leading-tight">
+                    <p className="font-semibold text-stone-900 group-hover:text-amber-700 transition-colors leading-tight">
                       {doctor.name}
                     </p>
-                    <p className="text-xs text-slate-400 mt-0.5">{doctor.title}</p>
+                    <p className="text-xs text-stone-400 mt-0.5">{doctor.title}</p>
                     {hospital && (
                       <p className="text-xs text-amber-700 font-medium mt-1">{hospital.short}</p>
                     )}
@@ -150,20 +150,20 @@ export default function SpecialistsGrid({ doctors }: { doctors: Doctor[] }) {
 
                 <div className="flex flex-wrap gap-1 mb-4">
                   {doctor.subspecialties.slice(0, 3).map((s) => (
-                    <span key={s} className="text-xs px-2 py-0.5 bg-slate-100 text-slate-600 rounded-full">
+                    <span key={s} className="text-xs px-2 py-0.5 bg-stone-100 text-stone-600 rounded-full">
                       {s}
                     </span>
                   ))}
                 </div>
 
-                <blockquote className="text-xs text-slate-500 leading-relaxed line-clamp-3 italic border-l-2 border-amber-300 pl-3 mb-3">
+                <blockquote className="text-xs text-stone-500 leading-relaxed line-clamp-3 italic border-l-2 border-amber-300 pl-3 mb-3">
                   {doctor.endorsement}
                 </blockquote>
 
-                <div className="flex items-center justify-between text-xs text-slate-400 pt-3 border-t border-slate-100">
+                <div className="flex items-center justify-between text-xs text-stone-400 pt-3 border-t border-stone-100">
                   <span className="flex flex-wrap gap-1">
                     {doctor.languages.map((lang) => (
-                      <span key={lang} className="border border-slate-200 px-1.5 py-0.5 rounded-full">
+                      <span key={lang} className="border border-stone-200 px-1.5 py-0.5 rounded-full">
                         {lang}
                       </span>
                     ))}
@@ -178,13 +178,13 @@ export default function SpecialistsGrid({ doctors }: { doctors: Doctor[] }) {
 
       {/* Bottom CTA */}
       <div className="mt-14 bg-amber-50 border border-amber-100 rounded-lg p-8 text-center">
-        <p className="text-sm text-slate-500 mb-1 font-medium">Not sure which specialist you need?</p>
-        <p className="text-slate-500 text-sm mb-6 max-w-md mx-auto leading-relaxed">
+        <p className="text-sm text-stone-500 mb-1 font-medium">Not sure which specialist you need?</p>
+        <p className="text-stone-500 text-sm mb-6 max-w-md mx-auto leading-relaxed">
           Describe your situation and our coordinator will match you to the right doctor — usually within 24 hours.
         </p>
         <Link
           href="/book/"
-          className="inline-flex items-center justify-center px-6 py-3 bg-slate-900 hover:bg-slate-700 text-white font-semibold rounded-lg text-sm transition-colors"
+          className="inline-flex items-center justify-center px-6 py-3 bg-stone-900 hover:bg-stone-700 text-white font-semibold rounded-lg text-sm transition-colors"
         >
           Get matched to a specialist
         </Link>
