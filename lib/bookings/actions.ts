@@ -1,9 +1,22 @@
 "use server";
 
-import { getAuthorizedUser } from "@/lib/auth/dal";
+import { revalidatePath } from "next/cache";
+import { getAuthorizedUser, getCurrentDoctorProfile } from "@/lib/auth/dal";
 import { isDatabaseConfigured } from "@/lib/db/client";
-import { createBooking, findDoctorProfileBySlugOrId } from "@/lib/db/queries/bookings";
-import { BookingFormSchema, type BookingFormState } from "./validation";
+import {
+  createBooking,
+  findDoctorProfileBySlugOrId,
+  confirmBookingForDoctor,
+  completeBookingForDoctor,
+  declineBookingForDoctor,
+  addDoctorNotesToBooking,
+} from "@/lib/db/queries/bookings";
+import {
+  BookingFormSchema,
+  BookingActionSchema,
+  type BookingFormState,
+  type BookingActionState,
+} from "./validation";
 
 /**
  * Real booking Server Action — replaces app/book/BookForm.tsx's fake
@@ -72,5 +85,91 @@ export async function submitBooking(
     };
   }
 
+  return { status: "success" };
+}
+
+/**
+ * Doctor-side booking action Server Action (spec §3.2/§3.4) — confirm,
+ * complete, decline, or add notes on a booking. Same DAL shape as
+ * submitBooking()/updateOwnDoctorProfile(): getAuthorizedUser(["doctor"])
+ * first, then getCurrentDoctorProfile() derives the caller's own
+ * doctor_profiles.id from the verified session — never from
+ * formData/bookingId alone. Each query function
+ * (lib/db/queries/bookings.ts) additionally scopes its update by
+ * `doctorId = doctorProfile.id`, so a crafted bookingId for someone else's
+ * booking simply matches zero rows.
+ *
+ * No reassignment to a specific other doctor, no cancellation — those stay
+ * out of a doctor's authority per spec §3.3.
+ */
+export async function updateBookingAssignedToSelf(
+  _prevState: BookingActionState,
+  formData: FormData
+): Promise<BookingActionState> {
+  const auth = await getAuthorizedUser(["doctor"]);
+  if ("error" in auth) {
+    return {
+      status: "error",
+      message:
+        auth.error === "unauthenticated"
+          ? "Please log in to manage bookings."
+          : "Only doctor accounts can manage bookings.",
+    };
+  }
+
+  const doctorProfile = await getCurrentDoctorProfile();
+  if (!doctorProfile) {
+    return { status: "error", message: "Your account isn't linked to a doctor profile yet." };
+  }
+
+  const validated = BookingActionSchema.safeParse({
+    bookingId: formData.get("bookingId"),
+    action: formData.get("action"),
+    notes: formData.get("notes") || "",
+  });
+
+  if (!validated.success) {
+    return { status: "error", message: "Invalid request." };
+  }
+
+  if (!isDatabaseConfigured()) {
+    return {
+      status: "error",
+      message: "Booking actions are not available yet — the database has not been configured.",
+    };
+  }
+
+  const { bookingId, action, notes } = validated.data;
+
+  try {
+    let updated;
+    switch (action) {
+      case "confirm":
+        updated = await confirmBookingForDoctor(bookingId, doctorProfile.id);
+        break;
+      case "complete":
+        updated = await completeBookingForDoctor(bookingId, doctorProfile.id);
+        break;
+      case "decline":
+        updated = await declineBookingForDoctor(bookingId, doctorProfile.id);
+        break;
+      case "add_notes":
+        updated = await addDoctorNotesToBooking(bookingId, doctorProfile.id, notes);
+        break;
+    }
+
+    if (!updated) {
+      return {
+        status: "error",
+        message:
+          "That booking isn't assigned to you, or isn't in a state this action applies to.",
+      };
+    }
+  } catch (err) {
+    console.error("[bookings/actions] Failed to update booking", err);
+    return { status: "error", message: "Something went wrong. Please try again." };
+  }
+
+  revalidatePath("/doctor-dashboard");
   return { status: "success" };
 }

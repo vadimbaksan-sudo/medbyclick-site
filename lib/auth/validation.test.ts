@@ -1,5 +1,5 @@
 import { describe, expect, it } from "bun:test";
-import { RegisterFormSchema, LoginFormSchema } from "./validation";
+import { RegisterFormSchema, RegisterDoctorFormSchema, LoginFormSchema } from "./validation";
 
 describe("RegisterFormSchema", () => {
   const valid = {
@@ -58,6 +58,65 @@ describe("RegisterFormSchema", () => {
 
   it("rejects an unsupported locale", () => {
     const result = RegisterFormSchema.safeParse({ ...valid, preferredLanguage: "fr" });
+    expect(result.success).toBe(false);
+  });
+});
+
+describe("RegisterDoctorFormSchema", () => {
+  const valid = {
+    firstName: "Elena",
+    lastName: "Volkova",
+    email: "elena@example.com",
+    password: "password1",
+    specialty: "Oncology",
+    title: "MD",
+    credentials: "MD, PhD",
+    bio: "Twenty years of experience.",
+    languages: "Russian, English",
+    preferredLanguage: "ru" as const,
+  };
+
+  it("accepts a fully valid doctor registration", () => {
+    const result = RegisterDoctorFormSchema.safeParse(valid);
+    expect(result.success).toBe(true);
+  });
+
+  it("rejects a missing specialty", () => {
+    const result = RegisterDoctorFormSchema.safeParse({ ...valid, specialty: "" });
+    expect(result.success).toBe(false);
+  });
+
+  it("accepts an omitted title/credentials/bio/languages (all optional)", () => {
+    const minimal = {
+      firstName: valid.firstName,
+      lastName: valid.lastName,
+      email: valid.email,
+      password: valid.password,
+      specialty: valid.specialty,
+    };
+    const result = RegisterDoctorFormSchema.safeParse(minimal);
+    expect(result.success).toBe(true);
+  });
+
+  // The hard requirement from the Developer task: vettingStatus/verified
+  // must never be settable via this schema, even if a crafted request
+  // supplies them — they simply aren't declared keys, so Zod strips them.
+  it("never includes vettingStatus/verified in parsed output, even if supplied", () => {
+    const result = RegisterDoctorFormSchema.safeParse({
+      ...valid,
+      vettingStatus: "approved",
+      verified: true,
+    });
+    expect(result.success).toBe(true);
+    if (result.success) {
+      const keys = Object.keys(result.data);
+      expect(keys).not.toContain("vettingStatus");
+      expect(keys).not.toContain("verified");
+    }
+  });
+
+  it("rejects a password under 8 characters", () => {
+    const result = RegisterDoctorFormSchema.safeParse({ ...valid, password: "abc123" });
     expect(result.success).toBe(false);
   });
 });

@@ -23,6 +23,40 @@ export const RegisterFormSchema = z.object({
 
 export type RegisterFormValues = z.infer<typeof RegisterFormSchema>;
 
+/**
+ * Doctor self-registration (app/register/doctor, lib/auth/actions.ts's
+ * registerDoctor()) — per
+ * docs/reports/product/2026-07-04-doctor-dashboard-spec.md §2. Deliberately
+ * only contains the fields a doctor is allowed to self-declare at
+ * registration (name, specialty, self-claimed credentials, languages, plus
+ * §1.1's editable-fields whitelist). `vettingStatus`/`verified` are NOT
+ * parseable keys here at all — they are hardcoded in the Server Action, never
+ * derived from form input, so there is no field to smuggle a value through.
+ */
+export const RegisterDoctorFormSchema = z.object({
+  firstName: z.string().trim().min(1, "First name is required."),
+  lastName: z.string().trim().min(1, "Last name is required."),
+  email: z.string().trim().min(1, "Email is required.").email("Enter a valid email address."),
+  password: z
+    .string()
+    .min(8, "Password must be at least 8 characters.")
+    .regex(/[a-zA-Z]/, "Password must contain at least one letter.")
+    .regex(/[0-9]/, "Password must contain at least one number."),
+  // Required by the doctor_profiles schema (specialty is NOT NULL) — this is
+  // the doctor's claimed specialty for Medical Community to verify during
+  // vetting, not a self-certified fact. Changing it later requires the
+  // request-based flow named in the spec's §1.2/§5, not a self-edit.
+  specialty: z.string().trim().min(1, "Specialty is required."),
+  title: z.string().trim().optional().default(""),
+  credentials: z.string().trim().optional().default(""),
+  bio: z.string().trim().optional().default(""),
+  // Comma-separated in the form UI, split into an array before persisting.
+  languages: z.string().trim().optional().default(""),
+  preferredLanguage: z.enum(["ru", "en", "he"]).default("ru"),
+});
+
+export type RegisterDoctorFormValues = z.infer<typeof RegisterDoctorFormSchema>;
+
 export const LoginFormSchema = z.object({
   email: z.string().trim().min(1, "Email is required.").email("Enter a valid email address."),
   password: z.string().min(1, "Password is required."),

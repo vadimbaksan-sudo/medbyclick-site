@@ -15,6 +15,13 @@
       "when": 1783196082078,
       "tag": "0001_tranquil_storm",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1783233932411,
+      "tag": "0002_narrow_wraith",
+      "breakpoints": true
     }
   ]
 }

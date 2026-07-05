@@ -61,3 +61,27 @@ export async function getCasesHandledCount(doctorProfileId: string): Promise<num
     .where(and(eq(bookings.doctorId, doctorProfileId), eq(bookings.status, "completed")));
   return rows[0]?.value ?? 0;
 }
+
+/**
+ * Doctor profile self-edit (spec §1.1/§1.3). Scoped by `userId`, NOT by a
+ * client-supplied doctor_profiles id — this is the belt-and-suspenders check
+ * beyond the caller's Zod whitelist that prevents a doctor from ever editing
+ * another doctor's row, even if a row id were somehow smuggled into the
+ * call. The `fields` type is intentionally narrow (only the §1.1 whitelist)
+ * so this function itself can't be reused to write a gated field.
+ */
+export async function updateOwnDoctorProfileRow(
+  userId: string,
+  fields: Partial<
+    Pick<DbDoctorProfile, "bio" | "credentials" | "languages" | "subspecialties" | "responseTime" | "avatarUrl" | "title">
+  >
+): Promise<DbDoctorProfile | null> {
+  if (!isDatabaseConfigured()) return null;
+  const db = getDb();
+  const rows = await db
+    .update(doctorProfiles)
+    .set({ ...fields, updatedAt: new Date() })
+    .where(eq(doctorProfiles.userId, userId))
+    .returning();
+  return rows[0] ?? null;
+}
