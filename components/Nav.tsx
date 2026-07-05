@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { getNavModules } from "@/modules/registry";
 import { createSupabaseBrowserClient } from "@/lib/supabase/client";
 import { logoutUser } from "@/lib/auth/actions";
+import { CONTACT } from "@/lib/contact";
 
 export default function Nav() {
   const [open, setOpen] = useState(false);
@@ -45,7 +46,7 @@ export default function Nav() {
     <header className="sticky top-0 z-50 bg-white border-b border-slate-100">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          <Link href="/" className="flex items-center gap-2 flex-shrink-0" onClick={closeAll}>
+          <Link href="/" className="flex items-center gap-2 shrink-0" onClick={closeAll}>
             <span className="text-slate-900 font-semibold text-lg tracking-tight">MedByClick</span>
             <span className="hidden sm:inline-block text-xs font-medium text-amber-700 bg-amber-50 border border-amber-200 px-2 py-0.5 rounded-full">
               Platform
@@ -93,7 +94,7 @@ export default function Nav() {
                           onClick={() => setPlatformOpen(false)}
                           className="flex items-center gap-2.5 px-3 py-2.5 rounded-xl hover:bg-slate-50 transition-colors group"
                         >
-                          <span className="text-lg flex-shrink-0">{mod.icon}</span>
+                          <span className="text-lg shrink-0">{mod.icon}</span>
                           <div>
                             <p className="text-xs font-semibold text-slate-900 group-hover:text-amber-700 transition-colors leading-tight">
                               {mod.navLabel}
@@ -138,6 +139,19 @@ export default function Nav() {
                     Register
                   </Link>
                 </>
+              )}
+              {CONTACT.telegram && (
+                <a
+                  href={CONTACT.telegram}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Telegram"
+                  className="flex items-center justify-center w-8 h-8 rounded-lg text-slate-500 hover:text-[#229ED9] hover:bg-slate-50 transition-colors"
+                >
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12L7.17 13.26l-2.95-.924c-.64-.203-.657-.64.136-.954l11.57-4.461c.537-.194 1.006.131.968.3z" />
+                  </svg>
+                </a>
               )}
               <Link
                 href="/book/"
@@ -247,6 +261,20 @@ export default function Nav() {
                     Register
                   </Link>
                 </div>
+              )}
+              {CONTACT.telegram && (
+                <a
+                  href={CONTACT.telegram}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={closeAll}
+                  className="flex items-center justify-center gap-2 py-2.5 border border-slate-200 text-slate-700 text-sm font-medium rounded-xl hover:bg-slate-50 transition-colors"
+                >
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" className="text-[#229ED9]">
+                    <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12L7.17 13.26l-2.95-.924c-.64-.203-.657-.64.136-.954l11.57-4.461c.537-.194 1.006.131.968.3z" />
+                  </svg>
+                  Telegram
+                </a>
               )}
               <Link
                 href="/book/"
