@@ -9,14 +9,14 @@ export const metadata = {
 export default function MedGlobalDBPage() {
   return (
     <div>
-      <div className="bg-stone-900 text-white py-16">
+      <div className="bg-green-50 text-stone-900 py-16">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="inline-flex items-center gap-2 text-xs font-medium text-amber-400 bg-amber-400/10 border border-amber-400/20 px-3 py-1.5 rounded-full mb-6">
-            <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />
+          <div className="inline-flex items-center gap-2 text-xs font-medium text-amber-700 bg-amber-100 border border-amber-200 px-3 py-1.5 rounded-full mb-6">
+            <span className="w-1.5 h-1.5 rounded-full bg-amber-600" />
             MedGlobalDB Module
           </div>
           <h1 className="text-4xl md:text-5xl font-bold mb-4">Global Specialist Database</h1>
-          <p className="text-stone-300 text-lg max-w-2xl leading-relaxed">
+          <p className="text-stone-600 text-lg max-w-2xl leading-relaxed">
             {globalDoctors.length.toLocaleString()}+ verified specialists across {new Set(globalDoctors.map((d) => d.country)).size} countries. Searchable by specialty, language, and institution.
           </p>
         </div>
@@ -37,9 +37,9 @@ export default function MedGlobalDBPage() {
           ))}
         </div>
 
-        <div className="mt-12 bg-stone-900 rounded-2xl p-8 text-white text-center">
+        <div className="mt-12 bg-green-50 rounded-2xl p-8 text-stone-900 text-center">
           <h2 className="text-xl font-bold mb-3">Can&apos;t find who you need?</h2>
-          <p className="text-stone-300 text-sm mb-6 max-w-md mx-auto">
+          <p className="text-stone-600 text-sm mb-6 max-w-md mx-auto">
             Our database is curated — not crowdsourced. If you need a specialist not listed, tell us and we&apos;ll source one through our global network.
           </p>
           <a

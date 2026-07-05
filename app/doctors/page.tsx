@@ -11,15 +11,15 @@ export default function DoctorsPage() {
   return (
     <div className="bg-white">
       {/* Header */}
-      <div className="bg-stone-900 text-white py-16">
+      <div className="bg-green-50 text-stone-900 py-16">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <p className="text-xs font-semibold uppercase tracking-widest text-amber-400 mb-4">
+          <p className="text-xs font-semibold uppercase tracking-widest text-amber-700 mb-4">
             Our specialists
           </p>
           <h1 className="text-3xl md:text-4xl font-bold mb-4">
             The network
           </h1>
-          <p className="text-stone-300 max-w-xl leading-relaxed">
+          <p className="text-stone-600 max-w-xl leading-relaxed">
             Every doctor here has been personally vetted by the founder — known through
             years of clinical collaboration, not credential review.
           </p>

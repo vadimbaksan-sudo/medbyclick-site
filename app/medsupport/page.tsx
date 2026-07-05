@@ -9,14 +9,14 @@ export default function MedSupportPage() {
 
   return (
     <div>
-      <div className="bg-stone-900 text-white py-16">
+      <div className="bg-green-50 text-stone-900 py-16">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="inline-flex items-center gap-2 text-xs font-medium text-amber-400 bg-amber-400/10 border border-amber-400/20 px-3 py-1.5 rounded-full mb-6">
+          <div className="inline-flex items-center gap-2 text-xs font-medium text-amber-700 bg-amber-100 border border-amber-200 px-3 py-1.5 rounded-full mb-6">
             <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
             MedSupport · Online Now
           </div>
           <h1 className="text-4xl md:text-5xl font-bold mb-4">24/7 Patient Support</h1>
-          <p className="text-stone-300 text-lg max-w-2xl leading-relaxed">
+          <p className="text-stone-600 text-lg max-w-2xl leading-relaxed">
             Our coordinators are available around the clock. Average response time: 2 minutes during business hours, 2 hours overnight.
           </p>
         </div>

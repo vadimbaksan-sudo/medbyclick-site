@@ -23,15 +23,15 @@ export default async function BookPage() {
   return (
     <div className="bg-white">
       {/* Header */}
-      <div className="bg-stone-900 text-white py-14">
+      <div className="bg-green-50 text-stone-900 py-14">
         <div className="max-w-3xl mx-auto px-4 sm:px-6">
-          <p className="text-xs font-semibold uppercase tracking-widest text-amber-400 mb-4">
+          <p className="text-xs font-semibold uppercase tracking-widest text-amber-700 mb-4">
             Get started
           </p>
           <h1 className="text-3xl md:text-4xl font-bold mb-4">
             Book a consultation
           </h1>
-          <p className="text-stone-300 leading-relaxed">
+          <p className="text-stone-600 leading-relaxed">
             Tell us about your situation. Our coordinator will review your case
             and confirm your appointment — usually within 24 hours.
           </p>

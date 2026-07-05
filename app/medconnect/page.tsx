@@ -10,20 +10,20 @@ export const metadata = {
 export default function MedConnectPage() {
   return (
     <div>
-      <div className="bg-stone-900 text-white py-16">
+      <div className="bg-green-50 text-stone-900 py-16">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="inline-flex items-center gap-2 text-xs font-medium text-amber-400 bg-amber-400/10 border border-amber-400/20 px-3 py-1.5 rounded-full mb-6">
-            <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />
+          <div className="inline-flex items-center gap-2 text-xs font-medium text-amber-700 bg-amber-100 border border-amber-200 px-3 py-1.5 rounded-full mb-6">
+            <span className="w-1.5 h-1.5 rounded-full bg-amber-600" />
             MedConnect Module
           </div>
           <h1 className="text-4xl md:text-5xl font-bold mb-4">Specialist Network</h1>
-          <p className="text-stone-300 text-lg max-w-2xl leading-relaxed">
+          <p className="text-stone-600 text-lg max-w-2xl leading-relaxed">
             Every doctor in this network has been personally vouched for by our founder — not matched by algorithm, not credentialed by committee.
           </p>
         </div>
       </div>
 
-      <div className="bg-stone-800 text-white">
+      <div className="bg-green-100 text-stone-900">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div className="grid grid-cols-3 md:grid-cols-3 gap-6 text-center">
             {[
@@ -32,8 +32,8 @@ export default function MedConnectPage() {
               { value: "3", label: "Countries covered" },
             ].map((s) => (
               <div key={s.label}>
-                <p className="text-2xl font-bold text-amber-400">{s.value}</p>
-                <p className="text-xs text-stone-400 mt-1">{s.label}</p>
+                <p className="text-2xl font-bold text-amber-700">{s.value}</p>
+                <p className="text-xs text-stone-600 mt-1">{s.label}</p>
               </div>
             ))}
           </div>

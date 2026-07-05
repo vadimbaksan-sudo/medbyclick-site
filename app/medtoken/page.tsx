@@ -23,16 +23,16 @@ export default function MedTokenPage() {
   return (
     <div>
       {/* ── Hero ─────────────────────────────────────────────────── */}
-      <div className="bg-stone-900 text-white py-16">
+      <div className="bg-green-50 text-stone-900 py-16">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="inline-flex items-center gap-2 text-xs font-medium text-amber-400 bg-amber-400/10 border border-amber-400/20 px-3 py-1.5 rounded-full mb-6">
-            <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />
+          <div className="inline-flex items-center gap-2 text-xs font-medium text-amber-700 bg-amber-100 border border-amber-200 px-3 py-1.5 rounded-full mb-6">
+            <span className="w-1.5 h-1.5 rounded-full bg-amber-600" />
             MedToken Module
           </div>
           <div className="grid lg:grid-cols-2 gap-10 items-center">
             <div>
               <h1 className="text-4xl md:text-5xl font-bold mb-4">MBC Token</h1>
-              <p className="text-stone-300 text-lg max-w-xl leading-relaxed mb-8">
+              <p className="text-stone-600 text-lg max-w-xl leading-relaxed mb-8">
                 The MedByClick utility token. Pay for healthcare services at a
                 15% discount, support doctor verification, and earn rewards for
                 growing the ecosystem.
@@ -46,17 +46,17 @@ export default function MedTokenPage() {
                 ].map((stat) => (
                   <div
                     key={stat.label}
-                    className="bg-white/5 border border-white/10 rounded-xl p-4 text-center"
+                    className="bg-white border border-stone-200 rounded-xl p-4 text-center"
                   >
-                    <p className="text-xs text-stone-400 mb-1">{stat.label}</p>
-                    <p className="font-bold text-amber-400 text-lg">{stat.value}</p>
+                    <p className="text-xs text-stone-600 mb-1">{stat.label}</p>
+                    <p className="font-bold text-amber-700 text-lg">{stat.value}</p>
                   </div>
                 ))}
               </div>
 
-              <div className="mt-6 p-4 bg-amber-400/10 border border-amber-400/20 rounded-xl">
-                <p className="text-xs text-amber-300 font-medium mb-1">Legal Notice</p>
-                <p className="text-xs text-stone-400 leading-relaxed">
+              <div className="mt-6 p-4 bg-amber-100 border border-amber-200 rounded-xl">
+                <p className="text-xs text-amber-800 font-medium mb-1">Legal Notice</p>
+                <p className="text-xs text-stone-600 leading-relaxed">
                   MBC is a utility token providing access to MedByClick platform services.
                   It is not a security, investment, or financial product.
                   Acquiring MBC carries risk of total loss. Not available to US or UK residents.
@@ -64,16 +64,16 @@ export default function MedTokenPage() {
               </div>
             </div>
 
-            <div className="bg-white/5 border border-white/10 rounded-2xl p-6">
+            <div className="bg-white border border-stone-200 rounded-2xl p-6">
               <div className="grid grid-cols-2 gap-4 mb-6">
                 <div className="text-center">
-                  <p className="text-xs text-stone-400 mb-1">Total Supply</p>
-                  <p className="text-3xl font-black text-amber-400">100M</p>
+                  <p className="text-xs text-stone-600 mb-1">Total Supply</p>
+                  <p className="text-3xl font-black text-amber-700">100M</p>
                   <p className="text-stone-500 text-xs">hard cap · no mint</p>
                 </div>
                 <div className="text-center">
-                  <p className="text-xs text-stone-400 mb-1">TGE Circulating</p>
-                  <p className="text-3xl font-black text-white">
+                  <p className="text-xs text-stone-600 mb-1">TGE Circulating</p>
+                  <p className="text-3xl font-black text-stone-900">
                     {(TGE_CIRCULATING / 1_000_000).toFixed(1)}M
                   </p>
                   <p className="text-stone-500 text-xs">
@@ -81,26 +81,26 @@ export default function MedTokenPage() {
                   </p>
                 </div>
               </div>
-              <div className="grid grid-cols-2 gap-4 mb-6 pt-4 border-t border-white/10">
+              <div className="grid grid-cols-2 gap-4 mb-6 pt-4 border-t border-stone-200">
                 <div className="text-center">
-                  <p className="text-xs text-stone-400 mb-1">FDV at TGE</p>
-                  <p className="text-2xl font-black text-white">$5M</p>
+                  <p className="text-xs text-stone-600 mb-1">FDV at TGE</p>
+                  <p className="text-2xl font-black text-stone-900">$5M</p>
                 </div>
                 <div className="text-center">
-                  <p className="text-xs text-stone-400 mb-1">Initial Market Cap</p>
-                  <p className="text-2xl font-black text-white">$535K</p>
+                  <p className="text-xs text-stone-600 mb-1">Initial Market Cap</p>
+                  <p className="text-2xl font-black text-stone-900">$535K</p>
                 </div>
               </div>
-              <div className="pt-4 border-t border-white/10 space-y-2">
+              <div className="pt-4 border-t border-stone-200 space-y-2">
                 {tokenInfo.tokenomics.map((item) => (
                   <div key={item.label}>
                     <div className="flex justify-between text-xs mb-1">
-                      <span className="text-stone-300">{item.label}</span>
-                      <span className="text-amber-400 font-semibold">{item.percentage}%</span>
+                      <span className="text-stone-600">{item.label}</span>
+                      <span className="text-amber-700 font-semibold">{item.percentage}%</span>
                     </div>
-                    <div className="h-1.5 rounded-full bg-white/10 overflow-hidden">
+                    <div className="h-1.5 rounded-full bg-stone-100 overflow-hidden">
                       <div
-                        className="h-full rounded-full bg-amber-400"
+                        className="h-full rounded-full bg-amber-500"
                         style={{ width: `${item.percentage * 2.5}%`, opacity: 0.5 + item.percentage / 60 }}
                       />
                     </div>
@@ -137,32 +137,32 @@ export default function MedTokenPage() {
       </div>
 
       {/* ── Burn Mechanics ───────────────────────────────────────── */}
-      <div className="bg-stone-900 text-white py-14">
+      <div className="bg-green-50 text-stone-900 py-14">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mb-8">
-            <p className="text-xs font-semibold uppercase tracking-widest text-amber-400 mb-2">Deflationary Design</p>
+            <p className="text-xs font-semibold uppercase tracking-widest text-amber-700 mb-2">Deflationary Design</p>
             <h2 className="text-2xl font-bold mb-2">How MBC is burned</h2>
-            <p className="text-stone-400 text-sm max-w-2xl">
+            <p className="text-stone-600 text-sm max-w-2xl">
               Every service transaction is a burn event. As platform volume grows, the burn rate grows proportionally —
               not through tokenomics engineering, but through real healthcare activity.
             </p>
           </div>
           <div className="grid md:grid-cols-2 gap-5 mb-10">
             {burnMechanics.map((m) => (
-              <div key={m.source} className="bg-white/5 border border-white/10 rounded-2xl p-6">
+              <div key={m.source} className="bg-white border border-stone-200 rounded-2xl p-6">
                 <div className="flex items-center gap-3 mb-3">
-                  <span className="text-2xl font-black text-amber-400">{m.burnPercent}%</span>
-                  <span className="text-sm text-stone-300 font-medium">burned</span>
+                  <span className="text-2xl font-black text-amber-700">{m.burnPercent}%</span>
+                  <span className="text-sm text-stone-600 font-medium">burned</span>
                 </div>
-                <p className="font-semibold text-white text-sm mb-1">{m.source}</p>
-                <p className="text-xs text-stone-400">{m.notes}</p>
+                <p className="font-semibold text-stone-900 text-sm mb-1">{m.source}</p>
+                <p className="text-xs text-stone-500">{m.notes}</p>
               </div>
             ))}
           </div>
 
           {/* Payment flow diagram */}
-          <div className="bg-white/5 border border-white/10 rounded-2xl p-6">
-            <p className="text-xs font-semibold uppercase tracking-widest text-amber-400 mb-4">Payment Split on Every MBC Transaction</p>
+          <div className="bg-white border border-stone-200 rounded-2xl p-6">
+            <p className="text-xs font-semibold uppercase tracking-widest text-amber-700 mb-4">Payment Split on Every MBC Transaction</p>
             <div className="flex flex-col sm:flex-row gap-3">
               {[
                 { pct: "40%", label: "Burned permanently", color: "bg-red-500/80", sub: "→ 0x000...dead" },
@@ -173,8 +173,8 @@ export default function MedTokenPage() {
                   <div className={`${item.color} px-4 py-3 text-center`}>
                     <p className="text-2xl font-black text-white">{item.pct}</p>
                   </div>
-                  <div className="bg-white/5 px-4 py-3 text-center">
-                    <p className="text-sm font-medium text-white mb-0.5">{item.label}</p>
+                  <div className="bg-stone-50 border border-stone-200 border-t-0 px-4 py-3 text-center">
+                    <p className="text-sm font-medium text-stone-900 mb-0.5">{item.label}</p>
                     <p className="text-xs text-stone-500">{item.sub}</p>
                   </div>
                 </div>

@@ -19,9 +19,9 @@ export default function CryptoCheckoutPage() {
           </p>
         </div>
       </div>
-      <div className="bg-stone-900 text-white py-12">
+      <div className="bg-green-50 text-stone-900 py-12">
         <div className="max-w-3xl mx-auto px-4 sm:px-6">
-          <p className="text-xs font-semibold uppercase tracking-widest text-amber-400 mb-3">Checkout</p>
+          <p className="text-xs font-semibold uppercase tracking-widest text-amber-700 mb-3">Checkout</p>
           <h1 className="text-3xl font-bold">Pay with USDT</h1>
         </div>
       </div>

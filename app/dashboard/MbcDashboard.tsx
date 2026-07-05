@@ -80,29 +80,29 @@ export default function MbcDashboard() {
     <div className="grid lg:grid-cols-3 gap-8">
       {/* Balance card */}
       <div className="lg:col-span-1 space-y-5">
-        <div className="bg-stone-900 text-white rounded-2xl p-6">
+        <div className="bg-green-50 text-stone-900 rounded-2xl p-6">
           <div className="flex items-center justify-between gap-2 mb-1">
-            <p className="text-xs text-stone-400">MBC Token Balance</p>
-            <span className="text-[10px] font-bold uppercase tracking-wide text-amber-300 bg-amber-400/10 border border-amber-400/30 px-1.5 py-0.5 rounded flex-shrink-0">
+            <p className="text-xs text-stone-600">MBC Token Balance</p>
+            <span className="text-[10px] font-bold uppercase tracking-wide text-amber-700 bg-amber-100 border border-amber-200 px-1.5 py-0.5 rounded shrink-0">
               Sample data — no account required yet
             </span>
           </div>
-          <p className="text-4xl font-black text-amber-400">{balance.toLocaleString()}</p>
-          <p className="text-sm text-stone-300 mt-1">≈ ${usdValue.toFixed(2)} USD</p>
+          <p className="text-4xl font-black text-amber-700">{balance.toLocaleString()}</p>
+          <p className="text-sm text-stone-600 mt-1">≈ ${usdValue.toFixed(2)} USD</p>
           <p className="text-xs text-stone-500 mt-0.5">at $0.10 / MBC</p>
 
-          <div className="mt-6 pt-5 border-t border-white/10 space-y-2">
+          <div className="mt-6 pt-5 border-t border-stone-200 space-y-2">
             <div className="flex justify-between text-xs">
-              <span className="text-stone-400">Token symbol</span>
-              <span className="font-semibold text-white">MBC</span>
+              <span className="text-stone-600">Token symbol</span>
+              <span className="font-semibold text-stone-900">MBC</span>
             </div>
             <div className="flex justify-between text-xs">
-              <span className="text-stone-400">Network</span>
-              <span className="font-semibold text-white">Ethereum (ERC-20)</span>
+              <span className="text-stone-600">Network</span>
+              <span className="font-semibold text-stone-900">Ethereum (ERC-20)</span>
             </div>
             <div className="flex justify-between text-xs">
-              <span className="text-stone-400">Current price</span>
-              <span className="font-semibold text-amber-400">$0.10</span>
+              <span className="text-stone-600">Current price</span>
+              <span className="font-semibold text-amber-700">$0.10</span>
             </div>
           </div>
 

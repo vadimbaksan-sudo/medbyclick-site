@@ -77,13 +77,13 @@ const categories = [...new Set(courses.map((c) => c.category))];
 export default function EducationPage() {
   return (
     <div>
-      <div className="bg-stone-900 text-white py-16">
+      <div className="bg-green-50 text-stone-900 py-16">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <p className="text-xs font-semibold uppercase tracking-widest text-amber-400 mb-4">
+          <p className="text-xs font-semibold uppercase tracking-widest text-amber-700 mb-4">
             Patient education
           </p>
           <h1 className="text-4xl md:text-5xl font-bold mb-4">Know more. Decide better.</h1>
-          <p className="text-stone-300 text-lg max-w-2xl leading-relaxed">
+          <p className="text-stone-600 text-lg max-w-2xl leading-relaxed">
             Clear, expert-written guides to help you understand your diagnosis, prepare for specialist consultations, and navigate complex medical decisions.
           </p>
         </div>
