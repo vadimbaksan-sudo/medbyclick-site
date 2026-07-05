@@ -251,6 +251,14 @@ export const bookings = pgTable("bookings", {
   // Which plan/flow created it, e.g. "book-form", "medai-intake".
   source: varchar("source", { length: 80 }).notNull().default("book-form"),
 
+  // Doctor-authored clinical notes (spec §3.2's "Add notes" action).
+  // Deliberately a separate column from `situationNotes` (patient-authored
+  // intake text) so the two never collide — see
+  // docs/reports/product/2026-07-04-doctor-dashboard-spec.md §3.2. Only ever
+  // written by the doctor assigned to this booking (doctorId match enforced
+  // server-side, not by this column alone).
+  doctorNotes: text("doctor_notes"),
+
   // Per docs/reports/product/2026-07-04-medtravel-bidirectional-flow-spec.md
   // §2: nullable, only populated by bookings originating from the medtravel
   // flow. Null means "not a cross-border-travel booking" and every existing
