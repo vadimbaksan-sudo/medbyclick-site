@@ -2,13 +2,13 @@
 
 import { useActionState } from "react";
 import Link from "next/link";
-import { registerPatient } from "@/lib/auth/actions";
+import { registerStudent } from "@/lib/auth/actions";
 import type { AuthFormState } from "@/lib/auth/validation";
 
 const initialState: AuthFormState | undefined = undefined;
 
-export default function RegisterForm() {
-  const [state, action, pending] = useActionState(registerPatient, initialState);
+export default function RegisterStudentForm() {
+  const [state, action, pending] = useActionState(registerStudent, initialState);
 
   return (
     <>
@@ -76,37 +76,20 @@ export default function RegisterForm() {
           )}
         </div>
 
-        <div className="grid grid-cols-2 gap-4">
-          <div>
-            <label htmlFor="citizenshipOrCountry" className="block text-sm font-medium text-stone-700 mb-1.5">
-              Citizenship / country
-            </label>
-            <input
-              id="citizenshipOrCountry"
-              name="citizenshipOrCountry"
-              type="text"
-              placeholder="e.g. Russia, Israel"
-              className="w-full border border-stone-200 rounded-lg px-4 py-2.5 text-sm text-stone-900 placeholder-stone-400 focus:outline-none focus:ring-2 focus:ring-stone-300 transition"
-            />
-            {state?.errors?.citizenshipOrCountry && (
-              <p className="text-xs text-red-500 mt-1">{state.errors.citizenshipOrCountry[0]}</p>
-            )}
-          </div>
-          <div>
-            <label htmlFor="preferredLanguage" className="block text-sm font-medium text-stone-700 mb-1.5">
-              Preferred language
-            </label>
-            <select
-              id="preferredLanguage"
-              name="preferredLanguage"
-              defaultValue="ru"
-              className="w-full border border-stone-200 rounded-lg px-4 py-2.5 text-sm text-stone-900 focus:outline-none focus:ring-2 focus:ring-stone-300 transition bg-white"
-            >
-              <option value="ru">Russian</option>
-              <option value="en">English</option>
-              <option value="he">Hebrew</option>
-            </select>
-          </div>
+        <div>
+          <label htmlFor="preferredLanguage" className="block text-sm font-medium text-stone-700 mb-1.5">
+            Preferred language
+          </label>
+          <select
+            id="preferredLanguage"
+            name="preferredLanguage"
+            defaultValue="ru"
+            className="w-full border border-stone-200 rounded-lg px-4 py-2.5 text-sm text-stone-900 focus:outline-none focus:ring-2 focus:ring-stone-300 transition bg-white"
+          >
+            <option value="ru">Russian</option>
+            <option value="en">English</option>
+            <option value="he">Hebrew</option>
+          </select>
         </div>
 
         {state?.message && (
@@ -135,9 +118,9 @@ export default function RegisterForm() {
         </Link>
       </p>
       <p className="text-center text-sm text-stone-500 mt-2">
-        Are you a doctor?{" "}
-        <Link href="/register/doctor/" className="text-stone-900 font-medium underline hover:no-underline">
-          Register here
+        Here for care instead?{" "}
+        <Link href="/register/patient/" className="text-stone-900 font-medium underline hover:no-underline">
+          Patient sign up
         </Link>
       </p>
     </>

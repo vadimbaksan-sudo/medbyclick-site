@@ -37,7 +37,7 @@ import { relations } from "drizzle-orm";
 // Enums
 // ---------------------------------------------------------------------------
 
-export const userRoleEnum = pgEnum("user_role", ["patient", "doctor", "admin"]);
+export const userRoleEnum = pgEnum("user_role", ["patient", "doctor", "student", "admin"]);
 
 export const localeEnum = pgEnum("locale", ["ru", "en", "he"]);
 
@@ -93,6 +93,12 @@ export const medicalEntryTypeEnum = pgEnum("medical_entry_type", [
   "diagnosis",
 ]);
 
+export const courseEnrollmentStatusEnum = pgEnum("course_enrollment_status", [
+  "enrolled",
+  "in_progress",
+  "completed",
+]);
+
 // ---------------------------------------------------------------------------
 // users — public-schema profile row, 1:1 with Supabase auth.users by id.
 // ---------------------------------------------------------------------------
@@ -124,6 +130,7 @@ export const usersRelations = relations(users, ({ one, many }) => ({
   bookingsAsPatient: many(bookings),
   payments: many(payments),
   medicalHistoryEntries: many(medicalHistoryEntries),
+  courseEnrollments: many(courseEnrollments),
 }));
 
 // ---------------------------------------------------------------------------
@@ -373,6 +380,46 @@ export const medicalHistoryEntriesRelations = relations(medicalHistoryEntries, (
 }));
 
 // ---------------------------------------------------------------------------
+// course_enrollments — real enrollment + progress tracking for mededu.
+//
+// Course *content* (title, instructor, description) still lives as static
+// data in modules/mededu/data.ts, same as medconnect's doctor cards before
+// doctor_profiles existed — only the per-user enrollment/progress relationship
+// needs a real row, so `courseId` is a plain string matching that static
+// array's `id` field rather than a foreign key into a courses table.
+//
+// `userId` is intentionally not restricted to role = 'student': course
+// content (patient advocacy, understanding a diagnosis) is directly useful
+// to patients too, and gating enrollment by role would just be friction with
+// no real safety/business reason behind it. "Student" is the primary
+// registration path for someone whose main reason to be on the platform is
+// the education module, not an access-control boundary.
+// ---------------------------------------------------------------------------
+
+export const courseEnrollments = pgTable("course_enrollments", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  userId: uuid("user_id").notNull().references(() => users.id, { onDelete: "cascade" }),
+  courseId: varchar("course_id", { length: 120 }).notNull(),
+
+  status: courseEnrollmentStatusEnum("status").notNull().default("enrolled"),
+  progressPercent: integer("progress_percent").notNull().default(0),
+
+  enrolledAt: timestamp("enrolled_at", { withTimezone: true }).notNull().defaultNow(),
+  completedAt: timestamp("completed_at", { withTimezone: true }),
+  updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
+}, (table) => ([
+  index("course_enrollments_user_id_idx").on(table.userId),
+  uniqueIndex("course_enrollments_user_course_unique_idx").on(table.userId, table.courseId),
+]));
+
+export const courseEnrollmentsRelations = relations(courseEnrollments, ({ one }) => ({
+  user: one(users, {
+    fields: [courseEnrollments.userId],
+    references: [users.id],
+  }),
+}));
+
+// ---------------------------------------------------------------------------
 // Inferred types
 // ---------------------------------------------------------------------------
 
@@ -393,3 +440,6 @@ export type NewDbPayment = typeof payments.$inferInsert;
 
 export type DbMedicalHistoryEntry = typeof medicalHistoryEntries.$inferSelect;
 export type NewDbMedicalHistoryEntry = typeof medicalHistoryEntries.$inferInsert;
+
+export type DbCourseEnrollment = typeof courseEnrollments.$inferSelect;
+export type NewDbCourseEnrollment = typeof courseEnrollments.$inferInsert;

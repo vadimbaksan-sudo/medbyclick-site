@@ -8,6 +8,7 @@ import { users, patientProfiles, doctorProfiles } from "@/lib/db/schema";
 import {
   RegisterFormSchema,
   RegisterDoctorFormSchema,
+  RegisterStudentFormSchema,
   LoginFormSchema,
   type AuthFormState,
 } from "./validation";
@@ -186,6 +187,67 @@ export async function registerDoctor(
 
   revalidatePath("/doctor-dashboard");
   redirect("/doctor-dashboard");
+}
+
+/**
+ * Student self-registration Server Action — mirrors registerPatient()'s
+ * shape, minus a profile table (see RegisterStudentFormSchema's comment).
+ * Every account created through this form is role: "student".
+ */
+export async function registerStudent(
+  _prevState: AuthFormState | undefined,
+  formData: FormData
+): Promise<AuthFormState> {
+  const validated = RegisterStudentFormSchema.safeParse({
+    firstName: formData.get("firstName"),
+    lastName: formData.get("lastName"),
+    email: formData.get("email"),
+    password: formData.get("password"),
+    preferredLanguage: formData.get("preferredLanguage") || "ru",
+  });
+
+  if (!validated.success) {
+    return { errors: validated.error.flatten().fieldErrors };
+  }
+
+  if (!isSupabaseConfigured() || !isDatabaseConfigured()) {
+    return {
+      message:
+        "Registration is not available yet — the Supabase project and database " +
+        "have not been configured in this environment. Please contact support.",
+    };
+  }
+
+  const { firstName, lastName, email, password, preferredLanguage } = validated.data;
+  const name = `${firstName} ${lastName}`.trim();
+
+  const supabase = await createSupabaseServerClient();
+  const { data, error } = await supabase.auth.signUp({ email, password });
+
+  if (error || !data.user) {
+    return { message: error?.message ?? "Could not create your account. Please try again." };
+  }
+
+  try {
+    const db = getDb();
+    await db.insert(users).values({
+      id: data.user.id,
+      email,
+      name,
+      role: "student",
+      locale: preferredLanguage,
+    });
+  } catch (err) {
+    console.error("[auth/actions] Failed to create user row after signUp", err);
+    return {
+      message:
+        "Your account was created but we couldn't finish setting up your profile. " +
+        "Please contact support.",
+    };
+  }
+
+  revalidatePath("/student-dashboard");
+  redirect("/student-dashboard");
 }
 
 /**

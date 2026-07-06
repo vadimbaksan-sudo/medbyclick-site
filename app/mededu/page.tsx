@@ -1,12 +1,33 @@
 import { courses } from "@/modules/mededu/data";
 import CourseCard from "@/modules/mededu/components/CourseCard";
+import { getCurrentUser } from "@/lib/auth/dal";
+import { isDatabaseConfigured } from "@/lib/db/client";
+import { listEnrollmentsForUser } from "@/lib/db/queries/course-enrollments";
+
+// Reads the auth session (cookies) to show enrollment state — same reason
+// app/dashboard/page.tsx forces dynamic rendering.
+export const dynamic = "force-dynamic";
 
 export const metadata = {
   title: "MedEdu — Medical Education · MedByClick",
   description: "Patient education courses taught by our specialist network.",
 };
 
-export default function MedEduPage() {
+export default async function MedEduPage() {
+  const user = await getCurrentUser();
+
+  let enrollmentsByCourseId: Record<string, { status: "enrolled" | "in_progress" | "completed"; progressPercent: number }> = {};
+  if (user && isDatabaseConfigured()) {
+    try {
+      const enrollments = await listEnrollmentsForUser(user.id);
+      enrollmentsByCourseId = Object.fromEntries(
+        enrollments.map((e) => [e.courseId, { status: e.status, progressPercent: e.progressPercent }])
+      );
+    } catch (err) {
+      console.error("[mededu] Failed to load enrollments", err);
+    }
+  }
+
   return (
     <div>
       <div className="bg-green-50 text-stone-900 py-16">
@@ -29,7 +50,12 @@ export default function MedEduPage() {
         </div>
         <div className="grid md:grid-cols-2 lg:grid-cols-2 gap-6">
           {courses.map((course) => (
-            <CourseCard key={course.id} course={course} />
+            <CourseCard
+              key={course.id}
+              course={course}
+              enrollment={enrollmentsByCourseId[course.id] ?? null}
+              loggedIn={Boolean(user)}
+            />
           ))}
         </div>
       </div>

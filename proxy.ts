@@ -19,7 +19,7 @@ import { createServerClient } from "@supabase/ssr";
  *      Proxy must not be the only line of defense.
  */
 
-const PROTECTED_PREFIXES = ["/dashboard", "/doctor-dashboard", "/book"];
+const PROTECTED_PREFIXES = ["/dashboard", "/doctor-dashboard", "/student-dashboard", "/book"];
 const AUTH_PAGES = ["/login", "/register"];
 
 export default async function proxy(request: NextRequest) {
