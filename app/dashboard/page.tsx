@@ -24,9 +24,10 @@ export const metadata = {
 export default async function DashboardPage() {
   const user = await requireUser();
 
-  // Doctors get their own cabinet (spec §7) — /dashboard is the patient
+  // Doctors and students get their own cabinets — /dashboard is the patient
   // surface. Admins aren't in scope for a dedicated dashboard in this pass.
   if (user.role === "doctor") redirect("/doctor-dashboard");
+  if (user.role === "student") redirect("/student-dashboard");
 
   let bookings: DbBooking[] = [];
   let payments: DbPayment[] = [];

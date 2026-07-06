@@ -6,6 +6,7 @@ import Link from "next/link";
 import { doctors } from "@/modules/medconnect/data";
 import { submitBooking } from "@/lib/bookings/actions";
 import { avatarGradientClass } from "@/lib/ui/avatarColor";
+import { SPECIALTIES } from "@/lib/constants/specialties";
 import type { BookingFormState } from "@/lib/bookings/validation";
 
 type CaseType = "new" | "second-opinion" | "treatment-planning";
@@ -27,20 +28,6 @@ const CASE_TYPES: { id: CaseType; label: string; description: string }[] = [
     label: "Decide on treatment",
     description: "I have a diagnosis and need guidance on which treatment path to take",
   },
-];
-
-const SPECIALTIES = [
-  "Oncology",
-  "Cardiology",
-  "Neurology",
-  "Gastroenterology",
-  "Endocrinology",
-  "Orthopedic Surgery",
-  "Hematology",
-  "Rheumatology",
-  "Pulmonology",
-  "Psychiatry",
-  "Other / Not sure",
 ];
 
 const SPECIALTY_TO_DOCTOR: Record<string, string> = {

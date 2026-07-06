@@ -57,6 +57,28 @@ export const RegisterDoctorFormSchema = z.object({
 
 export type RegisterDoctorFormValues = z.infer<typeof RegisterDoctorFormSchema>;
 
+/**
+ * Student self-registration (app/register/student, lib/auth/actions.ts's
+ * registerStudent()). Deliberately minimal — a student account has no
+ * profile table of its own (see lib/db/schema.ts's course_enrollments
+ * comment); the only student-specific data is which courses they've
+ * enrolled in, created separately via lib/mededu/actions.ts once they
+ * actually enroll, not at registration time.
+ */
+export const RegisterStudentFormSchema = z.object({
+  firstName: z.string().trim().min(1, "First name is required."),
+  lastName: z.string().trim().min(1, "Last name is required."),
+  email: z.string().trim().min(1, "Email is required.").email("Enter a valid email address."),
+  password: z
+    .string()
+    .min(8, "Password must be at least 8 characters.")
+    .regex(/[a-zA-Z]/, "Password must contain at least one letter.")
+    .regex(/[0-9]/, "Password must contain at least one number."),
+  preferredLanguage: z.enum(["ru", "en", "he"]).default("ru"),
+});
+
+export type RegisterStudentFormValues = z.infer<typeof RegisterStudentFormSchema>;
+
 export const LoginFormSchema = z.object({
   email: z.string().trim().min(1, "Email is required.").email("Enter a valid email address."),
   password: z.string().min(1, "Password is required."),

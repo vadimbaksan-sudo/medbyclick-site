@@ -4,6 +4,7 @@ import { useActionState } from "react";
 import Link from "next/link";
 import { registerDoctor } from "@/lib/auth/actions";
 import type { AuthFormState } from "@/lib/auth/validation";
+import { SPECIALTIES } from "@/lib/constants/specialties";
 
 const initialState: AuthFormState | undefined = undefined;
 
@@ -81,13 +82,21 @@ export default function RegisterDoctorForm() {
             <label htmlFor="specialty" className="block text-sm font-medium text-stone-700 mb-1.5">
               Specialty
             </label>
-            <input
+            <select
               id="specialty"
               name="specialty"
-              type="text"
-              placeholder="e.g. Oncology"
-              className="w-full border border-stone-200 rounded-lg px-4 py-2.5 text-sm text-stone-900 placeholder-stone-400 focus:outline-none focus:ring-2 focus:ring-stone-300 transition"
-            />
+              defaultValue=""
+              className="w-full border border-stone-200 rounded-lg px-4 py-2.5 text-sm text-stone-900 focus:outline-none focus:ring-2 focus:ring-stone-300 transition bg-white"
+            >
+              <option value="" disabled>
+                Select a specialty
+              </option>
+              {SPECIALTIES.map((s) => (
+                <option key={s} value={s}>
+                  {s}
+                </option>
+              ))}
+            </select>
             {state?.errors?.specialty && (
               <p className="text-xs text-red-500 mt-1">{state.errors.specialty[0]}</p>
             )}
@@ -197,7 +206,7 @@ export default function RegisterDoctorForm() {
       </p>
       <p className="text-center text-sm text-stone-500 mt-2">
         Registering as a patient instead?{" "}
-        <Link href="/register/" className="text-stone-900 font-medium underline hover:no-underline">
+        <Link href="/register/patient/" className="text-stone-900 font-medium underline hover:no-underline">
           Patient sign up
         </Link>
       </p>
