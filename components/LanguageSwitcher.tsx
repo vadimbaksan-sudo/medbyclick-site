@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { useLanguage } from "@/components/LanguageProvider";
+import { useLanguage, type LanguageCode } from "@/components/LanguageProvider";
 
 // Full 12-language target set per docs/ROADMAP.md "Localization (12 Languages)"
 // and docs/decision-log/0003-localization-12-languages.md. Only English and
@@ -14,9 +14,9 @@ import { useLanguage } from "@/components/LanguageProvider";
 // content for those 10 — that would violate the sign-off requirement.
 const LANGUAGES = [
   { code: "en", flag: "🇬🇧", name: "English", translated: true },
-  { code: "tr", flag: "🇹🇷", name: "Türkçe", translated: false },
-  { code: "es", flag: "🇪🇸", name: "Español", translated: false },
-  { code: "fr", flag: "🇫🇷", name: "Français", translated: false },
+  { code: "tr", flag: "🇹🇷", name: "Türkçe", translated: true },
+  { code: "es", flag: "🇪🇸", name: "Español", translated: true },
+  { code: "fr", flag: "🇫🇷", name: "Français", translated: true },
   { code: "de", flag: "🇩🇪", name: "Deutsch", translated: false },
   { code: "ru", flag: "🇷🇺", name: "Русский", translated: true },
   { code: "zh", flag: "🇨🇳", name: "中文", translated: false },
@@ -62,7 +62,7 @@ export default function LanguageSwitcher() {
     localStorage.setItem(DISPLAY_KEY, lang.code);
     // Only en/ru actually translate content; anything else falls back to
     // English rather than showing a mismatched flag/content combination.
-    setCode(lang.translated ? (lang.code as "en" | "ru") : "en");
+    setCode(lang.translated ? (lang.code as LanguageCode) : "en");
     setOpen(false);
   }
 

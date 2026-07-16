@@ -51,7 +51,7 @@ export default function Nav() {
           <Link href="/" className="flex items-center gap-2 shrink-0" onClick={closeAll}>
             <span className="text-stone-900 font-semibold text-lg tracking-tight">MedByClick</span>
             <span className="hidden sm:inline-block text-xs font-medium text-amber-700 bg-amber-50 border border-amber-200 px-2 py-0.5 rounded-full">
-              <T en="Platform" ru="Платформа" />
+              <T en="Platform" ru="Платформа" tr="Platform" es="Plataforma" fr="Plateforme" />
             </span>
           </Link>
 
@@ -61,7 +61,7 @@ export default function Nav() {
               href="/specialists/"
               className="text-sm font-medium text-stone-600 hover:text-stone-900 px-3 py-2 rounded-lg hover:bg-stone-50 transition-colors"
             >
-              <T en="Specialists" ru="Специалисты" />
+              <T en="Specialists" ru="Специалисты" tr="Uzmanlar" es="Especialistas" fr="Spécialistes" />
             </Link>
 
             {primary && primary.href !== "/medconnect" && (
@@ -80,7 +80,7 @@ export default function Nav() {
                   onBlur={() => setTimeout(() => setPlatformOpen(false), 150)}
                   className="flex items-center gap-1 text-sm font-medium text-stone-600 hover:text-stone-900 px-3 py-2 rounded-lg hover:bg-stone-50 transition-colors"
                 >
-                  <T en="Platform" ru="Платформа" />
+                  <T en="Platform" ru="Платформа" tr="Platform" es="Plataforma" fr="Plateforme" />
                   <svg className={`w-3.5 h-3.5 transition-transform ${platformOpen ? "rotate-180" : ""}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                   </svg>
@@ -115,7 +115,7 @@ export default function Nav() {
                 href="/dashboard/"
                 className="text-sm font-medium text-stone-600 hover:text-stone-900 px-3 py-2 rounded-lg hover:bg-stone-50 transition-colors"
               >
-                <T en="Dashboard" ru="Кабинет" />
+                <T en="Dashboard" ru="Кабинет" tr="Panel" es="Panel" fr="Tableau de bord" />
               </Link>
               {loggedIn ? (
                 <form action={logoutUser}>
@@ -123,7 +123,7 @@ export default function Nav() {
                     type="submit"
                     className="text-sm font-medium text-stone-600 hover:text-stone-900 px-3 py-2 rounded-lg hover:bg-stone-50 transition-colors"
                   >
-                    <T en="Log out" ru="Выйти" />
+                    <T en="Log out" ru="Выйти" tr="Çıkış yap" es="Cerrar sesión" fr="Se déconnecter" />
                   </button>
                 </form>
               ) : (
@@ -132,13 +132,13 @@ export default function Nav() {
                     href="/login/"
                     className="text-sm font-medium text-stone-600 hover:text-stone-900 px-3 py-2 rounded-lg hover:bg-stone-50 transition-colors"
                   >
-                    <T en="Log in" ru="Войти" />
+                    <T en="Log in" ru="Войти" tr="Giriş yap" es="Iniciar sesión" fr="Se connecter" />
                   </Link>
                   <Link
                     href="/register/"
                     className="text-sm font-medium bg-stone-100 hover:bg-stone-200 text-stone-900 px-3 py-2 rounded-lg transition-colors"
                   >
-                    <T en="Register" ru="Регистрация" />
+                    <T en="Register" ru="Регистрация" tr="Kayıt ol" es="Registrarse" fr="S'inscrire" />
                   </Link>
                 </>
               )}
@@ -160,7 +160,7 @@ export default function Nav() {
                 href="/book/"
                 className="text-sm font-medium bg-stone-900 text-white px-4 py-2 rounded-lg hover:bg-stone-700 transition-colors"
               >
-                <T en="Book a Consultation" ru="Записаться" />
+                <T en="Book a Consultation" ru="Записаться" tr="Randevu Al" es="Reservar" fr="Réserver" />
               </Link>
             </div>
           </nav>
@@ -197,7 +197,7 @@ export default function Nav() {
               className="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-stone-50 transition-colors"
             >
               <span className="text-lg">🩺</span>
-              <span className="text-sm font-medium text-stone-700"><T en="Specialists" ru="Специалисты" /></span>
+              <span className="text-sm font-medium text-stone-700"><T en="Specialists" ru="Специалисты" tr="Uzmanlar" es="Especialistas" fr="Spécialistes" /></span>
             </Link>
             <Link
               href="/medai/"
@@ -205,7 +205,7 @@ export default function Nav() {
               className="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-stone-50 transition-colors"
             >
               <span className="text-lg">🧠</span>
-              <span className="text-sm font-medium text-stone-700"><T en="AI Diagnostics" ru="ИИ-диагностика" /></span>
+              <span className="text-sm font-medium text-stone-700"><T en="AI Diagnostics" ru="ИИ-диагностика" tr="Yapay Zeka Tanı" es="Diagnóstico IA" fr="Diagnostic IA" /></span>
             </Link>
             <Link
               href="/pricing/"
@@ -213,7 +213,7 @@ export default function Nav() {
               className="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-stone-50 transition-colors"
             >
               <span className="text-lg">💳</span>
-              <span className="text-sm font-medium text-stone-700"><T en="Pricing" ru="Цены" /></span>
+              <span className="text-sm font-medium text-stone-700"><T en="Pricing" ru="Цены" tr="Fiyatlandırma" es="Precios" fr="Tarifs" /></span>
             </Link>
             <Link
               href="/medtravel/"
@@ -221,7 +221,7 @@ export default function Nav() {
               className="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-stone-50 transition-colors"
             >
               <span className="text-lg">✈️</span>
-              <span className="text-sm font-medium text-stone-700"><T en="Medical Travel" ru="Медицинские поездки" /></span>
+              <span className="text-sm font-medium text-stone-700"><T en="Medical Travel" ru="Медицинские поездки" tr="Sağlık Turizmi" es="Viajes Médicos" fr="Voyage Médical" /></span>
             </Link>
             <Link
               href="/mededu/"
@@ -229,7 +229,7 @@ export default function Nav() {
               className="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-stone-50 transition-colors"
             >
               <span className="text-lg">📚</span>
-              <span className="text-sm font-medium text-stone-700"><T en="Education" ru="Образование" /></span>
+              <span className="text-sm font-medium text-stone-700"><T en="Education" ru="Образование" tr="Eğitim" es="Educación" fr="Éducation" /></span>
             </Link>
 
             <div className="pt-2 border-t border-stone-100 mt-2 space-y-2">
@@ -240,14 +240,14 @@ export default function Nav() {
                     onClick={closeAll}
                     className="flex-1 text-center py-2.5 border border-stone-200 text-stone-700 text-sm font-medium rounded-xl hover:bg-stone-50 transition-colors"
                   >
-                    <T en="Dashboard" ru="Кабинет" />
+                    <T en="Dashboard" ru="Кабинет" tr="Panel" es="Panel" fr="Tableau de bord" />
                   </Link>
                   <form action={logoutUser} className="flex-1" onSubmit={closeAll}>
                     <button
                       type="submit"
                       className="w-full text-center py-2.5 bg-stone-100 text-stone-900 text-sm font-medium rounded-xl hover:bg-stone-200 transition-colors"
                     >
-                      <T en="Log out" ru="Выйти" />
+                      <T en="Log out" ru="Выйти" tr="Çıkış yap" es="Cerrar sesión" fr="Se déconnecter" />
                     </button>
                   </form>
                 </div>
@@ -258,14 +258,14 @@ export default function Nav() {
                     onClick={closeAll}
                     className="flex-1 text-center py-2.5 border border-stone-200 text-stone-700 text-sm font-medium rounded-xl hover:bg-stone-50 transition-colors"
                   >
-                    <T en="Log in" ru="Войти" />
+                    <T en="Log in" ru="Войти" tr="Giriş yap" es="Iniciar sesión" fr="Se connecter" />
                   </Link>
                   <Link
                     href="/register/"
                     onClick={closeAll}
                     className="flex-1 text-center py-2.5 bg-stone-100 text-stone-900 text-sm font-medium rounded-xl hover:bg-stone-200 transition-colors"
                   >
-                    <T en="Register" ru="Регистрация" />
+                    <T en="Register" ru="Регистрация" tr="Kayıt ol" es="Registrarse" fr="S'inscrire" />
                   </Link>
                 </div>
               )}
@@ -288,7 +288,7 @@ export default function Nav() {
                 onClick={closeAll}
                 className="block text-center py-3 bg-stone-900 text-white text-sm font-semibold rounded-xl hover:bg-stone-700 transition-colors"
               >
-                <T en="Book a Consultation" ru="Записаться на консультацию" />
+                <T en="Book a Consultation" ru="Записаться на консультацию" tr="Randevu Alın" es="Reservar una consulta" fr="Réserver une consultation" />
               </Link>
             </div>
           </div>

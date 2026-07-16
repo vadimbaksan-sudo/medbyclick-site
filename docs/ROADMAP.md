@@ -202,6 +202,25 @@ applied per-language) · Consult: **Legal & Compliance** (advertising/medical-cl
 rules differ by jurisdiction, notably China and Gulf states)
 
 Decided 2026-07-06 (Vadim). Full record: `docs/decision-log/0003-localization-12-languages.md`.
+Scope extended 2026-07-16 (Vadim): `docs/decision-log/0004-mvp-i18n-en-ru-tr-es-fr.md`.
+
+**Status (2026-07-16):** MVP i18n is live — `components/LanguageProvider.tsx` +
+`components/T.tsx` translate marketing/UI chrome (nav, hero, homepage sections,
+footer) for **English, Russian, Turkish, Spanish, French**. This jumps ahead of
+the strict demand-only sequencing below for Turkish/Spanish/French specifically
+— justified because all three are Latin-script with no RTL or CJK typography
+cost, so the engineering-complexity concern that motivates demand-gating
+doesn't apply to them; German, Chinese, Japanese, Korean, Arabic, Italian, and
+Portuguese remain flag-only ("soon") in the switcher pending real demand.
+**Not translated in any of the 5 live languages**: doctor endorsement quotes/
+names/specialties (pending Medical Advisory sign-off per language), the
+footer's legal/scope disclaimer (pending Legal & Compliance review), and
+module registry nav labels (out of scope for this pass). Translations were
+drafted directly (not by certified medical translators) — acceptable *only*
+because the translated strings are non-clinical marketing/UI chrome; this does
+not extend to the excluded clinically-adjacent content above, which still
+requires the certified-translator + Medical Advisory process below before it
+ships in any language.
 
 **Target language set (12):** English, Turkish, Spanish, French, German, Russian,
 Chinese (Mandarin), Japanese, Korean, Arabic, Italian, Portuguese.
