@@ -79,6 +79,10 @@ unprovisioned vendor account.
    decision (`docs/reports/product/2026-07-02-t2-platform-evaluation-rubric.md`)
    may make `medsupport`'s custom build redundant. That module's phase is
    explicitly contingent on T2's outcome.
+6. **Localization ships by demonstrated demand, not by flag count.** See
+   "Localization (12 Languages)" below — languages are added to the queue as
+   real patient/doctor volume from that market appears, not built speculatively
+   ahead of it.
 
 ## Phase Summary
 
@@ -188,6 +192,50 @@ pipeline exist, ahead of anything token-gated.
 land before Phase 1 of the whitepaper's token roadmap (§18) completes: audit,
 mainnet deployment, and published legal documents. Building ahead of that
 produces a wallet UI with no contract to call.
+
+## Localization (12 Languages) — Cross-Cutting
+
+Owner: **CTO/Product** (technical sequencing) · Required gate: **Medical Advisory**
+(clinical sign-off per language, per this role's existing CEO-only authority in
+`docs/governance/DECISION_MATRIX.md` — not a new decision, just that authority
+applied per-language) · Consult: **Legal & Compliance** (advertising/medical-claim
+rules differ by jurisdiction, notably China and Gulf states)
+
+Decided 2026-07-06 (Vadim). Full record: `docs/decision-log/0003-localization-12-languages.md`.
+
+**Target language set (12):** English, Turkish, Spanish, French, German, Russian,
+Chinese (Mandarin), Japanese, Korean, Arabic, Italian, Portuguese.
+
+**Source of truth:** English. Every other language is a translation of the
+English copy, never translated peer-to-peer between two non-English languages
+(avoids compounding drift).
+
+**Translation standard — do not implement literal/word-for-word translation
+for clinical content.** Certified medical translators only, per language.
+Reason: literal translation of dosages, symptom descriptions, and medical
+instructions is a patient-safety and liability risk (idiom, unit, and
+cultural-context mismatches), which is exactly why Medical Advisory holds
+final veto on clinical accuracy of any published claim — that authority
+extends to every translated version, not just the English original. No
+language variant of clinically-relevant copy (`medai`, `mededu`, doctor/patient
+instructions, booking flow copy) ships without Medical Advisory sign-off *for
+that language*, separate from the English sign-off.
+
+**Sequencing (by demonstrated demand, not all 12 at once):**
+1. **English + Russian** — already the platform's real audience (diaspora +
+   existing base); no new build, just the formal i18n pass.
+2. **Turkish** — concrete business driver (Turkish Airlines partnership
+   discussion), goes next once Phase 1's core loop is real.
+3. **Remaining 9** (Spanish, French, German, Chinese, Japanese, Korean, Arabic,
+   Italian, Portuguese) — queued, prioritized when real patient/doctor volume
+   from that market appears. Not built speculatively ahead of demand.
+
+**Known engineering complexity, flagged now so it isn't rediscovered later:**
+Arabic requires RTL layout support (not just string translation); Chinese,
+Japanese, and Korean need CJK-appropriate typography/font handling, not a
+drop-in of the Latin-script design system. `medai`'s intake flow already has
+some i18n scaffolding (see Phase 1 above) — audit it before assuming it covers
+these three properly.
 
 ## What This Document Does Not Cover
 
