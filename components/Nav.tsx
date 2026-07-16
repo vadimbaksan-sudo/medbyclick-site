@@ -7,6 +7,7 @@ import { createSupabaseBrowserClient } from "@/lib/supabase/client";
 import { logoutUser } from "@/lib/auth/actions";
 import { CONTACT } from "@/lib/contact";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
+import T from "@/components/T";
 
 export default function Nav() {
   const [open, setOpen] = useState(false);
@@ -50,7 +51,7 @@ export default function Nav() {
           <Link href="/" className="flex items-center gap-2 shrink-0" onClick={closeAll}>
             <span className="text-stone-900 font-semibold text-lg tracking-tight">MedByClick</span>
             <span className="hidden sm:inline-block text-xs font-medium text-amber-700 bg-amber-50 border border-amber-200 px-2 py-0.5 rounded-full">
-              Platform
+              <T en="Platform" ru="Платформа" />
             </span>
           </Link>
 
@@ -60,7 +61,7 @@ export default function Nav() {
               href="/specialists/"
               className="text-sm font-medium text-stone-600 hover:text-stone-900 px-3 py-2 rounded-lg hover:bg-stone-50 transition-colors"
             >
-              Specialists
+              <T en="Specialists" ru="Специалисты" />
             </Link>
 
             {primary && primary.href !== "/medconnect" && (
@@ -79,7 +80,7 @@ export default function Nav() {
                   onBlur={() => setTimeout(() => setPlatformOpen(false), 150)}
                   className="flex items-center gap-1 text-sm font-medium text-stone-600 hover:text-stone-900 px-3 py-2 rounded-lg hover:bg-stone-50 transition-colors"
                 >
-                  Platform
+                  <T en="Platform" ru="Платформа" />
                   <svg className={`w-3.5 h-3.5 transition-transform ${platformOpen ? "rotate-180" : ""}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                   </svg>
@@ -114,7 +115,7 @@ export default function Nav() {
                 href="/dashboard/"
                 className="text-sm font-medium text-stone-600 hover:text-stone-900 px-3 py-2 rounded-lg hover:bg-stone-50 transition-colors"
               >
-                Dashboard
+                <T en="Dashboard" ru="Кабинет" />
               </Link>
               {loggedIn ? (
                 <form action={logoutUser}>
@@ -122,7 +123,7 @@ export default function Nav() {
                     type="submit"
                     className="text-sm font-medium text-stone-600 hover:text-stone-900 px-3 py-2 rounded-lg hover:bg-stone-50 transition-colors"
                   >
-                    Log out
+                    <T en="Log out" ru="Выйти" />
                   </button>
                 </form>
               ) : (
@@ -131,13 +132,13 @@ export default function Nav() {
                     href="/login/"
                     className="text-sm font-medium text-stone-600 hover:text-stone-900 px-3 py-2 rounded-lg hover:bg-stone-50 transition-colors"
                   >
-                    Log in
+                    <T en="Log in" ru="Войти" />
                   </Link>
                   <Link
                     href="/register/"
                     className="text-sm font-medium bg-stone-100 hover:bg-stone-200 text-stone-900 px-3 py-2 rounded-lg transition-colors"
                   >
-                    Register
+                    <T en="Register" ru="Регистрация" />
                   </Link>
                 </>
               )}
@@ -159,7 +160,7 @@ export default function Nav() {
                 href="/book/"
                 className="text-sm font-medium bg-stone-900 text-white px-4 py-2 rounded-lg hover:bg-stone-700 transition-colors"
               >
-                Book a Consultation
+                <T en="Book a Consultation" ru="Записаться" />
               </Link>
             </div>
           </nav>
@@ -196,7 +197,7 @@ export default function Nav() {
               className="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-stone-50 transition-colors"
             >
               <span className="text-lg">🩺</span>
-              <span className="text-sm font-medium text-stone-700">Specialists</span>
+              <span className="text-sm font-medium text-stone-700"><T en="Specialists" ru="Специалисты" /></span>
             </Link>
             <Link
               href="/medai/"
@@ -204,7 +205,7 @@ export default function Nav() {
               className="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-stone-50 transition-colors"
             >
               <span className="text-lg">🧠</span>
-              <span className="text-sm font-medium text-stone-700">AI Diagnostics</span>
+              <span className="text-sm font-medium text-stone-700"><T en="AI Diagnostics" ru="ИИ-диагностика" /></span>
             </Link>
             <Link
               href="/pricing/"
@@ -212,7 +213,7 @@ export default function Nav() {
               className="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-stone-50 transition-colors"
             >
               <span className="text-lg">💳</span>
-              <span className="text-sm font-medium text-stone-700">Pricing</span>
+              <span className="text-sm font-medium text-stone-700"><T en="Pricing" ru="Цены" /></span>
             </Link>
             <Link
               href="/medtravel/"
@@ -220,7 +221,7 @@ export default function Nav() {
               className="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-stone-50 transition-colors"
             >
               <span className="text-lg">✈️</span>
-              <span className="text-sm font-medium text-stone-700">Medical Travel</span>
+              <span className="text-sm font-medium text-stone-700"><T en="Medical Travel" ru="Медицинские поездки" /></span>
             </Link>
             <Link
               href="/mededu/"
@@ -228,7 +229,7 @@ export default function Nav() {
               className="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-stone-50 transition-colors"
             >
               <span className="text-lg">📚</span>
-              <span className="text-sm font-medium text-stone-700">Education</span>
+              <span className="text-sm font-medium text-stone-700"><T en="Education" ru="Образование" /></span>
             </Link>
 
             <div className="pt-2 border-t border-stone-100 mt-2 space-y-2">
@@ -239,14 +240,14 @@ export default function Nav() {
                     onClick={closeAll}
                     className="flex-1 text-center py-2.5 border border-stone-200 text-stone-700 text-sm font-medium rounded-xl hover:bg-stone-50 transition-colors"
                   >
-                    Dashboard
+                    <T en="Dashboard" ru="Кабинет" />
                   </Link>
                   <form action={logoutUser} className="flex-1" onSubmit={closeAll}>
                     <button
                       type="submit"
                       className="w-full text-center py-2.5 bg-stone-100 text-stone-900 text-sm font-medium rounded-xl hover:bg-stone-200 transition-colors"
                     >
-                      Log out
+                      <T en="Log out" ru="Выйти" />
                     </button>
                   </form>
                 </div>
@@ -257,14 +258,14 @@ export default function Nav() {
                     onClick={closeAll}
                     className="flex-1 text-center py-2.5 border border-stone-200 text-stone-700 text-sm font-medium rounded-xl hover:bg-stone-50 transition-colors"
                   >
-                    Log in
+                    <T en="Log in" ru="Войти" />
                   </Link>
                   <Link
                     href="/register/"
                     onClick={closeAll}
                     className="flex-1 text-center py-2.5 bg-stone-100 text-stone-900 text-sm font-medium rounded-xl hover:bg-stone-200 transition-colors"
                   >
-                    Register
+                    <T en="Register" ru="Регистрация" />
                   </Link>
                 </div>
               )}
@@ -287,7 +288,7 @@ export default function Nav() {
                 onClick={closeAll}
                 className="block text-center py-3 bg-stone-900 text-white text-sm font-semibold rounded-xl hover:bg-stone-700 transition-colors"
               >
-                Book a Consultation
+                <T en="Book a Consultation" ru="Записаться на консультацию" />
               </Link>
             </div>
           </div>

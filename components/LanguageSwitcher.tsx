@@ -1,42 +1,49 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { useLanguage } from "@/components/LanguageProvider";
 
 // Full 12-language target set per docs/ROADMAP.md "Localization (12 Languages)"
-// and docs/decision-log/0003-localization-12-languages.md. UI-only for now:
-// selecting a language stores the preference (for the real i18n switch once
-// content is localized) but does not translate page content — only English
-// (and, once localized, Russian per the roadmap's first sequencing step)
-// have real copy today. Do not wire this to fake/machine-translated content;
-// that would violate the certified-medical-translator + Medical Advisory
-// sign-off requirement in the linked decision.
+// and docs/decision-log/0003-localization-12-languages.md. Only English and
+// Russian actually translate page content right now (via LanguageProvider +
+// components/T.tsx) — the roadmap's first sequencing step, since Russian is
+// the platform's real existing audience. The other 10 stay visible/selectable
+// (so the target set is honest and visible) but fall back to English content
+// until real demand + certified medical translation + Medical Advisory
+// sign-off land, per the linked decision. Do not wire fake/machine-translated
+// content for those 10 — that would violate the sign-off requirement.
 const LANGUAGES = [
-  { code: "en", flag: "🇬🇧", name: "English" },
-  { code: "tr", flag: "🇹🇷", name: "Türkçe" },
-  { code: "es", flag: "🇪🇸", name: "Español" },
-  { code: "fr", flag: "🇫🇷", name: "Français" },
-  { code: "de", flag: "🇩🇪", name: "Deutsch" },
-  { code: "ru", flag: "🇷🇺", name: "Русский" },
-  { code: "zh", flag: "🇨🇳", name: "中文" },
-  { code: "ja", flag: "🇯🇵", name: "日本語" },
-  { code: "ko", flag: "🇰🇷", name: "한국어" },
-  { code: "ar", flag: "🇸🇦", name: "العربية" },
-  { code: "it", flag: "🇮🇹", name: "Italiano" },
-  { code: "pt", flag: "🇵🇹", name: "Português" },
+  { code: "en", flag: "🇬🇧", name: "English", translated: true },
+  { code: "tr", flag: "🇹🇷", name: "Türkçe", translated: false },
+  { code: "es", flag: "🇪🇸", name: "Español", translated: false },
+  { code: "fr", flag: "🇫🇷", name: "Français", translated: false },
+  { code: "de", flag: "🇩🇪", name: "Deutsch", translated: false },
+  { code: "ru", flag: "🇷🇺", name: "Русский", translated: true },
+  { code: "zh", flag: "🇨🇳", name: "中文", translated: false },
+  { code: "ja", flag: "🇯🇵", name: "日本語", translated: false },
+  { code: "ko", flag: "🇰🇷", name: "한국어", translated: false },
+  { code: "ar", flag: "🇸🇦", name: "العربية", translated: false },
+  { code: "it", flag: "🇮🇹", name: "Italiano", translated: false },
+  { code: "pt", flag: "🇵🇹", name: "Português", translated: false },
 ] as const;
 
-const STORAGE_KEY = "mbc-language";
+const DISPLAY_KEY = "mbc-language-display";
 
 export default function LanguageSwitcher() {
+  const { code, setCode } = useLanguage();
   const [open, setOpen] = useState(false);
-  const [current, setCurrent] = useState<(typeof LANGUAGES)[number]>(LANGUAGES[0]);
+  const [displayCode, setDisplayCode] = useState<string>("en");
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const saved = localStorage.getItem(STORAGE_KEY);
-    const match = LANGUAGES.find((l) => l.code === saved);
-    if (match) setCurrent(match);
+    const saved = localStorage.getItem(DISPLAY_KEY);
+    if (saved && LANGUAGES.some((l) => l.code === saved)) setDisplayCode(saved);
   }, []);
+
+  // Keep the shown flag in sync if content language changes elsewhere.
+  useEffect(() => {
+    setDisplayCode(code);
+  }, [code]);
 
   useEffect(() => {
     function handleClickOutside(e: MouseEvent) {
@@ -48,9 +55,14 @@ export default function LanguageSwitcher() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
+  const current = LANGUAGES.find((l) => l.code === displayCode) ?? LANGUAGES[0];
+
   function selectLanguage(lang: (typeof LANGUAGES)[number]) {
-    setCurrent(lang);
-    localStorage.setItem(STORAGE_KEY, lang.code);
+    setDisplayCode(lang.code);
+    localStorage.setItem(DISPLAY_KEY, lang.code);
+    // Only en/ru actually translate content; anything else falls back to
+    // English rather than showing a mismatched flag/content combination.
+    setCode(lang.translated ? (lang.code as "en" | "ru") : "en");
     setOpen(false);
   }
 
@@ -69,7 +81,7 @@ export default function LanguageSwitcher() {
       </button>
 
       {open && (
-        <div className="absolute top-full right-0 mt-1 w-48 max-h-80 overflow-y-auto bg-white border border-stone-200 rounded-2xl shadow-xl z-50">
+        <div className="absolute top-full right-0 mt-1 w-56 max-h-80 overflow-y-auto bg-white border border-stone-200 rounded-2xl shadow-xl z-50">
           <div className="p-1.5">
             {LANGUAGES.map((lang) => (
               <button
@@ -82,7 +94,10 @@ export default function LanguageSwitcher() {
                 }`}
               >
                 <span className="text-base leading-none shrink-0">{lang.flag}</span>
-                <span>{lang.name}</span>
+                <span className="flex-1 text-left">{lang.name}</span>
+                {!lang.translated && (
+                  <span className="text-[10px] text-stone-400 shrink-0">soon</span>
+                )}
               </button>
             ))}
           </div>
