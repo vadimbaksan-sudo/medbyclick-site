@@ -1,0 +1,51 @@
+import type { GivingCampaign } from "./types";
+
+// Placeholder/preview data only — see app/medgive/page.tsx disclaimer.
+// No real patients, no real funds. Do not treat as live campaign content.
+export const campaigns: GivingCampaign[] = [
+  {
+    id: "campaign-1",
+    patientDisplayName: "A.K. (age 7)",
+    condition: "Congenital heart defect — corrective surgery",
+    clinicName: "MedByClick-verified cardiac center",
+    treatmentSummary: "Pre-surgery corrective procedure, clinic-issued cost estimate on file",
+    currency: "USD",
+    fundingGoal: 42000,
+    amountRaised: 27500,
+    daysRemaining: 18,
+    urgency: "urgent",
+    verified: true,
+    deidentified: true,
+    story: "A short, verified case summary will appear here once the family's campaign narrative is approved for publication.",
+  },
+  {
+    id: "campaign-2",
+    patientDisplayName: "M. Petrova",
+    condition: "Oncology — second-line treatment",
+    clinicName: "MedByClick-verified oncology partner",
+    treatmentSummary: "Treatment plan and itemized cost estimate co-signed by the treating clinic",
+    currency: "USD",
+    fundingGoal: 65000,
+    amountRaised: 18200,
+    daysRemaining: 40,
+    urgency: "time-sensitive",
+    verified: true,
+    deidentified: false,
+    story: "A short, verified case summary will appear here once the patient's campaign narrative is approved for publication.",
+  },
+  {
+    id: "campaign-3",
+    patientDisplayName: "D.R. (age 34)",
+    condition: "Rare disease — specialist diagnostic workup",
+    clinicName: "MedByClick-verified specialist network",
+    treatmentSummary: "Diagnostic workup cost estimate pending clinic co-signature",
+    currency: "USD",
+    fundingGoal: 12000,
+    amountRaised: 3100,
+    daysRemaining: 55,
+    urgency: "routine",
+    verified: true,
+    deidentified: true,
+    story: "A short, verified case summary will appear here once the patient's campaign narrative is approved for publication.",
+  },
+];

@@ -193,6 +193,32 @@ land before Phase 1 of the whitepaper's token roadmap (§18) completes: audit,
 mainnet deployment, and published legal documents. Building ahead of that
 produces a wallet UI with no contract to call.
 
+## Module 15 — MedGive (Regulatory-Gated, Not Token-Dependent)
+
+Added 2026-08-04 per Vadim's spec (`docs/decision-log/0005-medgive-module-added.md`).
+Individually-verified medical crowdfunding — each campaign ties to one
+clinic-verified patient case, funds held in escrow, disbursed direct-to-clinic
+on treatment milestones (never as cash to the patient).
+
+**Status: frontend scaffold only** (`modules/medgive/`, `app/medgive/page.tsx`) —
+mock campaign data, no real donations, no payment processing. This is a
+*separate* gate from the Phase 4 token-dependency list above: MedGive's block
+is charitable-solicitation law, tax law, and health-data privacy, not the
+smart contract.
+
+| Module | Real-functionality definition | Depends on | Consult |
+|---|---|---|---|
+| `medgive` | Real donation processing, escrow, direct-to-clinic disbursement, KYC/AML, tax receipts | Jurisdiction-by-jurisdiction charitable-solicitation review; likely a nonprofit/fiscal-sponsorship partnership (per the module spec's Compliance & Safety Notes) | **Legal & Compliance — required before any build of real donation/escrow flow**; **Medical Advisory — required** (public disclosure of patient medical conditions); Web3 & Token Strategy only if MBC-credit donations are pursued (optional per spec §4) |
+
+Per the module spec itself: *"MedGive carries meaningfully higher regulatory
+complexity than the platform's other modules, spanning charity law, tax law,
+health data privacy, and consumer protection simultaneously across every
+target jurisdiction; dedicated legal review per target jurisdiction... is
+required before any public launch in that market."* No real money or real
+patient data flows through this module until that review lands per target
+jurisdiction — the same do-not-fake-success discipline as `medai`/`medpayments`
+elsewhere on this roadmap.
+
 ## Localization (12 Languages) — Cross-Cutting
 
 Owner: **CTO/Product** (technical sequencing) · Required gate: **Medical Advisory**

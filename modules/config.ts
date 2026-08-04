@@ -12,6 +12,7 @@ export const moduleConfig = {
   medtrials:      true,
   medpharmaccess: true,
   medtoken:       true,
+  medgive:        true,
 } as const satisfies Record<string, boolean>;
 
 export type ModuleId = keyof typeof moduleConfig;
