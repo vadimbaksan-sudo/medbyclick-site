@@ -186,6 +186,21 @@ pipeline exist, ahead of anything token-gated.
 | `medtoken` | Real wallet connection, real balance reads, real transaction history — contingent on the audited BNB Chain contract deployment (whitepaper §15.5, §18 Phase 1) | Smart contract audit complete; Legal documents published (§16.5) | **Web3 & Token Strategy — required**, per this role's Must-Not-Do (no unilateral tokenomics approval) |
 | `medtravel` (escrow) | MBC escrow smart-contract integration (whitepaper §6, Use Case 6) | `medtoken`'s contract layer | Web3 & Token Strategy, Legal & Compliance |
 | `medtrials` | Real clinical trial listings and enrollment matching, plus token referral bounties | `core`; clinical accuracy of trial data | **Medical Advisory — required** (clinical feature); Web3 & Token Strategy (bounty mechanics) |
+
+**2026-08-05 update:** `/medtrials` now includes a live search against the
+public ClinicalTrials.gov API v2 (`lib/clinicaltrials/api.ts`,
+`app/api/clinicaltrials/search/route.ts`) — no API key exists for that
+registry, it's fully open. Scope is deliberately narrow: link-out search
+results only (title, phase, sponsor, locations, and a link to the official
+listing), no MedByClick-generated eligibility matching or clinical
+commentary, clearly labeled as external NIH/NLM registry data, not a
+MedByClick recommendation. The **Medical Advisory consult above is still
+required and has not happened yet** — this entry does not satisfy it. Built
+now because the risk profile of *displaying/linking to* an already-public,
+government-vetted registry is materially lower than `medai`'s generated
+clinical content, but the module isn't cleared for Medical Advisory sign-off
+until she reviews the framing/disclaimers. See
+`docs/decision-log/0006-clinicaltrials-gov-integration.md`.
 | `medpharmaccess` | Real pharmaceutical sourcing coordination — the most regulatory-exposed module (cross-border pharma access) | `core`; jurisdiction-by-jurisdiction legal review | **Legal & Compliance — required before any build**; Medical Advisory |
 
 `medtoken`'s real functionality (beyond UI polish on `TokenBalance`) cannot
