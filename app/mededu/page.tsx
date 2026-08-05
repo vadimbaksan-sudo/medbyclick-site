@@ -1,5 +1,6 @@
 import { courses } from "@/modules/mededu/data";
 import CourseCard from "@/modules/mededu/components/CourseCard";
+import ArticleSearch from "@/modules/mededu/components/ArticleSearch";
 import { getCurrentUser } from "@/lib/auth/dal";
 import { isDatabaseConfigured } from "@/lib/db/client";
 import { listEnrollmentsForUser } from "@/lib/db/queries/course-enrollments";
@@ -48,7 +49,7 @@ export default async function MedEduPage() {
           <h2 className="text-xl font-bold text-stone-900">All Courses</h2>
           <p className="text-sm text-stone-500">{courses.reduce((s, c) => s + c.enrolled, 0).toLocaleString()} students enrolled</p>
         </div>
-        <div className="grid md:grid-cols-2 lg:grid-cols-2 gap-6">
+        <div className="grid md:grid-cols-2 lg:grid-cols-2 gap-6 mb-16">
           {courses.map((course) => (
             <CourseCard
               key={course.id}
@@ -57,6 +58,24 @@ export default async function MedEduPage() {
               loggedIn={Boolean(user)}
             />
           ))}
+        </div>
+
+        <div className="border-t border-stone-200 pt-12">
+          <p className="text-xs font-semibold uppercase tracking-widest text-amber-600 mb-2">
+            For Medical Students &amp; Professionals
+          </p>
+          <h2 className="text-2xl md:text-3xl font-bold text-stone-900 mb-3">
+            Search Medical Literature
+          </h2>
+          <div className="bg-stone-50 border border-stone-200 rounded-xl p-5 mb-8">
+            <p className="text-sm text-stone-600 leading-relaxed">
+              Live results from PubMed, the U.S. National Library of Medicine&apos;s
+              index of peer-reviewed journal literature — for coursework and
+              clinical reference, not patient guidance. Each result links to the
+              official listing on pubmed.ncbi.nlm.nih.gov.
+            </p>
+          </div>
+          <ArticleSearch />
         </div>
       </div>
     </div>
