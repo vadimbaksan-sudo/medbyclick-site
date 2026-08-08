@@ -14,6 +14,8 @@ import { medtrialsModule } from "./medtrials";
 import { medpharmaccessModule } from "./medpharmaccess";
 import { medtokenModule } from "./medtoken";
 import { medgiveModule } from "./medgive";
+import { medagentModule } from "./medagent";
+import { medlogisticsModule } from "./medlogistics";
 
 const ALL_MODULES: ModuleDefinition[] = [
   coreModule,
@@ -30,6 +32,8 @@ const ALL_MODULES: ModuleDefinition[] = [
   medpharmaccessModule,
   medtokenModule,
   medgiveModule,
+  medagentModule,
+  medlogisticsModule,
 ];
 
 export function getEnabledModules(): ModuleDefinition[] {

@@ -24,6 +24,23 @@
 > corrected — it was internally contradicting §1/§6's own headline TGE circulating
 > supply figure. See §5 for the reconciliation. The §3.2 Platform Rewards schedule
 > mismatch remains open (needs a decision, not a spot-fix — unchanged from v1.1).
+>
+> **Open flag (2026-08-07, not a revision):** A separate investor-facing spec
+> document ("MedByClick Detailed Platform & Feature Specification, All 15
+> Modules") describes the MedToken/MedEconomy module very differently from
+> this paper — it recommends launching as a **non-transferable, centrally-
+> administered points ledger** with no blockchain and no tradability, and a
+> three-phase path to any future tokenization (points → permissioned ledger →
+> real token), each phase gated on dedicated securities counsel (Howey test /
+> MiCA) per jurisdiction before proceeding. That is more conservative than
+> this document's plan below (real BEP-20 contract, hard-capped supply, TGE,
+> CEX listing). **Nothing in this paper has been changed to reflect that
+> document** — this note only flags the divergence for Web3 & Token Strategy
+> and Legal & Compliance to reconcile as a Joint decision: either the two
+> describe sequential phases of the same plan, or one needs to change before
+> real `medtoken` functionality is built. See
+> `docs/decision-log/0008-medagent-medlogistics-and-token-phasing-flag.md`
+> and the corresponding flag in `docs/ROADMAP.md`.
 
 ---
 

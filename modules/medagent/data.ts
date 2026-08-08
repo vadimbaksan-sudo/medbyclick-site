@@ -1,0 +1,58 @@
+import type { ReferralCase } from "./types";
+
+// Placeholder/preview data only — no real agents, no real patients, no real
+// commission liability. See app/medagent/page.tsx disclaimer.
+export const referralCases: ReferralCase[] = [
+  {
+    id: "ref-1",
+    agentName: "Coordinator — Tel Aviv Network",
+    agentTier: "gold",
+    patientRef: "Case #4471",
+    condition: "Cardiac surgery, cross-border",
+    destinationInstitution: "MedByClick-verified cardiac center",
+    stage: "quote_accepted",
+    estimatedValue: 24000,
+    currency: "USD",
+    commissionRate: 0.08,
+    lastUpdated: "2 days ago",
+  },
+  {
+    id: "ref-2",
+    agentName: "Coordinator — Moscow Network",
+    agentTier: "silver",
+    patientRef: "Case #4488",
+    condition: "Oncology second opinion",
+    destinationInstitution: "MedByClick-verified oncology partner",
+    stage: "quote_sent",
+    estimatedValue: 6500,
+    currency: "USD",
+    commissionRate: 0.06,
+    lastUpdated: "5 hours ago",
+  },
+  {
+    id: "ref-3",
+    agentName: "Coordinator — Chisinau Network",
+    agentTier: "bronze",
+    patientRef: "Case #4502",
+    condition: "Orthopedic consultation",
+    destinationInstitution: "MedByClick-verified specialist network",
+    stage: "inquiry",
+    estimatedValue: 3200,
+    currency: "USD",
+    commissionRate: 0.05,
+    lastUpdated: "1 hour ago",
+  },
+  {
+    id: "ref-4",
+    agentName: "Coordinator — Tel Aviv Network",
+    agentTier: "gold",
+    patientRef: "Case #4390",
+    condition: "Fertility treatment cycle",
+    destinationInstitution: "MedByClick-verified fertility center",
+    stage: "treatment_complete",
+    estimatedValue: 15000,
+    currency: "USD",
+    commissionRate: 0.08,
+    lastUpdated: "3 weeks ago",
+  },
+];

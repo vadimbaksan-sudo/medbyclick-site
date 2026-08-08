@@ -208,6 +208,24 @@ land before Phase 1 of the whitepaper's token roadmap (§18) completes: audit,
 mainnet deployment, and published legal documents. Building ahead of that
 produces a wallet UI with no contract to call.
 
+**⚠ Open flag (2026-08-07):** A separate investor-facing spec document
+("MedByClick Detailed Platform & Feature Specification, All 15 Modules")
+describes MedToken/MedEconomy very differently from `TOKENOMICS.md`/the
+whitepaper above — it explicitly recommends launching as a
+**non-transferable, centrally-administered points ledger** (no blockchain,
+no tradability, no profit expectation) with a three-phase path to any future
+tokenization, each phase gated on dedicated securities counsel sign-off
+(Howey-test / MiCA analysis) per jurisdiction. That is materially more
+conservative than the existing plan — a real BEP-20 contract, hard-capped
+supply, TGE, and CEX listing, already specified in `TOKENOMICS.md` and the
+whitepaper. **This is not resolved here.** It's flagged for Web3 & Token
+Strategy and Legal & Compliance to reconcile as a Joint decision before any
+real `medtoken` build begins: either the two documents describe two
+different, sequential phases (points now, real token later — consistent
+with the "Phase 1/2/3" framing), or they're in genuine tension and one plan
+needs to change. See the corresponding note added to `TOKENOMICS.md`'s
+revision-note section. Full context: `docs/decision-log/0008-medagent-medlogistics-and-token-phasing-flag.md`.
+
 ## Module 15 — MedGive (Regulatory-Gated, Not Token-Dependent)
 
 Added 2026-08-04 per Vadim's spec (`docs/decision-log/0005-medgive-module-added.md`).
@@ -233,6 +251,39 @@ required before any public launch in that market."* No real money or real
 patient data flows through this module until that review lands per target
 jurisdiction — the same do-not-fake-success discipline as `medai`/`medpayments`
 elsewhere on this roadmap.
+
+## Modules 16–17 — MedAgent & MedLogistics (Frontend Scaffolds)
+
+Added 2026-08-07 per the "Detailed Platform & Feature Specification" document
+(`docs/decision-log/0008-medagent-medlogistics-and-token-phasing-flag.md`).
+Both were fully specified in that document but had **no code at all** in this
+repo before this entry — unlike MedGive, which extended an already-registered
+concept, these are genuinely new modules.
+
+**Status: frontend scaffold only.**
+
+- `medagent` (`modules/medagent/`, `app/medagent/page.tsx`) — a kanban-style
+  referral pipeline (inquiry → qualification → quote sent → quote accepted →
+  in progress → complete) with mock agent tiers (Bronze/Silver/Gold) and an
+  illustrative commission total. No real agent onboarding, vetting,
+  anti-fraud screening, or commission payout exists — the spec's onboarding
+  workflow (business/ID verification, background checks, probationary case
+  caps) is entirely unbuilt.
+- `medlogistics` (`modules/medlogistics/`, `app/medlogistics/page.tsx`) — mock
+  visa/travel case cards (patient and physician-trainee mobility) showing
+  status and visa stage. No real flight/visa booking, document collection
+  portal, or partner logistics integration exists.
+
+| Module | Real-functionality definition | Depends on | Consult |
+|---|---|---|---|
+| `medagent` | Real agent onboarding (ID/business verification, anti-fraud vetting), live CRM/pipeline backed by real cases, real commission calculation and payout | `core`; `medpayments` for payout execution | **Legal & Compliance** (referral-fee/commission disclosure rules vary by jurisdiction; anti-kickback exposure) |
+| `medlogistics` | Real visa requirement checklists, document collection, flight/accommodation booking, on-ground coordinator dispatch | `medtravel`/`medagent` case handoff; travel/visa partner integrations | Legal & Compliance (immigration guidance liability — the spec itself requires disclaiming that MedLogistics facilitates but does not guarantee visa approval) |
+
+Both are placed here rather than in a phase table because, unlike the
+Phase 1–4 modules above, they don't depend on the token contract or on a
+Medical Advisory clinical review — they're gated purely on their own
+build effort and standard commercial/partner integrations, not on an
+external blocking dependency.
 
 ## Localization (12 Languages) — Cross-Cutting
 
