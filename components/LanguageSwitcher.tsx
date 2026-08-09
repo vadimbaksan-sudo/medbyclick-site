@@ -1,7 +1,27 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import {
+  GB,
+  TR,
+  ES,
+  FR,
+  DE,
+  RU,
+  CN,
+  JP,
+  KR,
+  SA,
+  IT,
+  PT,
+} from "country-flag-icons/react/3x2";
 import { useLanguage, type LanguageCode } from "@/components/LanguageProvider";
+
+// SVG flags, not emoji: emoji flags render as bare two-letter codes on
+// Windows (no glyph for the combined regional-indicator pair in most
+// system emoji fonts there), while macOS/iOS render them fine — SVG
+// renders identically everywhere. See country-flag-icons package.
+const FLAGS = { GB, TR, ES, FR, DE, RU, CN, JP, KR, SA, IT, PT } as const;
 
 // Full 12-language target set per docs/ROADMAP.md "Localization (12 Languages)"
 // and docs/decision-log/0003-localization-12-languages.md. Only English and
@@ -13,18 +33,18 @@ import { useLanguage, type LanguageCode } from "@/components/LanguageProvider";
 // sign-off land, per the linked decision. Do not wire fake/machine-translated
 // content for those 10 — that would violate the sign-off requirement.
 const LANGUAGES = [
-  { code: "en", flag: "🇬🇧", name: "English", translated: true },
-  { code: "tr", flag: "🇹🇷", name: "Türkçe", translated: true },
-  { code: "es", flag: "🇪🇸", name: "Español", translated: true },
-  { code: "fr", flag: "🇫🇷", name: "Français", translated: true },
-  { code: "de", flag: "🇩🇪", name: "Deutsch", translated: false },
-  { code: "ru", flag: "🇷🇺", name: "Русский", translated: true },
-  { code: "zh", flag: "🇨🇳", name: "中文", translated: false },
-  { code: "ja", flag: "🇯🇵", name: "日本語", translated: false },
-  { code: "ko", flag: "🇰🇷", name: "한국어", translated: false },
-  { code: "ar", flag: "🇸🇦", name: "العربية", translated: false },
-  { code: "it", flag: "🇮🇹", name: "Italiano", translated: false },
-  { code: "pt", flag: "🇵🇹", name: "Português", translated: false },
+  { code: "en", country: "GB", name: "English", translated: true },
+  { code: "tr", country: "TR", name: "Türkçe", translated: true },
+  { code: "es", country: "ES", name: "Español", translated: true },
+  { code: "fr", country: "FR", name: "Français", translated: true },
+  { code: "de", country: "DE", name: "Deutsch", translated: false },
+  { code: "ru", country: "RU", name: "Русский", translated: true },
+  { code: "zh", country: "CN", name: "中文", translated: false },
+  { code: "ja", country: "JP", name: "日本語", translated: false },
+  { code: "ko", country: "KR", name: "한국어", translated: false },
+  { code: "ar", country: "SA", name: "العربية", translated: false },
+  { code: "it", country: "IT", name: "Italiano", translated: false },
+  { code: "pt", country: "PT", name: "Português", translated: false },
 ] as const;
 
 const DISPLAY_KEY = "mbc-language-display";
@@ -74,7 +94,10 @@ export default function LanguageSwitcher() {
         aria-expanded={open}
         className="flex items-center gap-1.5 text-sm font-medium text-stone-600 hover:text-stone-900 px-2.5 py-2 rounded-lg hover:bg-stone-50 transition-colors"
       >
-        <span className="text-base leading-none">{current.flag}</span>
+        {(() => {
+          const CurrentFlag = FLAGS[current.country];
+          return <CurrentFlag className="w-5 h-[14px] rounded-[2px] shrink-0" />;
+        })()}
         <svg className={`w-3 h-3 transition-transform ${open ? "rotate-180" : ""}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
         </svg>
@@ -83,23 +106,26 @@ export default function LanguageSwitcher() {
       {open && (
         <div className="absolute top-full right-0 mt-1 w-56 max-h-80 overflow-y-auto bg-white border border-stone-200 rounded-2xl shadow-xl z-50">
           <div className="p-1.5">
-            {LANGUAGES.map((lang) => (
-              <button
-                key={lang.code}
-                onClick={() => selectLanguage(lang)}
-                className={`w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-sm transition-colors ${
-                  lang.code === current.code
-                    ? "bg-amber-50 text-amber-800 font-medium"
-                    : "text-stone-700 hover:bg-stone-50"
-                }`}
-              >
-                <span className="text-base leading-none shrink-0">{lang.flag}</span>
-                <span className="flex-1 text-left">{lang.name}</span>
-                {!lang.translated && (
-                  <span className="text-[10px] text-stone-400 shrink-0">soon</span>
-                )}
-              </button>
-            ))}
+            {LANGUAGES.map((lang) => {
+              const Flag = FLAGS[lang.country];
+              return (
+                <button
+                  key={lang.code}
+                  onClick={() => selectLanguage(lang)}
+                  className={`w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-sm transition-colors ${
+                    lang.code === current.code
+                      ? "bg-amber-50 text-amber-800 font-medium"
+                      : "text-stone-700 hover:bg-stone-50"
+                  }`}
+                >
+                  <Flag className="w-5 h-[14px] rounded-[2px] shrink-0" />
+                  <span className="flex-1 text-left">{lang.name}</span>
+                  {!lang.translated && (
+                    <span className="text-[10px] text-stone-400 shrink-0">soon</span>
+                  )}
+                </button>
+              );
+            })}
           </div>
         </div>
       )}
