@@ -3,7 +3,7 @@ import type { ModuleDefinition } from "../types";
 export const medtrialsModule: ModuleDefinition = {
   id: "medtrials",
   name: "MedTrials",
-  navLabel: "Clinical Trials",
+  navLabel: "MedTrials",
   href: "/medtrials",
   icon: "🔬",
   description: "Access to clinical research studies and experimental treatment matching",
