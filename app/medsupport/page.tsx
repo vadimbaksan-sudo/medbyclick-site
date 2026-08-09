@@ -15,7 +15,7 @@ export default function MedSupportPage() {
             <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
             MedSupport · Online Now
           </div>
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">24/7 Patient Support</h1>
+          <h1 className="text-4xl md:text-5xl font-bold mb-4">MedSupport — VIP Concierge Medicine</h1>
           <p className="text-stone-600 text-lg max-w-2xl leading-relaxed">
             Our coordinators are available around the clock. Average response time: 2 minutes during business hours, 2 hours overnight.
           </p>

@@ -20,7 +20,7 @@ export default function MedAgentPage() {
             <span className="w-1.5 h-1.5 rounded-full bg-amber-600" />
             MedAgent Module
           </div>
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">Referral Network Pipeline</h1>
+          <h1 className="text-4xl md:text-5xl font-bold mb-4">MedAgent — Global Medical Agent Network</h1>
           <p className="text-stone-600 text-lg max-w-2xl leading-relaxed">
             A structured channel for medical coordinators and referral agents — every
             case tracked from inquiry to completed treatment, with transparent commission

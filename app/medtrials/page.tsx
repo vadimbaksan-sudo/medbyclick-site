@@ -18,7 +18,7 @@ export default function MedTrialsPage() {
             <span className="w-1.5 h-1.5 rounded-full bg-amber-600" />
             MedTrials Module
           </div>
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">Clinical Trials</h1>
+          <h1 className="text-4xl md:text-5xl font-bold mb-4">MedTrials — Clinical Innovation Gateway</h1>
           <p className="text-stone-600 text-lg max-w-2xl leading-relaxed">
             Access to ongoing research studies with our network hospitals. {recruiting.length} trials currently recruiting.
           </p>

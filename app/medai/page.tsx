@@ -16,7 +16,7 @@ export default function MedAIPage() {
             <span className="w-1.5 h-1.5 rounded-full bg-amber-600" />
             MedAI Module
           </div>
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">AI Intake Assistant</h1>
+          <h1 className="text-4xl md:text-5xl font-bold mb-4">MedAI — Clinical Intelligence Engine</h1>
           <p className="text-stone-600 text-lg max-w-2xl leading-relaxed">
             Describe your symptoms and get a structured intake summary — including suggested specialty and queue priority — reviewed by a coordinator before anything happens next. This is not a diagnosis.
           </p>

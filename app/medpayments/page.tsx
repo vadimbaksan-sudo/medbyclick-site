@@ -14,7 +14,7 @@ export default function MedPaymentsPage() {
             <span className="w-1.5 h-1.5 rounded-full bg-amber-600" />
             MedPayments Module
           </div>
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">Simple, Transparent Pricing</h1>
+          <h1 className="text-4xl md:text-5xl font-bold mb-4">MedPayments — Cross-Border Payments, Billing & Settlement Infrastructure</h1>
           <p className="text-stone-600 text-lg leading-relaxed">
             No hidden fees. No subscription traps. Pay for what you actually need.
           </p>

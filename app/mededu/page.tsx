@@ -37,7 +37,7 @@ export default async function MedEduPage() {
             <span className="w-1.5 h-1.5 rounded-full bg-amber-600" />
             MedEdu Module
           </div>
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">Medical Education</h1>
+          <h1 className="text-4xl md:text-5xl font-bold mb-4">MedEdu — Global Medical Education Platform</h1>
           <p className="text-stone-600 text-lg max-w-2xl leading-relaxed">
             Courses taught by the same specialists in our network. Real clinical knowledge — not generic health content.
           </p>

@@ -22,7 +22,7 @@ export default function MedTravelPage() {
             <span className="w-1.5 h-1.5 rounded-full bg-amber-600" />
             MedTravel Module
           </div>
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">Medical Travel</h1>
+          <h1 className="text-4xl md:text-5xl font-bold mb-4">MedTravel — Cross-Border Treatment Coordination</h1>
           <p className="text-stone-600 text-lg max-w-2xl leading-relaxed">
             World-class care isn&apos;t always local. Whether you travel to Israel or an Israeli doctor
             travels to you, we coordinate treatment end-to-end — from consultation to recovery.

@@ -15,7 +15,7 @@ export default function MedGivePage() {
             <span className="w-1.5 h-1.5 rounded-full bg-amber-600" />
             MedGive Module
           </div>
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">Medical Crowdfunding, Verified Case by Case</h1>
+          <h1 className="text-4xl md:text-5xl font-bold mb-4">MedGive — Individual Patient Medical Crowdfunding & Charitable Support</h1>
           <p className="text-stone-600 text-lg max-w-2xl leading-relaxed">
             Every campaign is tied to a specific, clinic-verified medical case. Funds are held in
             escrow and paid directly to the treating clinic — never disbursed as cash to the patient.

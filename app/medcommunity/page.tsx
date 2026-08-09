@@ -15,7 +15,7 @@ export default function MedCommunityPage() {
             <span className="w-1.5 h-1.5 rounded-full bg-amber-600" />
             MedCommunity Module
           </div>
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">Patient Community</h1>
+          <h1 className="text-4xl md:text-5xl font-bold mb-4">MedCommunity — Professional Network</h1>
           <p className="text-stone-600 text-lg max-w-2xl leading-relaxed">
             A moderated forum for patients navigating complex conditions. Real stories, practical advice, specialist-verified information.
           </p>

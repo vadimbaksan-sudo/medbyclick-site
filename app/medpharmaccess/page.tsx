@@ -15,7 +15,7 @@ export default function MedPharmAccessPage() {
             <span className="w-1.5 h-1.5 rounded-full bg-amber-600" />
             MedPharmAccess Module
           </div>
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">Pharmacy Access</h1>
+          <h1 className="text-4xl md:text-5xl font-bold mb-4">MedPharmaAccess — Global Treatment Continuity</h1>
           <p className="text-stone-600 text-lg max-w-2xl leading-relaxed">
             Cross-border medication sourcing, compassionate use coordination, and insurance authorization support for hard-to-access drugs.
           </p>

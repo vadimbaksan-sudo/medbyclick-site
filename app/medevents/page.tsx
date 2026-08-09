@@ -15,7 +15,7 @@ export default function MedEventsPage() {
             <span className="w-1.5 h-1.5 rounded-full bg-amber-600" />
             MedEvents Module
           </div>
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">Events & Conferences</h1>
+          <h1 className="text-4xl md:text-5xl font-bold mb-4">MedEvents — Medical Events Infrastructure</h1>
           <p className="text-stone-600 text-lg max-w-2xl leading-relaxed">
             Medical conferences, patient advocacy summits, and specialist webinars — organized by and for the MedByClick network.
           </p>

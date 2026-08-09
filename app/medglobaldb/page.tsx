@@ -15,7 +15,7 @@ export default function MedGlobalDBPage() {
             <span className="w-1.5 h-1.5 rounded-full bg-amber-600" />
             MedGlobalDB Module
           </div>
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">Global Specialist Database</h1>
+          <h1 className="text-4xl md:text-5xl font-bold mb-4">MedGlobalDB — Global Medical Intelligence System</h1>
           <p className="text-stone-600 text-lg max-w-2xl leading-relaxed">
             {globalDoctors.length.toLocaleString()}+ verified specialists across {new Set(globalDoctors.map((d) => d.country)).size} countries. Searchable by specialty, language, and institution.
           </p>

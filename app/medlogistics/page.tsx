@@ -15,7 +15,7 @@ export default function MedLogisticsPage() {
             <span className="w-1.5 h-1.5 rounded-full bg-amber-600" />
             MedLogistics Module
           </div>
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">Travel &amp; Visa Coordination</h1>
+          <h1 className="text-4xl md:text-5xl font-bold mb-4">MedLogistics — Mobility &amp; Operational Execution</h1>
           <p className="text-stone-600 text-lg max-w-2xl leading-relaxed">
             Turns a confirmed treatment plan or training placement into a coordinated
             physical journey — flights, visas, accommodation, and on-ground support.

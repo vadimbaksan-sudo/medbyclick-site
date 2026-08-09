@@ -16,7 +16,7 @@ export default function MedConnectPage() {
             <span className="w-1.5 h-1.5 rounded-full bg-amber-600" />
             MedConnect Module
           </div>
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">Specialist Network</h1>
+          <h1 className="text-4xl md:text-5xl font-bold mb-4">MedConnect — Clinical Interaction Hub</h1>
           <p className="text-stone-600 text-lg max-w-2xl leading-relaxed">
             Every doctor in this network has been personally vouched for by our founder — not matched by algorithm, not credentialed by committee.
           </p>
