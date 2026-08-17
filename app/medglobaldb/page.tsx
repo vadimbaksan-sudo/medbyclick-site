@@ -1,4 +1,4 @@
-import { globalDoctors } from "@/modules/medglobaldb/data";
+import { getGlobalDbDoctors } from "@/modules/medglobaldb/data";
 import GlobalDoctorCard from "@/modules/medglobaldb/components/GlobalDoctorCard";
 
 export const metadata = {
@@ -6,7 +6,8 @@ export const metadata = {
   description: "Searchable database of verified international specialists.",
 };
 
-export default function MedGlobalDBPage() {
+export default async function MedGlobalDBPage() {
+  const globalDoctors = await getGlobalDbDoctors();
   return (
     <div>
       <div className="bg-green-50 text-stone-900 py-16">

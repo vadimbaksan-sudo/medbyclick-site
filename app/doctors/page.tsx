@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { doctors } from "@/modules/medconnect/data";
+import { getMedconnectDoctors } from "@/modules/medconnect/data";
 import DoctorsGrid from "./DoctorsGrid";
 
 export const metadata = {
@@ -7,7 +7,8 @@ export const metadata = {
   description: "Browse our personally vetted network of medical specialists.",
 };
 
-export default function DoctorsPage() {
+export default async function DoctorsPage() {
+  const doctors = await getMedconnectDoctors();
   return (
     <div className="bg-white">
       {/* Header */}

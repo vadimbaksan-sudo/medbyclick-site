@@ -1,19 +1,15 @@
 import type { Doctor } from "./types";
 import { seedDoctors } from "@/lib/db/seed/doctors.seed";
+import { listMedconnectDoctors } from "@/lib/db/queries/doctors";
+import type { DbDoctorProfile } from "@/lib/db/schema";
 
 /**
  * medconnect's view over the unified `doctor_profiles` table (spec
  * §2.3/§3.1): the vetted local (Israel) network, endorsement-driven.
  *
- * This is no longer a standalone hardcoded array — it's an adapter over
- * lib/db/seed/doctors.seed.ts, the same seed data lib/db/seed/run.ts
- * inserts into `doctor_profiles`. Once a live Supabase database is seeded,
- * swap this for `listMedconnectDoctors()` from lib/db/queries/doctors.ts
- * (which queries `WHERE vetting_status = 'approved'`); until then, this
- * static derivation keeps the existing browse pages working without a live
- * DB connection, filtered the same way medconnect's cards always were —
- * doctors with a founder endorsement, the local-network hallmark. Content
- * is unchanged from the original 10-doctor mock array.
+ * `doctors` (static array below) is the seed-derived fallback, used when no
+ * live database is configured. Content is unchanged from the original
+ * 10-doctor mock array.
  */
 export const doctors: Doctor[] = seedDoctors
   .filter((d) => Boolean(d.endorsement))
@@ -30,3 +26,32 @@ export const doctors: Doctor[] = seedDoctors
     casesHandled: d.casesHandledOverride ?? 0,
     responseTime: d.responseTime ?? "",
   }));
+
+function mapDbDoctor(d: DbDoctorProfile): Doctor {
+  return {
+    id: d.slug ?? d.id,
+    name: d.name,
+    title: d.title ?? "",
+    specialty: d.specialty,
+    subspecialties: d.subspecialties ?? [],
+    languages: d.languages ?? [],
+    credentials: d.credentials ?? "",
+    endorsement: d.endorsement ?? "",
+    bio: d.bio ?? "",
+    casesHandled: d.casesHandledOverride ?? 0,
+    responseTime: d.responseTime ?? "",
+  };
+}
+
+/**
+ * Real Drizzle query with a fallback to the static `doctors` array above
+ * when no database is configured (`listMedconnectDoctors()` returns `null`
+ * in that case — see lib/db/queries/doctors.ts). Prefer this over the
+ * static `doctors` export in any new Server Component; the static export
+ * stays only for the handful of Client Component / build-time (SSG)
+ * call sites that can't `await` (docs/decision-log/0009).
+ */
+export async function getMedconnectDoctors(): Promise<Doctor[]> {
+  const rows = await listMedconnectDoctors();
+  return rows ? rows.map(mapDbDoctor) : doctors;
+}

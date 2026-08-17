@@ -2,6 +2,7 @@ import { Suspense } from "react";
 import Link from "next/link";
 import BookForm from "./BookForm";
 import { getCurrentUser } from "@/lib/auth/dal";
+import { getMedconnectDoctors } from "@/modules/medconnect/data";
 
 // See app/dashboard/page.tsx's identical note — this page reads the auth
 // session and must not be statically snapshotted.
@@ -19,6 +20,7 @@ export default async function BookPage() {
   // optimistic redirect to /login for /book, but this server-side check is
   // the real gate (per the auth guide: never rely on Proxy alone).
   const user = await getCurrentUser();
+  const doctors = await getMedconnectDoctors();
 
   return (
     <div className="bg-white">
@@ -71,7 +73,7 @@ export default async function BookPage() {
           </div>
         ) : (
           <Suspense fallback={<div className="animate-pulse h-96 bg-stone-100 rounded-xl" />}>
-            <BookForm patientEmail={user.email} />
+            <BookForm patientEmail={user.email} doctors={doctors} />
           </Suspense>
         )}
       </div>

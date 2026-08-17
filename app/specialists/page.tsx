@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { doctors } from "@/modules/medconnect/data";
+import { getMedconnectDoctors } from "@/modules/medconnect/data";
 import { CONTACT } from "@/lib/contact";
 import SpecialistsGrid from "./SpecialistsGrid";
 
@@ -9,7 +9,8 @@ export const metadata = {
     "Browse our personally vetted network of specialists across Sheba, Hadassah, Ichilov, and more. Hospital-agnostic — we route to whoever is right for your case.",
 };
 
-export default function SpecialistsPage() {
+export default async function SpecialistsPage() {
+  const doctors = await getMedconnectDoctors();
   return (
     <div>
       {/* Header */}

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { doctors } from "@/modules/medconnect/data";
+import { getMedconnectDoctors } from "@/modules/medconnect/data";
 import DoctorCard from "@/modules/medconnect/components/DoctorCard";
 
 export const metadata = {
@@ -7,7 +7,8 @@ export const metadata = {
   description: "Browse our personally vetted network of medical specialists.",
 };
 
-export default function MedConnectPage() {
+export default async function MedConnectPage() {
+  const doctors = await getMedconnectDoctors();
   return (
     <div>
       <div className="bg-green-50 text-stone-900 py-16">

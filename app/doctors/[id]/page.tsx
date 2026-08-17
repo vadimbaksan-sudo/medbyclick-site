@@ -1,8 +1,13 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { doctors } from "@/modules/medconnect/data";
+import { doctors, getMedconnectDoctors } from "@/modules/medconnect/data";
 import { avatarGradientClass } from "@/lib/ui/avatarColor";
 
+// Build-time param generation stays on the static array deliberately — it
+// must not depend on a live database connection existing at build time
+// (docs/decision-log/0009). `dynamicParams` defaults to true, so a doctor
+// that only exists in a live DB (not in this static list) still renders
+// fine on-demand via the async lookup below; it's just not pre-built.
 export function generateStaticParams() {
   return doctors.map((d) => ({ id: d.id }));
 }
@@ -13,7 +18,8 @@ export async function generateMetadata({
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
-  const doctor = doctors.find((d) => d.id === id);
+  const allDoctors = await getMedconnectDoctors();
+  const doctor = allDoctors.find((d) => d.id === id);
   if (!doctor) return {};
   return {
     title: `${doctor.name} — MedByClick`,
@@ -27,10 +33,11 @@ export default async function DoctorProfilePage({
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
-  const doctor = doctors.find((d) => d.id === id);
+  const allDoctors = await getMedconnectDoctors();
+  const doctor = allDoctors.find((d) => d.id === id);
   if (!doctor) notFound();
 
-  const others = doctors.filter((d) => d.id !== doctor.id).slice(0, 2);
+  const others = allDoctors.filter((d) => d.id !== doctor.id).slice(0, 2);
 
   return (
     <div className="bg-white">

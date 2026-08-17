@@ -3,7 +3,7 @@
 import { useActionState, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
-import { doctors } from "@/modules/medconnect/data";
+import type { Doctor } from "@/modules/medconnect/types";
 import { submitBooking } from "@/lib/bookings/actions";
 import { avatarGradientClass } from "@/lib/ui/avatarColor";
 import { SPECIALTIES } from "@/lib/constants/specialties";
@@ -81,7 +81,7 @@ const ROUTING_RATIONALE: Record<string, string> = {
 
 const initialState: BookingFormState = { status: "idle" };
 
-export default function BookForm({ patientEmail }: { patientEmail: string }) {
+export default function BookForm({ patientEmail, doctors }: { patientEmail: string; doctors: Doctor[] }) {
   const searchParams = useSearchParams();
   const preselectedDoctorId = searchParams.get("doctor") ?? "";
 
