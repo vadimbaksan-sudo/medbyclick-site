@@ -4,6 +4,8 @@ import MbcDashboard from "./MbcDashboard";
 import BookingHistory from "./BookingHistory";
 import PaymentHistory from "./PaymentHistory";
 import MedicalHistoryShell from "./MedicalHistoryShell";
+import CaseChecklistShell from "./CaseChecklistShell";
+import SecondOpinionReportShell from "./SecondOpinionReportShell";
 import { requireUser } from "@/lib/auth/dal";
 import { isDatabaseConfigured } from "@/lib/db/client";
 import { listBookingsForPatient } from "@/lib/db/queries/bookings";
@@ -54,6 +56,8 @@ export default async function DashboardPage() {
         <BookingHistory bookings={bookings} />
         <PaymentHistory payments={payments} />
         <MedicalHistoryShell />
+        <CaseChecklistShell />
+        <SecondOpinionReportShell />
 
         <div>
           <div className="flex items-center gap-2 mb-4">

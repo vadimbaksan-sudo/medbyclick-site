@@ -1,8 +1,8 @@
 import "server-only";
-import { and, eq, or } from "drizzle-orm";
+import { and, eq, or, inArray, desc } from "drizzle-orm";
 import { getDb } from "@/lib/db/client";
 import { bookings, doctorProfiles } from "@/lib/db/schema";
-import type { NewDbBooking } from "@/lib/db/schema";
+import type { NewDbBooking, DbBooking } from "@/lib/db/schema";
 
 /**
  * Real Drizzle query layer for bookings — replaces
@@ -66,12 +66,17 @@ export async function findDoctorProfileBySlugOrId(doctorIdOrSlug: string) {
  * matches zero rows instead of silently succeeding.
  */
 
-/** requested -> confirmed. */
+/**
+ * requested -> confirmed. Also advances `caseStage` to
+ * `consultation_scheduled` (Phase B, docs/decision-log/0009) — a doctor
+ * confirming a booking is precisely the spec's Step 7 "Подтверждение
+ * врача" checkpoint.
+ */
 export async function confirmBookingForDoctor(bookingId: string, doctorProfileId: string) {
   const db = getDb();
   const rows = await db
     .update(bookings)
-    .set({ status: "confirmed", updatedAt: new Date() })
+    .set({ status: "confirmed", caseStage: "consultation_scheduled", updatedAt: new Date() })
     .where(
       and(
         eq(bookings.id, bookingId),
@@ -94,7 +99,7 @@ export async function completeBookingForDoctor(bookingId: string, doctorProfileI
   const db = getDb();
   const rows = await db
     .update(bookings)
-    .set({ status: "completed", updatedAt: new Date() })
+    .set({ status: "completed", caseStage: "closed", updatedAt: new Date() })
     .where(
       and(
         eq(bookings.id, bookingId),
@@ -116,7 +121,7 @@ export async function declineBookingForDoctor(bookingId: string, doctorProfileId
   const db = getDb();
   const rows = await db
     .update(bookings)
-    .set({ status: "requested", doctorId: null, updatedAt: new Date() })
+    .set({ status: "requested", doctorId: null, caseStage: "submitted", updatedAt: new Date() })
     .where(
       and(
         eq(bookings.id, bookingId),
@@ -143,6 +148,50 @@ export async function addDoctorNotesToBooking(
     .update(bookings)
     .set({ doctorNotes, updatedAt: new Date() })
     .where(and(eq(bookings.id, bookingId), eq(bookings.doctorId, doctorProfileId)))
+    .returning();
+  return rows[0] ?? null;
+}
+
+/**
+ * Coordinator/admin escalation queue (Phase F, docs/decision-log/0009,
+ * spec §3.4's "Эскалирован"/"Оставлен" terminal states). No dedicated
+ * "coordinator" role exists yet (docs/ROADMAP.md) — gated to `admin` in
+ * app/coordinator/page.tsx as the interim standing-in role.
+ */
+export async function listEscalatedOrAbandonedBookings(): Promise<DbBooking[]> {
+  const db = getDb();
+  return db
+    .select()
+    .from(bookings)
+    .where(inArray(bookings.caseStage, ["escalated", "abandoned"]))
+    .orderBy(desc(bookings.escalatedAt), desc(bookings.updatedAt));
+}
+
+/**
+ * Phase H cross-module handoff (spec §3.4's "Передан" terminal state /
+ * §3.3 "если второе мнение рекомендует очное лечение за рубежом"). Marks a
+ * case as continuing in another module without deleting/archiving the
+ * MedConnect record — it stays visible as the case's system-of-record per
+ * spec §1. Scoped to admin, not a specific doctor, since the receiving
+ * module (medtravel/medtrials/medpharmaccess) is what actually owns the
+ * case going forward; there's no doctor-authority reason to restrict who
+ * flags a transfer the way there is for confirm/complete/decline.
+ */
+export async function transferBookingToModule(
+  bookingId: string,
+  targetModule: DbBooking["transferredToModule"]
+) {
+  const db = getDb();
+  const now = new Date();
+  const rows = await db
+    .update(bookings)
+    .set({
+      caseStage: "transferred",
+      transferredToModule: targetModule,
+      transferredAt: now,
+      updatedAt: now,
+    })
+    .where(eq(bookings.id, bookingId))
     .returning();
   return rows[0] ?? null;
 }

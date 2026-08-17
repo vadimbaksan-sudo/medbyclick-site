@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { doctors, getMedconnectDoctors } from "@/modules/medconnect/data";
+import { doctors } from "@/modules/medconnect/data";
+import { getMedconnectDoctors } from "@/modules/medconnect/getDoctors";
 import { avatarGradientClass } from "@/lib/ui/avatarColor";
 
 // Build-time param generation stays on the static array deliberately — it

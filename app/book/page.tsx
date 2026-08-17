@@ -2,7 +2,7 @@ import { Suspense } from "react";
 import Link from "next/link";
 import BookForm from "./BookForm";
 import { getCurrentUser } from "@/lib/auth/dal";
-import { getMedconnectDoctors } from "@/modules/medconnect/data";
+import { getMedconnectDoctors } from "@/modules/medconnect/getDoctors";
 
 // See app/dashboard/page.tsx's identical note — this page reads the auth
 // session and must not be statically snapshotted.

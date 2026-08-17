@@ -7,8 +7,10 @@ Decision Authority). Individual phases below still hit existing Joint/required-c
 gates (Legal & Compliance, Medical Advisory, Medical Community) already established
 elsewhere in `docs/ROADMAP.md` — this entry sequences the work, it does not clear
 those gates.
-**Status:** Decided (sequencing) / Phase A executed same day; later phases open pending
-Vadim's pick of what to build next
+**Status:** Decided (sequencing) / Phases A, B, D, F, H executed 2026-08-17 (same
+day, per Vadim's "let's do it all" follow-up); Phases C, E, G shipped as schema +
+synthetic-data UI shells only, consistent with the Legal & Compliance gate below —
+not full builds. See "Addendum — What Actually Shipped" at the end of this entry.
 
 ## Context
 
@@ -151,3 +153,96 @@ None recorded.
   (same "flag, don't silently resolve" pattern for out-of-session decisions)
 - Source document: `MedByClick_01_MedConnect_RU.pdf` ("Подготовлено для
   Марины", 11 августа 2026) — not committed to the repo (supplied in chat)
+
+## Addendum — What Actually Shipped (2026-08-17, same day)
+
+Vadim's follow-up ("давай все сделаем ок") authorized building all phases in
+this entry. Executed with one hard constraint discovered mid-build: the
+existing Legal & Compliance gate on real clinical content (already
+established for `medical_history_entries`, see `docs/ROADMAP.md` Phase 0)
+applies identically to a second-opinion report's diagnostic text, an
+uploaded document's content, and a consilium opinion's text — all real
+clinical *content* about a real patient/case. That gate was not cleared
+this session and could not be cleared unilaterally, so **Phases C, E, G
+shipped as schema + synthetic-data UI shells, mirroring the existing
+`medical_history_entries`/`MedicalHistoryShell.tsx` precedent exactly** —
+not as live doctor-facing write flows. Workflow *metadata* (that a case is
+at a given pipeline stage) carries no clinical content and was not subject
+to this gate.
+
+**Real, working, no gate (Phases A, B, D, F, H):**
+- Phase A: `/medconnect`, `/medglobaldb`, `/doctors`, `/specialists`,
+  the doctor detail page, and the booking form now read the real
+  `doctor_profiles` query layer with a fallback to the static mock array
+  when no database is configured.
+- Phase B: `bookings.caseStage` (submitted → documents_requested →
+  under_review → matched → consultation_scheduled → report_issued →
+  closed/transferred/escalated/abandoned) — additive, doesn't touch the
+  existing doctor-facing `status` field the dashboard already gates on.
+  Confirm/complete/decline actions now also advance `caseStage`. AI triage
+  was deliberately **not** wired to auto-set urgency from real patient
+  text — `/api/medai/intake` carries its own explicit "synthetic/test
+  input only until Legal & Compliance clears real patient data going to an
+  external LLM" gate, discovered while scoping this phase.
+- Phase D: `lib/matching/doctorMatch.ts` — real weighted-scoring dual-route
+  matching (`rankDoctorsForCase`/`rankInstitutionsForCase`), unit-tested
+  (`lib/matching/doctorMatch.test.ts`, 11 cases). Not wired into a live
+  page yet — `/book`'s existing specialty→doctor routing is deliberately
+  curated founder-voice content for the 10 mock doctors (real hospital
+  names, personal endorsement copy) and would be actively degraded by
+  silently replacing it with the generic algorithm. The algorithm's real
+  home is MedGlobalDB's broader pool once that page gets a case-intake
+  entry point, not a forced fit into `/book`.
+- Phase F: `bookings.slaDeadlineAt`/`escalatedAt`, `lib/bookings/sla.ts`'s
+  `runSlaSweep()` (unit-tested deadline math in
+  `lib/bookings/slaDeadline.test.ts`), `app/api/cron/sla-sweep/route.ts`
+  wired via `vercel.json`'s `crons` (once/day — **this project is on the
+  Vercel Hobby plan, which only permits daily cron**, not the more
+  frequent sweep a real SLA system would eventually want), gated by
+  `CRON_SECRET` (fails closed if unset). `app/coordinator/page.tsx` —
+  the escalation/abandonment queue — gated to the `admin` role since no
+  dedicated coordinator role exists yet in `userRoleEnum`.
+- Phase H: `bookings.transferredToModule`/`transferredAt` +
+  `transferBookingToModule()` — records that a case's follow-up moved to
+  medtravel/medtrials/medpharmaccess. Deliberately minimal: those three
+  modules don't have real case-linking schema of their own yet (medtravel
+  has partial fields per the Phase 3 roadmap row; the other two don't), so
+  this only marks the MedConnect-side intent, not a real cross-module sync.
+
+**Schema + synthetic-only UI shell (Phases C, E, G — gated):**
+- `case_documents`, `second_opinion_reports`, `consilium_opinions` tables
+  (all with an `isSynthetic` column, defense-in-depth query layer in
+  `lib/db/queries/case-content.ts` hard-coding `isSynthetic = true` into
+  every read — same pattern as `lib/db/queries/medical-history.ts`). No
+  insert path exists for any of the three, intentionally.
+- `lib/signing/signRecord.ts` — the internal hash-based signing mechanism
+  is real and unit-tested (`lib/signing/signRecord.test.ts`), ready to use
+  the moment real report content is allowed; what's gated is the content,
+  not the signing math.
+- UI shells rendering `lib/db/seed/case-content.seed.ts`'s synthetic
+  constants, each carrying an explicit "Synthetic example — pending Legal
+  & Compliance review" badge: `app/dashboard/CaseChecklistShell.tsx`,
+  `app/dashboard/SecondOpinionReportShell.tsx` (both on the patient
+  dashboard), `app/doctor-dashboard/ConsiliumShell.tsx` (doctor dashboard).
+
+**Regression caught and fixed during this pass:** Phase A's original
+implementation added a `"server-only"`-importing module into
+`modules/medconnect/data.ts`'s / `modules/medglobaldb/data.ts`'s import
+chain, which broke the pre-existing `lib/db/seed/doctors.seed.test.ts` (bun
+test can't resolve `"server-only"` the way Next's bundler does). Fixed by
+splitting each into a plain `data.ts` (static array, test-safe) and a new
+`getDoctors.ts` (DB-aware fetcher, `"server-only"`). Applied the same split
+to `lib/bookings/sla.ts` → `lib/bookings/slaDeadline.ts` (pure) so its
+deadline math is unit-tested too, and removed an unnecessary
+`"server-only"` from `lib/signing/signRecord.ts` (pure crypto, no
+DB/secrets, no reason to block it from tests). Full suite green after the
+fix: `bun test lib/` — 56 pass, 0 fail. `bun run build` (production build)
+also verified clean.
+
+**Not done, still open for a future session:** the actual granular
+doctor-facing UI to walk a case through every `caseStage` transition by
+hand (today only confirm/complete/decline exist, which cover a subset of
+stages); wiring Phase D's matching algorithm into a real case-intake entry
+point; any real object-storage vendor decision for Phase C; any real
+e-signature vendor decision for Phase E if internal hash-signing turns out
+insufficient at scale.

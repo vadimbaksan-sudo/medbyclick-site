@@ -3,6 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { getAuthorizedUser, getCurrentDoctorProfile } from "@/lib/auth/dal";
 import { isDatabaseConfigured } from "@/lib/db/client";
+import { computeSlaDeadline } from "@/lib/bookings/slaDeadline";
 import {
   createBooking,
   findDoctorProfileBySlugOrId,
@@ -76,6 +77,11 @@ export async function submitBooking(
       language,
       source: "book-form",
       status: "requested",
+      // Phase B/F (docs/decision-log/0009): caseStage defaults to
+      // "submitted" at the DB level; the SLA deadline depends on `urgency`
+      // (a per-row value), so it can't be a static column default and is
+      // computed here instead.
+      slaDeadlineAt: computeSlaDeadline(urgency),
     });
   } catch (err) {
     console.error("[bookings/actions] Failed to create booking", err);

@@ -60,6 +60,37 @@ export const bookingUrgencyEnum = pgEnum("booking_urgency", [
   "urgent",
 ]);
 
+// Per docs/decision-log/0009-medconnect-state-machine-build-plan.md Phase B:
+// the MedConnect state-machine spec's pipeline stage, distinct from
+// `bookingStatusEnum` above. `status` stays the doctor-facing
+// confirm/complete/decline lifecycle the dashboard already gates on;
+// `caseStage` is the finer-grained pipeline position (intake → documents →
+// triage → matching → consultation → report → close), additive and
+// non-breaking to every existing status-based check. Workflow metadata
+// only — no clinical content lives on this column, so it carries no
+// Legal & Compliance gate.
+export const caseStageEnum = pgEnum("case_stage", [
+  "submitted",
+  "documents_requested",
+  "under_review",
+  "matched",
+  "consultation_scheduled",
+  "report_issued",
+  "closed",
+  "transferred",
+  "escalated",
+  "abandoned",
+]);
+
+// Which downstream module a closed/transferred case's follow-up work moved
+// to (spec §3.4's "Передан" terminal status, §4 integration points). Null
+// means "no cross-module handoff" — the ordinary case.
+export const transferTargetModuleEnum = pgEnum("transfer_target_module", [
+  "medtravel",
+  "medtrials",
+  "medpharmaccess",
+]);
+
 // Per docs/reports/product/2026-07-04-medtravel-bidirectional-flow-spec.md
 // §2: which party crosses the border for a medtravel booking. Null/default
 // means "not a cross-border-travel booking at all" — every existing row and
@@ -279,12 +310,35 @@ export const bookings = pgTable("bookings", {
   // duplicated here.
   travelCountry: varchar("travel_country", { length: 100 }),
 
+  // Phase B (docs/decision-log/0009): pipeline stage, independent of the
+  // doctor-facing `status` above. Defaults to the state a booking is in the
+  // instant it's created via the real booking form.
+  caseStage: caseStageEnum("case_stage").notNull().default("submitted"),
+
+  // Phase F: SLA deadline computed at creation from `urgency` (see
+  // lib/bookings/sla.ts for the routine/semi-urgent/urgent → hours mapping).
+  // Null means "not yet computed" (should not happen for new rows past this
+  // migration, but kept nullable for any pre-existing row backfilled with
+  // NULL rather than a guessed deadline).
+  slaDeadlineAt: timestamp("sla_deadline_at", { withTimezone: true }),
+  // Set the first time the SLA sweep (lib/bookings/sla.ts) flips a booking
+  // to `escalated`, so a booking already escalated once isn't repeatedly
+  // re-flagged/re-notified by every sweep run.
+  escalatedAt: timestamp("escalated_at", { withTimezone: true }),
+
+  // Phase H: which downstream module this case's follow-up moved to, and
+  // when. Both null = ordinary case, no handoff. Set together, never one
+  // without the other.
+  transferredToModule: transferTargetModuleEnum("transferred_to_module"),
+  transferredAt: timestamp("transferred_at", { withTimezone: true }),
+
   createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
   updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
 }, (table) => ([
   index("bookings_patient_id_idx").on(table.patientId),
   index("bookings_doctor_id_idx").on(table.doctorId),
   index("bookings_status_idx").on(table.status),
+  index("bookings_case_stage_idx").on(table.caseStage),
 ]));
 
 export const bookingsRelations = relations(bookings, ({ one, many }) => ({
@@ -420,6 +474,154 @@ export const courseEnrollmentsRelations = relations(courseEnrollments, ({ one })
 }));
 
 // ---------------------------------------------------------------------------
+// case_documents, second_opinion_reports, consilium_opinions —
+// SCHEMA + UI SHELL ONLY, SYNTHETIC DATA ONLY.
+//
+// Per docs/decision-log/0009-medconnect-state-machine-build-plan.md Phase
+// C/E/G: these three tables hold real clinical *content* about a case
+// (uploaded documents, a doctor's diagnostic opinion, a consilium's
+// discussion) — the same category of data as `medical_history_entries`
+// above, and gated by the identical Legal & Compliance dependency (spec
+// §5.2: retention policy, data residency, jurisdiction handling must clear
+// before any real patient-linked clinical content is stored). No
+// application code in this build writes a non-synthetic row into any of
+// the three tables below — see lib/db/queries/case-content.ts, which
+// hard-codes `isSynthetic = true` into every read, mirroring
+// lib/db/queries/medical-history.ts's defense-in-depth pattern.
+//
+// Workflow *metadata* about these steps (that a case is at the
+// `documents_requested`/`report_issued`/consilium-in-progress stage) is
+// NOT gated — that lives on `bookings.caseStage` above, which carries no
+// clinical content.
+// ---------------------------------------------------------------------------
+
+export const caseDocumentTypeEnum = pgEnum("case_document_type", [
+  "dicom_imaging",
+  "lab_report",
+  "pathology_report",
+  "discharge_summary",
+  "prescription",
+  "other",
+]);
+
+export const caseDocuments = pgTable("case_documents", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  bookingId: uuid("booking_id").notNull().references(() => bookings.id, { onDelete: "cascade" }),
+  uploadedByUserId: uuid("uploaded_by_user_id").references(() => users.id, { onDelete: "set null" }),
+
+  documentType: caseDocumentTypeEnum("document_type").notNull(),
+  title: varchar("title", { length: 250 }).notNull(),
+  // Storage pointer placeholder — no real object-storage vendor is wired up
+  // yet (docs/decision-log/0009 Phase C flags this as an open infra
+  // decision: Supabase Storage vs. S3-compatible). Null for every synthetic
+  // seed row; real uploads cannot flow through this column until both the
+  // vendor decision and the Legal & Compliance sign-off above land.
+  fileRef: text("file_ref"),
+
+  createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+
+  isSynthetic: boolean("is_synthetic").notNull().default(true),
+}, (table) => ([
+  index("case_documents_booking_id_idx").on(table.bookingId),
+]));
+
+export const caseDocumentsRelations = relations(caseDocuments, ({ one }) => ({
+  booking: one(bookings, {
+    fields: [caseDocuments.bookingId],
+    references: [bookings.id],
+  }),
+  uploadedBy: one(users, {
+    fields: [caseDocuments.uploadedByUserId],
+    references: [users.id],
+  }),
+}));
+
+export const diagnosisConcurrenceEnum = pgEnum("diagnosis_concurrence", [
+  "concurs",
+  "diverges",
+  "partial",
+]);
+
+export const secondOpinionReports = pgTable("second_opinion_reports", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  // One report per booking — the spec's Step 10/11 structured second-opinion
+  // deliverable is issued once per case, then locked by signing.
+  bookingId: uuid("booking_id").notNull().references(() => bookings.id, { onDelete: "cascade" }),
+  doctorId: uuid("doctor_id").notNull().references(() => doctorProfiles.id, { onDelete: "restrict" }),
+
+  diagnosisConcurrence: diagnosisConcurrenceEnum("diagnosis_concurrence"),
+  diagnosisNotes: text("diagnosis_notes"),
+  alternativeTreatments: text("alternative_treatments"),
+  riskAssessment: text("risk_assessment"),
+  recommendedNextSteps: text("recommended_next_steps"),
+
+  // Signing locks the report — spec §3.2 Step 11's hard rule ("unsigned or
+  // AI-only drafts cannot be issued") is enforced in
+  // lib/reports/actions.ts by refusing any update once signedAt is set, not
+  // by a DB constraint alone. signatureHash is a SHA-256 of
+  // (doctorId + bookingId + report content + signedAt) — see
+  // lib/signing/signRecord.ts. This is an internal signed record, not a
+  // third-party e-signature vendor (docs/decision-log/0009 Phase E notes
+  // that tradeoff explicitly).
+  signedAt: timestamp("signed_at", { withTimezone: true }),
+  signatureHash: text("signature_hash"),
+
+  createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+  updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
+
+  isSynthetic: boolean("is_synthetic").notNull().default(true),
+}, (table) => ([
+  uniqueIndex("second_opinion_reports_booking_id_unique_idx").on(table.bookingId),
+]));
+
+export const secondOpinionReportsRelations = relations(secondOpinionReports, ({ one }) => ({
+  booking: one(bookings, {
+    fields: [secondOpinionReports.bookingId],
+    references: [bookings.id],
+  }),
+  doctor: one(doctorProfiles, {
+    fields: [secondOpinionReports.doctorId],
+    references: [doctorProfiles.id],
+  }),
+}));
+
+export const consiliumRoleEnum = pgEnum("consilium_role", ["lead", "participant"]);
+
+export const consiliumOpinions = pgTable("consilium_opinions", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  bookingId: uuid("booking_id").notNull().references(() => bookings.id, { onDelete: "cascade" }),
+  doctorId: uuid("doctor_id").notNull().references(() => doctorProfiles.id, { onDelete: "restrict" }),
+
+  role: consiliumRoleEnum("role").notNull().default("participant"),
+  opinionText: text("opinion_text"),
+  // Per spec §2 "Мультидисциплинарные консилиумы": dissenting opinions must
+  // be recorded, not just the majority view — concurs = null means "not yet
+  // submitted," not "abstained."
+  concurs: boolean("concurs"),
+
+  signedAt: timestamp("signed_at", { withTimezone: true }),
+  signatureHash: text("signature_hash"),
+
+  createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+
+  isSynthetic: boolean("is_synthetic").notNull().default(true),
+}, (table) => ([
+  index("consilium_opinions_booking_id_idx").on(table.bookingId),
+  uniqueIndex("consilium_opinions_booking_doctor_unique_idx").on(table.bookingId, table.doctorId),
+]));
+
+export const consiliumOpinionsRelations = relations(consiliumOpinions, ({ one }) => ({
+  booking: one(bookings, {
+    fields: [consiliumOpinions.bookingId],
+    references: [bookings.id],
+  }),
+  doctor: one(doctorProfiles, {
+    fields: [consiliumOpinions.doctorId],
+    references: [doctorProfiles.id],
+  }),
+}));
+
+// ---------------------------------------------------------------------------
 // Inferred types
 // ---------------------------------------------------------------------------
 
@@ -443,3 +645,12 @@ export type NewDbMedicalHistoryEntry = typeof medicalHistoryEntries.$inferInsert
 
 export type DbCourseEnrollment = typeof courseEnrollments.$inferSelect;
 export type NewDbCourseEnrollment = typeof courseEnrollments.$inferInsert;
+
+export type DbCaseDocument = typeof caseDocuments.$inferSelect;
+export type NewDbCaseDocument = typeof caseDocuments.$inferInsert;
+
+export type DbSecondOpinionReport = typeof secondOpinionReports.$inferSelect;
+export type NewDbSecondOpinionReport = typeof secondOpinionReports.$inferInsert;
+
+export type DbConsiliumOpinion = typeof consiliumOpinions.$inferSelect;
+export type NewDbConsiliumOpinion = typeof consiliumOpinions.$inferInsert;

@@ -2,5 +2,11 @@
   "framework": "nextjs",
   "buildCommand": "next build",
   "outputDirectory": ".next",
-  "installCommand": "bun install"
+  "installCommand": "bun install",
+  "crons": [
+    {
+      "path": "/api/cron/sla-sweep",
+      "schedule": "0 9 * * *"
+    }
+  ]
 }

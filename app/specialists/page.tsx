@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { getMedconnectDoctors } from "@/modules/medconnect/data";
+import { getMedconnectDoctors } from "@/modules/medconnect/getDoctors";
 import { CONTACT } from "@/lib/contact";
 import SpecialistsGrid from "./SpecialistsGrid";
 

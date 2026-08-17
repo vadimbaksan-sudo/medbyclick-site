@@ -1,4 +1,4 @@
-import { getGlobalDbDoctors } from "@/modules/medglobaldb/data";
+import { getGlobalDbDoctors } from "@/modules/medglobaldb/getDoctors";
 import GlobalDoctorCard from "@/modules/medglobaldb/components/GlobalDoctorCard";
 
 export const metadata = {

@@ -4,6 +4,7 @@ import { listBookingsForDoctorProfile } from "@/lib/db/queries/bookings";
 import type { DbBooking } from "@/lib/db/schema";
 import ProfileEditForm from "./ProfileEditForm";
 import BookingActions from "./BookingActions";
+import ConsiliumShell from "./ConsiliumShell";
 
 // See app/dashboard/page.tsx's identical note — this page reads the auth
 // session and must not be statically snapshotted.
@@ -118,6 +119,8 @@ export default async function DoctorDashboardPage() {
                 </div>
               )}
             </div>
+
+            <ConsiliumShell />
           </>
         )}
       </div>
