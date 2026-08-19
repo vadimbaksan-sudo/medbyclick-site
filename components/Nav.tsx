@@ -35,9 +35,18 @@ export default function Nav() {
     return () => sub.subscription.unsubscribe();
   }, []);
 
+  // Previously split into a `primary` (medconnect, meant to render as its
+  // own top-level link) + `platform` (everything else, in the dropdown)
+  // pair. The `primary` link's guard condition (`primary.href !==
+  // "/medconnect"`) could never be true for the medconnect module itself,
+  // so that link never rendered — medconnect silently vanished from the
+  // desktop nav entirely (still visible in the footer, which doesn't do
+  // this split). Fix: medconnect goes back into the same dropdown as every
+  // other module, exactly like the other 14. "Специалисты" below stays a
+  // separate, deliberately distinct top-level link — it's a real,
+  // already-working doctor-browse page in its own right, not meant to be
+  // medconnect's nav entry point (2026-08-19 conversation with Vadim).
   const navModules = getNavModules();
-  const primary = navModules.find((m) => m.id === "medconnect");
-  const platform = navModules.filter((m) => m.id !== "medconnect");
 
   function closeAll() {
     setOpen(false);
@@ -64,16 +73,7 @@ export default function Nav() {
               <T en="Specialists" ru="Специалисты" tr="Uzmanlar" es="Especialistas" fr="Spécialistes" />
             </Link>
 
-            {primary && primary.href !== "/medconnect" && (
-              <Link
-                href={primary.href!}
-                className="text-sm font-medium text-stone-600 hover:text-stone-900 px-3 py-2 rounded-lg hover:bg-stone-50 transition-colors"
-              >
-                {primary.navLabel}
-              </Link>
-            )}
-
-            {platform.length > 0 && (
+            {navModules.length > 0 && (
               <div className="relative">
                 <button
                   onClick={() => setPlatformOpen(!platformOpen)}
@@ -89,7 +89,7 @@ export default function Nav() {
                 {platformOpen && (
                   <div className="absolute top-full left-0 mt-1 w-72 bg-white border border-stone-200 rounded-2xl shadow-xl overflow-hidden">
                     <div className="p-2 grid grid-cols-2 gap-0.5">
-                      {platform.map((mod) => (
+                      {navModules.map((mod) => (
                         <Link
                           key={mod.id}
                           href={mod.href!}
