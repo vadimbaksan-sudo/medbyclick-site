@@ -17,6 +17,11 @@ const DOC_TYPE_LABEL: Record<string, string> = {
  * real upload flow exists. This renders
  * lib/db/seed/case-content.seed.ts's constants only — no upload input, no
  * DB write path.
+ *
+ * Shared component: rendered on the logged-in patient dashboard
+ * (app/dashboard/page.tsx) AND publicly on /medconnect (no login required)
+ * so the same illustrative example is reachable either way — per Vadim's
+ * 2026-08-19 request to make these previews visible without an account.
  */
 export default function CaseChecklistShell() {
   const missing = syntheticCaseDocuments.filter((d) => d.status === "missing");

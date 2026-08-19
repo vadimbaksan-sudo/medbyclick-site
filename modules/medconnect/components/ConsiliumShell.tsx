@@ -7,6 +7,9 @@ import { syntheticConsiliumOpinions } from "@/lib/db/seed/case-content.seed";
  * about a real case require Legal & Compliance sign-off before storage.
  * The spec's requirement that dissenting opinions are recorded, not just
  * the majority view, is reflected here even in the illustrative data.
+ *
+ * Shared component: rendered on the logged-in doctor dashboard and
+ * publicly on /medconnect — see CaseChecklistShell.tsx's identical note.
  */
 export default function ConsiliumShell() {
   const opinions = syntheticConsiliumOpinions;

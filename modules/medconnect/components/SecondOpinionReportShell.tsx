@@ -12,6 +12,9 @@ const CONCURRENCE_LABEL: Record<string, string> = {
  * MedicalHistoryShell/CaseChecklistShell. The signing *mechanism*
  * (lib/signing/signRecord.ts) is real and ready to use; what's gated is
  * storing real clinical opinion content, not the hash-signing math itself.
+ *
+ * Shared component: rendered on the logged-in patient dashboard and
+ * publicly on /medconnect — see CaseChecklistShell.tsx's identical note.
  */
 export default function SecondOpinionReportShell() {
   const report = syntheticSecondOpinionReport;
