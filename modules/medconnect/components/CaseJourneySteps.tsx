@@ -119,9 +119,9 @@ const STATUS_CLASS: Record<StepStatus, string> = {
 export default function CaseJourneySteps() {
   return (
     <div>
-      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      <ol className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 list-none">
         {STEPS.map((step) => (
-          <div key={step.n} className="border border-stone-200 rounded-lg p-5">
+          <li key={step.n} className="border border-stone-200 rounded-lg p-5">
             <div className="flex items-center justify-between gap-2 mb-2">
               <span className="text-xs font-bold text-stone-400">Step {step.n}</span>
               <span className={`text-[10px] font-bold uppercase tracking-wide px-2 py-0.5 rounded-full ${STATUS_CLASS[step.status]}`}>
@@ -130,9 +130,9 @@ export default function CaseJourneySteps() {
             </div>
             <p className="text-sm font-semibold text-stone-900 mb-1">{step.title}</p>
             <p className="text-xs text-stone-500 leading-relaxed">{step.description}</p>
-          </div>
+          </li>
         ))}
-      </div>
+      </ol>
       <div className="flex flex-wrap gap-4 mt-5 text-xs text-stone-500">
         <span className="flex items-center gap-1.5">
           <span className="w-2 h-2 rounded-full bg-green-500" /> Live — real, working

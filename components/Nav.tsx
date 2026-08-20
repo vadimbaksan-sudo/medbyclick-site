@@ -74,10 +74,20 @@ export default function Nav() {
             </Link>
 
             {navModules.length > 0 && (
-              <div className="relative">
+              <div
+                className="relative"
+                onKeyDown={(e) => {
+                  // Bubbles up from the button or any link inside the open
+                  // panel, so Escape closes it regardless of which of the
+                  // two currently has focus.
+                  if (e.key === "Escape") setPlatformOpen(false);
+                }}
+              >
                 <button
                   onClick={() => setPlatformOpen(!platformOpen)}
                   onBlur={() => setTimeout(() => setPlatformOpen(false), 150)}
+                  aria-haspopup="true"
+                  aria-expanded={platformOpen}
                   className="flex items-center gap-1 text-sm font-medium text-stone-600 hover:text-stone-900 px-3 py-2 rounded-lg hover:bg-stone-50 transition-colors"
                 >
                   <T en="Platform" ru="Платформа" tr="Platform" es="Plataforma" fr="Plateforme" />
