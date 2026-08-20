@@ -200,14 +200,6 @@ export default function Nav() {
               <span className="text-sm font-medium text-stone-700"><T en="Specialists" ru="Специалисты" tr="Uzmanlar" es="Especialistas" fr="Spécialistes" /></span>
             </Link>
             <Link
-              href="/medai/"
-              onClick={closeAll}
-              className="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-stone-50 transition-colors"
-            >
-              <span className="text-lg">🧠</span>
-              <span className="text-sm font-medium text-stone-700"><T en="AI Diagnostics" ru="ИИ-диагностика" tr="Yapay Zeka Tanı" es="Diagnóstico IA" fr="Diagnostic IA" /></span>
-            </Link>
-            <Link
               href="/pricing/"
               onClick={closeAll}
               className="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-stone-50 transition-colors"
@@ -215,22 +207,23 @@ export default function Nav() {
               <span className="text-lg">💳</span>
               <span className="text-sm font-medium text-stone-700"><T en="Pricing" ru="Цены" tr="Fiyatlandırma" es="Precios" fr="Tarifs" /></span>
             </Link>
-            <Link
-              href="/medtravel/"
-              onClick={closeAll}
-              className="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-stone-50 transition-colors"
-            >
-              <span className="text-lg">✈️</span>
-              <span className="text-sm font-medium text-stone-700"><T en="Medical Travel" ru="Медицинские поездки" tr="Sağlık Turizmi" es="Viajes Médicos" fr="Voyage Médical" /></span>
-            </Link>
-            <Link
-              href="/mededu/"
-              onClick={closeAll}
-              className="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-stone-50 transition-colors"
-            >
-              <span className="text-lg">📚</span>
-              <span className="text-sm font-medium text-stone-700"><T en="Education" ru="Образование" tr="Eğitim" es="Educación" fr="Éducation" /></span>
-            </Link>
+            {/* Same bug class as the desktop dropdown fix (see navModules
+                comment above): this was a hardcoded 5-module list that never
+                got updated when modules were added, so most of them
+                (including MedConnect) were unreachable from mobile nav
+                entirely. Now loops over the same getNavModules() the desktop
+                dropdown uses, so the two can never drift apart again. */}
+            {navModules.map((mod) => (
+              <Link
+                key={mod.id}
+                href={mod.href!}
+                onClick={closeAll}
+                className="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-stone-50 transition-colors"
+              >
+                <span className="text-lg">{mod.icon}</span>
+                <span className="text-sm font-medium text-stone-700">{mod.navLabel}</span>
+              </Link>
+            ))}
 
             <div className="pt-2 border-t border-stone-100 mt-2 space-y-2">
               {loggedIn ? (
