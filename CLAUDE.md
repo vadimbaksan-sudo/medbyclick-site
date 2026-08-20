@@ -6,11 +6,18 @@ All font choices, colors, spacing, and aesthetic direction are defined there.
 Do not deviate without explicit user approval.
 In QA mode, flag any code that doesn't match DESIGN.md.
 
+## Conventions
+- `docs/conventions/server-only-split.md` — when a module needs both
+  unit-testable logic and a `"server-only"` DB-touching part, split them into
+  two files (`.server.ts` suffix for the server-only half). Lint-enforced for
+  new files; read this before adding a new DB-aware module.
+
+
 <!-- cloude-code-toolbox:mcp-skills-awareness-begin -->
 
 ### MCP & Skills awareness (Cloude Code ToolBox)
 
-_Last synced: 2026-07-04T17:01:20.859Z._
+_Last synced: 2026-07-13T12:15:01.522Z._
 
 - **Full report:** `.claude/cloude-code-toolbox-mcp-skills-awareness.md` in this workspace (auto-overwritten on each scan). Use it as ground truth for configured servers and skill folders.
 - **MCP:** For **live tools** in Claude Code, enable the matching server via `/mcp`. Servers are configured in `~/.claude.json` (user) and `.mcp.json` (project).
