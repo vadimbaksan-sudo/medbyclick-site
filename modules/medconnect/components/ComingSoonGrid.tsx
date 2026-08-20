@@ -45,7 +45,7 @@ export default function ComingSoonGrid() {
   return (
     <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
       {ITEMS.map((item) => (
-        <div key={item.title} className="border border-dashed border-stone-300 rounded-2xl p-5 bg-stone-50">
+        <div key={item.title} className="border border-dashed border-stone-300 rounded-lg p-5 bg-stone-50">
           <span className="text-[10px] font-bold uppercase tracking-wide text-stone-500 bg-stone-200 px-2 py-0.5 rounded-full">
             Coming soon
           </span>

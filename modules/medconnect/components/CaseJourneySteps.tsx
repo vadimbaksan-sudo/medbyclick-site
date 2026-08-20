@@ -17,8 +17,12 @@ interface Step {
  *
  * Status per step reflects the actual codebase, not the spec's intent:
  * - live: real, working code, no compliance gate
- * - preview: schema + synthetic-data UI shell exists (see the shells
- *   rendered below this component on /medconnect), no real write path
+ * - preview: real code exists but isn't reachable by a user yet. Usually a
+ *   schema + synthetic-data UI shell (see the shells rendered below this
+ *   component on /medconnect); step 5 is the one exception — its matching
+ *   engine (lib/matching/doctorMatch.ts) is real and unit-tested, just not
+ *   wired into a live page yet (2026-08-20 /autoplan retrospective review
+ *   caught this step mislabeled "live").
  * - planned: nothing built yet
  * - blocked: real code exists but is intentionally gated behind a Legal &
  *   Compliance / Medical Advisory sign-off, not a "todo"
@@ -52,7 +56,7 @@ const STEPS: Step[] = [
     n: 5,
     title: "Doctor & institution matching",
     description: "Two ranked, explainable shortlists — direct-to-doctor and via-institution.",
-    status: "live",
+    status: "preview",
   },
   {
     n: 6,
@@ -117,7 +121,7 @@ export default function CaseJourneySteps() {
     <div>
       <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {STEPS.map((step) => (
-          <div key={step.n} className="border border-stone-200 rounded-2xl p-5">
+          <div key={step.n} className="border border-stone-200 rounded-lg p-5">
             <div className="flex items-center justify-between gap-2 mb-2">
               <span className="text-xs font-bold text-stone-400">Step {step.n}</span>
               <span className={`text-[10px] font-bold uppercase tracking-wide px-2 py-0.5 rounded-full ${STATUS_CLASS[step.status]}`}>
