@@ -56,4 +56,65 @@
 
 **Context:** Test review coverage diagram flagged as [GAP]: no channel hypothesis, no test budget, no go/no-go criteria. All three needed before the first paid acquisition test can be evaluated as a success or failure.
 
+---
+
+## T5 — Dedicated coordinator role (userRoleEnum) instead of admin-gating /coordinator
+
+**What:** Add a real `coordinator` value to `userRoleEnum` and re-gate
+`app/coordinator/page.tsx` (the escalated/abandoned-booking queue, which
+shows patient-authored `situationNotes`) to it instead of `admin`.
+
+**Why:** Flagged by the 2026-08-20 `/autoplan` retrospective review: right
+now every `admin` account can read every escalated/abandoned case's raw
+notes, with no coordinator-specific audit trail or access boundary — an
+interim state adopted only because no coordinator role existed yet when the
+page shipped (Phase F, `docs/decision-log/0009`).
+
+**Pros:** Real least-privilege boundary instead of "admin can see
+everything." Natural fit once T1 (coordinator hire) lands — the role needs
+to exist in the schema before that person can be onboarded with the right
+access anyway.
+
+**Cons:** Schema migration (one enum value) + swapping the page's role check
++ deciding who gets granted the role and how — small code change, real
+process decision attached to it.
+
+**Context:** Not urgent on its own (today's `admin` accounts are trusted,
+this isn't external exposure) — but should land before or alongside T1
+rather than being deferred indefinitely, since T1's hire is the first person
+who should get this role instead of `admin`.
+
+**Depends on / blocked by:** Loosely coupled to T1 — cleanest if a
+coordinator role exists by the time that hire is onboarded.
+
+---
+
+## T6 — `bookings.caseStage` has 3 states nothing ever sets
+
+**What:** `documents_requested`, `under_review`, and `matched` exist in the
+`case_stage` enum but no write path in the codebase ever transitions a
+booking into any of them — confirmed by tracing every `caseStage` write site.
+Either wire real transitions into these states as part of a future case-flow
+build, or explicitly document them as reserved-not-yet-used so the enum
+doesn't overstate what Phase B (`docs/decision-log/0009`) actually shipped.
+
+**Why:** Flagged by the 2026-08-20 `/autoplan` retrospective review — the
+public `/medconnect` 12-step case journey and the decision-log both describe
+a richer pipeline than what the write paths actually implement today
+(`submitted → consultation_scheduled → closed`, plus the terminal
+escalated/abandoned/transferred side-states).
+
+**Pros:** Either resolution is cheap. Wiring them in is the more complete
+fix if a doctor-facing "advance this case" UI gets built later. Documenting
+them as reserved costs one sentence and removes the overstatement risk
+immediately.
+
+**Cons:** Wiring them in now would be scope creep beyond what was
+authorized for the retrospective review itself — not done as part of this
+pass.
+
+**Depends on / blocked by:** Nothing — either resolution can happen
+independently, whenever the doctor-facing case-detail UI (noted as "not
+done, still open" in `docs/decision-log/0009`'s addendum) gets built.
+
 **Depends on / blocked by:** Coordinator operational (Phase 2 gate). Write before marketing hire begins.

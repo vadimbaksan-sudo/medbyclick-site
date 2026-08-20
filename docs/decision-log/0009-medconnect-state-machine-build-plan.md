@@ -246,3 +246,46 @@ stages); wiring Phase D's matching algorithm into a real case-intake entry
 point; any real object-storage vendor decision for Phase C; any real
 e-signature vendor decision for Phase E if internal hash-signing turns out
 insufficient at scale.
+
+`documents_requested`, `under_review`, and `matched` exist in the
+`case_stage` enum as reserved states for that future doctor-facing case-flow
+UI — no write path sets them today (`caseStage` only ever moves
+`submitted → consultation_scheduled → closed`, plus the escalated/
+abandoned/transferred side-states), see `TODOS.md` T6.
+
+## Addendum 2 — Retrospective /autoplan Review (2026-08-20)
+
+Vadim ran the shipped result above through gstack's `/autoplan` pipeline
+retrospectively (CEO/Design/Eng/DX review, dual-voice Claude+Codex) to check
+for gaps a pre-ship review would have caught. Full findings and decision
+audit trail: `~/.gstack/projects/medbyclick/vadimrudkovsky-medconnect-retrospective-plan-20260820-230103.md`.
+Summary of what changed as a result:
+
+- **Fixed (unanimous, no gate needed):** MedConnect was unreachable from the
+  mobile nav menu (a hardcoded link list, never updated when modules were
+  added — same bug class as the desktop dropdown fix earlier this session,
+  reintroduced on the other breakpoint); `CaseJourneySteps.tsx` step 5
+  ("Doctor & institution matching") was mislabeled "Live" when the matching
+  engine isn't wired into any reachable page — relabeled "Preview";
+  `rounded-2xl` in two new components violated `DESIGN.md`'s radius rule —
+  fixed to `rounded-lg`.
+- **Fixed (Vadim's call at the review gate):** `runSlaSweep()`
+  (`lib/bookings/sla.ts`) had an undocumented ordering dependency — a
+  booking both overdue and long-unassigned always resolved to "escalated"
+  purely because that UPDATE ran first in the code, not by design. Fixed by
+  making escalation require an assigned doctor (there's someone to escalate
+  to) and abandonment require no doctor (there isn't) — mutually exclusive
+  by construction now, with a unit-tested pure mirror of both conditions in
+  `lib/bookings/slaDeadline.ts`. The `isSynthetic` defense-in-depth pattern
+  (Phases C/E/G) was enforced only by a code comment — added an ESLint rule
+  banning direct imports of the three gated tables outside
+  `lib/db/queries/case-content.ts`. The `"server-only"` split pattern that
+  had silently caused the same test regression three times is now documented
+  (`docs/conventions/server-only-split.md`) and lint-enforced for new files.
+- **Deferred, tracked as debt (Vadim's call):** `/coordinator` staying
+  admin-gated rather than getting a dedicated role (`TODOS.md` T5); the 3
+  reserved-but-unused `caseStage` states, documented above instead of wired
+  in now (`TODOS.md` T6); the public "Blocked (compliance)" status label —
+  Claude read it as honest transparency, Codex as unnecessary competitive/
+  investor exposure — left as-is, Vadim's explicit call given it was already
+  an approved decision this same build session.
