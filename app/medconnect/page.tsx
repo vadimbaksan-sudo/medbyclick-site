@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { getMedconnectDoctors } from "@/modules/medconnect/getDoctors";
+import { isDatabaseConfigured } from "@/lib/db/client";
 import DoctorCard from "@/modules/medconnect/components/DoctorCard";
 import CaseJourneySteps from "@/modules/medconnect/components/CaseJourneySteps";
 import CaseChecklistShell from "@/modules/medconnect/components/CaseChecklistShell";
@@ -13,7 +14,21 @@ export const metadata = {
 };
 
 export default async function MedConnectPage() {
-  const doctors = await getMedconnectDoctors();
+  // Same try/catch + tri-state pattern as app/coordinator/page.tsx: a real
+  // DB error shouldn't crash the page (getMedconnectDoctors doesn't catch
+  // internally), and "zero doctors" needs its own message so it's never
+  // silently indistinguishable from "the page is broken". Flagged by the
+  // 2026-08-20 /autoplan retrospective review — this page had no empty/error
+  // state at all before.
+  let doctors: Awaited<ReturnType<typeof getMedconnectDoctors>> = [];
+  let dbError = false;
+  try {
+    doctors = await getMedconnectDoctors();
+  } catch (err) {
+    console.error("[medconnect] Failed to load doctors", err);
+    dbError = true;
+  }
+
   return (
     <div>
       <div className="bg-green-50 text-stone-900 py-16">
@@ -53,11 +68,26 @@ export default async function MedConnectPage() {
             Not sure? Let us match you →
           </Link>
         </div>
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {doctors.map((doctor) => (
-            <DoctorCard key={doctor.id} doctor={doctor} />
-          ))}
-        </div>
+        {dbError && (
+          <div className="bg-red-50 border border-red-200 rounded-lg p-5 text-sm text-red-700">
+            Failed to load specialists right now. Check server logs, or try again shortly.
+          </div>
+        )}
+
+        {!dbError && isDatabaseConfigured() && doctors.length === 0 && (
+          <div className="bg-stone-50 border border-stone-200 rounded-lg p-5 text-sm text-stone-600">
+            No specialists are listed right now — check back shortly, or{" "}
+            <Link href="/book" className="underline">tell us about your case</Link> and we&apos;ll route you directly.
+          </div>
+        )}
+
+        {!dbError && doctors.length > 0 && (
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {doctors.map((doctor) => (
+              <DoctorCard key={doctor.id} doctor={doctor} />
+            ))}
+          </div>
+        )}
       </div>
 
       <div className="border-t border-stone-100 py-16">
