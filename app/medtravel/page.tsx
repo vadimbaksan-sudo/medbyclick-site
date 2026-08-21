@@ -1,6 +1,7 @@
 import { destinations, missionDestinations } from "@/modules/medtravel/data";
 import DestinationCard from "@/modules/medtravel/components/DestinationCard";
 import MissionDestinationCard from "@/modules/medtravel/components/MissionDestinationCard";
+import { Calendar, ClipboardList, Plane, RefreshCw } from "lucide-react";
 
 export const metadata = {
   title: "MedTravel — Medical Travel · MedByClick",
@@ -62,13 +63,13 @@ export default function MedTravelPage() {
           <h2 className="text-xl font-bold text-stone-900 mb-6">What we handle</h2>
           <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-4">
             {[
-              { icon: "🗓", text: "Appointment scheduling in local time zones" },
-              { icon: "📋", text: "Medical record translation & preparation" },
-              { icon: "✈️", text: "Travel & accommodation recommendations" },
-              { icon: "🔄", text: "Follow-up coordination back home" },
+              { icon: Calendar, text: "Appointment scheduling in local time zones" },
+              { icon: ClipboardList, text: "Medical record translation & preparation" },
+              { icon: Plane, text: "Travel & accommodation recommendations" },
+              { icon: RefreshCw, text: "Follow-up coordination back home" },
             ].map((item) => (
               <div key={item.text} className="flex flex-col gap-2">
-                <span className="text-2xl">{item.icon}</span>
+                <item.icon className="w-6 h-6 text-stone-600" />
                 <p className="text-sm text-stone-600 leading-relaxed">{item.text}</p>
               </div>
             ))}

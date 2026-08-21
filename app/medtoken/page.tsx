@@ -128,7 +128,7 @@ export default function MedTokenPage() {
               key={uc.id}
               className="border border-stone-200 rounded-2xl p-6 bg-white hover:border-amber-300 hover:shadow-sm transition-all"
             >
-              <span className="text-3xl mb-4 block">{uc.icon}</span>
+              <uc.icon className="w-7 h-7 mb-4 text-amber-700" />
               <h3 className="font-semibold text-stone-900 mb-2">{uc.title}</h3>
               <p className="text-xs text-stone-500 leading-relaxed">{uc.description}</p>
             </div>

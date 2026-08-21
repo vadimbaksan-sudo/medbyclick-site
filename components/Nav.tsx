@@ -8,6 +8,7 @@ import { logoutUser } from "@/lib/auth/actions";
 import { CONTACT } from "@/lib/contact";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
 import T from "@/components/T";
+import { Stethoscope, CreditCard } from "lucide-react";
 
 export default function Nav() {
   const [open, setOpen] = useState(false);
@@ -106,7 +107,7 @@ export default function Nav() {
                           onClick={() => setPlatformOpen(false)}
                           className="flex items-center gap-2.5 px-3 py-2.5 rounded-xl hover:bg-stone-50 transition-colors group"
                         >
-                          <span className="text-lg shrink-0">{mod.icon}</span>
+                          <mod.icon className="w-4 h-4 shrink-0 text-stone-500 group-hover:text-amber-700 transition-colors" />
                           <div>
                             <p className="text-xs font-semibold text-stone-900 group-hover:text-amber-700 transition-colors leading-tight">
                               {mod.navLabel}
@@ -206,7 +207,7 @@ export default function Nav() {
               onClick={closeAll}
               className="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-stone-50 transition-colors"
             >
-              <span className="text-lg">🩺</span>
+              <Stethoscope className="w-4 h-4 text-stone-500" />
               <span className="text-sm font-medium text-stone-700"><T en="Specialists" ru="Специалисты" tr="Uzmanlar" es="Especialistas" fr="Spécialistes" /></span>
             </Link>
             <Link
@@ -214,7 +215,7 @@ export default function Nav() {
               onClick={closeAll}
               className="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-stone-50 transition-colors"
             >
-              <span className="text-lg">💳</span>
+              <CreditCard className="w-4 h-4 text-stone-500" />
               <span className="text-sm font-medium text-stone-700"><T en="Pricing" ru="Цены" tr="Fiyatlandırma" es="Precios" fr="Tarifs" /></span>
             </Link>
             {/* Same bug class as the desktop dropdown fix (see navModules
@@ -230,7 +231,7 @@ export default function Nav() {
                 onClick={closeAll}
                 className="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-stone-50 transition-colors"
               >
-                <span className="text-lg">{mod.icon}</span>
+                <mod.icon className="w-4 h-4 text-stone-500" />
                 <span className="text-sm font-medium text-stone-700">{mod.navLabel}</span>
               </Link>
             ))}

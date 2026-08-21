@@ -1,4 +1,5 @@
 import { Suspense } from "react";
+import { AlertTriangle } from "lucide-react";
 import CryptoForm from "./CryptoForm";
 
 export const metadata = {
@@ -11,7 +12,7 @@ export default function CryptoCheckoutPage() {
     <div>
       <div className="bg-red-600 text-white py-3 px-4 sm:px-6">
         <div className="max-w-3xl mx-auto flex items-start gap-3">
-          <span className="text-xl leading-none flex-shrink-0" aria-hidden="true">⚠️</span>
+          <AlertTriangle className="w-5 h-5 flex-shrink-0" aria-hidden="true" />
           <p className="text-sm font-bold leading-snug">
             DEMO / TEST MODE — this page is not connected to a real wallet or blockchain.
             Do not send real USDT or any other cryptocurrency to the address shown below —

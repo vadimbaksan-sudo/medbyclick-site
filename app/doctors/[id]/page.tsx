@@ -3,6 +3,7 @@ import Link from "next/link";
 import { doctors } from "@/modules/medconnect/data";
 import { getMedconnectDoctors } from "@/modules/medconnect/getDoctors";
 import { avatarGradientClass } from "@/lib/ui/avatarColor";
+import { Globe } from "lucide-react";
 
 // Build-time param generation stays on the static array deliberately — it
 // must not depend on a live database connection existing at build time
@@ -82,7 +83,7 @@ export default async function DoctorProfilePage({
                   key={lang}
                   className="flex items-center gap-1.5 text-sm text-stone-700 bg-stone-100 px-3 py-1.5 rounded-full"
                 >
-                  <span className="text-base">🌐</span>
+                  <Globe className="w-3.5 h-3.5" />
                   {lang}
                 </span>
               ))}

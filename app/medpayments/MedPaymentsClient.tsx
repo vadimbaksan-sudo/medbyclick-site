@@ -5,6 +5,7 @@ import { plans } from "@/modules/medpayments/data";
 import type { PricingPlan } from "@/modules/medpayments/types";
 import PricingCard from "@/modules/medpayments/components/PricingCard";
 import PaymentSelector from "@/modules/medpayments/components/PaymentSelector";
+import { ShieldCheck, Undo2, Receipt } from "lucide-react";
 
 export default function MedPaymentsClient() {
   const [selectedPlan, setSelectedPlan] = useState<PricingPlan | null>(null);
@@ -32,12 +33,12 @@ export default function MedPaymentsClient() {
 
         <div className="mt-16 grid sm:grid-cols-3 gap-6 text-center">
           {[
-            { icon: "🔒", title: "Stripe Secured", body: "All card payments processed by Stripe. PCI DSS Level 1 certified." },
-            { icon: "↩️", title: "Full Refund", body: "If we can't match you to a specialist within 48 hours, you get a full refund." },
-            { icon: "💬", title: "Invoice on Request", body: "Formal invoice available for insurance reimbursement or employer benefits." },
+            { icon: ShieldCheck, title: "Stripe Secured", body: "All card payments processed by Stripe. PCI DSS Level 1 certified." },
+            { icon: Undo2, title: "Full Refund", body: "If we can't match you to a specialist within 48 hours, you get a full refund." },
+            { icon: Receipt, title: "Invoice on Request", body: "Formal invoice available for insurance reimbursement or employer benefits." },
           ].map((item) => (
             <div key={item.title} className="p-6 border border-stone-100 rounded-xl">
-              <span className="text-3xl">{item.icon}</span>
+              <item.icon className="w-7 h-7 text-amber-700 mx-auto" />
               <p className="font-semibold text-stone-900 mt-3 mb-2 text-sm">{item.title}</p>
               <p className="text-xs text-stone-500 leading-relaxed">{item.body}</p>
             </div>

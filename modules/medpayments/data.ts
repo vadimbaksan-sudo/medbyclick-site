@@ -1,4 +1,5 @@
 import type { PricingPlan, PaymentMethod } from "./types";
+import { CreditCard, CircleDollarSign, Coins } from "lucide-react";
 
 export const plans: PricingPlan[] = [
   {
@@ -59,7 +60,7 @@ export const paymentMethods: PaymentMethod[] = [
     name: "Credit / Debit Card",
     type: "card",
     description: "Visa, Mastercard, American Express — processed securely by Stripe.",
-    icon: "💳",
+    icon: CreditCard,
     details: [
       "PCI DSS Level 1 certified",
       "3D Secure authentication",
@@ -72,7 +73,7 @@ export const paymentMethods: PaymentMethod[] = [
     type: "crypto",
     description: "Tether USD stablecoin on the Ethereum network.",
     network: "Ethereum",
-    icon: "₮",
+    icon: CircleDollarSign,
     details: [
       "ERC-20 standard on Ethereum",
       "~1–3 min confirmation",
@@ -85,7 +86,7 @@ export const paymentMethods: PaymentMethod[] = [
     type: "crypto",
     description: "Tether USD stablecoin on the TRON network. Minimal fees.",
     network: "TRON",
-    icon: "₮",
+    icon: CircleDollarSign,
     details: [
       "TRC-20 standard on TRON",
       "~3 second block time",
@@ -99,7 +100,7 @@ export const paymentMethods: PaymentMethod[] = [
     description: "MedByClick utility token on Ethereum. Pay with MBC and receive 20% off.",
     network: "Ethereum",
     discount: 20,
-    icon: "🪙",
+    icon: Coins,
     details: [
       "ERC-20 on Ethereum",
       "20% discount applied at checkout",

@@ -12,9 +12,11 @@
  * authored here — this list intentionally sticks to plain, verifiable
  * statements about what the feature does structurally.
  */
+import { ClipboardList, Zap, Target, UserCheck } from "lucide-react";
+
 export const aiFeatures = [
-  { icon: "📝", title: "Structured Intake", description: "Turns your description into a clear, organized summary for your care team." },
-  { icon: "⚡", title: "Fast, Always Available", description: "Complete your intake in minutes, any time of day." },
-  { icon: "🎯", title: "Specialist Routing", description: "Suggests a specialty for your coordinator to confirm — never a diagnosis." },
-  { icon: "🧑‍⚕️", title: "Reviewed by a Human", description: "A coordinator reviews every submission before any next step is taken." },
+  { icon: ClipboardList, title: "Structured Intake", description: "Turns your description into a clear, organized summary for your care team." },
+  { icon: Zap, title: "Fast, Always Available", description: "Complete your intake in minutes, any time of day." },
+  { icon: Target, title: "Specialist Routing", description: "Suggests a specialty for your coordinator to confirm — never a diagnosis." },
+  { icon: UserCheck, title: "Reviewed by a Human", description: "A coordinator reviews every submission before any next step is taken." },
 ];

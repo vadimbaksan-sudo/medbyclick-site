@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { User, Stethoscope, BookOpen } from "lucide-react";
 
 export const metadata = {
   title: "Register — MedByClick",
@@ -8,19 +9,19 @@ export const metadata = {
 const ROLES = [
   {
     href: "/register/patient/",
-    icon: "🩺",
+    icon: User,
     title: "I'm a patient",
     description: "Book consultations with our vetted specialist network and track your care.",
   },
   {
     href: "/register/doctor/",
-    icon: "👨‍⚕️",
+    icon: Stethoscope,
     title: "I'm a doctor",
     description: "Join the network. Applications are reviewed before you appear as bookable.",
   },
   {
     href: "/register/student/",
-    icon: "📚",
+    icon: BookOpen,
     title: "I'm here to learn",
     description: "Enroll in courses and track your progress through the education module.",
   },
@@ -44,7 +45,7 @@ export default function RegisterChooserPage() {
               href={role.href}
               className="group flex items-center gap-4 bg-white border border-stone-200 rounded-2xl p-5 hover:border-amber-300 hover:shadow-sm transition-all"
             >
-              <span className="text-3xl shrink-0">{role.icon}</span>
+              <role.icon className="w-7 h-7 shrink-0 text-stone-500 group-hover:text-amber-700 transition-colors" />
               <div>
                 <p className="font-semibold text-stone-900 group-hover:text-amber-700 transition-colors">
                   {role.title}

@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
+import { Fuel, Hourglass, Clock } from "lucide-react";
 
 const WALLETS = {
   ethereum: "0x4a3Bc7D8E9F2a1B6C5D4E3F2A1B6C5D4E3F2A1B6",
@@ -40,7 +41,9 @@ export default function CryptoForm() {
   if (confirmed) {
     return (
       <div className="text-center py-12">
-        <div className="w-16 h-16 rounded-full bg-amber-100 flex items-center justify-center mx-auto mb-6 text-2xl">⏳</div>
+        <div className="w-16 h-16 rounded-full bg-amber-100 flex items-center justify-center mx-auto mb-6">
+          <Hourglass className="w-7 h-7 text-amber-700" />
+        </div>
         <h2 className="text-2xl font-bold text-stone-900 mb-2">Awaiting confirmation</h2>
         <p className="text-stone-500 mb-1">{planName} — {price.toFixed(2)} USDT via {net.name}</p>
         <p className="text-stone-400 text-sm mb-1">We'll activate your plan as soon as the transaction confirms ({net.time}).</p>
@@ -103,8 +106,8 @@ export default function CryptoForm() {
             </button>
           </div>
           <div className="flex gap-4 mt-3 text-xs text-stone-400">
-            <span>⏱ {net.time}</span>
-            <span>⛽ Fee: {net.fee}</span>
+            <span className="flex items-center gap-1"><Clock className="w-3.5 h-3.5" /> {net.time}</span>
+            <span className="flex items-center gap-1"><Fuel className="w-3.5 h-3.5" /> Fee: {net.fee}</span>
           </div>
         </div>
 

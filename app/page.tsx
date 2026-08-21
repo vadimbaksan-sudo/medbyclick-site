@@ -6,6 +6,7 @@ import { getNavModules } from "@/modules/registry";
 import { avatarGradientClass } from "@/lib/ui/avatarColor";
 import T from "@/components/T";
 import { useLanguage, type LanguageCode } from "@/components/LanguageProvider";
+import { Check } from "lucide-react";
 
 const HERO_HEADLINE: Record<LanguageCode, { before: string; emphasis: string; after: string }> = {
   en: { before: "When every doctor says", emphasis: "they can't help", after: "— we know who can." },
@@ -118,7 +119,7 @@ export default function HomePage() {
                 href={mod.href!}
                 className="group flex flex-col items-center text-center p-4 bg-white rounded-2xl border border-stone-200 hover:border-amber-300 hover:shadow-md transition-all"
               >
-                <span className="text-2xl mb-2">{mod.icon}</span>
+                <mod.icon className="w-6 h-6 mb-2 text-stone-600 group-hover:text-amber-700 transition-colors" />
                 <p className="text-xs font-semibold text-stone-900 group-hover:text-amber-700 transition-colors leading-tight">
                   {mod.navLabel}
                 </p>
@@ -167,7 +168,6 @@ export default function HomePage() {
             <div className="grid grid-cols-1 gap-4">
               {[
                 {
-                  icon: "✓",
                   en: { title: "Personal vetting", body: "Every doctor in the network is known personally to the founder — not credentialed by an algorithm." },
                   ru: { title: "Личная проверка", body: "Каждый врач в сети лично известен основателю — а не отобран алгоритмом." },
                   tr: { title: "Kişisel değerlendirme", body: "Ağdaki her doktor kurucu tarafından kişisel olarak tanınır — bir algoritma tarafından belgelendirilmez." },
@@ -175,7 +175,6 @@ export default function HomePage() {
                   fr: { title: "Vérification personnelle", body: "Chaque médecin du réseau est connu personnellement du fondateur — et non accrédité par un algorithme." },
                 },
                 {
-                  icon: "✓",
                   en: { title: "Case-level routing", body: "We don't match by keyword. We read your case and connect you to the right person for your specific situation." },
                   ru: { title: "Подбор по сути случая", body: "Мы не сопоставляем по ключевым словам. Мы читаем ваш случай и связываем вас с нужным человеком именно для вашей ситуации." },
                   tr: { title: "Vaka bazlı yönlendirme", body: "Anahtar kelimeyle eşleştirmiyoruz. Vakanızı okuyoruz ve sizi durumunuza en uygun kişiyle buluşturuyoruz." },
@@ -183,7 +182,6 @@ export default function HomePage() {
                   fr: { title: "Orientation au cas par cas", body: "Nous ne faisons pas de correspondance par mot-clé. Nous lisons votre dossier et vous mettons en relation avec la bonne personne pour votre situation." },
                 },
                 {
-                  icon: "✓",
                   en: { title: "Hard cases welcome", body: "Rare conditions, exhausted options, pre-surgery second opinions — this is exactly what the network was built for." },
                   ru: { title: "Сложные случаи — по адресу", body: "Редкие заболевания, исчерпанные варианты, второе мнение перед операцией — именно для этого создана сеть." },
                   tr: { title: "Zor vakalar için doğru adres", body: "Nadir hastalıklar, tükenmiş seçenekler, ameliyat öncesi ikinci görüş — ağ tam olarak bunun için kuruldu." },
@@ -192,8 +190,8 @@ export default function HomePage() {
                 },
               ].map((item) => (
                 <div key={item.en.title} className="flex gap-4 p-5 rounded-xl border border-stone-100 bg-stone-50">
-                  <span className="flex-shrink-0 w-6 h-6 rounded-full bg-amber-100 text-amber-700 text-sm font-bold flex items-center justify-center">
-                    {item.icon}
+                  <span className="flex-shrink-0 w-6 h-6 rounded-full bg-amber-100 text-amber-700 flex items-center justify-center">
+                    <Check className="w-3.5 h-3.5" />
                   </span>
                   <div>
                     <p className="font-semibold text-stone-900 text-sm mb-1">

@@ -1,4 +1,5 @@
 import type { MedEvent } from "../types";
+import { Calendar, MapPin } from "lucide-react";
 
 const typeBadge: Record<MedEvent["type"], string> = {
   conference: "bg-blue-100 text-blue-700",
@@ -28,8 +29,8 @@ export default function EventCard({ event }: { event: MedEvent }) {
       <h3 className="font-bold text-stone-900 leading-snug mb-2">{event.title}</h3>
 
       <div className="flex items-center gap-4 text-xs text-stone-500 mb-3">
-        <span>📅 {event.date}</span>
-        <span>📍 {event.location}</span>
+        <span className="flex items-center gap-1"><Calendar className="w-3.5 h-3.5" /> {event.date}</span>
+        <span className="flex items-center gap-1"><MapPin className="w-3.5 h-3.5" /> {event.location}</span>
       </div>
 
       <p className="text-sm text-stone-500 leading-relaxed mb-4 line-clamp-3">{event.description}</p>

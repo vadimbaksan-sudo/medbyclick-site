@@ -36,7 +36,7 @@ function MethodCard({
       <div className="flex items-start justify-between gap-3">
         <div className="flex items-center gap-3">
           <span
-            className={`w-10 h-10 rounded-xl flex items-center justify-center text-xl flex-shrink-0 ${
+            className={`w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 ${
               selected
                 ? isMbc
                   ? "bg-amber-400/20"
@@ -44,7 +44,7 @@ function MethodCard({
                 : "bg-stone-100"
             }`}
           >
-            {method.icon}
+            <method.icon className="w-5 h-5 text-stone-700" />
           </span>
           <div>
             <div className="flex items-center gap-2 flex-wrap">

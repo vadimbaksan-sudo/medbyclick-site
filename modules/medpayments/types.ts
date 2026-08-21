@@ -1,3 +1,5 @@
+import type { LucideIcon } from "lucide-react";
+
 export interface PricingPlan {
   id: string;
   name: string;
@@ -17,6 +19,6 @@ export interface PaymentMethod {
   description: string;
   network?: string;
   discount?: number;
-  icon: string;
+  icon: LucideIcon;
   details: string[];
 }

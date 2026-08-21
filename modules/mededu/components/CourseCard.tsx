@@ -4,6 +4,7 @@ import { useActionState } from "react";
 import type { Course } from "../types";
 import { enrollInCourse, updateCourseProgress } from "@/lib/mededu/actions";
 import type { CourseActionState } from "@/lib/mededu/validation";
+import { Clock, Users, Star } from "lucide-react";
 
 const levelBadge = {
   beginner: "bg-green-100 text-green-700",
@@ -50,9 +51,9 @@ export default function CourseCard({
       <p className="text-xs text-stone-400 mb-4">{course.instructor}</p>
 
       <div className="flex items-center gap-4 text-xs text-stone-500 mb-4">
-        <span>⏱ {course.duration}</span>
-        <span>👥 {course.enrolled.toLocaleString()} enrolled</span>
-        <span>★ {course.rating}</span>
+        <span className="flex items-center gap-1"><Clock className="w-3.5 h-3.5" /> {course.duration}</span>
+        <span className="flex items-center gap-1"><Users className="w-3.5 h-3.5" /> {course.enrolled.toLocaleString()} enrolled</span>
+        <span className="flex items-center gap-1"><Star className="w-3.5 h-3.5" /> {course.rating}</span>
       </div>
 
       <div className="flex flex-wrap gap-1 mb-5">

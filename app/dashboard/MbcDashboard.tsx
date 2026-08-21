@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import { CreditCard, Stethoscope, Coins } from "lucide-react";
 
 const MBC_PRICE_USD = 0.10;
 const DEFAULT_BALANCE = 5000;
@@ -167,21 +168,21 @@ export default function MbcDashboard() {
         <div className="border border-stone-200 rounded-2xl p-5 space-y-3">
           <p className="text-xs font-semibold text-stone-500 uppercase tracking-widest">Quick actions</p>
           <Link href="/medpayments/" className="flex items-center gap-3 p-2.5 rounded-xl hover:bg-stone-50 transition-colors group">
-            <span className="text-lg">💳</span>
+            <CreditCard className="w-5 h-5 text-stone-500" />
             <div>
               <p className="text-sm font-medium text-stone-900 group-hover:text-amber-700 transition-colors">Pay for a plan</p>
               <p className="text-xs text-stone-400">20% off with MBC tokens</p>
             </div>
           </Link>
           <Link href="/book/" className="flex items-center gap-3 p-2.5 rounded-xl hover:bg-stone-50 transition-colors group">
-            <span className="text-lg">🩺</span>
+            <Stethoscope className="w-5 h-5 text-stone-500" />
             <div>
               <p className="text-sm font-medium text-stone-900 group-hover:text-amber-700 transition-colors">Book a consultation</p>
               <p className="text-xs text-stone-400">Earn 100 MBC per consultation</p>
             </div>
           </Link>
           <Link href="/medtoken/" className="flex items-center gap-3 p-2.5 rounded-xl hover:bg-stone-50 transition-colors group">
-            <span className="text-lg">🪙</span>
+            <Coins className="w-5 h-5 text-stone-500" />
             <div>
               <p className="text-sm font-medium text-stone-900 group-hover:text-amber-700 transition-colors">Token details & roadmap</p>
               <p className="text-xs text-stone-400">MBC token info</p>

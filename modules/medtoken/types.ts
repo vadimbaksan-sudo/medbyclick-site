@@ -1,3 +1,5 @@
+import type { LucideIcon } from "lucide-react";
+
 export interface TokenTier {
   id: string;
   name: string;
@@ -33,7 +35,7 @@ export interface UseCase {
   id: string;
   title: string;
   description: string;
-  icon: string;
+  icon: LucideIcon;
 }
 
 export interface TokenInfo {

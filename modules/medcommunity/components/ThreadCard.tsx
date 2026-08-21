@@ -1,4 +1,5 @@
 import type { ForumThread } from "../types";
+import { MessageCircle, Eye } from "lucide-react";
 
 export default function ThreadCard({ thread }: { thread: ForumThread }) {
   return (
@@ -24,8 +25,8 @@ export default function ThreadCard({ thread }: { thread: ForumThread }) {
           <span>{thread.author}</span>
         </div>
         <div className="flex items-center gap-4">
-          <span>💬 {thread.replies}</span>
-          <span>👁 {thread.views.toLocaleString()}</span>
+          <span className="flex items-center gap-1"><MessageCircle className="w-3.5 h-3.5" /> {thread.replies}</span>
+          <span className="flex items-center gap-1"><Eye className="w-3.5 h-3.5" /> {thread.views.toLocaleString()}</span>
           <span>{thread.lastActivity}</span>
         </div>
       </div>

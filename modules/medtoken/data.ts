@@ -1,4 +1,5 @@
 import type { TokenTier, Reward, TokenInfo } from "./types";
+import { CreditCard, Stethoscope, Building2, Zap, Gift, Shield } from "lucide-react";
 
 export const tiers: TokenTier[] = [
   {
@@ -193,37 +194,37 @@ export const tokenInfo: TokenInfo = {
       id: "payments",
       title: "Payment Discount",
       description: "Pay for any MedByClick service with MBC and receive a 15% discount versus card payment. 40% of each MBC payment is permanently burned.",
-      icon: "💳",
+      icon: CreditCard,
     },
     {
       id: "doctor-staking",
       title: "Doctor Verification Stake",
       description: "Licensed physicians stake 1,000–5,000 MBC to maintain verified status on the platform. Stake is refundable — not a fee. Creates real accountability.",
-      icon: "🩺",
+      icon: Stethoscope,
     },
     {
       id: "clinic-placement",
       title: "Clinic Featured Placement",
       description: "Partner clinics stake MBC tiers (5K–50K) for featured placement and referral priority in MedGlobalDB. Every clinic upgrade is a guaranteed buy.",
-      icon: "🏥",
+      icon: Building2,
     },
     {
       id: "priority",
       title: "Priority Access Passes",
       description: "Spend 100 MBC for a Priority Pass — 12-hour coordinator response SLA instead of 24–48 hours. 100% of Priority Pass MBC is burned.",
-      icon: "⚡",
+      icon: Zap,
     },
     {
       id: "referral",
       title: "Referral Rewards",
       description: "Earn MBC when a patient you referred completes a paid service (50–150 MBC) or when a doctor you referred gets verified (500 MBC).",
-      icon: "🎁",
+      icon: Gift,
     },
     {
       id: "escrow",
       title: "Medical Travel Escrow",
       description: "MBC serves as escrow currency for international medical packages. Funds release to clinics on patient confirmation — protecting both sides.",
-      icon: "🛡️",
+      icon: Shield,
     },
   ],
 };

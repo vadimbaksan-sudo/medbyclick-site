@@ -37,7 +37,7 @@ export default function MedAIPage() {
             <div className="space-y-4">
               {aiFeatures.map((f) => (
                 <div key={f.title} className="flex gap-4 p-5 border border-stone-100 rounded-xl bg-stone-50">
-                  <span className="text-2xl flex-shrink-0">{f.icon}</span>
+                  <f.icon className="w-6 h-6 flex-shrink-0 text-stone-600" />
                   <div>
                     <p className="font-semibold text-stone-900 text-sm mb-1">{f.title}</p>
                     <p className="text-stone-500 text-sm leading-relaxed">{f.description}</p>

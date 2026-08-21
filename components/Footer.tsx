@@ -29,7 +29,7 @@ export default function Footer() {
             <div className="flex flex-col gap-2 text-sm">
               {navModules.map((mod) => (
                 <Link key={mod.id} href={mod.href!} className="hover:text-stone-900 transition-colors flex items-center gap-1.5">
-                  <span className="text-xs">{mod.icon}</span>
+                  <mod.icon className="w-3.5 h-3.5 shrink-0" />
                   {mod.navLabel}
                 </Link>
               ))}
