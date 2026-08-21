@@ -1,12 +1,72 @@
 @import "tailwindcss";
 
+/*
+ * DESIGN.md (2026-08-21) "dossier" system. Rather than touching every
+ * className across ~85 components, this redefines Tailwind's own stone,
+ * amber, and green palettes and the lg, xl, and 2xl radius steps at the
+ * token level — every existing stone, amber, green, and rounded-2xl class
+ * in the codebase picks up the new values automatically. teal (token and
+ * education accent) and red or sky (raw semantic fallbacks not yet
+ * migrated to a component) are left untouched, per DESIGN.md's Ecosystem
+ * Extension Rule.
+ */
 @theme inline {
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-onest);
+  --font-serif: var(--font-pt-serif);
+  --font-mono: var(--font-plex-mono);
+}
+
+@theme {
+  /* stone: warm paper -> ink ramp (DESIGN.md Color section) */
+  --color-stone-50: #fcfaf4;
+  --color-stone-100: #f5f1e8;
+  --color-stone-200: #dedacd;
+  --color-stone-300: #c3bca8;
+  --color-stone-400: #a79f8a;
+  --color-stone-500: #8b8471;
+  --color-stone-600: #68736e;
+  --color-stone-700: #4d564a;
+  --color-stone-800: #303731;
+  --color-stone-900: #1b2620;
+
+  /* amber -> terracotta ramp (DESIGN.md primary accent, #B84D35 anchors 700 */
+  --color-amber-50: #fbeee7;
+  --color-amber-100: #f5dbcb;
+  --color-amber-200: #e9bc9c;
+  --color-amber-300: #db9970;
+  --color-amber-400: #c97a50;
+  --color-amber-500: #b5613f;
+  --color-amber-600: #a8532e;
+  --color-amber-700: #b84d35;
+  --color-amber-800: #8a3a26;
+  --color-amber-900: #5f2818;
+
+  /* green: paper wash -> deep-green primary action ramp (also carries
+     "success" semantic at 400-600, unchanged role from the prior system) */
+  --color-green-50: #f5f1e8;
+  --color-green-100: #e7e4d6;
+  --color-green-200: #d3d6c4;
+  --color-green-300: #a9b69e;
+  --color-green-400: #7a9c7f;
+  --color-green-500: #4f8264;
+  --color-green-600: #2f6b4f;
+  --color-green-700: #1e4d3b;
+  --color-green-800: #163a2c;
+  --color-green-900: #0f281f;
+
+  /* No third radius scale (DESIGN.md Layout section) — xl/2xl collapse to
+     the same value as lg so a stray rounded-xl/rounded-2xl class can't
+     silently reintroduce one. */
+  --radius-xl: var(--radius-lg);
+  --radius-2xl: var(--radius-lg);
 }
 
 body {
   font-family: var(--font-sans);
-  background: #ffffff;
-  color: #0f172a;
+  background: #f5f1e8;
+  color: #1b2620;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-serif);
 }

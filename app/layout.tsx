@@ -1,14 +1,32 @@
 import type { Metadata } from "next";
-import { Geist } from "next/font/google";
+import { Onest, PT_Serif, IBM_Plex_Mono } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import { LanguageProvider } from "@/components/LanguageProvider";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
+// DESIGN.md (2026-08-21): PT Serif for headlines, Onest for body/UI — both
+// have real Cyrillic support, unlike the prior Geist-only system. IBM Plex
+// Mono for data/case-mark contexts — previously referenced by globals.css's
+// --font-mono var but never actually loaded, so font-mono silently fell
+// back to the browser default; fixed here as part of the same font swap.
+const onestSans = Onest({
+  variable: "--font-onest",
+  subsets: ["latin", "cyrillic"],
+});
+
+const ptSerif = PT_Serif({
+  variable: "--font-pt-serif",
+  weight: ["400", "700"],
+  style: ["normal", "italic"],
+  subsets: ["latin", "cyrillic"],
+});
+
+const plexMono = IBM_Plex_Mono({
+  variable: "--font-plex-mono",
+  weight: ["400", "500"],
+  subsets: ["latin", "cyrillic"],
 });
 
 export const metadata: Metadata = {
@@ -32,7 +50,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" translate="no" className={`${geistSans.variable} h-full antialiased notranslate`}>
+    <html
+      lang="en"
+      translate="no"
+      className={`${onestSans.variable} ${ptSerif.variable} ${plexMono.variable} h-full antialiased notranslate`}
+    >
       <body className="min-h-full flex flex-col">
         <LanguageProvider>
           <Nav />
