@@ -1,11 +1,33 @@
 # Design System — MedByClick
 
-Status: adopted 2026-07-05, via `/design-consultation`. Extends and formalizes
-the system already in production (validated by the 2026-07-04 `/design-review`
-audit) rather than replacing it — two proposed full-replacement directions
-("cosmic/space" and "archival dossier") were reviewed and rejected during
-consultation; the existing navy/amber/Geist system was confirmed as the
-right foundation to build the wider ecosystem on.
+Status: adopted 2026-08-21, via `/design-consultation`. Replaces the
+navy→green/stone/amber system adopted 2026-07-05 with an editorial
+"dossier" direction — warm paper, serif headlines, a sparing terracotta
+accent. **Previous version preserved at
+`docs/archive/DESIGN.md.pre-dossier-20260821.md`** per explicit request,
+since this direction was tried once before and rejected (see Decisions Log).
+
+## Why this replaces a direction rejected 2026-07-05
+
+The 2026-07-05 consultation considered and rejected an "archival dossier"
+direction (warm paper, Fraunces serif, wax-seal accent) — the user's direct
+visual reaction was negative, and it was abandoned without iteration. This
+2026-08-21 consultation independently arrived at the same core concept —
+Codex and a separate Claude subagent, run in parallel without seeing each
+other's output, both proposed "medical dossier, not startup landing page"
+on their own. Differences from the rejected version, and why they might
+change the outcome this time:
+- **Typeface:** Fraunces (no Cyrillic support at all) → PT Serif (real
+  Cyrillic, free on Google Fonts, originally commissioned for official
+  Russian-government use — thematically closer to "institutional trust").
+- **Accent motif:** literal wax-seal → a spare monospace case-number mark
+  (`№ 047`), less costume-y.
+- **Grounding:** the 2026-07-05 version doesn't record what research (if
+  any) informed it. This version is grounded in real competitor screenshots
+  (Teladoc, Included Health, Bumrungrad International, Roche, Clinique La
+  Prairie, Phamily) captured live via browser — see Decisions Log.
+- Vadim reviewed this history mid-session and explicitly chose to proceed
+  anyway, asking only that the prior version be preserved as a fallback.
 
 ## Product Context
 - **What this is:** MedByClick — a personally-vetted medical specialist
@@ -15,136 +37,137 @@ right foundation to build the wider ecosystem on.
 - **Who it's for:** patients seeking trusted specialist care; secondarily,
   doctors, and (on token/education pages) a broader ecosystem/community
   audience.
-- **Memorable thing:** "This place can be trusted with my health." Trust and
-  humanity are primary everywhere; the token/ecosystem side is secondary and
-  must never read as crypto hype.
+- **Memorable thing:** "Seriousness without coldness" (Vadim's own words,
+  2026-08-21). The product is not an algorithmic marketplace — a human
+  personally vouches for every specialist — and the design should look like
+  evidence of that, not an advertisement for it.
 - **Project type:** marketing/trust site + patient/doctor web app (dashboard,
   booking, payments) + a distinct-but-coherent token/education sub-brand.
 
 ## Aesthetic Direction
-- **Direction:** Confident, warm-professional trust network — light,
-  hopeful warmth (soft green + warm light gray) instead of dark-navy
-  authority, plus a single warm accent (amber), editorial headline voice.
-  Revised 2026-07-05 per direct user feedback: dark navy/slate read as
-  cold and "metallic" once seen across full pages and avatar grids; green
-  ("color of hope," associated with health) plus a warm neutral reads more
-  human for a medical-trust product. See Decisions Log.
-- **Decoration level:** minimal — typography and real content carry the
-  page; no icon-in-colored-circle grids, no decorative gradients/blobs.
-- **Mood:** serious but human. A confident specific claim ("When every
-  doctor says they can't help — we know who can."), not a templated pitch.
-- **Reference sites:** none directly copied; informed by 2026 research on
-  medical-trust sites moving away from "hospital blue" toward warmth, and
-  premium crypto/fintech sites (Coinbase-era) moving toward calm minimalism
-  over hype — both point toward restraint, which this system already had.
+- **Direction:** Editorial/Magazine — "a medical dossier, not a startup
+  landing page." Composition-first on marketing/hero surfaces (asymmetric,
+  poster-like), grid-disciplined on data-dense surfaces (dashboards, doctor
+  listings) — unchanged from the prior system's layout philosophy.
+- **Decoration level:** intentional — thin rules, a monospace case-number
+  mark in the margin (`№ 047`), no gradients, no texture, no photography
+  filters. One step up from the prior system's "minimal," to carry the
+  documentary/dossier feel without becoming decorative.
+- **Mood:** serious, unhurried, human — "someone here actually reads
+  files." A private clinic's dossier rendered in pixels, not a benefits
+  portal wearing a smile.
+- **Reference sites (real, screenshotted live 2026-08-21):**
+  - *Avoid:* Teladoc Health, Included Health — generic corporate
+    telehealth SaaS (purple/navy, stock-photo grids, testimonial
+    carousels); Bumrungrad International (the closest real competitor by
+    business model — cross-border medical coordination — yet cluttered,
+    competing banner colors, reads dated despite global scale).
+  - *Informs:* Roche — serif display headline + generous white space +
+    restraint, proof that "editorial" reads as credible at large-pharma
+    scale, not just indie-studio scale.
+  - *Considered and set aside:* Clinique La Prairie — monochrome,
+    cinematic full-bleed photography, italic-serif "atmosphere" register.
+    Real, prestigious, but colder than "seriousness without coldness"
+    calls for; explored as Variant D, not chosen.
+  - *Set aside as wrong genre entirely:* Phamily (Awwwards) — playful,
+    illustrated, hot-pink+green pharmacy app. Good execution, wrong tone
+    for a diagnosis-adjacent product.
 
 ## Typography
-- **Display/Hero:** Geist (already in production via `next/font`) — clean,
-  confident, no licensing cost, already proven on the live site.
-- **Body:** Geist — same family, keeps one voice across the whole site.
-- **UI/Labels:** Geist, same as body.
-- **Data/Tables/Token figures:** IBM Plex Mono, `font-variant-numeric:
-  tabular-nums` — new addition. Reads as audited/precise (loyalty stats,
-  tokenomics numbers, booking/payment ledgers), never as a marketing counter
-  animation. Free, open license (SIL OFL), self-hostable.
-- **Loading:** Geist via `next/font/google` (already wired); IBM Plex Mono to
-  be added the same way for any new stat/data/token components.
-- **Scale:** follow existing Tailwind default type scale already in use
-  across the codebase (`text-sm/base/lg/xl/2xl/...`) — no new scale needed.
+- **Display/Hero:** PT Serif (Bold, Italic for pull-quotes) — real Cyrillic
+  support, free (Google Fonts, ParaType, SIL-compatible license),
+  originally designed for official Russian-language institutional use.
+  Replaces Geist for headlines only.
+- **Body/UI/Labels:** Onest — grotesk with full Cyrillic coverage, free
+  (Google Fonts, SIL OFL). Replaces Geist for body copy, forms, nav,
+  buttons, captions.
+- **Data/Tables/Token figures/Case marks:** IBM Plex Mono,
+  `font-variant-numeric: tabular-nums` — unchanged from the prior system.
+  Also now used for the case-number marginal mark (`№ 047`) and workflow
+  metadata (`CASE-STAGE: MATCHED · SLA: 24H`).
+- **Loading:** all three via `next/font/google` (Google Fonts-hosted,
+  self-hostable, no separate CDN dependency).
+- **Scale:** existing Tailwind default type scale (`text-sm/base/lg/xl/
+  2xl/...`) stays — no new scale needed, only the font-family tokens change.
 
 ## Color
-- **Approach:** restrained — one accent color per context, color is rare and
-  meaningful, never a repeating decoration. Revised 2026-07-05: the shared
-  *base* (formerly dark navy) is now a light green + warm gray pairing; the
-  accent layer (amber for medical, teal for token/education) is unchanged.
-- **Base — hero / "authority" sections (all pages):** `green-50` (`#F0FDF4`)
-  wash, replacing `bg-slate-900`. Text on this section switches from white
-  to `stone-900` (`#1C1917`); secondary/caption text uses `stone-600`/
-  `stone-500` instead of `slate-300`/`slate-400`; dividers use `stone-200`
-  instead of `slate-800`.
-- **Base — content sections (all pages):** `stone-50` (`#FAFAF9`), replacing
-  plain white/`slate-50` page backgrounds — a warm light gray, not the cool
-  blue-cast `slate` scale. Cards within these sections stay `bg-white` with
-  `border-stone-200` so they lift off the wash, same visual hierarchy as
-  before (white cards on a tinted page), just warmer.
-- **Neutrals:** Tailwind `stone` scale (50 through 900), replacing `slate`
-  everywhere — text, borders, UI chrome, non-accent buttons. `slate` had a
-  cool blue undertone that read as "metal" once seen across full pages and
-  avatar grids (user feedback, 2026-07-05); `stone` keeps the same restrained
-  neutral-plus-amber approach but warmer. Non-accent solid buttons (e.g. a
-  secondary "confirm"/"submit" action) use `stone-900`/`stone-700` where they
-  previously used `slate-900`/`slate-700`.
-- **Primary accent (medical/trust pages):** `amber-400`/`amber-500`
-  (`#FBBF24`/`#F59E0B`) — unchanged. On the new light green/stone base,
-  eyebrow labels and small accent text that used to be `amber-400` (for
-  contrast against dark navy) become `amber-700`/`amber-600` for contrast
-  against the light base; button fills (`bg-amber-500`) are unchanged.
-- **Secondary (token/education/foundation pages only):** `teal-600`/`teal-500`
-  (`#0D9488`/`#14B8A6`) — unchanged, still confined strictly to
-  ecosystem/token/education surfaces so a visitor's brain never conflates
-  "trust" pages with "token" pages. Do not use teal on medical-trust pages;
-  do not use amber as the primary accent on token/tokenomics pages. These
-  pages get the same base swap (green/stone instead of navy/white) as
-  medical pages — only the accent differs, per the Ecosystem Extension Rule
-  below.
-- **Semantic:** success `green-400`/`green-500` (already used for doctor
-  response-time indicators), warning `amber-600`, error `red-500`, info
-  `sky-500`. These are mid-tone/saturated shades, clearly distinct from the
-  pale `green-50` base wash — a status indicator is never confused with the
-  page background. Semantic color is separate from the brand accent and does
-  not count as a design risk — it's functional, not decorative.
-- **Light-first:** the site is light-first — no more dark-navy hero
-  sections. Visual rhythm between sections now comes from alternating
-  `green-50` (hero/statement sections) and `stone-50` (content-dense
-  sections), rather than from a dark/light contrast.
+- **Approach:** restrained — one accent color per context, used sparingly
+  (a single mark, a link, never a repeating badge fill).
+- **Base — all pages:** warm paper `#F5F1E8` (marketing/hero sections),
+  surface `#FCFAF4` (cards, replacing white). Both replace the prior
+  `green-50`/`stone-50` pairing — the paper tone carries the "dossier," not
+  a wash of brand color.
+- **Text:** ink `#1B2620` (deep green-black, replacing `stone-900`) for
+  primary text; muted `#68736E` (warm stone-gray, replacing `stone-500`/
+  `stone-600`) for secondary/caption text; borders `#DEDACD` (replacing
+  `stone-200`).
+- **Primary accent (medical/trust pages):** terracotta `#B84D35` — replaces
+  amber. Used sparingly: a case-number mark, a link underline, a status
+  dot — never a broad badge fill or button color. Primary buttons use deep
+  green `#1E4D3B` (new — carries competence/action, distinct from the
+  terracotta accent's "human annotation" role), not the accent color.
+- **Secondary (token/education/foundation pages only):** teal `#0D9488`/
+  `#14B8A6` — **unchanged**. These pages inherit the new warm-paper base
+  (per the Ecosystem Extension Rule below) but keep their own accent, same
+  firewall logic as before: a visitor should never confuse a token page for
+  a medical-trust page or vice versa.
+- **Semantic:** success `#2F6B4F`, warning `#A8722C`, error `#B0392B`, info
+  `#3C5C68` — retuned to sit correctly against the warm paper base (the
+  prior system's `green-400`/`amber-600`/`red-500`/`sky-500` read too cool/
+  saturated against paper rather than white). Functional, not decorative —
+  not a design risk.
+- **Dark mode:** paper → `#14180F`, surface → `#1C2118`, ink → `#EDEAE0`,
+  terracotta → `#D97A5F` (lightened for contrast), deep green → `#7FBFA0`.
+  Reduce saturation slightly on the accent, same pattern as the prior
+  system's dark-mode strategy.
 
 ## Spacing
-- **Base unit:** 4px (Tailwind default) — already in use.
-- **Density:** comfortable — matches existing spacing in production
-  (generous padding on hero/cards, per the 2026-07-04 design audit's positive
-  read on the current hero section).
-- **Scale:** Tailwind defaults (`1`–`96`), already in use throughout.
+- **Base unit:** 4px (Tailwind default) — unchanged.
+- **Density:** comfortable — unchanged, no voice in this consultation
+  (Codex, subagent, or Claude) disputed it.
+- **Scale:** Tailwind defaults (`1`–`96`) — unchanged.
 
 ## Layout
-- **Approach:** grid-disciplined for content-dense pages (doctor listings,
-  dashboard), hybrid for marketing/hero sections (asymmetric hero, disciplined
-  grid below). Already the pattern in production.
-- **Grid:** Tailwind's default responsive grid (`grid-cols-1 md:grid-cols-2
-  lg:grid-cols-3` etc.), already in use.
-- **Max content width:** `max-w-6xl` (already the standard container width
-  across pages).
+- **Approach:** hybrid — grid-disciplined for content-dense pages (doctor
+  listings, dashboards, bookings — unchanged from the prior system);
+  creative-editorial for marketing/hero sections (new: an asymmetric
+  "poster" composition instead of a centered stack — a case-file layout,
+  portrait+caption on one side, headline on the other).
+- **Grid:** Tailwind's default responsive grid, unchanged.
+- **Max content width:** `max-w-6xl`, unchanged.
 - **Border radius:** `rounded-lg` (cards/buttons), `rounded-full` (pills/
-  avatars/badges) — already the pattern in use; keep this hierarchy, don't
-  introduce a third radius scale.
+  avatars/badges) — **unchanged**, deliberately kept as continuity with the
+  prior system rather than introducing a third radius scale mid-redesign.
 
 ## Motion
-- **Approach:** minimal-functional — `transition-colors`/`transition-all` on
-  hover/interactive states only, no scroll-driven choreography, no entrance
-  animations. Matches the calm, confident trust-first tone.
-- **Easing:** default Tailwind transition easing (ease-in-out equivalent).
-- **Duration:** Tailwind default transition durations (150-200ms class),
-  already in use — don't introduce longer/showier durations.
+- **Approach:** minimal-functional — unchanged. `transition-colors`/
+  `transition-all` on hover/interactive states only, no scroll-driven
+  choreography, no entrance animations.
+- **Easing:** default Tailwind transition easing — unchanged.
+- **Duration:** Tailwind default transition durations (150-200ms) —
+  unchanged.
 
-## Ecosystem Extension Rule (new, resolves the token/medical tension)
+## Ecosystem Extension Rule (unchanged in structure, updated values)
 
-The token, education, and foundation surfaces are **part of the same visual
-system**, not a separate brand — same Geist typeface, same green/stone base
-(revised 2026-07-05, was navy/white), same spacing/radius/motion rules. The
-**only** thing that changes on those pages is the accent color (teal instead
-of amber) and the addition of IBM Plex Mono for any numeric/ledger-style
-data. This keeps one coherent site while making sure a visitor never
-mistakes the token pages for a crypto-hype site or the medical pages for a
-token pitch. Do not introduce a third accent, a different typeface, or
-different spacing/radius rules for these sections — extend the existing
-system, don't fork it.
+The token, education, and foundation surfaces remain **part of the same
+visual system**, not a separate brand — same typography (PT Serif/Onest),
+same warm-paper base, same spacing/radius/motion rules. The **only** thing
+that changes on those pages is the accent color (teal instead of terracotta)
+and IBM Plex Mono for numeric/ledger-style data, exactly as before. Do not
+introduce a third accent, a different typeface, or different spacing/radius
+rules for these sections.
 
 ## Decisions Log
 | Date | Decision | Rationale |
 |------|----------|-----------|
-| 2026-07-05 | Rejected full-replacement "cosmic/space" direction | Would undermine trust positioning for the medical-facing majority of the site; token pages are secondary, shouldn't drive the whole system |
+| 2026-07-05 | Rejected full-replacement "cosmic/space" direction | Would undermine trust positioning for the medical-facing majority of the site |
 | 2026-07-05 | Rejected full-replacement "archival dossier" direction (warm paper, Fraunces serif, wax-seal accent) | User's direct visual reaction was negative on the palette and the whole dossier/seal concept — abandoned rather than iterated |
-| 2026-07-05 | Adopted: extend existing navy/amber/Geist system rather than replace it | Already validated by the 2026-07-04 `/design-review` audit as coherent and non-generic; two replacement attempts both missed — the honest read is the existing system was already right |
-| 2026-07-05 | Added IBM Plex Mono for data/token figures | Reads as audited/precise rather than marketing; free, open license |
-| 2026-07-05 | Added teal as the token/education/foundation-only secondary accent | Keeps ecosystem pages visually distinct from medical-trust pages without introducing a second full palette or typeface |
-| 2026-07-05 | Doctor avatar fills use `stone` (warm light gray) instead of sitewide `slate`, plus one muted `green-700` "trust/hope" option | User feedback: the `slate`-based avatar gradient read as cold/"metal" once repeated across a full grid; `stone` keeps the same restrained neutral-plus-amber approach but warmer. Green is a deliberately dark/desaturated shade, distinct from the `green-400`/`500` semantic success color, so it never gets misread as a status indicator. Scoped to avatar fills only at the time — extended sitewide same day, see next row |
-| 2026-07-05 | Replaced the dark-navy (`slate-900`) base sitewide with a light `green-50` (hero sections) + `stone-50` (content sections) pairing; replaced `slate` neutrals with `stone` everywhere, not just avatars | Direct user feedback after seeing the avatar fix and the live site: the same "metal" critique applied to the whole site, not just avatars — user explicitly asked for green ("color of hope") + warm light gray as the two primary colors, confirmed via a live before/after preview on /specialists before wider rollout. Amber/teal accent layer and the medical/token firewall are unchanged — only the shared base and neutral scale moved |
+| 2026-07-05 | Adopted navy→green/stone/amber system | Already validated by the 2026-07-04 `/design-review` audit as coherent and non-generic |
+| 2026-07-05 – 2026-08-20 | Green/stone/amber system in production, extended for MedConnect case-pipeline UI | See `docs/decision-log/0009` and related entries |
+| 2026-08-21 | Ran `/design-consultation` again, requested by Vadim ("хочу узнать что по дизайнеру") | Not triggered by a specific complaint — an open exploration |
+| 2026-08-21 | Codex + independent Claude subagent, run in parallel with no shared context, both independently proposed "medical dossier" | Cross-model agreement without collusion — see full transcript `~/.gstack/projects/medbyclick/vadimrudkovsky-medconnect-...` design session for both raw outputs |
+| 2026-08-21 | Live-browser research on 6 real competitors (Teladoc, Included Health, Bumrungrad, Roche, Clinique La Prairie, Phamily) before committing | Vadim explicitly requested going beyond 2 SaaS competitors to large real players — see Aesthetic Direction reference notes |
+| 2026-08-21 | Built 4 real HTML comparison variants (A Dossier, B Cabinet, C Clinic/safe, D Resort) rather than describing directions in prose | AI image-mockup generation (`gstack design`) failed — no OpenAI org verification — fell back to real coded HTML variants, which Vadim reviewed directly in-browser |
+| 2026-08-21 | **Flagged mid-session:** Variant A ("Dossier") is conceptually the same direction rejected 2026-07-05 | Caught by reading this file's own Decisions Log before writing — not something either AI voice or the research surfaced on its own |
+| 2026-08-21 | Vadim reviewed the 2026-07-05 rejection and chose to proceed with Variant A anyway | Different typeface (real Cyrillic vs. none), different accent motif (case-mark vs. wax-seal), grounded in real research this time — Vadim's judgment that this iteration is different enough to warrant a second look. Requested the prior DESIGN.md be preserved as a fallback: `docs/archive/DESIGN.md.pre-dossier-20260821.md` |
+| 2026-08-21 | Adopted: PT Serif + Onest, warm paper `#F5F1E8`, terracotta `#B84D35` accent, deep green `#1E4D3B` primary action color | Chosen over B (Cabinet — too dark/high-risk), C (Clinic — too close to status quo to differentiate), D (Resort — colder than "seriousness without coldness" calls for) |
