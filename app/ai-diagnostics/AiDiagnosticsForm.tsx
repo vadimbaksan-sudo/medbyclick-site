@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { Skeleton } from "@/components/Skeleton";
 
 type FormState = "idle" | "analyzing" | "done";
 
@@ -102,6 +103,43 @@ export default function AiDiagnosticsForm() {
     high: "bg-red-50 border-red-200 text-red-800",
   };
   const urgencyLabels = { low: "Low urgency", moderate: "Moderate urgency", high: "Elevated urgency" };
+
+  // Shown during the fixed demo delay before mockAnalysis() resolves — this
+  // mock always succeeds (no error branch exists for this flow), so the
+  // shape of the incoming "done" result below is certain even though its
+  // exact text isn't yet. Mirrors that layout: assessment card, possible-
+  // areas list, recommended-specialist card.
+  if (formState === "analyzing") {
+    return (
+      <div className="space-y-6">
+        <p className="text-sm text-stone-500" role="status" aria-live="polite">
+          Analyzing your symptoms…
+        </p>
+        <div className="border border-stone-200 rounded-2xl p-6">
+          <div className="flex items-center justify-between mb-4">
+            <Skeleton className="h-3.5 w-24 rounded" />
+            <Skeleton className="h-5 w-28 rounded-full" />
+          </div>
+          <Skeleton className="h-3.5 w-full rounded mb-1.5" />
+          <Skeleton className="h-3.5 w-5/6 rounded" />
+        </div>
+
+        <div className="border border-stone-200 rounded-2xl p-6 bg-white">
+          <Skeleton className="h-3.5 w-52 rounded mb-3" />
+          <div className="space-y-2.5">
+            <Skeleton className="h-3.5 w-4/5 rounded" />
+            <Skeleton className="h-3.5 w-3/5 rounded" />
+            <Skeleton className="h-3.5 w-2/3 rounded" />
+          </div>
+        </div>
+
+        <div className="border border-stone-200 rounded-2xl p-6 bg-white">
+          <Skeleton className="h-3 w-32 rounded mb-2" />
+          <Skeleton className="h-4 w-40 rounded" />
+        </div>
+      </div>
+    );
+  }
 
   if (formState === "done" && result) {
     return (
@@ -228,18 +266,9 @@ export default function AiDiagnosticsForm() {
 
       <button
         type="submit"
-        disabled={formState === "analyzing"}
-        className="w-full py-3.5 bg-green-700 hover:bg-green-800 disabled:opacity-60 text-white font-semibold rounded-xl text-sm transition-colors"
+        className="w-full py-3.5 bg-green-700 hover:bg-green-800 text-white font-semibold rounded-xl text-sm transition-colors"
       >
-        {formState === "analyzing" ? (
-          <span className="flex items-center justify-center gap-2">
-            <svg className="animate-spin w-4 h-4" fill="none" viewBox="0 0 24 24">
-              <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-              <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
-            </svg>
-            Analyzing symptoms…
-          </span>
-        ) : "Analyze my symptoms"}
+        Analyze my symptoms
       </button>
     </form>
   );
