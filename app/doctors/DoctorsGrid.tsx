@@ -22,7 +22,7 @@ export default function DoctorsGrid({ doctors }: { doctors: Doctor[] }) {
             onClick={() => setActive(null)}
             className={`flex-shrink-0 text-sm px-4 py-1.5 rounded-full border transition-colors ${
               active === null
-                ? "bg-stone-900 text-white border-stone-900"
+                ? "border-stone-900 bg-stone-900/5 text-stone-900 font-medium"
                 : "border-stone-200 text-stone-600 hover:border-stone-400"
             }`}
           >
@@ -34,7 +34,7 @@ export default function DoctorsGrid({ doctors }: { doctors: Doctor[] }) {
               onClick={() => setActive(specialty)}
               className={`flex-shrink-0 text-sm px-4 py-1.5 rounded-full border transition-colors ${
                 active === specialty
-                  ? "bg-stone-900 text-white border-stone-900"
+                  ? "border-stone-900 bg-stone-900/5 text-stone-900 font-medium"
                   : "border-stone-200 text-stone-600 hover:border-stone-400"
               }`}
             >

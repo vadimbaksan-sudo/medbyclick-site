@@ -343,7 +343,7 @@ export default function HomePage() {
           </p>
           <Link
             href="/book"
-            className="inline-flex items-center justify-center px-8 py-4 bg-stone-900 hover:bg-stone-700 text-white font-semibold rounded-lg transition-colors"
+            className="inline-flex items-center justify-center px-8 py-4 bg-green-700 hover:bg-green-800 text-white font-semibold rounded-lg transition-colors"
           >
             <T en="Book a Consultation" ru="Записаться на консультацию" tr="Randevu Alın" es="Reservar una consulta" fr="Réserver une consultation" />
           </Link>

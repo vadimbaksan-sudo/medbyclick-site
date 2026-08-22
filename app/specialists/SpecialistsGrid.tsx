@@ -66,7 +66,7 @@ export default function SpecialistsGrid({ doctors }: { doctors: Doctor[] }) {
                 onClick={() => setSpecialtyFilter(s)}
                 className={`px-3 py-1.5 rounded-full text-xs font-medium transition-colors ${
                   specialtyFilter === s
-                    ? "bg-stone-900 text-white"
+                    ? "bg-stone-900/15 text-stone-900 font-semibold"
                     : "bg-stone-100 text-stone-600 hover:bg-stone-200"
                 }`}
               >
@@ -86,7 +86,7 @@ export default function SpecialistsGrid({ doctors }: { doctors: Doctor[] }) {
                 onClick={() => setHospitalFilter(h)}
                 className={`px-3 py-1.5 rounded-full text-xs font-medium transition-colors ${
                   hospitalFilter === h
-                    ? "bg-amber-500 text-white"
+                    ? "bg-stone-900/15 text-stone-900 font-semibold"
                     : "bg-stone-100 text-stone-600 hover:bg-stone-200"
                 }`}
               >
@@ -184,7 +184,7 @@ export default function SpecialistsGrid({ doctors }: { doctors: Doctor[] }) {
         </p>
         <Link
           href="/book/"
-          className="inline-flex items-center justify-center px-6 py-3 bg-stone-900 hover:bg-stone-700 text-white font-semibold rounded-lg text-sm transition-colors"
+          className="inline-flex items-center justify-center px-6 py-3 bg-green-700 hover:bg-green-800 text-white font-semibold rounded-lg text-sm transition-colors"
         >
           Get matched to a specialist
         </Link>
