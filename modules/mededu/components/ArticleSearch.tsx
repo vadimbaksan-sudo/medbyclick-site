@@ -3,6 +3,18 @@
 import { useState } from "react";
 import type { PubMedArticle } from "@/lib/pubmed/api";
 import ArticleCard from "./ArticleCard";
+import { Skeleton } from "@/components/Skeleton";
+
+function ArticleCardSkeleton() {
+  return (
+    <div className="border border-stone-100 rounded-2xl p-6">
+      <Skeleton className="h-4 w-3/4 rounded mb-2" />
+      <Skeleton className="h-3.5 w-1/2 rounded mb-2" />
+      <Skeleton className="h-3 w-2/5 rounded mb-3" />
+      <Skeleton className="h-3.5 w-28 rounded" />
+    </div>
+  );
+}
 
 export default function ArticleSearch() {
   const [query, setQuery] = useState("");
@@ -52,13 +64,21 @@ export default function ArticleSearch() {
         </button>
       </form>
 
-      {error && <p className="text-sm text-red-600 mb-6">{error}</p>}
+      {loading && (
+        <div className="space-y-4">
+          <ArticleCardSkeleton />
+          <ArticleCardSkeleton />
+          <ArticleCardSkeleton />
+        </div>
+      )}
 
-      {articles && articles.length === 0 && !error && (
+      {!loading && error && <p className="text-sm text-red-600 mb-6">{error}</p>}
+
+      {!loading && articles && articles.length === 0 && !error && (
         <p className="text-sm text-stone-500 mb-6">No results for &ldquo;{query}&rdquo;. Try different terms.</p>
       )}
 
-      {articles && articles.length > 0 && (
+      {!loading && articles && articles.length > 0 && (
         <div className="space-y-4">
           {articles.map((article) => (
             <ArticleCard key={article.pmid} article={article} />
