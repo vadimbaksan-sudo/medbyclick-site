@@ -452,7 +452,7 @@ export default function MedTokenPage() {
                     <p className="text-xs text-stone-500 leading-relaxed mb-4">{reward.description}</p>
                     <div className="flex items-center justify-between">
                       <span className="text-sm font-bold text-amber-600">{reward.cost} MBC</span>
-                      <button className="text-xs font-medium bg-stone-900 hover:bg-stone-700 text-white px-3 py-1.5 rounded-lg transition-colors">
+                      <button className="text-xs font-medium border border-stone-300 hover:border-stone-400 text-stone-900 px-3 py-1.5 rounded-lg transition-colors">
                         Redeem
                       </button>
                     </div>

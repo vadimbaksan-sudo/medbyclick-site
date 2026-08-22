@@ -297,7 +297,7 @@ export default function BookForm({ patientEmail, doctors }: { patientEmail: stri
                 type="button"
                 disabled={!situation.trim()}
                 onClick={() => setStep(4)}
-                className="px-6 py-2.5 bg-stone-900 hover:bg-stone-700 disabled:opacity-40 text-white font-semibold rounded-lg text-sm transition-colors"
+                className="px-6 py-2.5 bg-green-700 hover:bg-green-800 disabled:opacity-40 text-white font-semibold rounded-lg text-sm transition-colors"
               >
                 See your match →
               </button>
@@ -400,7 +400,7 @@ export default function BookForm({ patientEmail, doctors }: { patientEmail: stri
             <button
               type="submit"
               disabled={pending}
-              className="w-full py-3.5 bg-stone-900 hover:bg-stone-700 disabled:opacity-60 text-white font-semibold rounded-lg text-sm transition-colors"
+              className="w-full py-3.5 bg-green-700 hover:bg-green-800 disabled:opacity-60 text-white font-semibold rounded-lg text-sm transition-colors"
             >
               {pending ? "Submitting…" : "Confirm and submit"}
             </button>
