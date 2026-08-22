@@ -54,16 +54,16 @@ export default function HomePage() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <Link
-                href="/specialists/"
-                className="inline-flex items-center justify-center px-6 py-3.5 bg-amber-700 hover:bg-amber-800 text-white font-semibold rounded-lg transition-colors text-sm"
-              >
-                <T en="Browse Specialists" ru="Смотреть специалистов" tr="Uzmanlara Göz At" es="Ver especialistas" fr="Parcourir les spécialistes" />
-              </Link>
-              <Link
                 href="/book"
-                className="inline-flex items-center justify-center px-6 py-3.5 border border-stone-300 hover:border-stone-400 text-stone-900 rounded-lg transition-colors text-sm"
+                className="inline-flex items-center justify-center px-6 py-3.5 bg-green-700 hover:bg-green-800 text-white font-semibold rounded-lg transition-colors text-sm"
               >
                 <T en="Book a Consultation" ru="Записаться на консультацию" tr="Randevu Alın" es="Reservar una consulta" fr="Réserver une consultation" />
+              </Link>
+              <Link
+                href="/specialists/"
+                className="inline-flex items-center justify-center px-6 py-3.5 border border-stone-300 hover:border-stone-400 text-stone-900 rounded-lg transition-colors text-sm"
+              >
+                <T en="Browse Specialists" ru="Смотреть специалистов" tr="Uzmanlara Göz At" es="Ver especialistas" fr="Parcourir les spécialistes" />
               </Link>
             </div>
           </div>
