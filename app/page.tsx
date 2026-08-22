@@ -26,7 +26,7 @@ export default function HomePage() {
     <>
       {/* Hero */}
       <section className="bg-green-50 text-stone-900">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-32">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-14 sm:py-20 md:py-24">
           <div className="max-w-3xl">
             <div className="inline-flex items-center gap-2 text-xs font-medium text-amber-700 bg-amber-100 border border-amber-200 px-3 py-1.5 rounded-full mb-8">
               <span className="w-1.5 h-1.5 rounded-full bg-amber-600 inline-block" />
