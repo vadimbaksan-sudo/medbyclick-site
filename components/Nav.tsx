@@ -167,7 +167,7 @@ export default function Nav() {
               <LanguageSwitcher />
               <Link
                 href="/book/"
-                className="text-sm font-medium bg-stone-900 text-white px-4 py-2 rounded-lg hover:bg-stone-700 transition-colors"
+                className="text-sm font-medium bg-green-700 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition-colors"
               >
                 <T en="Book a Consultation" ru="Записаться" tr="Randevu Al" es="Reservar" fr="Réserver" />
               </Link>
@@ -288,7 +288,7 @@ export default function Nav() {
               <Link
                 href="/book/"
                 onClick={closeAll}
-                className="block text-center py-3 bg-stone-900 text-white text-sm font-semibold rounded-xl hover:bg-stone-700 transition-colors"
+                className="block text-center py-3 bg-green-700 text-white text-sm font-semibold rounded-xl hover:bg-green-600 transition-colors"
               >
                 <T en="Book a Consultation" ru="Записаться на консультацию" tr="Randevu Alın" es="Reservar una consulta" fr="Réserver une consultation" />
               </Link>
