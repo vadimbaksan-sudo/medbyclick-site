@@ -45,7 +45,7 @@ export default function EventCard({ event }: { event: MedEvent }) {
         <span className="text-xs text-stone-400">{event.price}</span>
         <button
           disabled={!event.registrationOpen}
-          className="text-sm font-medium bg-stone-900 hover:bg-stone-700 disabled:opacity-40 text-white px-4 py-1.5 rounded-lg transition-colors"
+          className="text-sm font-medium border border-stone-300 hover:border-stone-400 disabled:opacity-40 text-stone-900 px-4 py-1.5 rounded-lg transition-colors"
         >
           {event.registrationOpen ? "Register" : "Notify Me"}
         </button>

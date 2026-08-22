@@ -46,7 +46,7 @@ export default function ArticleSearch() {
         <button
           type="submit"
           disabled={loading || !query.trim()}
-          className="px-6 py-3 bg-stone-900 hover:bg-stone-700 disabled:bg-stone-300 text-white font-medium rounded-lg text-sm transition-colors"
+          className="px-6 py-3 border border-stone-300 hover:border-stone-400 disabled:opacity-60 text-stone-900 font-medium rounded-lg text-sm transition-colors"
         >
           {loading ? "Searching…" : "Search PubMed"}
         </button>

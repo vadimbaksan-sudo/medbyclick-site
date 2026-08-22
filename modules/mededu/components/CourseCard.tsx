@@ -65,7 +65,7 @@ export default function CourseCard({
       {!loggedIn ? (
         <a
           href="/register/"
-          className="block text-center w-full py-2.5 bg-stone-900 hover:bg-stone-700 text-white text-sm font-medium rounded-xl transition-colors"
+          className="block text-center w-full py-2.5 border border-stone-300 hover:border-stone-400 text-stone-900 text-sm font-medium rounded-xl transition-colors"
         >
           Log in to enroll
         </a>
@@ -75,7 +75,7 @@ export default function CourseCard({
           <button
             type="submit"
             disabled={enrollPending}
-            className="w-full py-2.5 bg-stone-900 hover:bg-stone-700 disabled:opacity-60 text-white text-sm font-medium rounded-xl transition-colors"
+            className="w-full py-2.5 border border-stone-300 hover:border-stone-400 disabled:opacity-60 text-stone-900 text-sm font-medium rounded-xl transition-colors"
           >
             {enrollPending ? "Enrolling…" : "Enroll Free"}
           </button>
@@ -102,7 +102,7 @@ export default function CourseCard({
             <button
               type="submit"
               disabled={progressPending}
-              className="w-full py-2.5 bg-stone-900 hover:bg-stone-700 disabled:opacity-60 text-white text-sm font-medium rounded-xl transition-colors"
+              className="w-full py-2.5 border border-stone-300 hover:border-stone-400 disabled:opacity-60 text-stone-900 text-sm font-medium rounded-xl transition-colors"
             >
               {progressPending
                 ? "Updating…"

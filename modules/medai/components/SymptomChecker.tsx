@@ -208,7 +208,7 @@ export default function SymptomChecker() {
           <button
             type="submit"
             disabled={view.kind === "loading"}
-            className="w-full py-3.5 bg-stone-900 hover:bg-stone-700 text-white font-semibold rounded-xl transition-colors text-sm disabled:opacity-60"
+            className="w-full py-3.5 bg-green-700 hover:bg-green-800 text-white font-semibold rounded-xl transition-colors text-sm disabled:opacity-60"
           >
             {view.kind === "loading" ? "Structuring your intake…" : "Send to Coordinator"}
           </button>
@@ -277,7 +277,7 @@ export default function SymptomChecker() {
             </button>
             <a
               href="/book"
-              className="flex-1 py-3 bg-stone-900 hover:bg-stone-700 text-white rounded-xl text-sm font-semibold text-center transition-colors"
+              className="flex-1 py-3 bg-green-700 hover:bg-green-800 text-white rounded-xl text-sm font-semibold text-center transition-colors"
             >
               Book a Specialist →
             </a>
@@ -308,7 +308,7 @@ function LocaleToggle({ locale, onChange }: { locale: MedaiLocale; onChange: (l:
           onClick={() => onChange(code)}
           className={`px-3 py-1.5 rounded-full border transition-colors ${
             locale === code
-              ? "bg-stone-900 text-white border-stone-900"
+              ? "border-stone-900 bg-stone-900/5 text-stone-900 font-medium"
               : "border-stone-200 text-stone-500 hover:border-stone-400"
           }`}
         >

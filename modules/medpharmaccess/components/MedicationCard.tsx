@@ -36,7 +36,7 @@ export default function MedicationCard({ medication }: { medication: Medication 
 
       <a
         href="/book"
-        className="block w-full text-center py-2.5 bg-stone-900 hover:bg-stone-700 text-white text-sm font-medium rounded-xl transition-colors"
+        className="block w-full text-center py-2.5 border border-stone-300 hover:border-stone-400 text-stone-900 text-sm font-medium rounded-xl transition-colors"
       >
         Request Access Support
       </a>
