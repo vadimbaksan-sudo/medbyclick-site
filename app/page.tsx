@@ -247,7 +247,7 @@ export default function HomePage() {
               },
             ].map((item) => (
               <div key={item.step}>
-                <p className="text-5xl font-black text-stone-100 mb-4 leading-none select-none">{item.step}</p>
+                <p className="text-5xl font-black text-stone-300 mb-4 leading-none select-none">{item.step}</p>
                 <h3 className="text-lg font-semibold text-stone-900 mb-3">
                   <T en={item.en.title} ru={item.ru.title} tr={item.tr.title} es={item.es.title} fr={item.fr.title} />
                 </h3>
