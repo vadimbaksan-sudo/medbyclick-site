@@ -188,7 +188,7 @@ export default function RegisterDoctorForm() {
         <button
           type="submit"
           disabled={pending}
-          className="w-full py-3 bg-stone-900 hover:bg-stone-700 disabled:opacity-60 text-white font-semibold rounded-lg text-sm transition-colors"
+          className="w-full py-3 bg-green-700 hover:bg-green-800 disabled:opacity-60 text-white font-semibold rounded-lg text-sm transition-colors"
         >
           {pending ? "Creating account…" : "Create doctor account"}
         </button>

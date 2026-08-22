@@ -50,7 +50,7 @@ export default function CryptoForm() {
         <p className="text-red-600 text-xs font-semibold mb-8">
           Demo mode — no real transaction was sent or is being monitored.
         </p>
-        <Link href="/dashboard/" className="inline-flex items-center px-5 py-2.5 bg-stone-900 text-white rounded-xl text-sm font-semibold hover:bg-stone-700 transition-colors">
+        <Link href="/dashboard/" className="inline-flex items-center px-5 py-2.5 border border-stone-300 hover:border-stone-400 text-stone-900 rounded-xl text-sm font-semibold transition-colors">
           Go to dashboard
         </Link>
       </div>
@@ -100,7 +100,7 @@ export default function CryptoForm() {
             </code>
             <button
               onClick={copyAddress}
-              className="flex-shrink-0 px-4 py-3 bg-stone-900 hover:bg-stone-700 text-white rounded-xl text-xs font-semibold transition-colors"
+              className="flex-shrink-0 px-4 py-3 border border-stone-300 hover:border-stone-400 text-stone-900 rounded-xl text-xs font-semibold transition-colors"
             >
               {copied ? "Copied!" : "Copy"}
             </button>
@@ -120,7 +120,7 @@ export default function CryptoForm() {
 
         <button
           onClick={() => setConfirmed(true)}
-          className="w-full py-3.5 bg-stone-900 hover:bg-stone-700 text-white font-bold rounded-xl text-sm transition-colors"
+          className="w-full py-3.5 bg-green-700 hover:bg-green-800 text-white font-bold rounded-xl text-sm transition-colors"
         >
           I've sent the payment
         </button>

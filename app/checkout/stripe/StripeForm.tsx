@@ -77,7 +77,7 @@ function PaymentForm({ pageData }: { pageData: PageData }) {
         </p>
         <Link
           href="/dashboard/"
-          className="inline-flex items-center px-5 py-2.5 bg-stone-900 text-white rounded-xl text-sm font-semibold hover:bg-stone-700 transition-colors mt-6"
+          className="inline-flex items-center px-5 py-2.5 border border-stone-300 hover:border-stone-400 text-stone-900 rounded-xl text-sm font-semibold transition-colors mt-6"
         >
           Go to dashboard
         </Link>
@@ -100,7 +100,7 @@ function PaymentForm({ pageData }: { pageData: PageData }) {
           <button
             type="submit"
             disabled={!stripe || state === "processing"}
-            className="w-full py-3.5 bg-stone-900 hover:bg-stone-700 disabled:opacity-60 text-white font-bold rounded-xl text-sm transition-colors"
+            className="w-full py-3.5 bg-green-700 hover:bg-green-800 disabled:opacity-60 text-white font-bold rounded-xl text-sm transition-colors"
           >
             {state === "processing" ? (
               <span className="flex items-center justify-center gap-2">
