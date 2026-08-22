@@ -55,7 +55,7 @@ export default function HomePage() {
             <div className="flex flex-col sm:flex-row gap-4">
               <Link
                 href="/specialists/"
-                className="inline-flex items-center justify-center px-6 py-3.5 bg-amber-500 hover:bg-amber-400 text-stone-900 font-semibold rounded-lg transition-colors text-sm"
+                className="inline-flex items-center justify-center px-6 py-3.5 bg-amber-700 hover:bg-amber-800 text-white font-semibold rounded-lg transition-colors text-sm"
               >
                 <T en="Browse Specialists" ru="Смотреть специалистов" tr="Uzmanlara Göz At" es="Ver especialistas" fr="Parcourir les spécialistes" />
               </Link>
