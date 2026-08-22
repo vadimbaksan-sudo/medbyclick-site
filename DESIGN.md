@@ -106,6 +106,18 @@ change the outcome this time:
   dot — never a broad badge fill or button color. Primary buttons use deep
   green `#1E4D3B` (new — carries competence/action, distinct from the
   terracotta accent's "human annotation" role), not the accent color.
+- **Which button is "primary" (2026-08-22, confirmed by Codex + independent
+  Claude subagent, unanimous):** the one action on a page that advances the
+  user toward booking, paying, or submitting is primary — solid fill
+  `bg-green-700` (`#1E4D3B`), white text, hover `bg-green-800`. Every other
+  action (browse, filter, learn more, cancel, secondary nav) is secondary —
+  `border border-stone-300 hover:border-stone-400 text-stone-900`, no fill.
+  At most one primary button per page/form-step; if two candidates both
+  look primary, one of them isn't actually a convert-stage action and
+  should be downgraded. Terracotta is never a button fill under this rule.
+  Rationale: warm/red-orange reads as caution in a medical context, not
+  urgency-to-buy; green already means "go/confirm" everywhere (traffic
+  signals, form validation, health status).
 - **Secondary (token/education/foundation pages only):** teal `#0D9488`/
   `#14B8A6` — **unchanged**. These pages inherit the new warm-paper base
   (per the Ecosystem Extension Rule below) but keep their own accent, same
@@ -171,3 +183,5 @@ rules for these sections.
 | 2026-08-21 | **Flagged mid-session:** Variant A ("Dossier") is conceptually the same direction rejected 2026-07-05 | Caught by reading this file's own Decisions Log before writing — not something either AI voice or the research surfaced on its own |
 | 2026-08-21 | Vadim reviewed the 2026-07-05 rejection and chose to proceed with Variant A anyway | Different typeface (real Cyrillic vs. none), different accent motif (case-mark vs. wax-seal), grounded in real research this time — Vadim's judgment that this iteration is different enough to warrant a second look. Requested the prior DESIGN.md be preserved as a fallback: `docs/archive/DESIGN.md.pre-dossier-20260821.md` |
 | 2026-08-21 | Adopted: PT Serif + Onest, warm paper `#F5F1E8`, terracotta `#B84D35` accent, deep green `#1E4D3B` primary action color | Chosen over B (Cabinet — too dark/high-risk), C (Clinic — too close to status quo to differentiate), D (Resort — colder than "seriousness without coldness" calls for) |
+| 2026-08-22 | `/design-review` audit found the deep-green primary-button rule was never applied sitewide — ~36 files used near-black, ~15 used terracotta as a second competing "primary" fill (both violations of this file) | Design system had been updated in `globals.css`/`DESIGN.md` but component-level button colors never migrated to match |
+| 2026-08-22 | Confirmed rule sitewide (not revised): deep green is the sole primary-button color; terracotta never a button fill; "primary" = the one convert-stage action per page | Codex and an independent Claude subagent, run in parallel with no shared context, gave identical answers — see Color section above for the full rule and rationale |
