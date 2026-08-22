@@ -117,4 +117,178 @@ pass.
 independently, whenever the doctor-facing case-detail UI (noted as "not
 done, still open" in `docs/decision-log/0009`'s addendum) gets built.
 
+---
+
+## T7 — Primary-button color convention doesn't match DESIGN.md (sitewide)
+
+**What:** DESIGN.md is explicit: "Primary buttons use deep green #1E4D3B
+... not the accent color," yet `bg-stone-900` (ink, near-black) is the
+actual primary-CTA convention in ~36 files, and `bg-amber-400`/`bg-amber-500`
+(terracotta) is used as a *second* competing "primary" fill in ~15 more —
+directly contradicting the same section's "never a broad badge fill or
+button color" rule for the accent. `/design-review` on 2026-08-22 fixed
+the single highest-leverage instance (the global nav CTA, `components/
+Nav.tsx:170,291`, now `bg-green-700`) and the acute contrast failure on
+the hero CTA (`app/page.tsx:58`, now `bg-amber-700` + white text) — the
+rest is unfixed. Representative file list from the source audit: `app/
+page.tsx:346`, `app/doctors/DoctorsGrid.tsx:25,37`, `app/specialists/
+SpecialistsGrid.tsx:69,187`, `app/medcommunity/page.tsx:39`, `app/
+medglobaldb/page.tsx:48`, `app/student-dashboard/page.tsx:61`, `app/
+ai-diagnostics/AiDiagnosticsForm.tsx:232`, `app/checkout/mbc/
+MbcForm.tsx:122,185`, `app/dashboard/MbcDashboard.tsx:112`, `modules/
+medsupport/components/ChatWidget.tsx:69`, `modules/medpayments/
+components/PricingCard.tsx:15,26`, `modules/medpayments/components/
+PaymentSelector.tsx:142-146,169`, `app/medtoken/page.tsx:103,206`, `app/
+book/BookForm.tsx:141`, `modules/medgive/components/CampaignCard.tsx:44`.
+
+**Why:** This is the single most load-bearing, most specific rule in
+DESIGN.md's Color section, and it's violated by the dominant convention
+across the majority of the site's forms and CTAs — not by scattered
+exceptions. Reads as a design-system update (globals.css remap) that the
+component-level color usage never migrated to catch up with.
+
+**Pros:** Once decided, mechanical — same className swap pattern used in
+FINDING-005/007, repeated per file. Fixing it closes the biggest gap
+between DESIGN.md and the live site.
+**Cons:** ~50 files, several with two competing "primary" conventions on
+the same page (e.g. homepage hero: terracotta *and* near-black solid
+buttons in different sections) — deciding which action is "the" primary
+CTA per page is a UX/IA call, not just a recolor, and belongs in front of
+the user before a sweeping change, not decided unilaterally by an
+automated pass.
+
+**Depends on / blocked by:** Nothing technical. Blocked on an explicit
+go-ahead given the blast radius and the pattern of this project routing
+every visual decision through direct user sign-off.
+
+---
+
+## T8 — Literal `bg-white`/`text-white` bypasses the surface token remap
+
+**What:** 34 files use raw `bg-white` for card/header surfaces (e.g.
+`components/Nav.tsx:58,101,201`, `app/specialists/
+SpecialistsGrid.tsx:43,126`, `app/medtoken/page.tsx` ×10, `app/
+ai-diagnostics/AiDiagnosticsForm.tsx:119,131,186,201`) instead of
+`bg-stone-50`, which resolves to the correct dossier surface `#FCFAF4`
+via the `@theme` remap in `app/globals.css`.
+
+**Why:** Doesn't break anything visually today — paper and surface are
+both very light — but it's untracked, unmapped color that will silently
+drift if the surface token ever changes, which is exactly the drift the
+token remap was built to prevent.
+
+**Pros:** Mechanical find-and-replace, low visual risk (near-identical
+color today).
+**Cons:** 34 files is beyond a single design-review session's CSS-first
+fix budget.
+
+**Depends on / blocked by:** Nothing.
+
+---
+
+## T9 — Filter/chip touch targets below the 44px minimum
+
+**What:** Specialty filter pills in `app/specialists/
+SpecialistsGrid.tsx:67-73,87-92` and `app/doctors/
+DoctorsGrid.tsx:23-27,35-39` use `px-3/4 py-1.5` (~28-30px tall). The
+mobile hamburger menu button (`components/Nav.tsx:181`) is ~36×36px.
+`medtoken`'s "Redeem" button (`app/medtoken/page.tsx:453`) is similarly
+undersized.
+
+**Why:** Below the accessibility guideline of 44×44px minimum for touch
+targets — a real usability cost on mobile, where these filter rows are
+the primary way to narrow 10+ specialists.
+
+**Pros:** Straightforward padding bump, low visual-risk CSS change.
+**Cons:** Touches several files at once; deferred alongside the primary
+button-color pass (T7) since together they'd have pushed the 2026-08-22
+session past its self-regulation risk threshold.
+
+**Depends on / blocked by:** Nothing.
+
+---
+
+## T10 — `<html lang>` doesn't follow the in-app language switcher
+
+**What:** `app/layout.tsx:53` sets `lang="en"` and it never updates when
+a user switches to Russian, Turkish, Spanish, or French via
+`components/LanguageProvider.tsx:37`. Screen readers keep using English
+pronunciation rules for non-English content.
+
+**Why:** Flagged independently by the Codex outside-voice review
+(2026-08-22). Real accessibility bug for a platform whose stated primary
+audience is Russian-speaking patients.
+
+**Pros:** Contained fix — set `document.documentElement.lang` in the
+language provider's effect.
+**Cons:** Requires a JS/behavior change, not a CSS-only fix, so it fell
+outside this design-review pass's CSS-first scope.
+
+**Depends on / blocked by:** Nothing.
+
+---
+
+## T11 — `/dashboard` and `/coordinator` redirect to a bare `/login` with no context
+
+**What:** Unauthenticated visits to `/dashboard` or `/coordinator`
+silently redirect to `/login` with zero explanation of why. Compare to
+`/book`, which shows a friendly contextual card ("Log in to book a
+consultation... booking is tied to your patient account so you can track
+your request") before the same login form.
+
+**Why:** A user who clicks "Dashboard" from the nav and lands on a bare
+login form with no context is a Goodwill Reservoir drain (hidden
+information about why they're there) — `/book` already solves this well;
+`/dashboard`/`/coordinator` should follow the same pattern.
+
+**Pros:** `/book`'s pattern already exists as a reference implementation
+to copy.
+**Cons:** Needs a redirect-reason param and conditional messaging in
+`LoginForm.tsx` — behavior/routing logic, not a CSS fix.
+
+**Depends on / blocked by:** Nothing.
+
+---
+
+## T12 — Miscellaneous smaller design-system gaps (source-audit findings, 2026-08-22)
+
+Bundled because each is small in isolation:
+
+- **Gradients contradict DESIGN.md's "no gradients" rule.**
+  `avatarGradientClass` (`lib/ui/avatarColor.ts`) generates
+  `bg-gradient-to-br` fills used for every doctor/specialist avatar
+  circle across `app/page.tsx:288`, `app/doctors/DoctorsGrid.tsx:68`,
+  `app/specialists/SpecialistsGrid.tsx:130`, and others. Thoughtful color
+  choice (avoids cool tones), but the mechanism itself is banned by
+  DESIGN.md's Aesthetic Direction section.
+- **Raw non-token badge colors** — `bg-blue-100 text-blue-700` in `app/
+  dashboard/BookingHistory.tsx:13`, `modules/medtrials/components/
+  TrialCard.tsx:5`, `modules/medevents/components/EventCard.tsx:5`;
+  `bg-violet-100` in `EventCard.tsx:6`; raw `bg-red-500/80` in `app/
+  medtoken/page.tsx:168` instead of the defined semantic error `#B0392B`.
+- **WhatsApp/Telegram icon-button contrast fails AA.** White icon on
+  WhatsApp green `#25D366` measures 1.98:1; white on Telegram blue
+  `#229ED9` measures 3.02:1 (`app/specialists/page.tsx:35,52`,
+  `components/Nav.tsx:160,282`). Defensible as brand-recognition colors,
+  but worth a darker shade or an outline treatment.
+- **MedToken doesn't consistently keep its teal firewall.** DESIGN.md's
+  Ecosystem Extension Rule says token/education pages keep teal as their
+  only accent deviation; `app/medtoken/page.tsx:26,67` uses amber/
+  terracotta in the hero and numeric cards instead.
+- **No dark-mode implementation.** DESIGN.md documents a full dark
+  palette (paper `#14180F`, ink `#EDEAE0`, etc. — DESIGN.md Color
+  section) but `app/globals.css` has no `prefers-color-scheme: dark`
+  block at all.
+- **Missing accessible names on search inputs.** Placeholder-only labels
+  (no visible `<label>`, no `aria-label`) on the global doctor search
+  (`app/medglobaldb/page.tsx:27`), and the PubMed/clinical-trial search
+  inputs (`modules/mededu/components/ArticleSearch.tsx:38`, `modules/
+  medtrials/components/TrialSearch.tsx:38`).
+- **No `aria-pressed` on active filter toggles** in `app/specialists/
+  SpecialistsGrid.tsx:63` and `app/doctors/DoctorsGrid.tsx` — active
+  state is visual-only, not exposed to assistive tech.
+
+**Depends on / blocked by:** Nothing — independent, can be picked off in
+any order.
+
 **Depends on / blocked by:** Coordinator operational (Phase 2 gate). Write before marketing hire begins.
