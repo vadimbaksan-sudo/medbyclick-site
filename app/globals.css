@@ -81,3 +81,19 @@ h1, h2, h3 {
   outline: 2px solid #b84d35;
   outline-offset: 2px;
 }
+
+/* No `prefers-reduced-motion` handling existed anywhere in the codebase
+   (checked: 0 hits for `prefers-reduced-motion` before this rule). The
+   support widget's "online" dot uses `animate-pulse` indefinitely, and
+   hover/transition-colors rules are used throughout — none of it respects
+   the OS-level reduced-motion setting. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
