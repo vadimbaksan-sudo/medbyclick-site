@@ -1,12 +1,12 @@
 import type { ModuleDefinition } from "../types";
-import { Calendar } from "lucide-react";
+import { createImageIcon } from "@/components/icons/createImageIcon";
 
 export const mdeventsModule: ModuleDefinition = {
   id: "medevents",
   name: "MedEvents",
   navLabel: "MedEvents",
   href: "/medevents",
-  icon: Calendar,
+  icon: createImageIcon("/icons/modules/medevents.png"),
   description: "Medical conferences, webinars, and patient advocacy events",
   color: "orange",
 };

@@ -1,12 +1,12 @@
 import type { ModuleDefinition } from "../types";
-import { CreditCard } from "lucide-react";
+import { createImageIcon } from "@/components/icons/createImageIcon";
 
 export const medpaymentsModule: ModuleDefinition = {
   id: "medpayments",
   name: "MedPayments",
   navLabel: "MedPayments",
   href: "/medpayments",
-  icon: CreditCard,
+  icon: createImageIcon("/icons/modules/medpayments.png"),
   description: "Secure Stripe-powered payments and subscription management",
   color: "green",
 };

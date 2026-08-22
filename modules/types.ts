@@ -1,11 +1,11 @@
-import type { LucideIcon } from "lucide-react";
+import type { ComponentType } from "react";
 
 export interface ModuleDefinition {
   id: string;
   name: string;
   navLabel: string;
   href?: string;
-  icon: LucideIcon;
+  icon: ComponentType<{ className?: string }>;
   description: string;
   color: string;
 }

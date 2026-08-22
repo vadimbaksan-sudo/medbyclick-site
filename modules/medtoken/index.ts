@@ -1,12 +1,12 @@
 import type { ModuleDefinition } from "../types";
-import { Coins } from "lucide-react";
+import { createImageIcon } from "@/components/icons/createImageIcon";
 
 export const medtokenModule: ModuleDefinition = {
   id: "medtoken",
   name: "MedToken",
   navLabel: "MedToken",
   href: "/medtoken",
-  icon: Coins,
+  icon: createImageIcon("/icons/modules/medtoken.png"),
   description: "Token-based loyalty program and rewards for platform engagement",
   color: "yellow",
 };

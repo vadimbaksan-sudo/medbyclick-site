@@ -1,12 +1,12 @@
 import type { ModuleDefinition } from "../types";
-import { GraduationCap } from "lucide-react";
+import { createImageIcon } from "@/components/icons/createImageIcon";
 
 export const mededuModule: ModuleDefinition = {
   id: "mededu",
   name: "MedEdu",
   navLabel: "MedEdu",
   href: "/mededu",
-  icon: GraduationCap,
+  icon: createImageIcon("/icons/modules/mededu.png"),
   description: "CME courses, patient education, and medical knowledge base",
   color: "amber",
 };
