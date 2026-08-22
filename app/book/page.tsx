@@ -51,7 +51,7 @@ export default async function BookPage() {
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <Link
                 href="/login"
-                className="px-5 py-2.5 bg-stone-900 hover:bg-stone-700 text-white font-semibold rounded-lg text-sm transition-colors"
+                className="px-5 py-2.5 bg-green-700 hover:bg-green-800 text-white font-semibold rounded-lg text-sm transition-colors"
               >
                 Log in
               </Link>

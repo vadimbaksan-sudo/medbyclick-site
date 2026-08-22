@@ -38,7 +38,7 @@ export default async function DoctorsPage() {
           </p>
           <Link
             href="/book"
-            className="inline-flex items-center justify-center px-6 py-3 bg-stone-900 hover:bg-stone-700 text-white font-medium rounded-lg text-sm transition-colors"
+            className="inline-flex items-center justify-center px-6 py-3 bg-green-700 hover:bg-green-800 text-white font-medium rounded-lg text-sm transition-colors"
           >
             Book a Consultation
           </Link>

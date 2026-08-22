@@ -30,7 +30,7 @@ export default function PricingPage() {
           </p>
           <a
             href="/book/"
-            className="inline-flex items-center justify-center px-8 py-4 bg-stone-900 hover:bg-stone-700 text-white font-semibold rounded-lg transition-colors"
+            className="inline-flex items-center justify-center px-8 py-4 border border-stone-300 hover:border-stone-400 text-stone-900 font-semibold rounded-lg transition-colors"
           >
             Book a Consultation
           </a>

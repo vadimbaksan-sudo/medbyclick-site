@@ -60,7 +60,7 @@ export default async function SpecialistsPage() {
               )}
               <Link
                 href="/book/"
-                className="inline-flex items-center justify-center px-4 py-2.5 bg-amber-500 hover:bg-amber-400 text-stone-900 font-semibold rounded-lg text-sm transition-colors"
+                className="inline-flex items-center justify-center px-4 py-2.5 border border-stone-300 hover:border-stone-400 text-stone-900 font-semibold rounded-lg text-sm transition-colors"
               >
                 Book a consultation
               </Link>

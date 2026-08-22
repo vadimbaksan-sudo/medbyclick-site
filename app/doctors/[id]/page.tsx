@@ -146,7 +146,7 @@ export default async function DoctorProfilePage({
                 </p>
                 <Link
                   href={`/book?doctor=${doctor.id}`}
-                  className="block w-full text-center px-5 py-3 bg-stone-900 hover:bg-stone-700 text-white font-medium rounded-lg text-sm transition-colors mb-3"
+                  className="block w-full text-center px-5 py-3 bg-green-700 hover:bg-green-800 text-white font-medium rounded-lg text-sm transition-colors mb-3"
                 >
                   Request Consultation
                 </Link>
