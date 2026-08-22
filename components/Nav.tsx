@@ -108,8 +108,8 @@ export default function Nav() {
                           className="flex items-center gap-2.5 px-3 py-2.5 rounded-xl hover:bg-stone-50 transition-colors group"
                         >
                           <mod.icon className="w-4 h-4 shrink-0 text-stone-500 group-hover:text-amber-700 transition-colors" />
-                          <div>
-                            <p className="text-xs font-semibold text-stone-900 group-hover:text-amber-700 transition-colors leading-tight">
+                          <div className="min-w-0">
+                            <p className="text-xs font-semibold text-stone-900 group-hover:text-amber-700 transition-colors leading-tight break-words">
                               {mod.navLabel}
                             </p>
                           </div>

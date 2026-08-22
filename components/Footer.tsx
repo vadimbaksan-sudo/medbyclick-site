@@ -28,7 +28,7 @@ export default function Footer() {
             <p className="text-stone-900 text-sm font-medium mb-3"><T en="Platform" ru="Платформа" tr="Platform" es="Plataforma" fr="Plateforme" /></p>
             <div className="flex flex-col gap-2 text-sm">
               {navModules.map((mod) => (
-                <Link key={mod.id} href={mod.href!} className="hover:text-stone-900 transition-colors flex items-center gap-1.5">
+                <Link key={mod.id} href={mod.href!} className="hover:text-stone-900 transition-colors flex items-center gap-1.5 break-words">
                   <mod.icon className="w-3.5 h-3.5 shrink-0" />
                   {mod.navLabel}
                 </Link>

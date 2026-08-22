@@ -120,7 +120,7 @@ export default function HomePage() {
                 className="group flex flex-col items-center text-center p-4 bg-white rounded-2xl border border-stone-200 hover:border-amber-300 hover:shadow-md transition-all"
               >
                 <mod.icon className="w-6 h-6 mb-2 text-stone-600 group-hover:text-amber-700 transition-colors" />
-                <p className="text-xs font-semibold text-stone-900 group-hover:text-amber-700 transition-colors leading-tight">
+                <p className="text-xs font-semibold text-stone-900 group-hover:text-amber-700 transition-colors leading-tight break-words">
                   {mod.navLabel}
                 </p>
               </Link>
