@@ -136,7 +136,7 @@ export default function AiDiagnosticsForm() {
         <div className="flex gap-3">
           <Link
             href="/book/"
-            className="flex-1 text-center py-3 bg-stone-900 hover:bg-stone-700 text-white font-semibold rounded-xl text-sm transition-colors"
+            className="flex-1 text-center py-3 bg-green-700 hover:bg-green-800 text-white font-semibold rounded-xl text-sm transition-colors"
           >
             Book a consultation
           </Link>
@@ -229,7 +229,7 @@ export default function AiDiagnosticsForm() {
       <button
         type="submit"
         disabled={formState === "analyzing"}
-        className="w-full py-3.5 bg-amber-500 hover:bg-amber-400 disabled:opacity-60 text-stone-900 font-semibold rounded-xl text-sm transition-colors"
+        className="w-full py-3.5 bg-green-700 hover:bg-green-800 disabled:opacity-60 text-white font-semibold rounded-xl text-sm transition-colors"
       >
         {formState === "analyzing" ? (
           <span className="flex items-center justify-center gap-2">

@@ -109,7 +109,7 @@ export default function MbcDashboard() {
 
           <button
             onClick={() => { setShowBuy(!showBuy); setBuySuccess(false); }}
-            className="mt-5 w-full py-2.5 bg-amber-400 hover:bg-amber-300 text-stone-900 font-bold rounded-xl text-sm transition-colors"
+            className="mt-5 w-full py-2.5 border border-stone-300 hover:border-stone-400 text-stone-900 font-bold rounded-xl text-sm transition-colors"
           >
             {showBuy ? "Cancel" : "Add tokens"}
           </button>
@@ -133,7 +133,7 @@ export default function MbcDashboard() {
                         onClick={() => setBuyQty(qty)}
                         className={`py-2 rounded-lg text-xs font-medium border transition-colors ${
                           buyQty === qty
-                            ? "border-stone-900 bg-stone-900 text-white"
+                            ? "border-stone-900 bg-stone-900/5 text-stone-900 font-semibold"
                             : "border-stone-200 text-stone-600 hover:border-stone-400"
                         }`}
                       >
@@ -155,7 +155,7 @@ export default function MbcDashboard() {
                 <button
                   type="submit"
                   disabled={buying}
-                  className="w-full py-2.5 bg-stone-900 hover:bg-stone-700 disabled:opacity-60 text-white font-bold rounded-xl text-sm transition-colors"
+                  className="w-full py-2.5 bg-green-700 hover:bg-green-800 disabled:opacity-60 text-white font-bold rounded-xl text-sm transition-colors"
                 >
                   {buying ? "Processing…" : `Buy ${parseInt(buyQty || "0").toLocaleString()} MBC`}
                 </button>
@@ -202,7 +202,7 @@ export default function MbcDashboard() {
             </p>
             <Link
               href="/medpayments/"
-              className="inline-block mt-5 px-5 py-2.5 bg-stone-900 text-white text-sm font-semibold rounded-xl hover:bg-stone-700 transition-colors"
+              className="inline-block mt-5 px-5 py-2.5 border border-stone-300 hover:border-stone-400 text-stone-900 text-sm font-semibold rounded-xl transition-colors"
             >
               Browse plans
             </Link>

@@ -99,7 +99,7 @@ export default function MbcForm() {
         <p className="text-stone-500 mb-1">{planName} — {mbcRequired.toLocaleString()} MBC deducted</p>
         <p className="text-stone-400 text-sm mb-1">New balance: {data.balance.toLocaleString()} MBC</p>
         <p className="text-stone-400 text-sm mb-8">You saved ${(originalPrice * MBC_DISCOUNT).toFixed(2)} vs. card payment.</p>
-        <Link href="/dashboard/" className="inline-flex items-center px-5 py-2.5 bg-stone-900 text-white rounded-xl text-sm font-semibold hover:bg-stone-700 transition-colors">
+        <Link href="/dashboard/" className="inline-flex items-center px-5 py-2.5 border border-stone-300 hover:border-stone-400 text-stone-900 rounded-xl text-sm font-semibold transition-colors">
           View dashboard
         </Link>
       </div>
@@ -119,7 +119,7 @@ export default function MbcForm() {
         {canPayNow ? (
           <button
             onClick={handlePayFromBalance}
-            className="w-full py-3.5 bg-amber-400 hover:bg-amber-300 text-stone-900 font-bold rounded-xl text-sm transition-colors"
+            className="w-full py-3.5 bg-green-700 hover:bg-green-800 text-white font-bold rounded-xl text-sm transition-colors"
           >
             Pay {mbcRequired.toLocaleString()} MBC from balance
           </button>
@@ -182,7 +182,7 @@ export default function MbcForm() {
           <button
             onClick={handlePayFromBalance}
             disabled={state === "paying"}
-            className="w-full py-3.5 bg-amber-400 hover:bg-amber-300 disabled:opacity-60 text-stone-900 font-bold rounded-xl text-sm transition-colors"
+            className="w-full py-3.5 bg-green-700 hover:bg-green-800 disabled:opacity-60 text-white font-bold rounded-xl text-sm transition-colors"
           >
             {state === "paying" ? (
               <span className="flex items-center justify-center gap-2">
@@ -216,7 +216,7 @@ export default function MbcForm() {
                       onClick={() => setBuyAmount(qty)}
                       className={`flex-1 py-2 rounded-lg text-xs font-medium border transition-colors ${
                         buyAmount === qty
-                          ? "border-stone-900 bg-stone-900 text-white"
+                          ? "border-stone-900 bg-stone-900/5 text-stone-900 font-semibold"
                           : "border-stone-200 text-stone-600 hover:border-stone-400"
                       }`}
                     >
@@ -238,7 +238,7 @@ export default function MbcForm() {
               <button
                 type="submit"
                 disabled={state === "buying" || buyAmount < 1}
-                className="w-full py-3 bg-stone-900 hover:bg-stone-700 disabled:opacity-60 text-white font-bold rounded-xl text-sm transition-colors"
+                className="w-full py-3 bg-green-700 hover:bg-green-800 disabled:opacity-60 text-white font-bold rounded-xl text-sm transition-colors"
               >
                 {state === "buying"
                   ? "Processing…"
