@@ -31,15 +31,17 @@ export default function MedPaymentsClient() {
           ))}
         </div>
 
-        <div className="mt-16 grid sm:grid-cols-3 gap-6 text-center">
+        <div className="mt-16 grid sm:grid-cols-3 gap-6">
           {[
             { icon: ShieldCheck, title: "Stripe Secured", body: "All card payments processed by Stripe. PCI DSS Level 1 certified." },
             { icon: Undo2, title: "Full Refund", body: "If we can't match you to a specialist within 48 hours, you get a full refund." },
             { icon: Receipt, title: "Invoice on Request", body: "Formal invoice available for insurance reimbursement or employer benefits." },
           ].map((item) => (
             <div key={item.title} className="p-6 border border-stone-100 rounded-xl">
-              <item.icon className="w-7 h-7 text-amber-700 mx-auto" />
-              <p className="font-semibold text-stone-900 mt-3 mb-2 text-sm">{item.title}</p>
+              <div className="flex items-center gap-2 mb-2">
+                <item.icon className="w-4 h-4 text-amber-700 shrink-0" />
+                <p className="font-semibold text-stone-900 text-sm">{item.title}</p>
+              </div>
               <p className="text-xs text-stone-500 leading-relaxed">{item.body}</p>
             </div>
           ))}
