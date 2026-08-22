@@ -111,7 +111,7 @@ export default function EducationPage() {
                       <span>·</span>
                       <span>{course.modules} modules</span>
                     </div>
-                    <button className="text-xs font-medium bg-stone-900 hover:bg-stone-700 text-white px-3 py-1.5 rounded-lg transition-colors">
+                    <button className="text-xs font-medium border border-stone-300 hover:border-stone-400 text-stone-900 px-3 py-1.5 rounded-lg transition-colors">
                       Start →
                     </button>
                   </div>
@@ -133,7 +133,7 @@ export default function EducationPage() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
               href="/book/"
-              className="inline-flex items-center justify-center px-6 py-3 bg-stone-900 hover:bg-stone-700 text-white font-semibold rounded-lg text-sm transition-colors"
+              className="inline-flex items-center justify-center px-6 py-3 bg-green-700 hover:bg-green-800 text-white font-semibold rounded-lg text-sm transition-colors"
             >
               Book a consultation
             </Link>

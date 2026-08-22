@@ -136,7 +136,7 @@ export default async function MedConnectPage() {
         <div className="max-w-xl mx-auto text-center px-4">
           <h2 className="text-2xl font-bold text-stone-900 mb-3">Need help choosing?</h2>
           <p className="text-stone-500 mb-6 text-sm">Tell us about your case — we route you to the right specialist within 24 hours.</p>
-          <Link href="/book" className="inline-flex items-center justify-center px-6 py-3 bg-stone-900 hover:bg-stone-700 text-white font-medium rounded-lg text-sm transition-colors">
+          <Link href="/book" className="inline-flex items-center justify-center px-6 py-3 bg-green-700 hover:bg-green-800 text-white font-medium rounded-lg text-sm transition-colors">
             Book a Consultation
           </Link>
         </div>

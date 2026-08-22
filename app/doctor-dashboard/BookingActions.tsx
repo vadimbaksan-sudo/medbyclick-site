@@ -36,7 +36,7 @@ export default function BookingActions({ booking }: BookingActionsProps) {
             <button
               type="submit"
               disabled={pending}
-              className="text-xs font-semibold px-3 py-1.5 rounded-full bg-stone-900 text-white hover:bg-stone-700 disabled:opacity-60 transition-colors"
+              className="text-xs font-semibold px-3 py-1.5 rounded-full bg-green-700 text-white hover:bg-green-800 disabled:opacity-60 transition-colors"
             >
               Confirm
             </button>
@@ -91,7 +91,7 @@ export default function BookingActions({ booking }: BookingActionsProps) {
           <button
             type="submit"
             disabled={pending}
-            className="text-xs font-semibold px-3 py-1.5 rounded-full bg-stone-900 text-white hover:bg-stone-700 disabled:opacity-60 transition-colors"
+            className="text-xs font-semibold px-3 py-1.5 rounded-full border border-stone-300 hover:border-stone-400 text-stone-900 disabled:opacity-60 transition-colors"
           >
             Save notes
           </button>

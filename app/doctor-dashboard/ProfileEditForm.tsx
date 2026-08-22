@@ -148,7 +148,7 @@ export default function ProfileEditForm({ doctorProfile }: ProfileEditFormProps)
         <button
           type="submit"
           disabled={pending}
-          className="py-2.5 px-5 bg-stone-900 hover:bg-stone-700 disabled:opacity-60 text-white font-semibold rounded-lg text-sm transition-colors"
+          className="py-2.5 px-5 bg-green-700 hover:bg-green-800 disabled:opacity-60 text-white font-semibold rounded-lg text-sm transition-colors"
         >
           {pending ? "Saving…" : "Save profile"}
         </button>
