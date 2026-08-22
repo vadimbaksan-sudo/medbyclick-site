@@ -1,6 +1,6 @@
 import { Suspense } from "react";
 import { AlertTriangle } from "lucide-react";
-import CryptoForm from "./CryptoForm";
+import CryptoForm, { CryptoFormSkeleton } from "./CryptoForm";
 
 export const metadata = {
   title: "Crypto Checkout — MedByClick",
@@ -27,7 +27,7 @@ export default function CryptoCheckoutPage() {
         </div>
       </div>
       <div className="max-w-3xl mx-auto px-4 sm:px-6 py-12">
-        <Suspense fallback={<div className="animate-pulse h-80 bg-stone-100 rounded-2xl" />}>
+        <Suspense fallback={<CryptoFormSkeleton />}>
           <CryptoForm />
         </Suspense>
       </div>

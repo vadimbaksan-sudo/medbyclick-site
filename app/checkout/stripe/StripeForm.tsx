@@ -9,6 +9,7 @@ import {
   useElements,
 } from "@stripe/react-stripe-js";
 import Link from "next/link";
+import { Skeleton } from "@/components/Skeleton";
 
 // Real publishable key from env — never hardcode. Falls back to Stripe's
 // own public demo test key ONLY so `loadStripe` doesn't throw when
@@ -152,6 +153,34 @@ function PaymentForm({ pageData }: { pageData: PageData }) {
   );
 }
 
+// Mirrors PaymentForm's `grid md:grid-cols-5` layout — shown while the
+// server-created PaymentIntent (a real fetch, genuinely variable latency,
+// not a fixed demo delay) is in flight.
+function StripeFormSkeleton() {
+  return (
+    <div className="grid md:grid-cols-5 gap-10">
+      <div className="md:col-span-3 space-y-5">
+        <Skeleton className="h-40 w-full rounded-xl" />
+        <Skeleton className="h-12 w-full rounded-xl" />
+        <Skeleton className="h-3.5 w-56 mx-auto rounded" />
+      </div>
+      <div className="md:col-span-2">
+        <div className="bg-stone-50 border border-stone-200 rounded-2xl p-6">
+          <Skeleton className="h-3 w-28 rounded mb-4" tone="light" />
+          <div className="flex justify-between items-start mb-4">
+            <Skeleton className="h-4 w-32 rounded" tone="light" />
+            <Skeleton className="h-4 w-16 rounded" tone="light" />
+          </div>
+          <div className="border-t border-stone-200 pt-4 flex justify-between">
+            <Skeleton className="h-4 w-14 rounded" tone="light" />
+            <Skeleton className="h-4 w-16 rounded" tone="light" />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function StripeForm() {
   const [pageData, setPageData] = useState<PageData | null>(null);
   const [clientSecret, setClientSecret] = useState<string | null>(null);
@@ -199,7 +228,7 @@ export default function StripeForm() {
   }
 
   if (!pageData || !clientSecret) {
-    return <div className="animate-pulse h-64 bg-stone-100 rounded-2xl" />;
+    return <StripeFormSkeleton />;
   }
 
   return (

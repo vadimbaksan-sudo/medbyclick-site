@@ -8,6 +8,7 @@ import { submitBooking } from "@/lib/bookings/actions";
 import { avatarGradientClass } from "@/lib/ui/avatarColor";
 import { SPECIALTIES } from "@/lib/constants/specialties";
 import type { BookingFormState } from "@/lib/bookings/validation";
+import { Skeleton } from "@/components/Skeleton";
 
 type CaseType = "new" | "second-opinion" | "treatment-planning";
 type Step = 1 | 2 | 3 | 4;
@@ -80,6 +81,32 @@ const ROUTING_RATIONALE: Record<string, string> = {
 };
 
 const initialState: BookingFormState = { status: "idle" };
+
+// Mirrors step 1's layout (progress bar, heading, three case-type options —
+// the default entry step for /book without a preselected doctor). Exported
+// for the page-level Suspense fallback — this component reads
+// useSearchParams(), so the App Router requires a Suspense boundary.
+export function BookFormSkeleton() {
+  return (
+    <div className="max-w-2xl mx-auto">
+      <div className="mb-10">
+        <div className="flex items-center justify-between mb-2">
+          <Skeleton className="h-3 w-16 rounded" />
+          <Skeleton className="h-3 w-10 rounded" />
+        </div>
+        <Skeleton className="h-0.5 w-full rounded-full" tone="light" />
+      </div>
+      <Skeleton className="h-7 w-3/4 rounded mb-2" />
+      <Skeleton className="h-4 w-full rounded mb-1.5" />
+      <Skeleton className="h-4 w-2/3 rounded mb-8" />
+      <div className="space-y-3">
+        <Skeleton className="h-[72px] w-full rounded-lg" />
+        <Skeleton className="h-[72px] w-full rounded-lg" />
+        <Skeleton className="h-[72px] w-full rounded-lg" />
+      </div>
+    </div>
+  );
+}
 
 export default function BookForm({ patientEmail, doctors }: { patientEmail: string; doctors: Doctor[] }) {
   const searchParams = useSearchParams();

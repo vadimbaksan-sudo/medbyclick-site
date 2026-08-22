@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { Fuel, Hourglass, Clock } from "lucide-react";
+import { Skeleton } from "@/components/Skeleton";
 
 const WALLETS = {
   ethereum: "0x4a3Bc7D8E9F2a1B6C5D4E3F2A1B6C5D4E3F2A1B6",
@@ -14,6 +15,43 @@ const NETWORK_LABELS: Record<string, { name: string; token: string; time: string
   ethereum: { name: "Ethereum", token: "USDT (ERC-20)", time: "~2–5 minutes", fee: "~$2–10 gas" },
   tron: { name: "TRON", token: "USDT (TRC-20)", time: "~30 seconds", fee: "<$0.01" },
 };
+
+// Mirrors the `grid md:grid-cols-5` layout below (network selector + amount
+// + wallet address block, order summary card). Exported for the page-level
+// Suspense fallback — this component reads useSearchParams(), so the App
+// Router requires a Suspense boundary around it.
+export function CryptoFormSkeleton() {
+  return (
+    <div className="grid md:grid-cols-5 gap-10">
+      <div className="md:col-span-3 space-y-6">
+        <div>
+          <Skeleton className="h-3.5 w-16 rounded mb-3" />
+          <div className="grid grid-cols-2 gap-3">
+            <Skeleton className="h-16 w-full rounded-xl" />
+            <Skeleton className="h-16 w-full rounded-xl" />
+          </div>
+        </div>
+        <Skeleton className="h-20 w-full rounded-xl" />
+        <Skeleton className="h-16 w-full rounded-xl" />
+        <Skeleton className="h-12 w-full rounded-xl" />
+      </div>
+      <div className="md:col-span-2">
+        <div className="bg-stone-50 border border-stone-200 rounded-2xl p-6">
+          <Skeleton className="h-3 w-28 rounded mb-4" tone="light" />
+          <div className="flex justify-between items-start mb-2">
+            <Skeleton className="h-4 w-28 rounded" tone="light" />
+            <Skeleton className="h-4 w-20 rounded" tone="light" />
+          </div>
+          <Skeleton className="h-3 w-24 rounded mb-4" tone="light" />
+          <div className="border-t border-stone-200 pt-4 flex justify-between">
+            <Skeleton className="h-4 w-14 rounded" tone="light" />
+            <Skeleton className="h-4 w-20 rounded" tone="light" />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 export default function CryptoForm() {
   const params = useSearchParams();

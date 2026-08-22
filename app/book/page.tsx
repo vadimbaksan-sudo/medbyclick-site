@@ -1,6 +1,6 @@
 import { Suspense } from "react";
 import Link from "next/link";
-import BookForm from "./BookForm";
+import BookForm, { BookFormSkeleton } from "./BookForm";
 import { getCurrentUser } from "@/lib/auth/dal";
 import { getMedconnectDoctors } from "@/modules/medconnect/getDoctors";
 
@@ -72,7 +72,7 @@ export default async function BookPage() {
             </p>
           </div>
         ) : (
-          <Suspense fallback={<div className="animate-pulse h-96 bg-stone-100 rounded-xl" />}>
+          <Suspense fallback={<BookFormSkeleton />}>
             <BookForm patientEmail={user.email} doctors={doctors} />
           </Suspense>
         )}

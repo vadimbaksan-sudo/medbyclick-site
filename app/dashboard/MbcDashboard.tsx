@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { CreditCard, Stethoscope, Coins } from "lucide-react";
+import { Skeleton } from "@/components/Skeleton";
 
 const MBC_PRICE_USD = 0.10;
 const DEFAULT_BALANCE = 5000;
@@ -42,6 +43,54 @@ function addTransaction(tx: Omit<Transaction, "id" | "date">) {
   } catch {}
 }
 
+// Mirrors the `grid lg:grid-cols-3` layout below — balance card + quick
+// actions on the left, transaction history rows on the right. Shown only
+// for the mount-time tick before the localStorage read resolves.
+function MbcDashboardSkeleton() {
+  return (
+    <div className="grid lg:grid-cols-3 gap-8">
+      <div className="lg:col-span-1 space-y-5">
+        <div className="bg-green-50 rounded-2xl p-6">
+          <Skeleton className="h-3 w-32 rounded mb-2" tone="light" />
+          <Skeleton className="h-9 w-28 rounded mb-1" tone="light" />
+          <Skeleton className="h-3.5 w-24 rounded mb-0.5" tone="light" />
+          <Skeleton className="h-3 w-20 rounded mb-6" tone="light" />
+          <div className="pt-5 border-t border-stone-200 space-y-2">
+            <Skeleton className="h-3 w-full rounded" tone="light" />
+            <Skeleton className="h-3 w-full rounded" tone="light" />
+            <Skeleton className="h-3 w-full rounded" tone="light" />
+          </div>
+          <Skeleton className="h-10 w-full rounded-xl mt-5" tone="light" />
+        </div>
+        <div className="border border-stone-200 rounded-2xl p-5 space-y-3">
+          <Skeleton className="h-3 w-24 rounded" />
+          <Skeleton className="h-9 w-full rounded-xl" />
+          <Skeleton className="h-9 w-full rounded-xl" />
+          <Skeleton className="h-9 w-full rounded-xl" />
+        </div>
+      </div>
+      <div className="lg:col-span-2">
+        <Skeleton className="h-5 w-44 rounded mb-5" />
+        <div className="border border-stone-200 rounded-2xl overflow-hidden divide-y divide-stone-100">
+          {[0, 1, 2, 3].map((i) => (
+            <div key={i} className="flex items-center gap-4 px-5 py-4">
+              <Skeleton className="w-9 h-9 rounded-full flex-shrink-0" />
+              <div className="flex-1 space-y-1.5">
+                <Skeleton className="h-3.5 w-40 rounded" />
+                <Skeleton className="h-3 w-28 rounded" />
+              </div>
+              <div className="space-y-1.5">
+                <Skeleton className="h-3.5 w-16 rounded ml-auto" />
+                <Skeleton className="h-3 w-12 rounded ml-auto" />
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function MbcDashboard() {
   const [balance, setBalance] = useState<number | null>(null);
   const [transactions, setTransactions] = useState<Transaction[]>([]);
@@ -72,7 +121,7 @@ export default function MbcDashboard() {
   }
 
   if (balance === null) {
-    return <div className="animate-pulse h-96 bg-stone-100 rounded-2xl" />;
+    return <MbcDashboardSkeleton />;
   }
 
   const usdValue = balance * MBC_PRICE_USD;

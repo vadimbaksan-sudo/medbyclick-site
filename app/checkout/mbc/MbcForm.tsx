@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import { Skeleton } from "@/components/Skeleton";
 
 const MBC_PRICE_USD = 0.10;
 const MBC_DISCOUNT = 0.20;
@@ -40,6 +41,45 @@ interface PageData {
   balance: number;
 }
 
+// Mirrors the final `grid md:grid-cols-5` layout below — balance widget +
+// pay button on the left, order summary card on the right. Shown only for
+// the mount-time tick before the URL-param/localStorage read resolves.
+function MbcFormSkeleton() {
+  return (
+    <div className="grid md:grid-cols-5 gap-10">
+      <div className="md:col-span-3 space-y-6">
+        <div className="rounded-2xl p-6 border-2 border-stone-200 bg-stone-50">
+          <Skeleton className="h-3 w-28 rounded mb-2" tone="light" />
+          <Skeleton className="h-8 w-24 rounded mb-1" tone="light" />
+          <Skeleton className="h-3 w-20 rounded mb-4" tone="light" />
+          <div className="pt-4 border-t border-stone-200 space-y-2">
+            <Skeleton className="h-3.5 w-full rounded" tone="light" />
+            <Skeleton className="h-3.5 w-full rounded" tone="light" />
+          </div>
+        </div>
+        <Skeleton className="h-12 w-full rounded-xl" />
+      </div>
+      <div className="md:col-span-2">
+        <div className="bg-stone-50 border border-stone-200 rounded-2xl p-6">
+          <Skeleton className="h-3 w-28 rounded mb-4" tone="light" />
+          <div className="flex justify-between items-start mb-1">
+            <Skeleton className="h-4 w-28 rounded" tone="light" />
+            <Skeleton className="h-4 w-14 rounded" tone="light" />
+          </div>
+          <div className="flex justify-between items-start mb-4">
+            <Skeleton className="h-3 w-24 rounded" tone="light" />
+            <Skeleton className="h-3 w-14 rounded" tone="light" />
+          </div>
+          <div className="border-t border-stone-200 pt-4 flex justify-between">
+            <Skeleton className="h-4 w-14 rounded" tone="light" />
+            <Skeleton className="h-4 w-16 rounded" tone="light" />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function MbcForm() {
   const [data, setData] = useState<PageData | null>(null);
   const [state, setState] = useState<State>("idle");
@@ -58,7 +98,7 @@ export default function MbcForm() {
   }, []);
 
   if (!data) {
-    return <div className="animate-pulse h-64 bg-stone-100 rounded-2xl" />;
+    return <MbcFormSkeleton />;
   }
 
   const { planName, originalPrice, discountedUsd, mbcRequired, balance } = data;
