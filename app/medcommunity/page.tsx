@@ -29,14 +29,14 @@ export default function MedCommunityPage() {
               <button
                 key={cat}
                 className={`flex-shrink-0 text-sm px-3 py-1.5 rounded-full border transition-colors ${
-                  i === 0 ? "bg-stone-900 text-white border-stone-900" : "border-stone-200 text-stone-600 hover:border-stone-400"
+                  i === 0 ? "border-stone-900 bg-stone-900/5 text-stone-900 font-medium" : "border-stone-200 text-stone-600 hover:border-stone-400"
                 }`}
               >
                 {cat}
               </button>
             ))}
           </div>
-          <button className="flex-shrink-0 ml-4 px-4 py-2 bg-amber-500 hover:bg-amber-400 text-stone-900 text-sm font-semibold rounded-lg transition-colors">
+          <button className="flex-shrink-0 ml-4 px-4 py-2 bg-green-700 hover:bg-green-800 text-white text-sm font-semibold rounded-lg transition-colors">
             + New Post
           </button>
         </div>

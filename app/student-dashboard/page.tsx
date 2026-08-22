@@ -58,7 +58,7 @@ export default async function StudentDashboardPage() {
             <p className="text-stone-500 text-sm mb-4">You haven&apos;t enrolled in any courses yet.</p>
             <Link
               href="/mededu/"
-              className="inline-flex items-center justify-center px-6 py-3 bg-amber-500 hover:bg-amber-400 text-stone-900 font-semibold rounded-lg text-sm transition-colors"
+              className="inline-flex items-center justify-center px-6 py-3 border border-stone-300 hover:border-stone-400 text-stone-900 font-semibold rounded-lg text-sm transition-colors"
             >
               Browse courses
             </Link>

@@ -45,7 +45,7 @@ export default async function MedGlobalDBPage() {
           </p>
           <a
             href="/book"
-            className="inline-flex items-center justify-center px-6 py-3 bg-amber-500 hover:bg-amber-400 text-stone-900 font-semibold rounded-lg text-sm transition-colors"
+            className="inline-flex items-center justify-center px-6 py-3 bg-green-700 hover:bg-green-800 text-white font-semibold rounded-lg text-sm transition-colors"
           >
             Request a Specialist
           </a>
