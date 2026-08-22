@@ -12,8 +12,8 @@ export default function PricingCard({
       onClick={onSelect}
       className={`block w-full text-center py-3 rounded-xl font-semibold text-sm transition-colors ${
         plan.highlighted
-          ? "bg-amber-400 hover:bg-amber-300 text-stone-900"
-          : "bg-stone-900 hover:bg-stone-700 text-white"
+          ? "bg-green-700 hover:bg-green-800 text-white"
+          : "border border-stone-300 hover:border-stone-400 text-stone-900"
       }`}
     >
       {plan.cta}
@@ -23,8 +23,8 @@ export default function PricingCard({
       href="/book/"
       className={`block w-full text-center py-3 rounded-xl font-semibold text-sm transition-colors ${
         plan.highlighted
-          ? "bg-amber-400 hover:bg-amber-300 text-stone-900"
-          : "bg-stone-900 hover:bg-stone-700 text-white"
+          ? "bg-green-700 hover:bg-green-800 text-white"
+          : "border border-stone-300 hover:border-stone-400 text-stone-900"
       }`}
     >
       {plan.cta}

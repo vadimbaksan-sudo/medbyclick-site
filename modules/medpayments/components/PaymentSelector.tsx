@@ -163,11 +163,7 @@ export default function PaymentSelector({
         </div>
         <button
           onClick={handlePayNow}
-          className={`px-6 py-3 rounded-xl font-bold text-sm transition-colors flex-shrink-0 ${
-            discount > 0
-              ? "bg-stone-900 hover:bg-stone-800 text-white"
-              : "bg-amber-400 hover:bg-amber-300 text-stone-900"
-          }`}
+          className="px-6 py-3 rounded-xl font-bold text-sm transition-colors flex-shrink-0 bg-green-700 hover:bg-green-800 text-white"
         >
           Pay Now
         </button>
