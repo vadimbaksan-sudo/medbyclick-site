@@ -70,3 +70,14 @@ body {
 h1, h2, h3 {
   font-family: var(--font-serif);
 }
+
+/* Sitewide keyboard-focus indicator. No component in the codebase sets
+   focus-visible styling of its own (checked: 0 hits for `focus-visible:`
+   across app/, components/, modules/), so keyboard and screen-reader users
+   get no visible indication of which link, button, or form field is
+   focused. One rule here covers every interactive element without
+   touching component files. */
+:focus-visible {
+  outline: 2px solid #b84d35;
+  outline-offset: 2px;
+}
