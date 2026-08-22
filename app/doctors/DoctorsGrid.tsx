@@ -17,7 +17,7 @@ export default function DoctorsGrid({ doctors }: { doctors: Doctor[] }) {
     <>
       {/* Filters */}
       <div className="border-b border-stone-100 bg-stone-50 sticky top-16 z-10">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex gap-3 overflow-x-auto">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-wrap gap-3">
           <button
             onClick={() => setActive(null)}
             className={`flex-shrink-0 text-sm px-4 py-1.5 rounded-full border transition-colors ${
